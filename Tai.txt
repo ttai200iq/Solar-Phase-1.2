@@ -1,0 +1,8 @@
+1. Filter Thiet bi nut Huy DONE
+2. Filter Huy warn
+3. Chọn thông số, điều chỉnh lại, thêm 2 nút xác nhận và button
+
+
+Note cho Phú: 
+1. Tạo mới mã lỗi, nội dung justify center
+2. 

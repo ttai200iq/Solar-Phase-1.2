@@ -1,0 +1,355 @@
+$colorWhite: rgb(229, 229, 229, 0.5);
+
+.DAT_Login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+  // background-color: #E4EBF5;
+  background-image: url("../../../public/dat_picture/Embody_APP_22.jpg");
+  background-position: center bottom !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  //display: flex;
+  // justify-content: center;
+  // align-items: center;
+
+  // background-color: #e4ebf5;
+
+  &::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+  }
+
+  &_Head {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    background-color: rgb(0, 62, 149, 0.7);
+    padding: 20px;
+    border: solid 1px rgb(229, 229, 229, 0.5);
+    // box-shadow: 3px 3px 5px rgba(53, 53, 53, 0.4), -3px -3px 5px rgba(53, 53, 53, 0.4);
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    &_Logo {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+        width: 40px;
+        height: 40px;
+        // object-fit: cover;
+      }
+    }
+
+    &_Title {
+      &_Main {
+        color: #ffffff;
+        font-size: 23px;
+        font-family: Verdana, sans-serif;
+        font-weight: 650;
+      }
+
+      &_Sub {
+        font-size: 15px;
+        color: rgb(255, 255, 255);
+      }
+    }
+
+    &_Lang {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(134, 195, 255, 0.5);
+
+      & span:first-child {
+        color: rgb(22, 22, 22);
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        font-size: 12px;
+        background-color: rgb(100, 149, 237, 0.7);
+        width: 15px;
+        padding: 2px;
+        border-radius: 3px;
+        color: #fff;
+        box-shadow:
+          2px 2px 5px rgb(255, 255, 255, 0.5),
+          -2px -2px 5px rgb(255, 255, 255, 0.5) fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      & span:last-child {
+        color: white;
+        display: flex;
+        justify-content: center;
+      }
+
+      &:hover {
+        background-color: #ccdefe;
+      }
+    }
+  }
+
+  &_Footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    &_Info {
+      width: 90%;
+      padding-bottom: 10px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & span {
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
+
+  &_Form {
+    width: 90%;
+    margin: auto;
+    //Smargin: auto;
+    //margin-top: calc(15vh);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(0, 62, 149, 0.7);
+    // box-shadow: 3px 3px 5px rgba(53, 53, 53, 0.4), -3px -3px 5px rgba(53, 53, 53, 0.4);
+    border: solid 1px rgb(229, 229, 229, 0.5);
+    -webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+
+    & p {
+      width: 80%;
+      margin: auto;
+      color: #ffffff;
+      font-size: x-large;
+      //font-family: Verdana, sans-serif;
+      //font-weight: bold;
+      padding: 18px;
+      //margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    &-input {
+      display: flex;
+      width: 80%;
+      margin: auto;
+      height: 40px;
+      margin-bottom: 15px;
+      //border: solid 1px rgb(37, 186, 255);;
+      // border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 10px;
+      -webkit-box-sizing: border-box;
+      /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;
+      /* Firefox, other Gecko */
+      box-sizing: border-box;
+      border-bottom: solid 1px white;
+      // box-shadow: inset 2px 2px 5px #cbced1, inset -2px -2px 5px #fff;
+
+      & input {
+        font-family: Montserrat-Regular;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        height: 40px;
+        width: 100%;
+        background: none !important;
+        border: none;
+        outline: none;
+        color: white;
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+
+        &::placeholder {
+          color: rgb(255, 255, 255);
+        }
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: #ffffff;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    &-note {
+      display: flex;
+      width: 80%;
+      margin: auto;
+      height: 40px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      //border: solid 1px rgb(37, 186, 255);;
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 10px;
+      -webkit-box-sizing: border-box;
+      /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;
+      /* Firefox, other Gecko */
+      box-sizing: border-box;
+      //box-shadow: inset 2px 2px 5px #cbced1, inset -2px -2px 5px #fff;
+    }
+
+    &-box {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: auto;
+      width: 80%;
+      margin-bottom: 20px;
+      text-align: left;
+      color: rgb(255, 255, 255);
+
+      & input {
+        display: none;
+      }
+
+      & input + label:before {
+        cursor: pointer;
+        margin-right: 10px;
+        padding-bottom: 5px;
+        display: block;
+        content: "\2713";
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        text-align: center;
+        border: 1px solid #6495ed;
+        color: transparent;
+        transition: 0.2s;
+        border-radius: 2px;
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+      }
+
+      & input:checked + label:before {
+        //background-color: rgb(255, 255, 255);
+        color: #6495ed;
+      }
+
+      & input + label:active:before {
+        transform: scale(0);
+      }
+    }
+
+    & button {
+      border-radius: 5px;
+      background-color: rgba(11, 25, 103);
+      color: white;
+      cursor: pointer;
+      width: 80%;
+      height: 40px;
+      outline: none;
+      border: none;
+      font-family: Montserrat-SemiBold;
+    }
+
+    &-footer {
+      cursor: pointer;
+      width: 80%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      color: rgb(255, 255, 255);
+      font-size: small;
+      margin-top: 10px;
+
+      & span {
+        font-size: 14px;
+      }
+
+      &-back {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Montserrat-Regular;
+      }
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .DAT_Login_Head {
+    width: 400px;
+    border-radius: 5px;
+  }
+
+  .DAT_Login_Form {
+    //margin-top: calc(15vh);
+    width: 400px;
+    border-radius: 5px;
+  }
+
+  .DAT_Login_Footer_Info {
+    width: 400px;
+  }
+
+  // .DAT_Login {
+  //   background-image: url("../../../public/banner/Login_PC-1.png");
+  //   background-position: center center !important;
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  //}
+}

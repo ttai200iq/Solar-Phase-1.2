@@ -1,0 +1,287 @@
+@use "../../index.scss" as COLOR;
+
+.DAT_AnaHeader {
+    width: 98%;
+    margin: auto;
+    margin-top: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &_Title {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-Bold;
+    }
+
+    &_Filter {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        padding: 8px;
+        border-radius: 5px;
+        overflow: hidden;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+
+        & input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: Montserrat-Regular;
+        }
+    }
+
+    &_New {
+        cursor: pointer;
+        border: none;
+        background-color: COLOR.$Primary-color;
+        color: white;
+        border-radius: 5px;
+        font-family: Montserrat-SemiBold;
+        padding: 8px;
+
+        & span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+    }
+}
+
+.DAT_AnaHeaderMobile {
+    width: 98%;
+    margin: auto;
+    margin-top: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-wrap: wrap;
+
+    &_Top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+
+        &_Filter {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: white;
+            padding: 8px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: solid 1px rgba(198, 197, 197, 0.5);
+
+            & input {
+                width: 100%;
+                border: none;
+                outline: none;
+                font-size: 14px;
+                font-family: Montserrat-Regular;
+            }
+
+            & input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &_New {
+            cursor: pointer;
+            border: none;
+            background-color: COLOR.$Primary-color;
+            color: white;
+            border-radius: 50%;
+            font-family: Montserrat-SemiBold;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &_Title {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-Bold;
+    }
+}
+
+.DAT_Ana {
+    width: 98%;
+    margin: auto;
+    margin-top: 16px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.95);
+    box-shadow:
+        2px 2px 5px rgba(198, 197, 197, 0.4),
+        -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+    &_Header {
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-SemiBold;
+        font-size: 16px;
+        padding: 16px;
+        background-color: rgba(233, 233, 233, 0.5);
+    }
+
+    &_Content {
+        padding: 10px;
+        height: calc(100vh - 180px);
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+    }
+}
+
+.DAT_AnaCreate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(231, 231, 231);
+    z-index: 25;
+
+    // an thanh scrollbar
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+    }
+
+    &_Header {
+        position: fixed;
+        z-index: 25;
+        width: 100%;
+        padding-top: 58px;
+        background-color: white;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        box-shadow: 0 0 4px 4px rgba(193, 193, 193, 0.5);
+        box-sizing: border-box;
+
+        &_Left {
+            flex: 5;
+            padding: 16px;
+            font-size: 20px;
+        }
+
+        &_Right {
+            flex: 5;
+            padding: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            justify-content: flex-end;
+            gap: 10px;
+
+            &_Save {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                overflow: hidden;
+                height: 30px;
+                padding: 0px 10px;
+                cursor: pointer;
+                background-color: #3e80fb;
+                border-radius: 5px;
+                gap: 5px;
+
+                & span {
+                    color: white;
+                }
+            }
+
+            &_Close {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                background-color: red;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgb(252, 122, 122);
+                }
+            }
+        }
+    }
+
+    &_Body {
+        width: 98%;
+        margin: auto;
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 134px;
+        margin-bottom: 16px;
+        padding: 20px;
+        box-sizing: border-box; // de padding va border khong bi tran ra ngoai
+    }
+}
+
+.DAT_AnaInfor {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    right: 0;
+    z-index: 30;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .DAT_Ana {
+        width: 98%;
+
+        //height: 68vh;
+        // overflow: hidden;
+        &_Content {
+            height: calc(100vh - 300px);
+        }
+
+
+
+    }
+
+
+
+
+}

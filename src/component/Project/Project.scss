@@ -1,0 +1,4100 @@
+@use "../../index.scss" as COLOR;
+
+.DAT_ProjectHeader {
+    width: 98%;
+    margin: auto;
+    margin-top: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &_Title {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-Bold;
+    }
+
+    &_Filter {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        padding: 8px;
+        border-radius: 5px;
+        overflow: hidden;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+
+        & input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: Montserrat-Regular;
+        }
+
+        & input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &_New {
+        cursor: pointer;
+        border: none;
+        background-color: COLOR.$Primary-color;
+        color: white;
+        border-radius: 5px;
+        font-family: Montserrat-SemiBold;
+        padding: 8px;
+
+        & span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+    }
+}
+
+.DAT_ProjectHeaderMobile {
+    width: 98%;
+    margin: auto;
+    margin-top: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-wrap: wrap;
+
+    &_Top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+
+        &_Filter {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: white;
+            padding: 8px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: solid 1px rgba(198, 197, 197, 0.5);
+
+            & input {
+                width: 100%;
+                border: none;
+                outline: none;
+                font-size: 14px;
+                font-family: Montserrat-Regular;
+            }
+
+            & input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &_New {
+            cursor: pointer;
+            border: none;
+            background-color: COLOR.$Primary-color;
+            color: white;
+            border-radius: 50%;
+            font-family: Montserrat-SemiBold;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &_Title {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-Bold;
+    }
+}
+
+.DAT_Project {
+    width: 98%;
+    //height: 80vh;
+    margin: auto;
+    margin-top: 15px;
+    //margin-bottom: 100px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.95);
+    box-shadow:
+        2px 2px 5px rgba(198, 197, 197, 0.4),
+        -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+    &_Nav {
+        display: flex;
+        gap: 10px;
+
+        border-bottom: solid 1px rgb(199, 199, 199);
+        padding: 15px;
+
+        & span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            font-size: 15px;
+            color: gray;
+
+            &:hover {
+                color: #6495ed;
+            }
+        }
+    }
+
+    &_Content {
+        padding: 10px;
+        height: calc(100vh - 180px);
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    &_Filter {
+        cursor: pointer;
+        max-width: 350px;
+        font-size: 14px;
+        color: rgb(80, 80, 80);
+        background-color: #dadada;
+        padding: 10px 25px 10px 25px;
+        margin-top: 2px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: flex;
+        gap: 2px;
+    }
+}
+
+.DAT_ProjectMobile {
+    width: 98%;
+    margin: auto;
+
+    &_Content {
+        background-color: white;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Top {
+            display: flex;
+            gap: 10px;
+            border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+            padding: 10px;
+            box-sizing: border-box;
+
+            &_Avatar {
+                width: 80px;
+                height: 80px;
+                border-radius: 5px;
+                overflow: hidden;
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &_Info {
+                flex: 1;
+
+                &_Name {
+                    color: black;
+                    font-size: 14px;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: space-between;
+                    font-family: Montserrat-SemiBold;
+
+                    &_Right {
+                        display: flex;
+                        justify-content: flex-end;
+                        gap: 5px;
+                    }
+                }
+
+                &_State {
+                    display: flex;
+                    gap: 20px;
+                    margin-bottom: 5px;
+
+                    &_Item {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        font-size: 12px;
+                    }
+                }
+
+                &_Data {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    &_Item {
+                        &_Name {
+                            color: gray;
+                            font-size: 12px;
+                            margin-bottom: 4px;
+                        }
+
+                        & span {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_Bottom {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_Left {
+                font-size: 12px;
+            }
+
+            &_Right {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+        }
+    }
+}
+
+.DAT_Modify {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_Item {
+        width: 35px;
+        height: 35px;
+        background-color: rgb(190, 190, 190);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(202, 202, 202);
+        }
+    }
+
+    &_Add {
+        background-color: COLOR.$Primary-color;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(202, 202, 202);
+        }
+    }
+
+    &_Filter {
+        position: fixed;
+        z-index: 20;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-shadow: 3px 3px 5px rgba(198, 197, 197, 0.4);
+
+        & input {
+            border: none;
+            outline: none;
+            font-size: 13px;
+        }
+
+        & select {
+            border: none;
+            outline: none;
+            background-color: white;
+        }
+
+        &_Close {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            background-color: #f44336;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(252, 122, 122);
+            }
+        }
+    }
+}
+
+// 19/01/2024 by Phu
+.DAT_ProjectData {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(193, 193, 193, 0.5);
+    background-color: rgba(240, 242, 245, 1);
+
+    &_Header {
+        background-color: white;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        box-shadow: 3px 3px 10px rgba(193, 193, 193, 0.5);
+
+        &_Left {
+            flex: 9;
+            padding: 16px;
+            min-width: 200px;
+
+            &_Top {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                & img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    // cursor: pointer;
+                }
+
+                &_Content {
+                    display: flex;
+                    flex-direction: column;
+
+                    &_Name {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+
+                    &_Addr {
+                        color: gray;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        &_Right {
+            flex: 1;
+            padding: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+
+            &_Add {
+                & button {
+                    background-color: COLOR.$Primary-color;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: solid 1px rgb(199, 199, 199);
+                    border-radius: 50%;
+                    cursor: pointer;
+
+                    &:hover {
+                        border: solid 1px COLOR.$Primary-color;
+                    }
+                }
+            }
+
+            &_More {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                cursor: pointer;
+                // background-color: #9e9e9e;
+
+                &:hover {
+                    background-color: #bdbdbd;
+                }
+            }
+
+            &_Close {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Dashboard {
+        position: relative;
+        margin-top: 16px;
+
+        &_Data {
+            width: 98%;
+            margin: auto;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 16px;
+
+            &_Left {
+                width: 35%;
+                background-color: white;
+                border-radius: 3px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                overflow: hidden;
+
+                &_Tit {
+                    width: 60%;
+                    display: flex;
+
+                    align-items: center;
+                    // justify-content: flex-end;
+                    background-color: rgba(247, 247, 247, 0.3);
+                    margin-bottom: 5px;
+                    border-radius: 10px;
+                    border: solid 1px rgba(198, 197, 197, 0.5);
+                    // margin-top: 5px;
+                    // justify-content: center;
+                    // justify-content: space-around;
+
+                    &_Item {
+                        flex: 1;
+                        padding: 5px;
+                        cursor: pointer;
+
+                        // display: flex;
+                        // align-items: center;
+                        // justify-content: center;
+                        // white-space: nowrap; // ngan xuong dong
+                        // overflow: hidden; // an noi dung vuot ra ngoai
+                        // text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                        // font-family: Montserrat-SemiBold;
+                        // background-color: #3e80fb;
+                    }
+                }
+            }
+
+            &_Center {
+                width: 35%;
+                background-color: white;
+                border-radius: 3px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                overflow: hidden;
+
+                &_Tit {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+
+                    &_Item {
+                        padding: 16px;
+                        white-space: nowrap; // ngan xuong dong
+                        overflow: hidden; // an noi dung vuot ra ngoai
+                        text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                    }
+
+                    &_Timer {
+                        padding: 5px;
+                        font-size: 13px;
+                        color: grey;
+                        box-sizing: border-box;
+                        white-space: nowrap; // ngan xuong dong
+                        overflow: hidden; // an noi dung vuot ra ngoai
+                        text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                    }
+                }
+
+                &_Graph {
+                    position: relative;
+                    width: 100%;
+                    height: 300px;
+                    overflow: hidden;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    gap: 200px;
+
+                    &_Solar {
+                        & img {
+                            width: 180px;
+                            height: 180px;
+                        }
+                    }
+
+                    &_Load {
+                        margin-top: 60px;
+
+                        & img {
+                            width: 70px;
+                            height: 70px;
+                        }
+                    }
+
+                    &_LineTop {
+                        display: flex;
+                        width: 100%;
+                        justify-content: center;
+                        align-items: center;
+
+                        &_P1 {
+                            flex: 1;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                        }
+
+                        &_P2 {
+                            width: 70px;
+
+                            &_Solar {
+                                & img {
+                                    width: 70px;
+                                    height: 70px;
+                                }
+                            }
+
+                            &_Load {
+                                & img {
+                                    width: 70px;
+                                    height: 70px;
+                                }
+                            }
+                        }
+
+                        &_P3 {
+                            flex: 1;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                        }
+                    }
+
+                    &_LineMid {
+                        display: flex;
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+
+                        &_Pin {
+                            & img {
+                                width: 70px;
+                                height: 70px;
+                            }
+                        }
+
+                        &_G {
+                            &_T {
+                                display: flex;
+                            }
+                        }
+
+                        &_Grid {
+                            & img {
+                                width: 70px;
+                                height: 70px;
+                            }
+                        }
+                    }
+
+                    &_LineBottom {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                    }
+
+                    &_SingleLine {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        gap: 10px;
+                        padding: 20px;
+                        box-sizing: border-box;
+
+                        &_Solar {
+                            & img {
+                                width: 100px;
+                                height: 100px;
+                            }
+                        }
+
+                        &_Grid {
+                            & img {
+                                width: 120px;
+                                height: 180px;
+                            }
+                        }
+                    }
+                }
+
+                &_Production {
+                    &_Data {
+                        padding: 8px 16px 16px 16px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+                        gap: 16px;
+
+                        &_Chart {
+                            flex: 5;
+                            display: flex;
+                            justify-content: center;
+
+                            &_Data {
+                                border-radius: 50%;
+                                border: solid 2px rgb(103, 179, 255);
+                                padding: 16px;
+                                width: 80px;
+                                height: 80px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                flex-wrap: wrap;
+                                background-color: #3e80fb;
+                                position: relative;
+                                overflow: hidden;
+
+                                background: url("../../../public/dat_picture/wave2.png"),
+                                    url("../../../public/dat_picture/wave3.png"),
+                                    url("../../../public/dat_picture/wave4.png");
+                                background-size: 220px 200px;
+                                background-repeat: repeat-x;
+                                box-shadow: 0 0 3px 5px rgba(193, 193, 193, 0.5);
+
+                                &_value {
+                                    width: 100%;
+                                    position: absolute;
+                                    z-index: 20;
+
+                                    &_num {
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: center;
+                                        color: black;
+                                    }
+
+                                    &_unit {
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: center;
+                                        font-size: 15px;
+                                        color: black;
+                                    }
+                                }
+                            }
+                        }
+
+                        &_Detail {
+                            flex: 5;
+                        }
+                    }
+
+                    &_Total {
+                        padding: 16px;
+                        display: flex;
+                        gap: 10px;
+                        border-top: solid 1px rgba(198, 197, 197, 0.5);
+
+                        &_Left {
+                            flex: 5;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+
+                            &_Item {
+                                padding: 8px;
+                                border-radius: 5px;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                border: solid 1px rgba(198, 197, 197, 0.5);
+
+                                &_Tit {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+
+                                &_Data {
+                                    margin: 4px 0px 0px 0px;
+                                }
+                            }
+                        }
+
+                        &_Right {
+                            flex: 5;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+
+                            &_Item {
+                                padding: 8px;
+                                border-radius: 5px;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                border: solid 1px rgba(198, 197, 197, 0.5);
+
+                                &_Tit {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+
+                                &_Data {
+                                    margin: 4px 0px 0px 0px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &_Consumption {
+                    &_Data {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 16px;
+
+                        &_Img {
+                            & img {
+                                width: 70px;
+                                height: 70px;
+                            }
+                        }
+                    }
+
+                    &_Total {
+                        padding: 16px;
+                        display: flex;
+                        gap: 10px;
+
+                        &_Left {
+                            flex: 5;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+
+                            &_Item {
+                                padding: 16px;
+                                border-radius: 5px;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                border: solid 1px rgba(198, 197, 197, 0.5);
+
+                                &_Tit {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+
+                                &_Data {
+                                    margin: 4px;
+                                }
+                            }
+                        }
+
+                        &_Right {
+                            flex: 5;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+
+                            &_Item {
+                                padding: 16px;
+                                border-radius: 5px;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                border: solid 1px rgba(198, 197, 197, 0.5);
+
+                                &_Tit {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+
+                                &_Data {
+                                    margin: 4px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &_Grid {
+                    &_Data {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 16px;
+
+                        &_Img {
+                            & img {
+                                width: 60px;
+                                height: 70px;
+                            }
+                        }
+                    }
+
+                    &_Row {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                        padding: 16px;
+
+                        &_Left {
+                            display: flex;
+                            border: solid 1px rgba(198, 197, 197, 0.5);
+                            border-radius: 5px;
+
+                            &_Tit {
+                                padding: 16px 8px;
+                                display: flex;
+                                align-items: center;
+                                width: 70px;
+                                font-size: 14px;
+                            }
+
+                            &_Data {
+                                display: flex;
+
+                                &_Item {
+                                    padding: 16px 8px;
+                                    width: 70px;
+
+                                    &_Tit {
+                                        font-size: 12px;
+                                        color: grey;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &_Battery {
+                    &_Data {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 16px;
+
+                        &_Img {
+                            & img {
+                                width: 60px;
+                                height: 70px;
+                            }
+                        }
+
+                        &_Status {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+
+                    &_Row {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                        padding: 16px;
+
+                        &_Left {
+                            display: flex;
+                            border: solid 1px rgba(198, 197, 197, 0.5);
+                            border-radius: 5px;
+
+                            &_Tit {
+                                // // flex: 2;
+                                // padding: 16px;
+                                // display: flex;
+                                // align-items: center;
+                                // min-width: 70px;
+
+                                padding: 16px 8px;
+                                display: flex;
+                                align-items: center;
+                                width: 70px;
+                                font-size: 14px;
+                            }
+
+                            &_Data {
+                                // flex: 8;
+                                // width: 100px;
+                                display: flex;
+
+                                &_Item {
+                                    padding: 16px 8px;
+                                    width: 70px;
+
+                                    &_Tit {
+                                        font-size: 12px;
+                                        color: grey;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                width: 30%;
+                border-radius: 3px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                overflow: hidden;
+                box-sizing: border-box;
+
+                &_Weather {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #ffffff;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: left;
+
+                    &_Inside {
+                        padding: 10px;
+                        height: 100%;
+                        box-sizing: border-box;
+
+                        &_Current {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 20px;
+
+                            &_Left {
+                                display: flex;
+                                align-items: center;
+                                gap: 2px;
+                                color: gray !important;
+                                box-sizing: border-box;
+                                align-items: center;
+                                white-space: nowrap;
+
+                                &_Deg {
+                                    font-family: Arial, Helvetica, sans-serif;
+
+                                    &_Des {
+                                        font-size: 12px;
+                                        color: gray;
+                                    }
+                                }
+
+                                &_PickType {
+                                    font-family: Arial, Helvetica, sans-serif;
+                                    font-weight: 500;
+                                    font-size: 20px;
+                                    cursor: pointer;
+                                    padding-right: 7px;
+                                    height: 50px;
+                                    display: flex;
+                                    justify-content: center;
+                                    gap: 2px;
+                                }
+
+                                &_Describe {
+                                    width: 170px;
+                                    height: 70px;
+                                    font-size: 14px;
+                                    overflow: hidden;
+                                    color: gray;
+                                    white-space: nowrap;
+                                }
+                            }
+
+                            &_Right {
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+                                // white-space: nowrap;
+                                overflow: hidden;
+
+                                &_Tit {
+                                    display: flex;
+                                    align-items: flex-start;
+                                    flex-direction: column;
+
+                                    &_Temp {
+                                        font-size: 20px;
+                                        color: black;
+                                    }
+
+                                    &_Des {
+                                        width: 50px;
+                                        font-size: 12px;
+                                        color: gray;
+                                        white-space: nowrap; // ngan xuong dong
+                                        overflow: hidden; // an noi dung vuot ra ngoai
+                                        text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                                    }
+                                }
+                            }
+                        }
+
+                        &_Describe {
+                            display: flex;
+                            color: gray;
+                            font-size: 13px;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 5px;
+                            width: 100%;
+                            padding-top: 5px;
+                        }
+
+                        &_Forecast {
+                            padding: 5px;
+                        }
+
+                        &_Bottom {
+                            padding: 0px 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            gap: 5px;
+                            align-items: center;
+                            overflow: hidden;
+                            overflow-x: scroll;
+                            cursor: grab;
+                            scrollbar-width: none;
+
+                            &:active {
+                                cursor: grabbing;
+                            }
+
+                            &_Box {
+                                min-width: 90px;
+                                max-width: 20%;
+                                color: gray;
+                                font-size: 13px;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &_History {
+            position: relative;
+            width: 98%;
+            background-color: white;
+            margin: auto;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-radius: 3px;
+            border: solid 1px rgba(198, 197, 197, 0.5);
+            overflow: hidden;
+
+            &_Tit {
+                padding: 16px;
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+
+                &_Left {
+                    flex: 2;
+                    min-width: 80px;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+                }
+
+                &_Right {
+                    flex: 8;
+                    display: flex;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    justify-content: flex-end;
+                    gap: 8px;
+
+                    &_Date {
+                        height: 25px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+                        border: solid 1px rgb(199, 199, 199);
+                        border-radius: 5px;
+
+                        &_Item {
+                            padding-left: 6px;
+                            padding-right: 6px;
+                            height: 25px;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-self: center;
+
+                            &:hover {
+                                color: #6495ed;
+                            }
+                        }
+                    }
+
+                    & button {
+                        display: flex;
+                        align-items: center;
+                        height: 25px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        background-color: white;
+                        border: solid 1px rgb(199, 199, 199);
+                        border-radius: 5px;
+                        font-family: Montserrat-Regular;
+
+                        &:hover {
+                            border: solid 1px #6495ed;
+                            color: #6495ed;
+                        }
+                    }
+
+                    &_Export {
+                        & button {
+                            display: flex;
+                            align-items: center;
+                            height: 25px;
+                            font-size: 14px;
+                            background-color: COLOR.$Primary-color;
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 5px;
+                            border: none;
+                            cursor: pointer;
+                            font-family: Montserrat-SemiBold;
+
+                            &:hover {
+                                background-color: #3e80fb;
+                                color: white;
+                            }
+                        }
+                    }
+
+                    & input {
+                        border: solid 1px rgb(199, 199, 199);
+                        border-radius: 5px;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                    }
+                }
+            }
+
+            &_Day {
+                padding: 16px;
+                height: 300px; // lam xong xoa dong nay di
+            }
+
+            &_Month {
+                padding: 16px;
+                height: 300px; // lam xong xoa dong nay di
+            }
+
+            &_Year {
+                padding: 16px;
+                height: 300px;
+
+                &_Tit {
+                    display: flex;
+
+                    &-Unit {
+                        flex: 1;
+                        color: gray;
+                        font-size: 14px;
+                    }
+
+                    &-Label {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: gray;
+                        font-size: 14px;
+                    }
+                }
+
+                &_Chart {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            &_Total {
+                padding: 16px;
+                height: 300px; // lam xong xoa dong nay di
+            }
+
+            &_SubConfig {
+                background-color: rgb(128, 128, 128, 0.5);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 58.6px;
+
+                &_Dropdown {
+                    background-color: white;
+                    border-top: 1px solid #b8b8b8;
+                    padding: 16px;
+                    height: 100%;
+
+                    &_Btn {
+                        padding: 16px;
+                        display: flex;
+                        gap: 16px;
+
+                        & button {
+                            padding: 5px 15px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            border: none;
+                            box-shadow: 0 0 3px 3px rgba(193, 193, 193, 0.5);
+                            width: 100px;
+                            height: 35px;
+                            font-family: Montserrat-SemiBold;
+                        }
+                    }
+
+                    &_Search {
+                        display: flex;
+                        width: fit-content;
+                        justify-self: center;
+                        align-items: center;
+                        border: 1px solid rgb(142, 142, 142);
+                        padding: 3px;
+                        border-radius: 5px;
+
+                        & input {
+                            border: none;
+                            width: 200px;
+                        }
+                    }
+
+                    &_Item {
+                        padding-top: 16px;
+                        font-size: 15px;
+
+                        &_Table {
+                            border-top: solid 1px #b8b8b8;
+                            border-left: solid 1px #b8b8b8;
+                            border-right: solid 1px #b8b8b8;
+
+                            & tr:first-child {
+                                border-bottom: solid 1px #b8b8b8;
+                            }
+                        }
+
+                        &_Table {
+                            border-collapse: collapse;
+                            width: 100%;
+
+                            &_Tr {
+                                display: flex;
+                                align-items: center;
+
+                                &_Th {
+                                    padding: 12px;
+                                    background-color: #d4d4d4;
+                                    width: 140px;
+                                }
+
+                                &_Td {
+                                    padding-left: 16px;
+                                    display: flex;
+
+                                    &_Checkbox {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                        padding-left: 10px;
+                                        width: 200px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &_More {
+            width: 98%;
+            margin: auto;
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            gap: 16px;
+
+            &_Left {
+                flex: 5;
+                min-width: 250px;
+                background-color: white;
+                border-radius: 3px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                padding: 16px;
+
+                &_Tit {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+
+                    &_Button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        background-color: rgb(231, 231, 231);
+                        color: grey;
+                        padding: 4px;
+                        cursor: pointer;
+                    }
+                }
+
+                &_Content {
+                    display: flex;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    padding: 16px;
+
+                    &_Left {
+                        flex: 5;
+
+                        &_Item {
+                            box-sizing: border-box;
+                            padding: 16px;
+                            display: flex;
+                            gap: 20px;
+
+                            &_Title {
+                                flex: 5;
+                                font-size: 14px;
+                                color: rgb(128, 128, 128);
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+
+                            &_Content {
+                                flex: 5;
+                                font-size: 14px;
+                                color: black;
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+                        }
+                    }
+
+                    &_Right {
+                        flex: 5;
+
+                        &_Item {
+                            box-sizing: border-box;
+                            padding: 16px;
+                            display: flex;
+                            gap: 20px;
+
+                            &_Title {
+                                flex: 5;
+                                font-size: 14px;
+                                color: rgb(128, 128, 128);
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+
+                            &_Content {
+                                flex: 5;
+                                font-size: 14px;
+                                color: black;
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 5;
+                background-color: white;
+                border-radius: 3px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                padding: 16px;
+
+                &_Tit {
+                    display: flex;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+                }
+
+                &_Content {
+                    &_Col {
+                        padding: 16px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 10px;
+
+                        &_Item {
+                            padding: 16px;
+                            flex: 1;
+                            text-align: center;
+                            min-width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &_Device {
+        position: relative;
+        margin-top: 16px;
+        margin-bottom: 16px;
+
+        &_Add {
+            & button {
+                background-color: COLOR.$Primary-color;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: solid 1px rgb(199, 199, 199);
+                border-radius: 50%;
+            }
+        }
+
+        &_TableMobile {
+            width: 95%;
+            margin: auto;
+
+            &_Content {
+                background-color: white;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+
+                &_Top {
+                    display: flex;
+                    gap: 10px;
+                    border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+                    padding: 10px;
+                    box-sizing: border-box;
+
+                    &_Type {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 5px;
+                        overflow: hidden;
+                        background-color: COLOR.$Primary-color;
+                        font-size: 12px;
+                    }
+
+                    &_Info {
+                        &_Name {
+                            color: black;
+                            font-size: 16px;
+                            margin-bottom: 5px;
+                            cursor: pointer;
+                            display: flex;
+                            justify-content: space-between;
+                            font-family: Montserrat-SemiBold;
+                        }
+
+                        &_Sn {
+                            font-size: 12px;
+                            color: gray;
+                        }
+
+                        &_OgLog {
+                            font-size: 12px;
+                            color: gray;
+                        }
+                    }
+                }
+
+                &_Bottom {
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    &_State {
+                        flex: 9;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                    }
+
+                    &_Right {
+                        flex: 1;
+                        display: flex;
+                        justify-content: flex-end;
+                        gap: 5px;
+                    }
+                }
+            }
+        }
+
+        &_Table {
+            width: 98%;
+            margin: auto;
+            overflow: hidden;
+            background-color: white;
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
+            border-radius: 5px;
+            // background-color: rgb(255, 255, 255, 0.95);
+            box-shadow:
+                2px 2px 5px rgba(198, 197, 197, 0.4),
+                -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+            &_Content {
+                padding: 10px;
+                // height: calc(100vh - 260px);
+                -webkit-box-sizing: border-box;
+                /* Safari/Chrome, other WebKit */
+                -moz-box-sizing: border-box;
+                /* Firefox, other Gecko */
+                box-sizing: border-box;
+            }
+        }
+    }
+
+    // &_Alert {
+    //     position: relative;
+    //     margin-top: 16px;
+    //     margin-bottom: 16px;
+
+    //     &_Data {
+    //         width: 98%;
+    //         margin: auto;
+    //         overflow: hidden;
+    //         -webkit-box-sizing: border-box;
+    //         /* Safari/Chrome, other WebKit */
+    //         -moz-box-sizing: border-box;
+    //         /* Firefox, other Gecko */
+    //         box-sizing: border-box;
+    //         border-radius: 5px;
+    //         background-color: rgb(255, 255, 255, 0.95);
+    //         box-shadow:
+    //             2px 2px 5px rgba(198, 197, 197, 0.4),
+    //             -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+    //         &_Table {
+    //             padding: 10px;
+    //             // height: calc(100vh - 180px);
+    //             -webkit-box-sizing: border-box;
+    //             /* Safari/Chrome, other WebKit */
+    //             -moz-box-sizing: border-box;
+    //             /* Firefox, other Gecko */
+    //             box-sizing: border-box;
+    //         }
+    //     }
+    // }
+
+    &_Share {
+        width: 98%;
+        margin: auto;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        // margin-top: 16px;
+        overflow: hidden;
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        border-radius: 5px;
+        background-color: rgb(255, 255, 255, 0.95);
+        box-shadow:
+            2px 2px 5px rgba(198, 197, 197, 0.4),
+            -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+        &_Header {
+            color: COLOR.$Primary-color;
+            font-family: Montserrat-SemiBold;
+            font-size: 16px;
+            padding: 16px;
+            background-color: rgba(233, 233, 233, 0.5);
+        }
+
+        &_Content {
+            padding: 10px;
+            // height: calc(100vh - 260px);
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
+        }
+    }
+}
+
+.DAT_AddNav {
+    position: absolute;
+    z-index: 30;
+    top: 180px;
+    right: 30px;
+    // width: 120px;
+    margin: auto;
+
+    border-radius: 5px;
+    background-color: white;
+    box-shadow:
+        3px 3px 5px rgba(198, 197, 197, 0.4),
+        -3px -3px 5px rgba(198, 197, 197, 0.4);
+    overflow: hidden;
+
+    -webkit-animation: animatetop 0.6s;
+    animation: animatetop 0.6s;
+
+    &-item {
+        cursor: pointer;
+        font-size: 12px;
+        color: black;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: rgba(41, 209, 255, 0.1);
+        }
+    }
+}
+
+.DAT_ProjectDataDrop {
+    position: absolute;
+    top: 132px;
+    right: 92px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 4px 4px rgba(193, 193, 193, 0.5);
+    z-index: 35;
+    display: flex;
+    flex-direction: column;
+
+    &_Dashboard {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+
+        background-color: #3e80fb;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #6495ed;
+        }
+    }
+
+    &_Device {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+
+        background-color: #4caf50;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #66bb6a;
+        }
+    }
+
+    &_Alert {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+
+        background-color: #ffd600;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ffea00;
+        }
+    }
+
+    &_More {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+
+        background-color: #9e9e9e;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #bdbdbd;
+        }
+    }
+
+    &_Item {
+        padding: 8px;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(236, 236, 236, 0.7);
+        }
+    }
+}
+
+.DAT_EditProject {
+    position: relative;
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(193, 193, 193, 0.5);
+
+    &_Header {
+        background-color: COLOR.$Primary-color;
+        display: flex;
+        left: 0px;
+        align-items: center;
+        padding: 16px;
+        color: white;
+
+        &_Left {
+            flex: 5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: Montserrat-Bold;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        &_Right {
+            flex: 5;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            &_Save {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 30px;
+                padding: 0px 8px;
+                cursor: pointer;
+                background-color: COLOR.$Save-button;
+                border-radius: 5px;
+                border: 1px solid white;
+                gap: 5px;
+                font-family: Montserrat-SemiBold;
+
+                & span {
+                    color: white;
+                }
+            }
+
+            &_Close {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_BasicInfo {
+        margin: auto;
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 5;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    & select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    &_Posi {
+                        display: flex;
+                        gap: 100px;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+
+                        &_Content {
+                            flex: 5;
+
+                            &_Tit {
+                                padding-bottom: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 5;
+
+                &_Item {
+                    margin: auto;
+                    padding: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    &_Content {
+                        height: 220px;
+                        box-shadow: 0 0 4px 4px rgba(193, 193, 193, 0.5);
+                    }
+                }
+            }
+        }
+    }
+
+    &_SystemInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        background-color: white;
+                        font-family: Montserrat-Regular;
+                    }
+                }
+            }
+
+            &_Center {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        background-color: white;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &_YieldInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        background-color: white;
+                        font-family: Montserrat-Regular;
+                    }
+                }
+            }
+
+            &_Center {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 3.3;
+            }
+        }
+    }
+
+    &_OwnerInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+
+            &_Center {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &_ImgInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &_Ava {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                padding-top: 16px;
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-bottom: 16px;
+
+                &_Img {
+                    background-color: white;
+                    display: flex;
+                    box-shadow: 0 0 6px 6px rgba(193, 193, 193, 0.5);
+
+                    & img {
+                        display: block;
+                        min-width: 0px !important;
+                        min-height: 0px !important;
+                        width: 300px;
+                        height: 150px;
+                    }
+                }
+
+                & input {
+                    width: 0.1px;
+                    height: 0.1px;
+                    opacity: 0;
+                    overflow: hidden;
+                    z-index: -1;
+                }
+
+                & label {
+                    width: 150px;
+                    background-color: rgb(128, 128, 128, 0.1);
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 5px;
+
+                    :hover {
+                        background-color: rgb(128, 128, 128, 0.7);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.DAT_AddProject {
+    position: relative;
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(193, 193, 193, 0.5);
+
+    &_Header {
+        background-color: COLOR.$Primary-color;
+        display: flex;
+        left: 0px;
+        align-items: center;
+        padding: 16px;
+        color: white;
+
+        &_Left {
+            flex: 5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: Montserrat-Bold;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        &_Right {
+            flex: 5;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            &_Save {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 30px;
+                padding: 0px 8px;
+                cursor: pointer;
+                background-color: COLOR.$Save-button;
+                border-radius: 5px;
+                border: 1px solid white;
+                gap: 5px;
+                font-family: Montserrat-SemiBold;
+
+                & span {
+                    color: white;
+                }
+            }
+
+            &_Close {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_BasicInfo {
+        margin: auto;
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 5;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    & select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    &_Posi {
+                        display: flex;
+                        gap: 100px;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+
+                        &_Content {
+                            flex: 5;
+
+                            &_Tit {
+                                padding-bottom: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 5;
+
+                &_Item {
+                    margin: auto;
+                    padding: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    &_Content {
+                        height: 220px;
+                        box-shadow: 0 0 4px 4px rgba(193, 193, 193, 0.5);
+                    }
+                }
+            }
+        }
+    }
+
+    &_SystemInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        background-color: white;
+                        font-family: Montserrat-Regular;
+                    }
+                }
+            }
+
+            &_Center {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        background-color: white;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &_YieldInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        background-color: white;
+                        font-family: Montserrat-Regular;
+                    }
+                }
+            }
+
+            &_Center {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 3.3;
+            }
+        }
+    }
+
+    &_OwnerInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+
+            &_Left {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+
+            &_Center {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 3.3;
+
+                &_Item {
+                    margin: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    padding-bottom: 16px;
+                    overflow: hidden;
+
+                    &_Tit {
+                        padding-bottom: 8px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: solid 1px rgb(199, 199, 199);
+                        padding: 4px;
+                        outline: none;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        font-family: Montserrat-Regular;
+                    }
+
+                    & input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &_ImgInfo {
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Tit {
+            padding: 16px;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+
+            &_Left {
+                flex: 9;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                cursor: pointer;
+                color: COLOR.$Secondary-color;
+            }
+        }
+
+        &_Body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &_Ava {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                padding-top: 16px;
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-bottom: 16px;
+
+                &_Img {
+                    background-color: white;
+                    display: flex;
+                    box-shadow: 0 0 6px 6px rgba(193, 193, 193, 0.5);
+
+                    & img {
+                        display: block;
+                        min-width: 0px !important;
+                        min-height: 0px !important;
+                        width: 300px;
+                        height: 150px;
+                    }
+                }
+
+                & input {
+                    width: 0.1px;
+                    height: 0.1px;
+                    opacity: 0;
+                    overflow: hidden;
+                    z-index: -1;
+                }
+
+                & label {
+                    width: 150px;
+                    background-color: rgb(128, 128, 128, 0.1);
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 5px;
+
+                    :hover {
+                        background-color: rgb(128, 128, 128, 0.7);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.DAT_ProjectInfor {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(188, 188, 188, 0.7);
+    top: 0px;
+    right: 0;
+    z-index: 30;
+    overflow: hidden;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.DAT_DevicePopup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(128, 128, 128, 0.7);
+    top: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // overflow-y: scroll;
+    // -ms-overflow-style: none;
+    // scrollbar-width: none;
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+}
+
+.DAT_Popup_Box {
+    position: relative;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        align-items: center;
+        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+        padding: 16px;
+        color: white;
+        font-family: Montserrat-Bold;
+
+        &_Left {
+            flex: 5;
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 5;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 13px;
+        padding: 16px;
+        color: COLOR.$Gray-color;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        & input {
+            width: 100%;
+            padding: 7px;
+            background-color: #bfbfbf4d;
+            border-radius: 3px;
+            border: 2px;
+            color: black;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            font-family: Montserrat-Regular;
+        }
+
+        & input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+
+        & button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: Montserrat-SemiBold;
+        }
+    }
+}
+
+.DAT_SharePopup_Box {
+    // &_Box {
+    position: relative;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        align-items: center;
+        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+        padding: 16px;
+        color: white;
+        font-family: Montserrat-Bold;
+
+        &_Left {
+            flex: 5;
+
+            & p {
+                font-size: 16px;
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 5;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 13px;
+        padding: 16px;
+        color: COLOR.$Gray-color;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        & p {
+            font-size: 13px;
+            margin: 0px 0px 10px 0px;
+            color: COLOR.$Gray-color;
+        }
+
+        & input {
+            width: 100%;
+            border-radius: 5px;
+            border: solid 1px rgba(198, 197, 197, 0.5);
+            padding: 8px;
+            outline: none;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            font-family: Montserrat-Regular;
+            background-color: white;
+        }
+
+        & input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+
+        & button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: Montserrat-SemiBold;
+        }
+    }
+
+    // }
+}
+
+.DAT_AddGatewayPopup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(128, 128, 128, 0.7);
+    top: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DAT_AddGateway {
+    position: relative;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        align-items: center;
+        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+        padding: 16px;
+        color: white;
+        font-family: Montserrat-Bold;
+
+        &_Left {
+            flex: 9;
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 13px;
+        padding: 16px;
+        color: COLOR.$Gray-color;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Radio {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 16px;
+
+            &_Item {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &_Input {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: grey;
+            margin-bottom: 16px;
+
+            & input {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px;
+                border: solid 1px rgb(199, 199, 199);
+                padding: 4px;
+                outline: none;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                font-family: Montserrat-Regular;
+            }
+
+            & input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &_Select {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: grey;
+            margin-bottom: 16px;
+
+            & select {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px;
+                border: solid 1px rgb(199, 199, 199);
+                padding: 4px;
+            }
+        }
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+
+        & button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: Montserrat-SemiBold;
+        }
+    }
+}
+
+.DAT_AddSubsystem {
+    position: relative;
+    // margin-top: -58px;
+    width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        background-color: rgba(182, 182, 182, 0.4);
+        padding: 16px;
+
+        &_Left {
+            flex: 5;
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 5;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 14px;
+        padding: 16px;
+        color: #505050;
+        border-bottom: 0.5px solid rgb(194, 194, 194);
+
+        &_Radio {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            // color: grey;
+            margin-bottom: 16px;
+
+            &_Body {
+                display: flex;
+                gap: 20px;
+
+                &_Item {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+
+        &_Input {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            // color: grey;
+            margin-bottom: 16px;
+
+            & input {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px;
+                border: solid 1px rgb(199, 199, 199);
+                padding: 4px;
+                outline: none;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+            }
+
+            & input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &_Select {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            // color: grey;
+            margin-bottom: 16px;
+
+            & select {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px;
+                border: solid 1px rgb(199, 199, 199);
+                padding: 4px;
+            }
+        }
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 10px;
+
+        & button {
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: 1px solid;
+            cursor: pointer;
+        }
+    }
+}
+
+.DAT_Picker {
+    height: 40px;
+    width: 200px;
+    outline: none;
+    border: none;
+}
+
+.DAT_CustomPicker {
+    height: 40px;
+    min-width: 120px;
+    border: solid 1px rgb(199, 199, 199);
+    margin-right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+}
+
+.DAT_RaiseBoxPopup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(128, 128, 128, 0.7);
+    top: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DAT_RaiseBox_Box {
+    position: relative;
+    // margin-top: -58px;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        background-color: rgba(182, 182, 182, 0.4);
+        padding: 16px;
+
+        &_Left {
+            flex: 5;
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 5;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 13px;
+        padding: 16px;
+        color: #505050;
+        border-bottom: 0.5px solid rgb(194, 194, 194);
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 10px;
+
+        & button {
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: 1px solid;
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    // .DAT_ProjectHeader {
+    //     &_Title {
+    //         margin-bottom: 10px;
+    //     }
+
+    //     &_Filter {
+    //         min-width: 95%;
+    //         margin: auto;
+    //         margin-bottom: 10px;
+    //     }
+
+    //     &_New {
+    //         color: white !important;
+    //         min-width: 100px;
+    //     }
+    // }
+
+    .DAT_Project {
+        width: 98%;
+
+        //height: 68vh;
+        // overflow: hidden;
+        &_Content {
+            height: calc(100vh - 300px);
+        }
+    }
+
+    .DAT_ProjectData {
+        &_Header {
+            &_Left {
+                flex: 8;
+                padding: 8px;
+
+                &_Top {
+                    display: flex;
+                    gap: 8px;
+
+                    &_Content {
+                        display: flex;
+                        gap: 4px;
+
+                        &_Name {
+                            font-size: 12px;
+                            font-family: Montserrat-SemiBold;
+                        }
+
+                        &_Addr {
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 2;
+                display: flex;
+                gap: 0px;
+                padding: 8px;
+            }
+        }
+
+        &_Dashboard {
+            margin-top: 16px;
+            margin-bottom: 16px;
+
+            &_Data {
+                display: contents;
+
+                &_Left {
+                    width: 98%;
+                    height: 100%;
+                    margin: auto;
+                    margin-bottom: 16px;
+                }
+
+                &_Center {
+                    width: 98%;
+                    height: 100%;
+                    margin: auto;
+                    margin-bottom: 16px;
+
+                    &_Production {
+                        &_Total {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            padding: 10px;
+                            -webkit-box-sizing: border-box;
+                            /* Safari/Chrome, other WebKit */
+                            -moz-box-sizing: border-box;
+                            /* Firefox, other Gecko */
+                            box-sizing: border-box;
+                            overflow: hidden;
+
+                            &_Item {
+                                width: 100%;
+                                padding: 16px;
+                                border-radius: 5px;
+                                -webkit-box-sizing: border-box;
+                                /* Safari/Chrome, other WebKit */
+                                -moz-box-sizing: border-box;
+                                /* Firefox, other Gecko */
+                                box-sizing: border-box;
+
+                                &_Tit {
+                                    font-size: 14px;
+                                    color: gray;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
+
+                                &_Data {
+                                    margin: 4px 0px 0px 0px;
+                                }
+                            }
+                        }
+                    }
+
+                    &_Consumption {
+                        &_Total {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            padding: 10px;
+                            -webkit-box-sizing: border-box;
+                            /* Safari/Chrome, other WebKit */
+                            -moz-box-sizing: border-box;
+                            /* Firefox, other Gecko */
+                            box-sizing: border-box;
+                            overflow: hidden;
+
+                            &_Item {
+                                width: 100%;
+                                padding: 16px;
+                                border-radius: 5px;
+                                -webkit-box-sizing: border-box;
+                                /* Safari/Chrome, other WebKit */
+                                -moz-box-sizing: border-box;
+                                /* Firefox, other Gecko */
+                                box-sizing: border-box;
+
+                                &_Tit {
+                                    font-size: 14px;
+                                    color: gray;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
+
+                                &_Data {
+                                    margin: 4px 0px 0px 0px;
+                                }
+                            }
+                        }
+                    }
+
+                    &_Grid {
+                        &_Row {
+                            &_Left {
+                                display: flex;
+                                flex-wrap: wrap;
+                                -webkit-box-sizing: border-box;
+                                /* Safari/Chrome, other WebKit */
+                                -moz-box-sizing: border-box;
+                                /* Firefox, other Gecko */
+                                box-sizing: border-box;
+                                overflow: hidden;
+
+                                &_Tit {
+                                    width: 100%;
+                                }
+
+                                &_Data {
+                                    &_Item {
+                                        padding: 8px 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &_Battery {
+                        &_Row {
+                            &_Left {
+                                display: flex;
+                                flex-wrap: wrap;
+                                -webkit-box-sizing: border-box;
+                                /* Safari/Chrome, other WebKit */
+                                -moz-box-sizing: border-box;
+                                /* Firefox, other Gecko */
+                                box-sizing: border-box;
+                                overflow: hidden;
+
+                                &_Tit {
+                                    width: 100%;
+                                }
+
+                                &_Data {
+                                    &_Item {
+                                        padding: 8px 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &_Right {
+                    width: 98%;
+                    margin: auto;
+                    margin-bottom: 16px;
+                }
+            }
+        }
+
+        &_Device {
+            margin-top: 16px;
+            height: calc(100vh - 200px);
+            // margin-bottom: 100px;
+            background-color: rgba(240, 242, 245);
+        }
+    }
+
+    .DAT_ProjectDataDrop {
+        top: 130px;
+        right: 40px;
+    }
+
+    .DAT_AddProject {
+        &_BasicInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_SystemInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_YieldInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_OwnerInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            margin-bottom: 100px;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Tit {
+                &_Left {
+                    min-width: 300px;
+                }
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+    }
+
+    .DAT_EditProject {
+        &_BasicInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_SystemInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_YieldInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_OwnerInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            // margin-bottom: 100px;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Tit {
+                &_Left {
+                    min-width: 300px;
+                }
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+
+        &_ImgInfo {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            margin-bottom: 100px;
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+
+            &_Tit {
+                &_Left {
+                    min-width: 300px;
+                }
+            }
+
+            &_Body {
+                display: contents;
+            }
+        }
+    }
+}
+
+@keyframes red-ball {
+    from {
+        offset-distance: 0%;
+    }
+
+    to {
+        offset-distance: 100%;
+    }
+}
+
+// Hidden scrollbar
+// overflow-y: scroll;
+// -ms-overflow-style: none;
+// scrollbar-width: none;
+
+// &::-webkit-scrollbar {
+//  display: none;
+//  /* Safari and Chrome */
+// }
+
+// text
+// white-space: nowrap; // ngan xuong dong
+// overflow: hidden; // an noi dung vuot ra ngoai
+// text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+
+// input
+// box-sizing: border-box;
+// -webkit-box-sizing: border-box;
+// -moz-box-sizing: border-box;
+
+// input [type=number] // xóa nút tăng giảm của type input number
+// & input::-webkit-outer-spin-button,
+// input::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+//     margin: 0;
+// }
+
+//Edit Scrollbar
+// &::-webkit-scrollbar {
+//     width: 8px;
+//     height: 10px;
+// }
+
+/* Track */
+// &::-webkit-scrollbar-track {
+//     background-color: rgba(0, 0, 0, 0);
+//     border-radius: 3px;
+// }
+
+/* Handle */
+// &::-webkit-scrollbar-thumb {
+//     background: #888;
+//     border-radius: 10px;
+// }
+
+/* Handle on hover */
+// &::-webkit-scrollbar-thumb:hover {
+//     background: #555;
+// }

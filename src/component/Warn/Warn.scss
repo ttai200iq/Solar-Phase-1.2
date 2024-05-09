@@ -1,0 +1,816 @@
+@use "../../index.scss" as COLOR;
+
+.DAT_WarnHeader {
+    width: 98%;
+    margin: auto;
+    margin-top: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &_Title {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-Bold;
+    }
+
+    &_Filter {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        padding: 8px;
+        border-radius: 5px;
+        overflow: hidden;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+
+        & input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: Montserrat-Regular;
+        }
+    }
+
+    &_New {
+        cursor: pointer;
+        border: none;
+        background-color: COLOR.$Primary-color;
+        color: white;
+        border-radius: 5px;
+        font-family: Montserrat-SemiBold;
+        padding: 8px;
+
+        & span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+    }
+}
+
+.DAT_WarnHeaderMobile {
+    width: 98%;
+    margin: auto;
+    margin-top: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-wrap: wrap;
+
+    &_Top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+
+        &_Filter {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: white;
+            padding: 8px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: solid 1px rgba(198, 197, 197, 0.5);
+
+            & input {
+                width: 100%;
+                border: none;
+                outline: none;
+                font-size: 14px;
+                font-family: Montserrat-Regular;
+            }
+
+            & input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &_New {
+            cursor: pointer;
+            border: none;
+            background-color: COLOR.$Primary-color;
+            color: white;
+            border-radius: 50%;
+            font-family: Montserrat-SemiBold;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &_Title {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: COLOR.$Primary-color;
+        font-family: Montserrat-Bold;
+    }
+}
+
+.DAT_Warn {
+    width: 98%;
+    margin: auto;
+    margin-top: 16px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.95);
+    box-shadow:
+        2px 2px 5px rgba(198, 197, 197, 0.4),
+        -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+    &_Nav {
+        display: flex;
+        gap: 10px;
+        border-bottom: solid 1px rgb(199, 199, 199);
+        padding: 15px;
+
+        & span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            font-size: 15px;
+            color: gray;
+
+            &:hover {
+                color: #6495ed;
+            }
+        }
+    }
+
+    &_Content {
+        padding: 10px;
+        height: calc(100vh - 180px);
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    &_Filter {
+        cursor: pointer;
+        max-width: 350px;
+        font-size: 14px;
+        color: rgb(80, 80, 80);
+        background-color: #dadada;
+        padding: 10px 25px 10px 25px;
+        margin-top: 2px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: flex;
+        gap: 2px;
+    }
+}
+
+.DAT_WarnMobile {
+    width: 98%;
+    margin: auto;
+
+    &_Content {
+        background-color: white;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+
+        &_Top {
+            display: flex;
+            gap: 10px;
+            border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+            padding: 10px;
+            box-sizing: border-box;
+
+            &_Warning {
+                background-color: rgba(254, 9, 9, 0.8);
+                width: 80px;
+                height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ffffff;
+                font-size: 14px;
+                border-radius: 5px;
+                font-family: Montserrat-SemiBold;
+            }
+
+            &_Notice {
+                background-color: rgb(253, 193, 39, 0.9);
+                width: 80px;
+                height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ffffff;
+                font-size: 14px;
+                border-radius: 5px;
+                font-family: Montserrat-SemiBold;
+            }
+
+            &_Info {
+                &_Name {
+                    color: black;
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: space-between;
+                    font-family: Montserrat-SemiBold;
+                }
+
+                &_Device {
+                    font-size: 12px;
+                    color: gray;
+                    margin-bottom: 5px;
+                }
+
+                &_Project {
+                    font-size: 12px;
+                    color: gray;
+                }
+
+                &_Plant {
+                    font-size: 12px;
+                    color: gray;
+                }
+            }
+        }
+
+        &_Bottom {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_Left {
+                flex: 9;
+
+                &_Open {
+                    margin-bottom: 5px;
+                    font-size: 12px;
+                    color: gray;
+                }
+
+                &_Close {
+                    font-size: 12px;
+                    color: gray;
+                }
+            }
+
+            &_Right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                gap: 5px;
+            }
+        }
+    }
+}
+
+.DAT_Modify {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_Item {
+        width: 35px;
+        height: 35px;
+        background-color: rgb(190, 190, 190);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(202, 202, 202);
+        }
+    }
+
+    &_Filter {
+        position: fixed;
+        z-index: 20;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-shadow: 3px 3px 5px rgba(198, 197, 197, 0.4);
+
+        & input {
+            border: none;
+            outline: none;
+            font-size: 13px;
+        }
+
+        & select {
+            border: none;
+            outline: none;
+            background-color: white;
+        }
+
+        &_Close {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+}
+
+.DAT_SettingWarn {
+    position: relative;
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(193, 193, 193, 0.5);
+    background-color: rgb(231, 231, 231);
+
+    &_Header {
+        background-color: white;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+
+        &_Left {
+            flex: 5;
+            padding: 16px;
+            font-size: 20px;
+        }
+
+        &_Right {
+            flex: 5;
+            padding: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            justify-content: flex-end;
+            gap: 10px;
+
+            &_Save {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                overflow: hidden;
+                height: 30px;
+                padding: 0px 10px;
+                cursor: pointer;
+                background-color: #3e80fb;
+                border-radius: 5px;
+                gap: 5px;
+
+                & span {
+                    color: white;
+                }
+            }
+
+            &_Close {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        width: 98%;
+        margin: auto;
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        padding: 20px;
+        box-sizing: border-box; // de padding va border khong bi tran ra ngoai
+
+        &_Row1 {
+            padding: 16px;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            gap: 100px;
+        }
+
+        &_Row2 {
+            padding: 16px;
+            display: flex;
+
+            &_Left {
+                flex: 5;
+
+                &_Tit {
+                    padding-bottom: 8px;
+                }
+
+                &_Content {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                    gap: 5px;
+                    color: grey;
+                }
+            }
+
+            &_Right {
+                flex: 5;
+
+                &_Tit {
+                    padding-bottom: 8px;
+                }
+
+                &_Content {
+                    display: flex;
+                    gap: 16px;
+
+                    &_Item {
+                        padding: 10px;
+                        height: 90px;
+                        width: 200px;
+                        background-color: white;
+                        border: solid 1px rgb(199, 199, 199);
+                        overflow: hidden;
+
+                        cursor: pointer;
+
+                        &:hover {
+                            border: solid 1px rgb(92, 165, 255);
+                        }
+
+                        &:focus {
+                            border: solid 1px rgb(92, 165, 255);
+                            color: rgb(92, 165, 255);
+                        }
+
+                        &_Tit {
+                            text-align: left;
+                            font-size: 16px;
+                            padding-bottom: 8px;
+                        }
+
+                        &_Content {
+                            color: grey;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden; // an noi dung vuot ra ngoai
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai 
+                        }
+                    }
+                }
+            }
+
+        }
+
+        &_Row4 {
+            display: flex;
+            padding: 16px;
+
+            &_Left {
+                flex: 5;
+
+                &_Tit {
+                    padding-bottom: 8px;
+                }
+
+                &_Content {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                    gap: 5px;
+                    color: grey;
+                }
+            }
+
+            &_Right {
+                flex: 5;
+
+                &_Tit {
+                    padding-bottom: 8px;
+                }
+
+                &_Content {
+                    display: flex;
+                    gap: 16px;
+
+                    &_Item {
+                        padding: 4px;
+                        width: 50px;
+                        background-color: white;
+                        border: solid 1px rgb(199, 199, 199);
+                        cursor: pointer;
+
+                        &:hover {
+                            border: solid 1px rgb(92, 165, 255);
+                        }
+
+                        &:focus {
+                            border: solid 1px rgb(92, 165, 255);
+                            color: rgb(92, 165, 255);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        &_Row6 {
+            padding: 16px;
+
+            &_Tit {
+                padding-bottom: 8px;
+            }
+
+            &_Content {
+                border: solid 1px rgb(199, 199, 199);
+                padding: 8px;
+                display: flex;
+                gap: 10px;
+
+                &_Tag {
+                    background-color: rgb(199, 199, 199, 0.5);
+                    border-radius: 5px;
+                    display: flex;
+                    gap: 8px;
+                    padding: 4px;
+
+                    &_Left {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    &_Right {
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                    }
+                }
+
+                &_Add {
+                    background-color: white;
+                    color: #3e80fb;
+                    padding: 4px;
+                    cursor: pointer;
+                }
+
+                &_Delete {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+
+                    &_Close {
+                        width: 20px;
+                        height: 20px;
+                        background-color: rgb(199, 199, 199, 0.5);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: grey;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        &_Line {
+            width: 95%;
+            margin: auto;
+            border-bottom: dashed 1px rgb(199, 199, 199);
+        }
+    }
+}
+
+.DAT_PopupReport_Box {
+    position: relative;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        align-items: center;
+        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+        padding: 16px;
+        color: white;
+        font-family: Montserrat-Bold;
+
+        &_Left {
+            flex: 5;
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 5;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 13px;
+        padding: 16px;
+        color: COLOR.$Gray-color;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+
+        & button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: Montserrat-SemiBold;
+        }
+    }
+}
+
+// INFO BOX IN WARN SECTION
+.DAT_PopupReportInfo_Box {
+    position: relative;
+    width: 600px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow:
+        2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &_Head {
+        display: flex;
+        align-items: center;
+        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+        padding: 16px;
+        color: white;
+        font-family: Montserrat-Bold;
+
+        &_Left {
+            flex: 10;
+            display: flex;
+
+            &_TableWarning {
+                font-size: 17px;
+                border-left: solid 4px COLOR.$Warning-color;
+                padding-left: 10px;
+            }
+
+            &_TableNotice {
+                font-size: 17px;
+                border-left: solid 4px COLOR.$Notice-color;
+                padding-left: 10px;
+            }
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 14px;
+        padding: 16px;
+        color: #505050;
+
+        &_Item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+
+            &_Box {
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 14px;
+                border: 2px solid #d6d6d6;
+                outline: none;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .DAT_Warn {
+        width: 98%;
+
+        //height: 68vh;
+        // overflow: hidden;
+        &_Content {
+            height: calc(100vh - 300px);
+        }
+    }
+
+    .DAT_SettingWarn {
+        &_Body {
+            margin-bottom: 100px;
+
+            &_Row1 {
+                padding: 16px;
+                display: contents;
+
+                &_Item {
+                    padding-bottom: 16px;
+                }
+            }
+
+            &_Row2 {
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+
+                &_Right {
+                    &_Content {
+                        display: flex;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+                    }
+                }
+            }
+
+            &_Row4 {
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+
+                &_Right {
+                    &_Content {
+                        display: flex;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+    }
+
+}
