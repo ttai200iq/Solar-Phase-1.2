@@ -251,9 +251,7 @@ export default function Day(props) {
               );
             case "hybrid":
               return (
-                <ResponsiveContainer
-                  style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
-                >
+                <ResponsiveContainer style={{ marginLeft: "-20px" }}>
                   <AreaChart width={100} height={500} data={props.data}>
                     <defs>
                       {/* <linearGradient id="colorday" x1="0" y1="0" x2="0" y2="1">

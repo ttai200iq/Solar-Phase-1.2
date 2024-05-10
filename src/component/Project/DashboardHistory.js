@@ -886,21 +886,21 @@ export default function DashboardHistory(props) {
   return (
     <>
       <div style={{ display: "flex", gap: "10px", width: "100%" }}>
-        <div className="DAT_ProjectData_Dashboard_Filterlist">
-          <div className="DAT_ProjectData_Dashboard_Filterlist_Head">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist">
+          <div className="DAT_ProjectData_NewDashboard_Filterlist_Head">
             Select parameters
           </div>
-          <div className="DAT_ProjectData_Dashboard_Filterlist_Body">
+          <div className="DAT_ProjectData_NewDashboard_Filterlist_Body">
             {(() => {
               switch (projectData.value.plantmode) {
                 case "consumption":
                   // return (
-                  //   <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
+                  //   <table className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table">
                   //     <tbody>
-                  //       <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                  //       <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
                   //
-                  //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                  //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                  //         <td className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                  //           <div className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
                   //             <input
                   //               id={
                   //                 "productionData_" +
@@ -932,10 +932,10 @@ export default function DashboardHistory(props) {
                   //     </tbody>
 
                   //     <tbody>
-                  //       <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                  //       <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
                   //
-                  //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                  //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                  //         <td className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                  //           <div className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
                   //             <input
                   //               id={
                   //                 "consumptionData_" +
@@ -967,10 +967,10 @@ export default function DashboardHistory(props) {
                   //     </tbody>
 
                   //     <tbody>
-                  //       <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                  //       <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
                   //
-                  //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                  //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                  //         <td className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                  //           <div className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
                   //             <input
                   //               id={
                   //                 "dailygridin_" +
@@ -998,8 +998,8 @@ export default function DashboardHistory(props) {
                   //             </label>
                   //           </div>
                   //         </td>
-                  //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                  //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                  //         <td className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                  //           <div className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
                   //             <input
                   //               id={
                   //                 "dailygridout_" +
@@ -1034,11 +1034,11 @@ export default function DashboardHistory(props) {
                   switch (dateType) {
                     case "date":
                       return (
-                        <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
+                        <table className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table">
                           <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <td className="DAT_ProjectData_Dashboard_Filterlist_Body">
-                                <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                            <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                              <td className="DAT_ProjectData_NewDashboard_Filterlist_Body">
+                                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                                   <input
                                     id={
                                       "productionData_" +
@@ -1070,9 +1070,9 @@ export default function DashboardHistory(props) {
                           </tbody>
 
                           <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <td className="DAT_ProjectData_Dashboard_Filterlist_Body">
-                                <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                            <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                              <td className="DAT_ProjectData_NewDashboard_Filterlist_Body">
+                                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                                   <input
                                     id={
                                       "consumptionData_" +
@@ -1104,9 +1104,9 @@ export default function DashboardHistory(props) {
                           </tbody>
 
                           <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <td className="DAT_ProjectData_Dashboard_Filterlist_Body">
-                                <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                            <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                              <td className="DAT_ProjectData_NewDashboard_Filterlist_Body">
+                                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                                   <input
                                     id={
                                       "gridData_" + projectData.value.plantmode
@@ -1136,10 +1136,10 @@ export default function DashboardHistory(props) {
                           </tbody>
 
                           {/* <tbody>
-                                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                                            <tr className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown_Item_Table_Tr">
                                               
-                                              <td className="DAT_ProjectData_Dashboard_Filterlist_Body">
-                                                <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                                              <td className="DAT_ProjectData_NewDashboard_Filterlist_Body">
+                                                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                                                   <input
                                                     id={
                                                       "batteryData_" +
@@ -1188,7 +1188,7 @@ export default function DashboardHistory(props) {
                     case "date":
                       return (
                         <>
-                          <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                          <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                             <input
                               id={
                                 "productionData_" + projectData.value.plantmode
@@ -1214,7 +1214,7 @@ export default function DashboardHistory(props) {
                             </label>
                           </div>
 
-                          <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                          <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                             <input
                               id={
                                 "consumptionData_" + projectData.value.plantmode
@@ -1240,7 +1240,7 @@ export default function DashboardHistory(props) {
                             </label>
                           </div>
 
-                          <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                          <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                             <input
                               id={"gridData_" + projectData.value.plantmode}
                               type="checkbox"
@@ -1264,7 +1264,7 @@ export default function DashboardHistory(props) {
                             </label>
                           </div>
 
-                          <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                          <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                             <input
                               id={"batteryData_" + projectData.value.plantmode}
                               type="checkbox"
@@ -1301,7 +1301,7 @@ export default function DashboardHistory(props) {
                 case "ESS":
                   return (
                     <>
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"productionData_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1324,7 +1324,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"consumptionData_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1347,7 +1347,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"grid_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1366,7 +1366,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"dailygridin_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1387,7 +1387,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"dailygridout_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1410,7 +1410,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"batteryData_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1431,7 +1431,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"charge_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1452,7 +1452,7 @@ export default function DashboardHistory(props) {
                         </label>
                       </div>
 
-                      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                      <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                         <input
                           id={"discharge_" + projectData.value.plantmode}
                           type="checkbox"
@@ -1476,7 +1476,7 @@ export default function DashboardHistory(props) {
                   );
                 default:
                   return (
-                    <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+                    <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
                       <input
                         id={"productionData_" + projectData.value.plantmode}
                         type="checkbox"
@@ -1504,16 +1504,16 @@ export default function DashboardHistory(props) {
             })()}
           </div>
         </div>
-        <div className="DAT_ProjectData_Dashboard_History">
-          <div className="DAT_ProjectData_Dashboard_History_Tit">
-            <div className="DAT_ProjectData_Dashboard_History_Tit_Left">
+        <div className="DAT_ProjectData_NewDashboard_History">
+          <div className="DAT_ProjectData_NewDashboard_History_Tit">
+            <div className="DAT_ProjectData_NewDashboard_History_Tit_Left">
               {dataLang.formatMessage({ id: "history" })}
             </div>
 
-            <div className="DAT_ProjectData_Dashboard_History_Tit_Right">
-              <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Date">
+            <div className="DAT_ProjectData_NewDashboard_History_Tit_Right">
+              <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date">
                 <div
-                  className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                  className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
                   id="date"
                   style={{
                     borderRight: "solid 1px rgb(199, 199, 199)",
@@ -1524,7 +1524,7 @@ export default function DashboardHistory(props) {
                   {dataLang.formatMessage({ id: "day" })}
                 </div>
                 <div
-                  className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                  className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
                   id="month"
                   style={{
                     borderRight: "solid 1px rgb(199, 199, 199)",
@@ -1535,7 +1535,7 @@ export default function DashboardHistory(props) {
                   {dataLang.formatMessage({ id: "month" })}
                 </div>
                 <div
-                  className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                  className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
                   id="year"
                   style={{
                     borderRight: "solid 1px rgb(199, 199, 199)",
@@ -1546,7 +1546,7 @@ export default function DashboardHistory(props) {
                   {dataLang.formatMessage({ id: "year" })}
                 </div>
                 <div
-                  className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                  className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
                   id="total"
                   style={{
                     color: dateType === "total" ? color.cur : color.pre,
@@ -1557,7 +1557,7 @@ export default function DashboardHistory(props) {
                 </div>
               </div>
               {/* 
-            <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Config">
+            <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Config">
               <button
                 onClick={(e) => {
                   handleShowConfig(e);
@@ -1568,7 +1568,7 @@ export default function DashboardHistory(props) {
               </button>
             </div> */}
 
-              <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Export">
+              <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Export">
                 <button onClick={(e) => handleExport(e)}>
                   {dataLang.formatMessage({ id: "export" })}
                 </button>
@@ -1650,7 +1650,7 @@ export default function DashboardHistory(props) {
           })()}
 
           <div
-            className="DAT_ProjectData_Dashboard_History_SubConfig"
+            className="DAT_ProjectData_NewDashboard_History_SubConfig"
             style={{
               height: dropConfig ? "calc(100vh - 180px)" : "0px",
               transition: "0.5s",
@@ -1658,826 +1658,12 @@ export default function DashboardHistory(props) {
           >
             {dropConfig ? (
               <div
-                className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown"
+                className="DAT_ProjectData_NewDashboard_History_SubConfig_Dropdown"
                 style={{
                   height: dropConfig ? "auto" : "0px",
                   transition: "0.5s",
                 }}
               >
-                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item">
-                  {(() => {
-                    switch (projectData.value.plantmode) {
-                      case "consumption":
-                        // return (
-                        //   <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
-                        //     <tbody>
-                        //       <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                        //         <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                        //           {dataLang.formatMessage({
-                        //             id: "production",
-                        //           })}
-                        //         </th>
-                        //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                        //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                        //             <input
-                        //               id={
-                        //                 "productionData_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //               type="checkbox"
-                        //               defaultChecked={
-                        //                 filterchart[
-                        //                   projectData.value.plantmode
-                        //                 ][dateType].production
-                        //               }
-                        //               onChange={(e) => {
-                        //                 handlefilterchart(e);
-                        //               }}
-                        //             />
-                        //             <label
-                        //               htmlFor={
-                        //                 "productionData_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //             >
-                        //               {dataLang.formatMessage({
-                        //                 id: "production",
-                        //               })}
-                        //             </label>
-                        //           </div>
-                        //         </td>
-                        //       </tr>
-                        //     </tbody>
-
-                        //     <tbody>
-                        //       <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                        //         <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                        //           {dataLang.formatMessage({
-                        //             id: "consumption",
-                        //           })}
-                        //         </th>
-                        //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                        //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                        //             <input
-                        //               id={
-                        //                 "consumptionData_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //               type="checkbox"
-                        //               defaultChecked={
-                        //                 filterchart[
-                        //                   projectData.value.plantmode
-                        //                 ][dateType].consumption
-                        //               }
-                        //               onChange={(e) => {
-                        //                 handlefilterchart(e);
-                        //               }}
-                        //             />
-                        //             <label
-                        //               htmlFor={
-                        //                 "consumptionData_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //             >
-                        //               {dataLang.formatMessage({
-                        //                 id: "consumption",
-                        //               })}
-                        //             </label>
-                        //           </div>
-                        //         </td>
-                        //       </tr>
-                        //     </tbody>
-
-                        //     <tbody>
-                        //       <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                        //         <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                        //           {dataLang.formatMessage({
-                        //             id: "grid",
-                        //           })}
-                        //         </th>
-                        //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                        //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                        //             <input
-                        //               id={
-                        //                 "dailygridin_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //               type="checkbox"
-                        //               defaultChecked={
-                        //                 filterchart[
-                        //                   projectData.value.plantmode
-                        //                 ][dateType].gridfeed
-                        //               }
-                        //               onChange={(e) => {
-                        //                 handlefilterchart(e);
-                        //               }}
-                        //             />
-                        //             <label
-                        //               htmlFor={
-                        //                 "dailygridin_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //             >
-                        //               {dataLang.formatMessage({
-                        //                 id: "gridfeed",
-                        //               })}
-                        //             </label>
-                        //           </div>
-                        //         </td>
-                        //         <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                        //           <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                        //             <input
-                        //               id={
-                        //                 "dailygridout_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //               type="checkbox"
-                        //               defaultChecked={
-                        //                 filterchart[
-                        //                   projectData.value.plantmode
-                        //                 ][dateType].purchasee
-                        //               }
-                        //               onChange={(e) => {
-                        //                 handlefilterchart(e);
-                        //               }}
-                        //             />
-                        //             <label
-                        //               htmlFor={
-                        //                 "dailygridout_" +
-                        //                 projectData.value.plantmode
-                        //               }
-                        //             >
-                        //               {dataLang.formatMessage({
-                        //                 id: "purchaseE",
-                        //               })}
-                        //             </label>
-                        //           </div>
-                        //         </td>
-                        //       </tr>
-                        //     </tbody>
-                        //   </table>
-                        // );
-                        switch (dateType) {
-                          case "date":
-                            return (
-                              <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "productionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].productionData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "productionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "production",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "consumption",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "consumptionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].consumptionData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "consumptionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "consumption",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "grid",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "gridData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].gridData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "gridData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "grid",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-
-                                {/* <tbody>
-                                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                              <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                                {dataLang.formatMessage({
-                                                  id: "batteryData",
-                                                })}
-                                              </th>
-                                              <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                                  <input
-                                                    id={
-                                                      "batteryData_" +
-                                                      projectData.value
-                                                        .plantmode
-                                                    }
-                                                    type="checkbox"
-                                                    defaultChecked={
-                                                      filterchart[
-                                                        projectData.value
-                                                          .plantmode
-                                                      ][dateType].batteryData
-                                                    }
-                                                    onChange={(e) => {
-                                                      handlefilterchart(e);
-                                                    }}
-                                                  />
-                                                  <label
-                                                    htmlFor={
-                                                      "batteryData_" +
-                                                      projectData.value
-                                                        .plantmode
-                                                    }
-                                                  >
-                                                    {dataLang.formatMessage({
-                                                      id: "batteryData",
-                                                    })}
-                                                  </label>
-                                                </div>
-                                              </td>
-                                            </tr>
-                                          </tbody> */}
-                              </table>
-                            );
-                          case "month":
-                            return <Checkboxfilter></Checkboxfilter>;
-                          case "year":
-                            return <Checkboxfilter></Checkboxfilter>;
-                          case "total":
-                            return <Checkboxfilter></Checkboxfilter>;
-                          default:
-                            return <></>;
-                        }
-                      case "hybrid":
-                        switch (dateType) {
-                          case "date":
-                            return (
-                              <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "productionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].productionData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "productionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "production",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "consumption",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "consumptionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].consumptionData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "consumptionData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "consumption",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "grid",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "gridData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].gridData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "gridData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "grid",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-
-                                <tbody>
-                                  <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                    <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                      {dataLang.formatMessage({
-                                        id: "batteryData",
-                                      })}
-                                    </th>
-                                    <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                        <input
-                                          id={
-                                            "batteryData_" +
-                                            projectData.value.plantmode
-                                          }
-                                          type="checkbox"
-                                          defaultChecked={
-                                            filterchart[
-                                              projectData.value.plantmode
-                                            ][dateType].batteryData
-                                          }
-                                          onChange={(e) => {
-                                            handlefilterchart(e);
-                                          }}
-                                        />
-                                        <label
-                                          htmlFor={
-                                            "batteryData_" +
-                                            projectData.value.plantmode
-                                          }
-                                        >
-                                          {dataLang.formatMessage({
-                                            id: "batteryData",
-                                          })}
-                                        </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            );
-                          case "month":
-                            return <Checkboxfilter></Checkboxfilter>;
-                          case "year":
-                            return <Checkboxfilter></Checkboxfilter>;
-                          case "total":
-                            return <Checkboxfilter></Checkboxfilter>;
-                          default:
-                            return <></>;
-                        }
-                      case "ESS":
-                        return (
-                          <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
-                            <tbody>
-                              <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                  {dataLang.formatMessage({
-                                    id: "production",
-                                  })}
-                                </th>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "productionData_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].production
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "productionData_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-
-                            <tbody>
-                              <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                  {dataLang.formatMessage({
-                                    id: "consumption",
-                                  })}
-                                </th>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "consumptionData_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].consumption
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "consumptionData_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "consumption",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-
-                            <tbody>
-                              <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                  {dataLang.formatMessage({
-                                    id: "grid",
-                                  })}
-                                </th>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={"grid_" + projectData.value.plantmode}
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].grid
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "grid_" + projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "grid",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "dailygridin_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].gridfeed
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "dailygridin_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "gridfeed",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "dailygridout_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].purchasee
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "dailygridout_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "purchaseE",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-
-                            <tbody>
-                              <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                  {dataLang.formatMessage({
-                                    id: "batteryData",
-                                  })}
-                                </th>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "batteryData_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].batterydata
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "batteryData_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "batteryData",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "charge_" + projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].charge
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "charge_" + projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "charge",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "discharge_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].discharge
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "discharge_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "discharge",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        );
-                      default:
-                        return (
-                          <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
-                            <tbody>
-                              <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                                <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                  {dataLang.formatMessage({
-                                    id: "production",
-                                  })}
-                                </th>
-                                <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                    <input
-                                      id={
-                                        "productionData_" +
-                                        projectData.value.plantmode
-                                      }
-                                      type="checkbox"
-                                      defaultChecked={
-                                        filterchart[
-                                          projectData.value.plantmode
-                                        ][dateType].productionData
-                                      }
-                                      onChange={(e) => {
-                                        handlefilterchart(e);
-                                      }}
-                                    />
-                                    <label
-                                      htmlFor={
-                                        "productionData_" +
-                                        projectData.value.plantmode
-                                      }
-                                    >
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </label>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        );
-                    }
-                  })()}
-                </div>
-
                 <div className="DAT_Filter_Dropdown_Bot">
                   <button
                     style={{

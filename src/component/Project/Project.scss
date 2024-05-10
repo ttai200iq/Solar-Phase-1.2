@@ -1568,8 +1568,7 @@
         }
     }
 
-    &_NewDasboard {
-        position: relative;
+    &_NewDashboard {
         margin: 10px 0 10px 10px;
         display: grid;
         grid-template-rows: repeat(2, 2fr);
@@ -1592,6 +1591,7 @@
             &_Right {
                 width: 35%;
                 display: grid;
+                // margin-right: 10px;
                 grid-template-rows: repeat(3, 2fr);
                 gap: 10px;
                 &_Information {
@@ -1599,7 +1599,11 @@
                 }
                 &_PredictDeg {
                     // background-color: #fff;
+                    width: 100%;
                     &_Weather {
+                        display: grid;
+                        grid-template-rows: repeat(2, 2fr);
+                        gap: 10px;
                         &_CurDeg {
                             height: 100px;
                             background-color: #fff;
@@ -1608,18 +1612,15 @@
                             justify-content: center;
                             padding: 10px;
                             white-space: nowrap; // ngan xuong dong
-                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                            overflow: hidden; // an noi dung vuot ra ngoai
 
                             // gap: 30px;
                             &_Text {
-                                width: 80px;
+                                width: 120px;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: center;
                                 white-space: nowrap; // ngan xuong dong
-                                overflow: hidden; // an noi dung vuot ra ngoai
                                 text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
                                 font-size: 15px;
                                 color: grey;
@@ -1627,8 +1628,22 @@
                                 & span {
                                     color: #000;
                                     font-family: segoeuib;
-                                    font-size: 30px;
+                                    font-size: 25px;
                                 }
+                            }
+                        }
+                        &_Forecast {
+                            // background-color: #fff;
+                            display: grid;
+                            grid-template-columns: repeat(3, 2fr);
+                            gap: 10px;
+                            &_Box {
+                                background-color: #fff;
+                                min-width: 140px;
+                                height: 100px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
                             }
                         }
                     }
@@ -1638,10 +1653,303 @@
 
         &_Bottom {
             margin-right: 10px;
+            height: fit-content;
             // width: 100%;
             display: flex;
             grid-template-columns: repeat(2, 2fr);
             gap: 10px;
+        }
+        &_Filterlist {
+            background-color: #fff;
+            width: 20%;
+            padding: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            &_Head {
+                min-width: 20px;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // white-space: nowrap;
+            }
+
+            &_Body {
+                margin-top: 35px;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+                height: 250px;
+                overflow-y: scroll;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    width: 7px;
+                    height: 10px;
+                }
+
+                /* Track */
+                &::-webkit-scrollbar-track {
+                    background-color: rgba(0, 0, 0, 0);
+                    border-radius: 2px;
+                }
+
+                /* Handle */
+                &::-webkit-scrollbar-thumb {
+                    background: #888;
+                    border-radius: 5px;
+                }
+
+                /* Handle on hover */
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+
+                &_Checkbox {
+                    // font-family: Montserrat-regular;
+                    color: #0b1967;
+                    & input {
+                        accent-color: COLOR.$Primary-color;
+                    }
+                }
+            }
+        }
+
+        &_History {
+            position: relative;
+            width: 80%;
+            background-color: white;
+            border-radius: 3px;
+            overflow: hidden;
+
+            &_Tit {
+                padding: 16px;
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+                align-items: center;
+
+                &_Left {
+                    flex: 2;
+                    min-width: 200px;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+                }
+
+                &_Right {
+                    flex: 8;
+                    display: flex;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    justify-content: flex-end;
+                    gap: 8px;
+
+                    &_Date {
+                        height: 25px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        overflow: hidden;
+                        border: solid 1px rgb(199, 199, 199);
+                        border-radius: 5px;
+
+                        &_Item {
+                            padding-left: 6px;
+                            padding-right: 6px;
+                            height: 25px;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-self: center;
+
+                            &:hover {
+                                color: #6495ed;
+                            }
+                        }
+                    }
+
+                    & button {
+                        display: flex;
+                        align-items: center;
+                        height: 25px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        background-color: white;
+                        border: solid 1px rgb(199, 199, 199);
+                        border-radius: 5px;
+                        font-family: Montserrat-Regular;
+
+                        &:hover {
+                            border: solid 1px #6495ed;
+                            color: #6495ed;
+                        }
+                    }
+
+                    &_Export {
+                        & button {
+                            display: flex;
+                            align-items: center;
+                            height: 25px;
+                            font-size: 14px;
+                            background-color: COLOR.$Primary-color;
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 5px;
+                            border: none;
+                            cursor: pointer;
+                            font-family: Montserrat-SemiBold;
+
+                            &:hover {
+                                background-color: #3e80fb;
+                                color: white;
+                            }
+                        }
+                    }
+
+                    & input {
+                        border: solid 1px rgb(199, 199, 199);
+                        border-radius: 5px;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                    }
+                }
+            }
+
+            &_Day {
+                padding: 16px;
+                height: 250px; // lam xong xoa dong nay di
+            }
+
+            &_Month {
+                padding: 16px;
+                height: 250px; // lam xong xoa dong nay di
+            }
+
+            &_Year {
+                padding: 16px;
+                height: 250px;
+
+                &_Tit {
+                    display: flex;
+
+                    &-Unit {
+                        flex: 1;
+                        color: gray;
+                        font-size: 14px;
+                    }
+
+                    &-Label {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: gray;
+                        font-size: 14px;
+                    }
+                }
+
+                &_Chart {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            &_Total {
+                padding: 16px;
+                height: 250px; // lam xong xoa dong nay di
+            }
+
+            &_SubConfig {
+                background-color: rgb(128, 128, 128, 0.5);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 58.6px;
+
+                &_Dropdown {
+                    background-color: white;
+                    border-top: 1px solid #b8b8b8;
+                    padding: 16px;
+                    height: 100%;
+
+                    &_Btn {
+                        padding: 16px;
+                        display: flex;
+                        gap: 16px;
+
+                        & button {
+                            padding: 5px 15px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            border: none;
+                            box-shadow: 0 0 3px 3px rgba(193, 193, 193, 0.5);
+                            width: 100px;
+                            height: 35px;
+                            font-family: Montserrat-SemiBold;
+                        }
+                    }
+
+                    &_Search {
+                        display: flex;
+                        width: fit-content;
+                        justify-self: center;
+                        align-items: center;
+                        border: 1px solid rgb(142, 142, 142);
+                        padding: 3px;
+                        border-radius: 5px;
+
+                        & input {
+                            border: none;
+                            width: 200px;
+                        }
+                    }
+
+                    &_Item {
+                        padding-top: 16px;
+                        font-size: 15px;
+
+                        &_Table {
+                            border-top: solid 1px #b8b8b8;
+                            border-left: solid 1px #b8b8b8;
+                            border-right: solid 1px #b8b8b8;
+
+                            & tr:first-child {
+                                border-bottom: solid 1px #b8b8b8;
+                            }
+                        }
+
+                        &_Table {
+                            border-collapse: collapse;
+                            width: 100%;
+
+                            &_Tr {
+                                display: flex;
+                                align-items: center;
+
+                                &_Th {
+                                    padding: 12px;
+                                    background-color: #d4d4d4;
+                                    width: 140px;
+                                }
+
+                                &_Td {
+                                    padding-left: 16px;
+                                    display: flex;
+
+                                    &_Checkbox {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                        // padding-left: 10px;
+                                        width: 200px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
