@@ -59,11 +59,14 @@ export default function ProjectData(props) {
   const dataLang = useIntl();
   const lang = useSelector((state) => state.admin.lang);
   const user = useSelector((state) => state.admin.usr);
+  const filterchart = useSelector((state) => state.tool.filterchart);
   const [view, setView] = useState("dashboard");
   const [dropState, setDropState] = useState(false);
   const [infoState, setInfoState] = useState(false);
   const [popupAddGateway, setPopupAddGateway] = useState(false);
-  const [snlogger, setSnlogger] = useState(dataLang.formatMessage({ id: "unknown" }));
+  const [snlogger, setSnlogger] = useState(
+    dataLang.formatMessage({ id: "unknown" })
+  );
   const [devname, setDevname] = useState("");
   const [devtype, setDevtype] = useState("");
   const [type, setType] = useState("");
@@ -157,9 +160,9 @@ export default function ProjectData(props) {
         <>
           {row.data.daily?.register
             ? parseFloat(
-              invt[row.logger_]?.[row.data.daily.register] *
-              row.data.daily?.cal
-            ).toFixed(2)
+                invt[row.logger_]?.[row.data.daily.register] *
+                  row.data.daily?.cal
+              ).toFixed(2)
             : 0}{" "}
           kWh
         </>
@@ -178,7 +181,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-            ruleInfor.value.setting.project.delete === true ? (
+          ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -192,19 +195,28 @@ export default function ProjectData(props) {
               //   </span>
               // </div>
               <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (<div className="DAT_TableEdit">
-                  <IoMdMore size={20}   {...bindToggle(popupState)} />
-                  <Menu {...bindMenu(popupState)}>
-                    {ruleInfor.value.setting.project.modify === true ?
-                      <MenuItem id={`${row.sn}_${row.name}_edit`} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                        <FiEdit size={14} />&nbsp;
-                        {dataLang.formatMessage({ id: "change" })}
-                      </MenuItem>
-                      : <></>
-                    }
-
-                  </Menu>
-                </div>)}
+                {(popupState) => (
+                  <div className="DAT_TableEdit">
+                    <IoMdMore size={20} {...bindToggle(popupState)} />
+                    <Menu {...bindMenu(popupState)}>
+                      {ruleInfor.value.setting.project.modify === true ? (
+                        <MenuItem
+                          id={`${row.sn}_${row.name}_edit`}
+                          onClick={(e) => {
+                            handleEdit(e);
+                            popupState.close();
+                          }}
+                        >
+                          <FiEdit size={14} />
+                          &nbsp;
+                          {dataLang.formatMessage({ id: "change" })}
+                        </MenuItem>
+                      ) : (
+                        <></>
+                      )}
+                    </Menu>
+                  </div>
+                )}
               </PopupState>
             )
           ) : (
@@ -325,7 +337,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-            ruleInfor.value.setting.project.delete === true ? (
+          ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -339,27 +351,43 @@ export default function ProjectData(props) {
               //   </span>
               // </div>
               <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (<div className="DAT_TableEdit">
-                  <IoMdMore size={20}   {...bindToggle(popupState)} />
-                  <Menu {...bindMenu(popupState)}>
-                    {ruleInfor.value.setting.project.modify === true ?
-                      <MenuItem id={`${row.sn}_${row.name}_edit`} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                        <FiEdit size={14} />&nbsp;
-                        {dataLang.formatMessage({ id: "change" })}
-                      </MenuItem>
-                      : <></>
-                    }
-                    {ruleInfor.value.setting.project.remove === true ?
-                      <MenuItem id={row.sn + "_remove"} onClick={(e) => { handleDelete(e); popupState.close() }}>
-                        <IoTrashOutline size={16} />
-                        &nbsp;
-                        {dataLang.formatMessage({ id: "delete" })}
-                      </MenuItem>
-                      : <></>}
-
-
-                  </Menu>
-                </div>)}
+                {(popupState) => (
+                  <div className="DAT_TableEdit">
+                    <IoMdMore size={20} {...bindToggle(popupState)} />
+                    <Menu {...bindMenu(popupState)}>
+                      {ruleInfor.value.setting.project.modify === true ? (
+                        <MenuItem
+                          id={`${row.sn}_${row.name}_edit`}
+                          onClick={(e) => {
+                            handleEdit(e);
+                            popupState.close();
+                          }}
+                        >
+                          <FiEdit size={14} />
+                          &nbsp;
+                          {dataLang.formatMessage({ id: "change" })}
+                        </MenuItem>
+                      ) : (
+                        <></>
+                      )}
+                      {ruleInfor.value.setting.project.remove === true ? (
+                        <MenuItem
+                          id={row.sn + "_remove"}
+                          onClick={(e) => {
+                            handleDelete(e);
+                            popupState.close();
+                          }}
+                        >
+                          <IoTrashOutline size={16} />
+                          &nbsp;
+                          {dataLang.formatMessage({ id: "delete" })}
+                        </MenuItem>
+                      ) : (
+                        <></>
+                      )}
+                    </Menu>
+                  </div>
+                )}
               </PopupState>
             )
           ) : (
@@ -527,8 +555,16 @@ export default function ProjectData(props) {
   // ];
 
   const popup_state = {
-    pre: { transform: "rotate(0deg)", transition: "0.5s", color: "rgba(11, 25, 103)", },
-    new: { transform: "rotate(90deg)", transition: "0.5s", color: "rgba(11, 25, 103)", },
+    pre: {
+      transform: "rotate(0deg)",
+      transition: "0.5s",
+      color: "rgba(11, 25, 103)",
+    },
+    new: {
+      transform: "rotate(90deg)",
+      transition: "0.5s",
+      color: "rgba(11, 25, 103)",
+    },
   };
 
   const handlePopup = (state) => {
@@ -668,7 +704,10 @@ export default function ProjectData(props) {
   };
 
   const handleInvt = async (sn) => {
-    const res = await invtCloud('{"deviceCode":"' + sn + '"}', Token.value.token);
+    const res = await invtCloud(
+      '{"deviceCode":"' + sn + '"}',
+      Token.value.token
+    );
     if (res.ret === 0) {
       setInvt((pre) => ({ ...pre, [sn]: res.data }));
     }
@@ -692,11 +731,14 @@ export default function ProjectData(props) {
     tabLable.value = listDeviceTab[0].name;
 
     const getShared = async () => {
-      let req = await callApi("post", host.DATA + "/getmailPlantmem", { plantid: projectData.value.plantid_, usr: user });
+      let req = await callApi("post", host.DATA + "/getmailPlantmem", {
+        plantid: projectData.value.plantid_,
+        usr: user,
+      });
       if (req.status) {
-        setgetShared(req.data)
+        setgetShared(req.data);
       }
-    }
+    };
     getShared();
 
     //data Logger
@@ -745,23 +787,25 @@ export default function ProjectData(props) {
       tab_.value = "logger";
       inverterDB.value = [];
       temp.value = [];
-      rootDispatch(toolslice.actions.setcal({
-        pro_1: 0,
-        pro_2: 0,
-        pro_3: 0,
-        bat_1: 0,
-        bat_2: 0,
-        bat_in_1: 0,
-        bat_out_1: 0,
-        con_1: 0,
-        con_2: 0,
-        grid_1: 0,
-        grid_in_1: 0,
-        grid_in_2: 0,
-        grid_out_1: 0,
-        grid_out_2: 0,
-      }));
-    }
+      rootDispatch(
+        toolslice.actions.setcal({
+          pro_1: 0,
+          pro_2: 0,
+          pro_3: 0,
+          bat_1: 0,
+          bat_2: 0,
+          bat_in_1: 0,
+          bat_out_1: 0,
+          con_1: 0,
+          con_2: 0,
+          grid_1: 0,
+          grid_in_1: 0,
+          grid_in_2: 0,
+          grid_out_1: 0,
+          grid_out_2: 0,
+        })
+      );
+    };
     // eslint-disable-next-line
   }, [lang]);
 
@@ -866,21 +910,20 @@ export default function ProjectData(props) {
       temp.value.map((item) => {
         socket.value.on("Server/" + item.sn, function (data) {
           Object.keys(data.data).map((keyName, i) => {
-
-            setInvt(pre => ({
+            setInvt((pre) => ({
               ...pre,
               [item.sn]: {
                 ...pre[item.sn],
-                [keyName]: data.data[keyName]
-              }
-            }))
-          })
-        })
-      })
+                [keyName]: data.data[keyName],
+              },
+            }));
+          });
+        });
+      });
     }
 
     // eslint-disable-next-line
-  }, [temp.value])
+  }, [temp.value]);
 
   // Handle close when press ESC
   useEffect(() => {
@@ -902,17 +945,29 @@ export default function ProjectData(props) {
   return (
     <div ref={box} style={{ width: "98%", margin: "auto" }}>
       <div className="DAT_ProjectData">
-        {isMobile.value
-          ? <div className="DAT_ProjectData_Header">
+        {isMobile.value ? (
+          <div className="DAT_ProjectData_Header">
             <div className="DAT_ProjectData_Header_Left">
-              <div className="DAT_ProjectData_Header_Left_Top"
+              <div
+                className="DAT_ProjectData_Header_Left_Top"
                 style={{ fontSize: 22 }}
               >
-                <img src={projectData.value.img ? projectData.value.img : "/dat_picture/solar_panel.png"} alt="" />
+                <img
+                  src={
+                    projectData.value.img
+                      ? projectData.value.img
+                      : "/dat_picture/solar_panel.png"
+                  }
+                  alt=""
+                />
                 <div className="DAT_ProjectData_Header_Left_Top_Content">
                   <div className="DAT_ProjectData_Header_Left_Top_Content_Name">
                     {projectData.value.plantname}
-                    {projectData.value.state === 1 ? <FaCheckCircle size={20} color="green" /> : <MdOutlineError size={20} color="red" />}
+                    {projectData.value.state === 1 ? (
+                      <FaCheckCircle size={20} color="green" />
+                    ) : (
+                      <MdOutlineError size={20} color="red" />
+                    )}
                   </div>
                   <div className="DAT_ProjectData_Header_Left_Top_Content_Addr">
                     {projectData.value.addr}
@@ -932,7 +987,8 @@ export default function ProjectData(props) {
                 />
               </div>
 
-              <div className="DAT_ProjectData_Header_Right_Close"
+              <div
+                className="DAT_ProjectData_Header_Right_Close"
                 onClick={() => {
                   plantState.value = "default";
                   setDropState(false);
@@ -942,17 +998,29 @@ export default function ProjectData(props) {
               </div>
             </div>
           </div>
-
-          : <div className="DAT_ProjectData_Header">
+        ) : (
+          <div className="DAT_ProjectData_Header">
             <div className="DAT_ProjectData_Header_Left">
-              <div className="DAT_ProjectData_Header_Left_Top"
+              <div
+                className="DAT_ProjectData_Header_Left_Top"
                 style={{ fontSize: 22 }}
               >
-                <img src={projectData.value.img ? projectData.value.img : "/dat_picture/solar_panel.png"} alt="" />
+                <img
+                  src={
+                    projectData.value.img
+                      ? projectData.value.img
+                      : "/dat_picture/solar_panel.png"
+                  }
+                  alt=""
+                />
                 <div className="DAT_ProjectData_Header_Left_Top_Content">
                   <div className="DAT_ProjectData_Header_Left_Top_Content_Name">
                     {projectData.value.plantname}
-                    {projectData.value.state === 1 ? <FaCheckCircle size={20} color="green" /> : <MdOutlineError size={20} color="red" />}
+                    {projectData.value.state === 1 ? (
+                      <FaCheckCircle size={20} color="green" />
+                    ) : (
+                      <MdOutlineError size={20} color="red" />
+                    )}
                   </div>
                   <div className="DAT_ProjectData_Header_Left_Top_Content_Addr">
                     {projectData.value.addr}
@@ -975,10 +1043,12 @@ export default function ProjectData(props) {
                 />
               </div>
 
-              {ruleInfor.value.setting.device.add
-                ? projectData.value.shared === 1
-                  ? <></>
-                  : <div className="DAT_ProjectData_Header_Right_Add"
+              {ruleInfor.value.setting.device.add ? (
+                projectData.value.shared === 1 ? (
+                  <></>
+                ) : (
+                  <div
+                    className="DAT_ProjectData_Header_Right_Add"
                     style={{ display: view === "device" ? "block" : "none" }}
                   >
                     <button
@@ -991,10 +1061,13 @@ export default function ProjectData(props) {
                       <IoAddOutline size={25} color="white" />
                     </button>
                   </div>
-                : <></>
-              }
+                )
+              ) : (
+                <></>
+              )}
 
-              <div className="DAT_ProjectData_Header_Right_Close"
+              <div
+                className="DAT_ProjectData_Header_Right_Close"
                 onClick={() => {
                   plantState.value = "default";
                   setDropState(false);
@@ -1010,28 +1083,51 @@ export default function ProjectData(props) {
               </div>
             </div>
           </div>
-        }
+        )}
 
         {(() => {
           switch (view) {
             case "dashboard":
               return (
-                <div className="DAT_ProjectData_Dashboard">
-                  <div className="DAT_ProjectData_Dashboard_Data">
-                    <Data />
-                    <GraphComponent />
-                    <div className="DAT_ProjectData_Dashboard_Data_Right">
-                      <div className="DAT_ProjectData_Dashboard_Data_Right_Weather">
+                // <div className="DAT_ProjectData_Dashboard">
+                //   <div className="DAT_ProjectData_Dashboard_Data">
+                //     <Data />
+                //     <GraphComponent />
+                //     <div className="DAT_ProjectData_Dashboard_Data_Right">
+                //       <div className="DAT_ProjectData_Dashboard_Data_Right_Weather">
+                //         <Weather />
+                //       </div>
+                //     </div>
+                //   </div>
+
+                //   <DashboardHistory />
+
+                //   <div className="DAT_ProjectData_Dashboard_More">
+                //     <ProjectInfo />
+                //     <Benefit />
+                //   </div>
+                // </div>
+                <div className="DAT_ProjectData_NewDasboard">
+                  <div className="DAT_ProjectData_NewDasboard_Top">
+                    <div className="DAT_ProjectData_NewDasboard_Top_Left">
+                      <div className="DAT_ProjectData_NewDasboard_Top_Left_Impact">
+                        Bar
+                      </div>
+                      <div className="DAT_ProjectData_NewDasboard_Top_Left_Graph">
+                        Graph
+                      </div>
+                    </div>
+                    <div className="DAT_ProjectData_NewDasboard_Top_Right">
+                      <div className="DAT_ProjectData_NewDasboard_Top_Right_Information">
+                        Hi
+                      </div>
+                      <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg">
                         <Weather />
                       </div>
                     </div>
                   </div>
-
-                  <DashboardHistory />
-
-                  <div className="DAT_ProjectData_Dashboard_More">
-                    <ProjectInfo />
-                    <Benefit />
+                  <div className="DAT_ProjectData_NewDasboard_Bottom">
+                    <DashboardHistory />
                   </div>
                 </div>
               );
@@ -1047,7 +1143,11 @@ export default function ProjectData(props) {
                         >
                           <span> {tabLable.value}</span>
                           <FiFilter />
-                          {tabMobile.value ? (<IoIosArrowDown />) : (<IoIosArrowForward />)}
+                          {tabMobile.value ? (
+                            <IoIosArrowDown />
+                          ) : (
+                            <IoIosArrowForward />
+                          )}
                         </button>
                         {ruleInfor.value.setting.device.add ? (
                           projectData.value.shared == 1 ? (
@@ -1073,12 +1173,15 @@ export default function ProjectData(props) {
                         ) : (
                           <div></div>
                         )}
-                        <div className="DAT_Toollist_Tab_Mobile_list"
+                        <div
+                          className="DAT_Toollist_Tab_Mobile_list"
                           style={{
                             top: "50px",
                             height: tabMobile.value ? "66px" : "0px",
                             transition: "0.5s",
-                            boxShadow: tabMobile.value ? "0 0 4px 4px rgba(193, 193, 193, 0.5)" : "none"
+                            boxShadow: tabMobile.value
+                              ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"
+                              : "none",
                           }}
                         >
                           {listDeviceTab.map((item, i) => {
@@ -1090,7 +1193,6 @@ export default function ProjectData(props) {
                                 onClick={(e) => {
                                   handleTabMobileDevice(e);
                                   tabMobile.value = false;
-
                                 }}
                               >
                                 {i + 1}: {item.name}
@@ -1107,13 +1209,17 @@ export default function ProjectData(props) {
                               <>
                                 {temp.value?.map((item, i) => {
                                   return (
-                                    <div className="DAT_ProjectData_Device_TableMobile_Content" key={i}>
+                                    <div
+                                      className="DAT_ProjectData_Device_TableMobile_Content"
+                                      key={i}
+                                    >
                                       <div className="DAT_ProjectData_Device_TableMobile_Content_Top">
                                         <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Type">
                                           {item.type}
                                         </div>
                                         <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info">
-                                          <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
+                                          <div
+                                            className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
                                             onClick={(e) => handleInfoLogger(e)}
                                           >
                                             {item.name}
@@ -1128,16 +1234,26 @@ export default function ProjectData(props) {
                                         <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_State">
                                           {item.state === 1 ? (
                                             <>
-                                              <FaCheckCircle size={16} color="green" />
+                                              <FaCheckCircle
+                                                size={16}
+                                                color="green"
+                                              />
                                               <span>
-                                                {dataLang.formatMessage({ id: "online", })}
+                                                {dataLang.formatMessage({
+                                                  id: "online",
+                                                })}
                                               </span>
                                             </>
                                           ) : (
                                             <>
-                                              <MdOutlineError size={18} color="red" />
+                                              <MdOutlineError
+                                                size={18}
+                                                color="red"
+                                              />
                                               <span>
-                                                {dataLang.formatMessage({ id: "offline", })}
+                                                {dataLang.formatMessage({
+                                                  id: "offline",
+                                                })}
                                               </span>
                                             </>
                                           )}
@@ -1180,16 +1296,26 @@ export default function ProjectData(props) {
                               <>
                                 {inverterDB.value?.map((item, i) => {
                                   return (
-                                    <div key={i} className="DAT_ProjectData_Device_TableMobile_Content">
+                                    <div
+                                      key={i}
+                                      className="DAT_ProjectData_Device_TableMobile_Content"
+                                    >
                                       <div className="DAT_ProjectData_Device_TableMobile_Content_Top">
-                                        <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Type"
-                                          style={{ backgroundColor: COLOR.value.DarkGreenColor }}
+                                        <div
+                                          className="DAT_ProjectData_Device_TableMobile_Content_Top_Type"
+                                          style={{
+                                            backgroundColor:
+                                              COLOR.value.DarkGreenColor,
+                                          }}
                                         >
                                           {item.data.mode}
                                         </div>
                                         <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info">
-                                          <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
-                                            onClick={(e) => handleInfoInverter(e)}
+                                          <div
+                                            className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
+                                            onClick={(e) =>
+                                              handleInfoInverter(e)
+                                            }
                                           >
                                             {item.name}
                                           </div>
@@ -1197,7 +1323,10 @@ export default function ProjectData(props) {
                                             SN: {item.sn}
                                           </div>
                                           <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_OgLog">
-                                            {dataLang.formatMessage({ id: "ogLog", })}: {item.logger_}
+                                            {dataLang.formatMessage({
+                                              id: "ogLog",
+                                            })}
+                                            : {item.logger_}
                                           </div>
                                         </div>
                                       </div>
@@ -1574,7 +1703,8 @@ export default function ProjectData(props) {
             case "share":
               return (
                 <div className="DAT_ProjectData_Share">
-                  <div className="DAT_ProjectData_Share_Header"
+                  <div
+                    className="DAT_ProjectData_Share_Header"
                     style={{
                       padding: "15px",
                       backgroundColor: "rgba(233, 233, 233, 0.5)",
@@ -1602,19 +1732,20 @@ export default function ProjectData(props) {
         })()}
       </div>
 
-      {popupAddGateway
-        ? <div className="DAT_AddGatewayPopup">
+      {popupAddGateway ? (
+        <div className="DAT_AddGatewayPopup">
           <AddGateway
             data={temp.value}
             handleInvt={handleInvt}
             handleClose={handleClosePopupAddGateway}
           />
         </div>
-        : <></>
-      }
+      ) : (
+        <></>
+      )}
 
-      {popupState.value
-        ? <div className="DAT_DevicePopup">
+      {popupState.value ? (
+        <div className="DAT_DevicePopup">
           <Popup
             plantid={projectData.value.plantid_}
             type="logger"
@@ -1625,26 +1756,29 @@ export default function ProjectData(props) {
             devtype={devtype}
           />
         </div>
-        : <> </>
-      }
+      ) : (
+        <> </>
+      )}
 
-      {isMobile.value
-        ? <>
-          {dropState
-            ? <div className="DAT_ProjectDataDrop">
+      {isMobile.value ? (
+        <>
+          {dropState ? (
+            <div className="DAT_ProjectDataDrop">
               {(() => {
                 switch (view) {
                   case "device":
                     return (
                       <>
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="dashboard"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "monitor" })}
                         </div>
 
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="share"
                           onClick={(e) => handleView(e)}
                         >
@@ -1655,14 +1789,16 @@ export default function ProjectData(props) {
                   case "share":
                     return (
                       <>
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="dashboard"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "monitor" })}
                         </div>
 
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="device"
                           onClick={(e) => handleView(e)}
                         >
@@ -1673,14 +1809,16 @@ export default function ProjectData(props) {
                   default:
                     return (
                       <>
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="device"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "device" })}
                         </div>
 
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="share"
                           onClick={(e) => handleView(e)}
                         >
@@ -1691,12 +1829,15 @@ export default function ProjectData(props) {
                 }
               })()}
             </div>
-            : <></>
-          }
+          ) : (
+            <></>
+          )}
         </>
-        : <>
-          {dropState
-            ? <div className="DAT_ProjectDataDrop"
+      ) : (
+        <>
+          {dropState ? (
+            <div
+              className="DAT_ProjectDataDrop"
               style={{ display: viewNav.value ? "block" : "none" }}
               onMouseEnter={() => {
                 viewStateNav.value = [true, true];
@@ -1711,14 +1852,16 @@ export default function ProjectData(props) {
                   case "device":
                     return (
                       <>
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="dashboard"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "monitor" })}
                         </div>
 
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="share"
                           onClick={(e) => handleView(e)}
                         >
@@ -1729,14 +1872,16 @@ export default function ProjectData(props) {
                   case "share":
                     return (
                       <>
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="dashboard"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "monitor" })}
                         </div>
 
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="device"
                           onClick={(e) => handleView(e)}
                         >
@@ -1747,14 +1892,16 @@ export default function ProjectData(props) {
                   default:
                     return (
                       <>
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="device"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "device" })}
                         </div>
 
-                        <div className="DAT_ProjectDataDrop_Item"
+                        <div
+                          className="DAT_ProjectDataDrop_Item"
                           id="share"
                           onClick={(e) => handleView(e)}
                         >
@@ -1765,12 +1912,14 @@ export default function ProjectData(props) {
                 }
               })()}
             </div>
-            : <></>
-          }
+          ) : (
+            <></>
+          )}
         </>
-      }
+      )}
 
-      <div className="DAT_DeviceInfor"
+      <div
+        className="DAT_DeviceInfor"
         style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
       >
         {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}

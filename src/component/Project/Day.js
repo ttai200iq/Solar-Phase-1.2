@@ -305,7 +305,7 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         strokeWidth={2}
-                        dataKey={props.v4}
+                        dataKey={props.v}
                         // stroke="rgba(11,25,103,0.7)"
                         stroke="#FF5151"
                         fillOpacity={1}
@@ -353,7 +353,7 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         strokeWidth={2}
-                        dataKey={props.v}
+                        dataKey={props.v4}
                         stroke="#62CE14"
                         fillOpacity={1}
                         // fill="rgba(196, 147, 2, 0.1)"

@@ -379,8 +379,9 @@
 }
 
 // 19/01/2024 by Phu
+
 .DAT_ProjectData {
-    position: relative;
+    // position: relative;
     width: 100%;
     margin: auto;
     overflow: hidden;
@@ -1140,15 +1141,68 @@
             }
         }
 
+        &_Filterlist {
+            background-color: #fff;
+            width: 20%;
+            padding: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            &_Head {
+                min-width: 20px;
+                font-family: Montserrat-SemiBold;
+                color: COLOR.$Primary-color;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // white-space: nowrap;
+            }
+
+            &_Body {
+                margin-top: 35px;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+                height: 250px;
+                overflow-y: scroll;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    width: 7px;
+                    height: 10px;
+                }
+
+                /* Track */
+                &::-webkit-scrollbar-track {
+                    background-color: rgba(0, 0, 0, 0);
+                    border-radius: 2px;
+                }
+
+                /* Handle */
+                &::-webkit-scrollbar-thumb {
+                    background: #888;
+                    border-radius: 5px;
+                }
+
+                /* Handle on hover */
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+
+                &_Checkbox {
+                    // font-family: Montserrat-regular;
+                    color: #0b1967;
+                    & input {
+                        accent-color: COLOR.$Primary-color;
+                    }
+                }
+            }
+        }
+
         &_History {
             position: relative;
-            width: 98%;
+            width: 80%;
             background-color: white;
-            margin: auto;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
             border-radius: 3px;
-            border: solid 1px rgba(198, 197, 197, 0.5);
             overflow: hidden;
 
             &_Tit {
@@ -1156,10 +1210,11 @@
                 display: flex;
                 flex-wrap: wrap;
                 overflow: hidden;
+                align-items: center;
 
                 &_Left {
                     flex: 2;
-                    min-width: 80px;
+                    min-width: 200px;
                     font-family: Montserrat-SemiBold;
                     color: COLOR.$Primary-color;
                 }
@@ -1245,17 +1300,17 @@
 
             &_Day {
                 padding: 16px;
-                height: 300px; // lam xong xoa dong nay di
+                height: 250px; // lam xong xoa dong nay di
             }
 
             &_Month {
                 padding: 16px;
-                height: 300px; // lam xong xoa dong nay di
+                height: 250px; // lam xong xoa dong nay di
             }
 
             &_Year {
                 padding: 16px;
-                height: 300px;
+                height: 250px;
 
                 &_Tit {
                     display: flex;
@@ -1284,7 +1339,7 @@
 
             &_Total {
                 padding: 16px;
-                height: 300px; // lam xong xoa dong nay di
+                height: 250px; // lam xong xoa dong nay di
             }
 
             &_SubConfig {
@@ -1368,7 +1423,7 @@
                                         display: flex;
                                         align-items: center;
                                         gap: 10px;
-                                        padding-left: 10px;
+                                        // padding-left: 10px;
                                         width: 200px;
                                     }
                                 }
@@ -1510,6 +1565,53 @@
                     }
                 }
             }
+        }
+    }
+
+    &_NewDasboard {
+        position: relative;
+        margin: 10px 0 10px 10px;
+        display: grid;
+        grid-template-rows: repeat(2, 2fr);
+        gap: 10px;
+        &_Top {
+            display: flex;
+            gap: 10px;
+            &_Left {
+                width: 65%;
+                display: grid;
+                grid-template-rows: repeat(2, 2fr);
+                gap: 10px;
+                &_Impact {
+                    background-color: #fff;
+                }
+                &_Graph {
+                    background-color: #fff;
+                }
+            }
+            &_Right {
+                width: 35%;
+                display: grid;
+                grid-template-rows: repeat(3, 2fr);
+                gap: 10px;
+                &_Information {
+                    background-color: #fff;
+                }
+                &_CurrentDeg {
+                    background-color: #fff;
+                }
+                &_PredictDeg {
+                    background-color: #fff;
+                }
+            }
+        }
+
+        &_Bottom {
+            margin-right: 10px;
+            // width: 100%;
+            display: flex;
+            grid-template-columns: repeat(2, 2fr);
+            gap: 10px;
         }
     }
 

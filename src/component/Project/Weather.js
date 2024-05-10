@@ -105,170 +105,171 @@ export default function Weather() {
   ) : (
     // <div className="DAT_ProjectData_Dashboard_Data_Right">
     //   <div className="DAT_ProjectData_Dashboard_Data_Right_Weather">
-    <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside">
-      <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current">
-        <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Left">
-          <img
-            src={"/dat_picture/station.jpg"}
-            style={{ width: "140px", height: "80px" }}
-            alt=""
-          />
-        </div>
-        <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right">
-          <img
-            src={"https:" + data.current.condition.icon}
-            style={{ width: "70px", height: "70px" }}
-            alt=""
-          />
-          <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right_Tit">
-            <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right_Tit_Temp">
-              {data.current.temp_c}°C
-            </div>
-            {/* {data.current.condition.text} */}
-            <PopupState variant="popper" popupId="demo-popup-popper">
-              {(popupState) => (
-                <div style={{ cursor: "pointer" }}>
-                  <div
-                    {...bindHover(popupState)}
-                    className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right_Tit_Des"
-                  >
-                    {" "}
-                    {data.current.condition.text}
-                  </div>
-                  <Popper {...bindPopper(popupState)} transition>
-                    {({ TransitionProps }) => (
-                      <Fade {...TransitionProps} timeout={350}>
-                        <Paper
-                          sx={{
-                            width: "200px",
-                            height: "30px",
-                            marginLeft: "200px",
-                            p: 2,
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              fontSize: "12px",
-                              textAlign: "justify",
-                              marginBottom: 1.7,
-                            }}
-                          >
-                            {data.current.condition.text}
-                          </Typography>
-                        </Paper>
-                      </Fade>
-                    )}
-                  </Popper>
-                </div>
-              )}
-            </PopupState>
-          </div>
-        </div>
-      </div>
-      <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Describe">
-        <IoLocation color="rgba(97,88,194,0.8)" size={15} />
-        {data.location.name},{data.location.country}, {data.location.localtime}
-      </div>
-      <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Forecast">
-        <ResponsiveContainer width={"100%"} height={150}>
-          <AreaChart
-            data={forecastdata}
-            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-          >
-            <defs>
-              <linearGradient
-                id="colorforecastdata"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop
-                  offset="5%"
-                  stopColor="rgba(97,88,194,0.8)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="rgba(97,88,194,0.8)"
-                  stopOpacity={0}
-                />
-              </linearGradient>
-            </defs>
-            <XAxis dataKey="name" hide={true} />
-            <Tooltip animationEasing="ease-in-out" />
-            <Area
-              type="monotone"
-              dataKey={v}
-              stroke="rgba(97,88,194,0.8)"
-              fillOpacity={20}
-              fill="url(#colorforecastdata)"
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-      <div
-        onMouseDown={startDragging}
-        onMouseUp={stopDragging}
-        onMouseLeave={stopDragging}
-        onMouseMove={dragging}
-        ref={boxRef}
-        className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Bottom"
-      >
-        {data.forecast.forecastday.map((item, index) => {
-          let weekdays = [];
-          if (lang === "en") {
-            weekdays = [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ];
-          } else if (lang === "vi") {
-            weekdays = [
-              "Chủ nhật",
-              "Thứ hai",
-              "Thứ ba",
-              "Thứ tư",
-              "Thứ năm",
-              "Thứ sáu",
-              "Thứ bảy",
-            ];
-          }
-          const dateObj = new Date(item.date);
-          const weekday = weekdays[dateObj.getUTCDay()];
-          const isToday = new Date(item.date).toDateString() === today;
-          return (
-            <div
-              key={index}
-              className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Bottom_Box"
-            >
-              <div
-                style={{
-                  fontFamily: isToday
-                    ? "Montserrat-Bold"
-                    : "Montserrat-Regular",
-                  color: "rgba(11, 25, 103)",
-                }}
-              >
-                {weekday}
-              </div>
-              <div>
-                <img
-                  draggable="true" // Enable drag for images
-                  onDragStart={(e) => e.preventDefault()}
-                  src={"https:" + item.day.condition.icon}
-                  style={{ width: "40px", height: "40px" }}
-                  alt=""
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    // <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside">
+    //   <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current">
+    //     <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Left">
+    //       <img
+    //         src={"/dat_picture/station.jpg"}
+    //         style={{ width: "140px", height: "80px" }}
+    //         alt=""
+    //       />
+    //     </div>
+    //     <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right">
+    //       <img
+    //         src={"https:" + data.current.condition.icon}
+    //         style={{ width: "70px", height: "70px" }}
+    //         alt=""
+    //       />
+    //       <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right_Tit">
+    //         <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right_Tit_Temp">
+    //           {data.current.temp_c}°C
+    //         </div>
+    //         {/* {data.current.condition.text} */}
+    //         <PopupState variant="popper" popupId="demo-popup-popper">
+    //           {(popupState) => (
+    //             <div style={{ cursor: "pointer" }}>
+    //               <div
+    //                 {...bindHover(popupState)}
+    //                 className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Current_Right_Tit_Des"
+    //               >
+    //                 {" "}
+    //                 {data.current.condition.text}
+    //               </div>
+    //               <Popper {...bindPopper(popupState)} transition>
+    //                 {({ TransitionProps }) => (
+    //                   <Fade {...TransitionProps} timeout={350}>
+    //                     <Paper
+    //                       sx={{
+    //                         width: "200px",
+    //                         height: "30px",
+    //                         marginLeft: "200px",
+    //                         p: 2,
+    //                       }}
+    //                     >
+    //                       <Typography
+    //                         sx={{
+    //                           fontSize: "12px",
+    //                           textAlign: "justify",
+    //                           marginBottom: 1.7,
+    //                         }}
+    //                       >
+    //                         {data.current.condition.text}
+    //                       </Typography>
+    //                     </Paper>
+    //                   </Fade>
+    //                 )}
+    //               </Popper>
+    //             </div>
+    //           )}
+    //         </PopupState>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Describe">
+    //     <IoLocation color="rgba(97,88,194,0.8)" size={15} />
+    //     {data.location.name},{data.location.country}, {data.location.localtime}
+    //   </div>
+    //   <div className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Forecast">
+    //     <ResponsiveContainer width={"100%"} height={150}>
+    //       <AreaChart
+    //         data={forecastdata}
+    //         margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+    //       >
+    //         <defs>
+    //           <linearGradient
+    //             id="colorforecastdata"
+    //             x1="0"
+    //             y1="0"
+    //             x2="0"
+    //             y2="1"
+    //           >
+    //             <stop
+    //               offset="5%"
+    //               stopColor="rgba(97,88,194,0.8)"
+    //               stopOpacity={0.8}
+    //             />
+    //             <stop
+    //               offset="95%"
+    //               stopColor="rgba(97,88,194,0.8)"
+    //               stopOpacity={0}
+    //             />
+    //           </linearGradient>
+    //         </defs>
+    //         <XAxis dataKey="name" hide={true} />
+    //         <Tooltip animationEasing="ease-in-out" />
+    //         <Area
+    //           type="monotone"
+    //           dataKey={v}
+    //           stroke="rgba(97,88,194,0.8)"
+    //           fillOpacity={20}
+    //           fill="url(#colorforecastdata)"
+    //         />
+    //       </AreaChart>
+    //     </ResponsiveContainer>
+    //   </div>
+    //   <div
+    //     onMouseDown={startDragging}
+    //     onMouseUp={stopDragging}
+    //     onMouseLeave={stopDragging}
+    //     onMouseMove={dragging}
+    //     ref={boxRef}
+    //     className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Bottom"
+    //   >
+    //     {data.forecast.forecastday.map((item, index) => {
+    //       let weekdays = [];
+    //       if (lang === "en") {
+    //         weekdays = [
+    //           "Sunday",
+    //           "Monday",
+    //           "Tuesday",
+    //           "Wednesday",
+    //           "Thursday",
+    //           "Friday",
+    //           "Saturday",
+    //         ];
+    //       } else if (lang === "vi") {
+    //         weekdays = [
+    //           "Chủ nhật",
+    //           "Thứ hai",
+    //           "Thứ ba",
+    //           "Thứ tư",
+    //           "Thứ năm",
+    //           "Thứ sáu",
+    //           "Thứ bảy",
+    //         ];
+    //       }
+    //       const dateObj = new Date(item.date);
+    //       const weekday = weekdays[dateObj.getUTCDay()];
+    //       const isToday = new Date(item.date).toDateString() === today;
+    //       return (
+    //         <div
+    //           key={index}
+    //           className="DAT_ProjectData_Dashboard_Data_Right_Weather_Inside_Bottom_Box"
+    //         >
+    //           <div
+    //             style={{
+    //               fontFamily: isToday
+    //                 ? "Montserrat-Bold"
+    //                 : "Montserrat-Regular",
+    //               color: "rgba(11, 25, 103)",
+    //             }}
+    //           >
+    //             {weekday}
+    //           </div>
+    //           <div>
+    //             <img
+    //               draggable="true" // Enable drag for images
+    //               onDragStart={(e) => e.preventDefault()}
+    //               src={"https:" + item.day.condition.icon}
+    //               style={{ width: "40px", height: "40px" }}
+    //               alt=""
+    //             />
+    //           </div>
+    //         </div>
+    //       );
+    //     })}
+    //   </div>
+    // </div>
+    <div className="DAT_Pr"></div>
   );
 }

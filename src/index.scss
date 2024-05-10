@@ -15,7 +15,7 @@ $Save-button: rgb(255, 255, 255, 0.1);
 
 body {
   // font-family: segoeui !important;
-  font-family: Montserrat-Regular !important;
+  font-family: segoeui !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(240, 242, 245, 1);
@@ -279,7 +279,6 @@ iframe {
       // top: 0;
       // z-index: 20;
     }
-
   }
 
   //1 cột ở bên trong TableRow  thuộc Body
@@ -300,7 +299,6 @@ iframe {
       overflow: hidden !important;
       text-overflow: ellipsis !important;
     }
-
   }
 
   &Col:first-child {
@@ -313,9 +311,6 @@ iframe {
     border-right: solid 1px rgb(213, 213, 213);
     // box-shadow: 3px 3px 6px rgb(213, 213, 213);
     // background-color: #03045e;
-
-
-
   }
 
   &Col:last-child {
@@ -328,11 +323,7 @@ iframe {
     z-index: 20;
     // box-shadow: 3px 3px 6px rgb(213, 213, 213);
     // background-color: #03045e;
-
-
   }
-
-
 
   //Body
   &Body {
@@ -351,9 +342,6 @@ iframe {
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);
     }
-
-
-
   }
 
   // &Cell:last-child{
@@ -373,8 +361,6 @@ iframe {
     display: flex;
     align-items: center;
     justify-content: center;
-
-
   }
 
   &Cell:first-child {
@@ -389,7 +375,6 @@ iframe {
     &:hover {
       background-color: rgba(231, 231, 231);
     }
-
   }
 
   &Cell:last-child {
@@ -401,8 +386,6 @@ iframe {
     border-right: solid 1px rgb(213, 213, 213);
     // box-shadow: 3px 3px 5px rgb(213, 213, 213,0.5);
     //  box-shadow: 3px 3px 6px rgb(213, 213, 213);
-
-
   }
 
   //     // &Header{
