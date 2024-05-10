@@ -276,23 +276,23 @@ export default function Weather() {
         <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
           <img
             src={"/dat_picture/station.jpg"}
-            style={{ width: "150px", height: "80px" }}
+            style={{ maxWidth: "150px", maxHeight: "80px" }}
             alt=""
           />
-          <img
-            src={"https:" + data.current.condition.icon}
-            style={{
-              width: "90px",
-              height: "90px",
-              paddingLeft: "40px",
-              marginBottom: "-10px",
-            }}
-            alt=""
-          />
-        </div>
-        <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Text">
-          <span>{data.current.temp_c}°C</span>
-          {data.current.condition.text}
+          <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Icon">
+            <img
+              src={"https:" + data.current.condition.icon}
+              style={{
+                marginLeft: "40px",
+                marginBottom: "-10px",
+              }}
+              alt=""
+            />
+          </div>
+          <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Text">
+            <span>{data.current.temp_c}°C</span>
+            {data.current.condition.text}
+          </div>
         </div>
       </div>
       <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast">
@@ -332,7 +332,6 @@ export default function Weather() {
                   draggable="true" // Enable drag for images
                   onDragStart={(e) => e.preventDefault()}
                   src={"https:" + item.day.condition.icon}
-                  style={{ width: "60px", height: "60px" }}
                   alt=""
                 />
               </div>

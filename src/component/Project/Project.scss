@@ -1440,6 +1440,9 @@
     &_NewDashboard {
         margin: 10px 0 10px 10px;
         gap: 10px;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
 
         &_Top {
             display: flex;
@@ -1448,6 +1451,8 @@
             &_Left {
                 width: 65%;
                 gap: 10px;
+                display: flex;
+                flex-direction: column;
 
                 &_Impact {
                     background-color: #fff;
@@ -1456,15 +1461,20 @@
 
                 &_Graph {
                     background-color: #fff;
+                    height: 100%;
                 }
             }
 
             &_Right {
                 width: 35%;
                 gap: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
 
                 &_Information {
                     background-color: #fff;
+                    margin-right: 10px;
                 }
 
                 &_PredictDeg {
@@ -1472,8 +1482,8 @@
                     width: 100%;
 
                     &_Weather {
-                        display: grid;
-                        grid-template-rows: repeat(2, 2fr);
+                        display: flex;
+                        flex-direction: column;
                         gap: 10px;
 
                         &_CurDeg {
@@ -1481,43 +1491,60 @@
                             background-color: #fff;
                             display: flex;
                             align-items: center;
-                            justify-content: center;
+                            justify-content: space-evenly;
                             padding: 10px;
                             white-space: nowrap; // ngan xuong dong
+                            overflow: hidden;
+                            margin-right: 10px;
 
-                            // gap: 30px;
-                            &_Text {
-                                width: 120px;
+                            &_Box {
                                 display: flex;
-                                flex-direction: column;
-                                justify-content: center;
                                 align-items: center;
-                                white-space: nowrap; // ngan xuong dong
-                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                                font-size: 15px;
-                                color: grey;
+                                justify-content: center;
 
-                                & span {
-                                    color: #000;
-                                    font-family: segoeuib;
-                                    font-size: 25px;
+                                &_Icon {
+                                    height: 100%;
+                                }
+
+                                &_Text {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: center;
+                                    white-space: nowrap; // ngan xuong dong
+                                    text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                                    font-size: 15px;
+                                    color: grey;
+
+                                    & span {
+                                        color: #000;
+                                        font-family: segoeuib;
+                                        font-size: 25px;
+                                    }
                                 }
                             }
+
                         }
 
                         &_Forecast {
                             // background-color: #fff;
-                            display: grid;
-                            grid-template-columns: repeat(3, 2fr);
+                            display: flex;
                             gap: 10px;
 
                             &_Box {
                                 background-color: #fff;
-                                min-width: 140px;
+                                width: calc(100% / 3 - 10px);
                                 height: 100px;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
+
+                                &_Icon {
+                                    & img {
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+                                }
                             }
                         }
                     }
@@ -1849,6 +1876,7 @@
                     overflow: hidden;
                     font-family: Montserrat-SemiBold;
                     color: COLOR.$Primary-color;
+                    margin-bottom: 8px;
 
                     &_Button {
                         display: flex;
@@ -1869,7 +1897,7 @@
 
                         &_Item {
                             box-sizing: border-box;
-                            padding: 16px;
+                            padding: 10px;
                             display: flex;
                             gap: 20px;
 
@@ -1898,9 +1926,12 @@
 
                         &_Item {
                             box-sizing: border-box;
-                            padding: 16px;
+                            padding: 10px;
                             display: flex;
                             gap: 20px;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden; // an noi dung vuot ra ngoai
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot 
 
                             &_Title {
                                 flex: 4;
@@ -1944,9 +1975,12 @@
                             display: flex;
                             flex: 1;
                             text-align: left;
-                            border: 1px solid #DEE1E6;
+                            border: 1px solid #dee1e6;
                             border-radius: 4px;
                             padding: 8px;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden; // an noi dung vuot ra ngoai
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot 
 
                             &_Icon {
                                 min-width: 65px;
