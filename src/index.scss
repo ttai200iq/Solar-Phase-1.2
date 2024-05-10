@@ -14,7 +14,6 @@ $purple-color: rgb(123, 90, 123);
 $Save-button: rgb(255, 255, 255, 0.1);
 
 body {
-  // font-family: segoeui !important;
   font-family: segoeui !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1177,6 +1176,13 @@ iframe {
 @font-face {
   font-family: "Montserrat-Medium";
   src: url("../public/assets/fonts/montserrat/Montserrat-Medium.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url("../public/assets/fonts/futura/SFUFuturaRegular.TTF");
   font-weight: 800;
   font-style: normal;
 }
