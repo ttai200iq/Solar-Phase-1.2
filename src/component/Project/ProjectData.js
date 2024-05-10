@@ -1126,7 +1126,7 @@ export default function ProjectData(props) {
                       </div>
                     </div>
                   </div>
-                  <div className="DAT_ProjectData_NewDashBoard_Bottom">
+                  <div className="DAT_ProjectData_NewDashboard_Bottom">
                     <DashboardHistory />
                   </div>
                 </div>
