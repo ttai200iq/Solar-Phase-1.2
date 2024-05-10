@@ -270,6 +270,31 @@ export default function Weather() {
     //     })}
     //   </div>
     // </div>
-    <div className="DAT_Pr"></div>
+    <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg_Weather">
+      <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg_Weather_CurDeg">
+        <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
+          <img
+            src={"/dat_picture/station.jpg"}
+            style={{ width: "150px", height: "80px" }}
+            alt=""
+          />
+          <img
+            src={"https:" + data.current.condition.icon}
+            style={{
+              width: "90px",
+              height: "90px",
+              paddingLeft: "40px",
+              marginBottom: "-10px",
+            }}
+            alt=""
+          />
+        </div>
+        <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg_Weather_CurDeg_Text">
+          <span>{data.current.temp_c}°C</span>
+          {data.current.condition.text}
+        </div>
+      </div>
+      <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg_Weather_Forecast"></div>
+    </div>
   );
 }

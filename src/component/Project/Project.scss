@@ -1597,11 +1597,41 @@
                 &_Information {
                     background-color: #fff;
                 }
-                &_CurrentDeg {
-                    background-color: #fff;
-                }
                 &_PredictDeg {
-                    background-color: #fff;
+                    // background-color: #fff;
+                    &_Weather {
+                        &_CurDeg {
+                            height: 100px;
+                            background-color: #fff;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 10px;
+                            white-space: nowrap; // ngan xuong dong
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            overflow: hidden; // an noi dung vuot ra ngoai
+
+                            // gap: 30px;
+                            &_Text {
+                                width: 80px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                                font-size: 15px;
+                                color: grey;
+
+                                & span {
+                                    color: #000;
+                                    font-family: segoeuib;
+                                    font-size: 30px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
