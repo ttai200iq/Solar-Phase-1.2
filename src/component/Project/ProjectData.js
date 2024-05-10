@@ -1107,21 +1107,21 @@ export default function ProjectData(props) {
                 //     <Benefit />
                 //   </div>
                 // </div>
-                <div className="DAT_ProjectData_NewDashBoard">
-                  <div className="DAT_ProjectData_NewDashBoard_Top">
-                    <div className="DAT_ProjectData_NewDashBoard_Top_Left">
-                      <div className="DAT_ProjectData_NewDashBoard_Top_Left_Impact">
+                <div className="DAT_ProjectData_NewDashboard">
+                  <div className="DAT_ProjectData_NewDashboard_Top">
+                    <div className="DAT_ProjectData_NewDashboard_Top_Left">
+                      <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
                         <Benefit />
                       </div>
-                      <div className="DAT_ProjectData_NewDashBoard_Top_Left_Graph">
+                      <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
                         Graph
                       </div>
                     </div>
-                    <div className="DAT_ProjectData_NewDashBoard_Top_Right">
-                      <div className="DAT_ProjectData_NewDashBoard_Top_Right_Information">
+                    <div className="DAT_ProjectData_NewDashboard_Top_Right">
+                      <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
                         <ProjectInfo />
                       </div>
-                      <div className="DAT_ProjectData_NewDashBoard_Top_Right_PredictDeg">
+                      <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
                         <Weather />
                       </div>
                     </div>

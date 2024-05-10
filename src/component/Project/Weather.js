@@ -54,6 +54,7 @@ export default function Weather() {
   useEffect(() => {
     axios.get(url).then((response) => {
       setData(response.data);
+      console.log(response.data);
       setForecastdata([]);
       response.data.forecast.forecastday.map((item) => {
         let dateObj = new Date(item.date);
@@ -270,6 +271,89 @@ export default function Weather() {
     //     })}
     //   </div>
     // </div>
-    <div className="DAT_Pr"></div>
+    <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather">
+      <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg">
+        <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
+          <img
+            src={"/dat_picture/station.jpg"}
+            style={{ width: "150px", height: "80px" }}
+            alt=""
+          />
+          <img
+            src={"https:" + data.current.condition.icon}
+            style={{
+              width: "90px",
+              height: "90px",
+              paddingLeft: "40px",
+              marginBottom: "-10px",
+            }}
+            alt=""
+          />
+        </div>
+        <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Text">
+          <span>{data.current.temp_c}°C</span>
+          {data.current.condition.text}
+        </div>
+      </div>
+      <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast">
+        {data.forecast.forecastday.map((item, index) => {
+          let weekdays = [];
+          if (lang === "en") {
+            weekdays = [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+            ];
+          } else if (lang === "vi") {
+            weekdays = [
+              "Chủ nhật",
+              "Thứ hai",
+              "Thứ ba",
+              "Thứ tư",
+              "Thứ năm",
+              "Thứ sáu",
+              "Thứ bảy",
+            ];
+          }
+          const dateObj = new Date(item.date);
+          const weekday = weekdays[dateObj.getUTCDay()];
+          const isToday = new Date(item.date).toDateString() === today;
+          return (
+            <div
+              key={index}
+              className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box"
+            >
+              <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Icon">
+                <img
+                  draggable="true" // Enable drag for images
+                  onDragStart={(e) => e.preventDefault()}
+                  src={"https:" + item.day.condition.icon}
+                  style={{ width: "60px", height: "60px" }}
+                  alt=""
+                />
+              </div>
+              <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text">
+                {item.day.avgtemp_c}°C
+                <div
+                  className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text_Weekday"
+                  style={{
+                    fontFamily: isToday
+                      ? "Montserrat-Bold"
+                      : "Montserrat-Regular",
+                    color: "rgba(11, 25, 103)",
+                  }}
+                >
+                  {weekday}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
