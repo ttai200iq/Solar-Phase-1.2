@@ -160,9 +160,9 @@ export default function ProjectData(props) {
         <>
           {row.data.daily?.register
             ? parseFloat(
-                invt[row.logger_]?.[row.data.daily.register] *
-                  row.data.daily?.cal
-              ).toFixed(2)
+              invt[row.logger_]?.[row.data.daily.register] *
+              row.data.daily?.cal
+            ).toFixed(2)
             : 0}{" "}
           kWh
         </>
@@ -181,7 +181,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-          ruleInfor.value.setting.project.delete === true ? (
+            ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -337,7 +337,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-          ruleInfor.value.setting.project.delete === true ? (
+            ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -1107,26 +1107,26 @@ export default function ProjectData(props) {
                 //     <Benefit />
                 //   </div>
                 // </div>
-                <div className="DAT_ProjectData_NewDasboard">
-                  <div className="DAT_ProjectData_NewDasboard_Top">
-                    <div className="DAT_ProjectData_NewDasboard_Top_Left">
-                      <div className="DAT_ProjectData_NewDasboard_Top_Left_Impact">
-                        Bar
+                <div className="DAT_ProjectData_NewDashBoard">
+                  <div className="DAT_ProjectData_NewDashBoard_Top">
+                    <div className="DAT_ProjectData_NewDashBoard_Top_Left">
+                      <div className="DAT_ProjectData_NewDashBoard_Top_Left_Impact">
+                        <Benefit />
                       </div>
-                      <div className="DAT_ProjectData_NewDasboard_Top_Left_Graph">
+                      <div className="DAT_ProjectData_NewDashBoard_Top_Left_Graph">
                         Graph
                       </div>
                     </div>
-                    <div className="DAT_ProjectData_NewDasboard_Top_Right">
-                      <div className="DAT_ProjectData_NewDasboard_Top_Right_Information">
-                        Hi
+                    <div className="DAT_ProjectData_NewDashBoard_Top_Right">
+                      <div className="DAT_ProjectData_NewDashBoard_Top_Right_Information">
+                        <ProjectInfo />
                       </div>
-                      <div className="DAT_ProjectData_NewDasboard_Top_Right_PredictDeg">
+                      <div className="DAT_ProjectData_NewDashBoard_Top_Right_PredictDeg">
                         <Weather />
                       </div>
                     </div>
                   </div>
-                  <div className="DAT_ProjectData_NewDasboard_Bottom">
+                  <div className="DAT_ProjectData_NewDashBoard_Bottom">
                     <DashboardHistory />
                   </div>
                 </div>
