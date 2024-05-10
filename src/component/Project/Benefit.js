@@ -15,8 +15,8 @@ export default function Benefit(props) {
     const dataLang = useIntl();
 
     return (
-        <div className="DAT_ProjectData_Dashboard_More_Right">
-            <div className="DAT_ProjectData_Dashboard_More_Right_Tit">
+        <div className="DAT_ProjectData_NewDashboard_More_Right">
+            <div className="DAT_ProjectData_NewDashboard_More_Right_Tit">
                 {dataLang.formatMessage({ id: "environment" })}
                 &nbsp;
                 <PopupState
@@ -97,13 +97,13 @@ export default function Benefit(props) {
                 </PopupState>
             </div>
 
-            <div className="DAT_ProjectData_Dashboard_More_Right_Content">
-                <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col">
-                    <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
-                        <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
+            <div className="DAT_ProjectData_NewDashboard_More_Right_Content">
+                <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col">
+                    <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item">
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src='/dat_icon/Coal Cart.png' alt='coal' />
                         </div>
-                        <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Tit">
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Tit">
                             <div style={{ fontSize: "16px", color: "grey" }}>
                                 {dataLang.formatMessage({ id: "coalSave" })}
                             </div>
@@ -123,8 +123,8 @@ export default function Benefit(props) {
                         </div>
                     </div>
 
-                    <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
-                        <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
+                    <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item">
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src='/dat_icon/CO2.png' alt='power' />
                         </div>
                         <div>
@@ -148,8 +148,8 @@ export default function Benefit(props) {
                     </div>
 
 
-                    <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
-                        <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
+                    <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item">
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src='/dat_icon/BlueTree.png' alt='tree' />
                         </div>
                         <div>
@@ -172,8 +172,8 @@ export default function Benefit(props) {
                         </div>
                     </div>
 
-                    <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
-                        <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
+                    <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item">
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src='/dat_icon/Money.png' alt='money' />
                         </div>
                         <div>

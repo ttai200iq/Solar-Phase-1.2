@@ -1435,148 +1435,6 @@
                 }
             }
         }
-
-        &_More {
-            width: 98%;
-            margin: auto;
-            margin-bottom: 16px;
-            display: flex;
-            flex-wrap: wrap;
-            overflow: hidden;
-            gap: 16px;
-
-            &_Left {
-                background-color: white;
-                padding: 16px;
-
-                &_Tit {
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    overflow: hidden;
-                    font-family: Montserrat-SemiBold;
-                    color: COLOR.$Primary-color;
-
-                    &_Button {
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        background-color: rgb(231, 231, 231);
-                        color: grey;
-                        padding: 4px;
-                        cursor: pointer;
-                    }
-                }
-
-                &_Content {
-                    overflow: hidden;
-
-                    &_Left {
-                        flex: 5;
-
-                        &_Item {
-                            box-sizing: border-box;
-                            padding: 16px;
-                            display: flex;
-                            gap: 20px;
-
-                            &_Title {
-                                flex: 4;
-                                font-size: 14px;
-                                color: rgb(128, 128, 128);
-                                white-space: nowrap; // ngan xuong dong
-                                overflow: hidden; // an noi dung vuot ra ngoai
-                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                            }
-
-                            &_Content {
-                                flex: 6;
-                                font-size: 14px;
-                                color: black;
-                                white-space: nowrap; // ngan xuong dong
-                                overflow: hidden; // an noi dung vuot ra ngoai
-                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                            }
-                        }
-                    }
-
-                    &_Right {
-                        flex: 5;
-
-                        &_Item {
-                            box-sizing: border-box;
-                            padding: 16px;
-                            display: flex;
-                            gap: 20px;
-
-                            &_Title {
-                                flex: 4;
-                                font-size: 14px;
-                                color: rgb(128, 128, 128);
-                                white-space: nowrap; // ngan xuong dong
-                                overflow: hidden; // an noi dung vuot ra ngoai
-                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                            }
-
-                            &_Content {
-                                flex: 6;
-                                font-size: 14px;
-                                color: black;
-                                overflow: hidden; // an noi dung vuot ra ngoai
-                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                            }
-                        }
-                    }
-                }
-            }
-
-            &_Right {
-                flex: 5;
-                background-color: white;
-                padding: 8px;
-
-                &_Tit {
-                    display: flex;
-                    font-family: Montserrat-SemiBold;
-                    color: COLOR.$Primary-color;
-                }
-
-                &_Content {
-                    &_Col {
-                        display: flex;
-                        gap: 10px;
-                        margin-top: 8px;
-
-                        &_Item {
-                            display: flex;
-                            flex: 1;
-                            text-align: left;
-                            border: 1px solid #DEE1E6;
-                            border-radius: 4px;
-                            padding: 8px;
-
-                            &_Icon {
-                                min-width: 65px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-
-                                & img {
-                                    width: 44px;
-                                    height: 44px;
-                                }
-                            }
-
-                            &_Tit {
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     &_NewDashboard {
@@ -1593,6 +1451,7 @@
 
                 &_Impact {
                     background-color: #fff;
+                    margin-bottom: 10px;
                 }
 
                 &_Graph {
@@ -1963,6 +1822,148 @@
                                         width: 200px;
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &_More {
+            width: 98%;
+            margin: auto;
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            gap: 16px;
+
+            &_Left {
+                background-color: white;
+                padding: 16px;
+
+                &_Tit {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+
+                    &_Button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        background-color: rgb(231, 231, 231);
+                        color: grey;
+                        padding: 4px;
+                        cursor: pointer;
+                    }
+                }
+
+                &_Content {
+                    overflow: hidden;
+
+                    &_Left {
+                        flex: 5;
+
+                        &_Item {
+                            box-sizing: border-box;
+                            padding: 16px;
+                            display: flex;
+                            gap: 20px;
+
+                            &_Title {
+                                flex: 4;
+                                font-size: 14px;
+                                color: rgb(128, 128, 128);
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+
+                            &_Content {
+                                flex: 6;
+                                font-size: 14px;
+                                color: black;
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+                        }
+                    }
+
+                    &_Right {
+                        flex: 5;
+
+                        &_Item {
+                            box-sizing: border-box;
+                            padding: 16px;
+                            display: flex;
+                            gap: 20px;
+
+                            &_Title {
+                                flex: 4;
+                                font-size: 14px;
+                                color: rgb(128, 128, 128);
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+
+                            &_Content {
+                                flex: 6;
+                                font-size: 14px;
+                                color: black;
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                flex: 5;
+                background-color: white;
+                padding: 8px;
+
+                &_Tit {
+                    display: flex;
+                    font-family: Montserrat-SemiBold;
+                    color: COLOR.$Primary-color;
+                }
+
+                &_Content {
+                    &_Col {
+                        display: flex;
+                        gap: 10px;
+                        margin-top: 8px;
+
+                        &_Item {
+                            display: flex;
+                            flex: 1;
+                            text-align: left;
+                            border: 1px solid #DEE1E6;
+                            border-radius: 4px;
+                            padding: 8px;
+
+                            &_Icon {
+                                min-width: 65px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                & img {
+                                    width: 44px;
+                                    height: 44px;
+                                }
+                            }
+
+                            &_Tit {
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
                             }
                         }
                     }
