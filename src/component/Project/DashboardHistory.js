@@ -385,9 +385,20 @@ export default function DashboardHistory(props) {
     setExportReport(false);
   };
 
+  // useEffect(() => {
+  //   console.log(filterchart);
+  //   console.log(projectData.value.plantmode);
+  //   console.log(dateType);
+  //   console.log(
+  //     filterchart[projectData.value.plantmode][dateType].productionData
+  //   );
+  // }, [filterchart, dateType]);
+
   const handlefilterchart = (e) => {
     const state = e.currentTarget.checked;
     const chartfield = e.currentTarget.id.split("_");
+    console.log(e.currentTarget.id);
+    console.log(state);
     // temp[chartfield[1]][dateType][chartfield[0]] = state;
     filterchartTemp.value = {
       ...filterchartTemp.value,
@@ -406,7 +417,7 @@ export default function DashboardHistory(props) {
     rootDispatch(toolslice.actions.setFilterchart(filterchartTemp.value));
   };
 
-  const Checkboxfilter = (props) => {
+  const Checkboxfilter = () => {
     return (
       <>
         <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
@@ -517,6 +528,28 @@ export default function DashboardHistory(props) {
           </label>
         </div>
       </>
+    );
+  };
+
+  const CheckboxGrid = () => {
+    return (
+      <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <input
+          id={"productionData_" + projectData.value.plantmode}
+          type="checkbox"
+          defaultChecked={
+            filterchart[projectData.value.plantmode][dateType].productionData
+          }
+          onChange={(e) => {
+            handlefilterchart(e);
+          }}
+        />
+        <label htmlFor={"productionData_" + projectData.value.plantmode}>
+          {dataLang.formatMessage({
+            id: "production",
+          })}
+        </label>
+      </div>
     );
   };
 
@@ -1474,32 +1507,21 @@ export default function DashboardHistory(props) {
                       </div>
                     </>
                   );
+                case "grid":
+                  switch (dateType) {
+                    case "date":
+                      return <CheckboxGrid></CheckboxGrid>;
+                    case "month":
+                      return <CheckboxGrid></CheckboxGrid>;
+                    case "year":
+                      return <CheckboxGrid></CheckboxGrid>;
+                    case "total":
+                      return <CheckboxGrid></CheckboxGrid>;
+                    default:
+                      <></>;
+                  }
                 default:
-                  return (
-                    <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
-                      <input
-                        id={"productionData_" + projectData.value.plantmode}
-                        type="checkbox"
-                        defaultChecked={
-                          filterchart[projectData.value.plantmode][dateType]
-                            .productionData
-                        }
-                        // style={{ accentColor: "red" }}
-                        onChange={(e) => {
-                          handlefilterchart(e);
-                        }}
-                      />
-                      <label
-                        htmlFor={
-                          "productionData_" + projectData.value.plantmode
-                        }
-                      >
-                        {dataLang.formatMessage({
-                          id: "production",
-                        })}
-                      </label>
-                    </div>
-                  );
+                  <></>;
               }
             })()}
           </div>

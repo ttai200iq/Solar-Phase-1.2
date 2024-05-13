@@ -55,7 +55,7 @@ export default function Weather() {
   useEffect(() => {
     axios.get(url).then((response) => {
       setData(response.data);
-      console.log(response.data);
+      // console.log(response.data);
       setForecastdata([]);
       response.data.forecast.forecastday.map((item) => {
         let dateObj = new Date(item.date);
