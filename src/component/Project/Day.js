@@ -47,8 +47,8 @@ export default function Day(props) {
   };
 
   return (
-    <div className="DAT_ProjectData_Dashboard_History_Day">
-      <div className="DAT_ProjectData_Dashboard_History_Year_Chart">
+    <div className="DAT_ProjectData_NewDashboard_History_Day">
+      <div className="DAT_ProjectData_NewDashboard_History_Year_Chart">
         {(() => {
           switch (projectData.value.plantmode) {
             case "grid":
