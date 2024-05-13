@@ -34,6 +34,7 @@
     "react-d3-speedometer": "^1.1.0",
     "react-data-table-component": "^7.5.3",
     "react-datepicker": "^4.25.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-geocode": "^1.0.0-alpha.1",
     "react-google-charts": "^4.0.1",
