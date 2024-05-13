@@ -276,14 +276,13 @@ export default function Weather() {
         <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
           <img
             src={"/dat_picture/station.jpg"}
-            style={{ maxWidth: "150px", maxHeight: "80px" }}
+            style={{ width: "180px", height: "100px", marginRight: "20px" }}
             alt=""
           />
           <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Icon">
             <img
               src={"https:" + data.current.condition.icon}
               style={{
-                marginLeft: "40px",
                 marginBottom: "-10px",
               }}
               alt=""
@@ -300,13 +299,13 @@ export default function Weather() {
           let weekdays = [];
           if (lang === "en") {
             weekdays = [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
+              "Sun",
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat",
             ];
           } else if (lang === "vi") {
             weekdays = [
@@ -341,8 +340,8 @@ export default function Weather() {
                   className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text_Weekday"
                   style={{
                     fontFamily: isToday
-                      ? "Montserrat-Bold"
-                      : "Montserrat-Regular",
+                      ? "segoeuib"
+                      : "segoeui",
                     color: "rgba(11, 25, 103)",
                   }}
                 >

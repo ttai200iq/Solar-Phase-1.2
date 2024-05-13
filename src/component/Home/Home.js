@@ -1972,7 +1972,7 @@ export default function Home(props) {
               <div className="DAT_Home_Row1_Right_Bot_Elec">
                 <div className="DAT_Home_Row1_Right_Bot_Elec-Head">
                   <div className="DAT_Home_Row1_Right_Bot_Elec-Head-Title">
-                    Dữ liệu phát điện
+                    {dataLang.formatMessage({ id: "HomeProduction" })}
                   </div>
                 </div>
 
