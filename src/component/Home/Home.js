@@ -131,7 +131,7 @@ export default function Home(props) {
       },
     },
     {
-      name: dataLang.formatMessage({ id: "name" }),
+      name: "Thông tin dự án",
       selector: (row) => (
         <div
           id={row.plantid_}
@@ -166,7 +166,7 @@ export default function Home(props) {
     },
 
     {
-      name: "kWh/kWp(h)",
+      name: "kWh/kWp (h)",
       selector: (row) =>
         parseFloat(sun[row.plantid_]).toFixed(2) === "NaN"
           ? 0
@@ -2191,7 +2191,7 @@ export default function Home(props) {
                       <ResponsiveContainer
                         style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
                       >
-                        <BarChart width={150} height={200} data={datayear}>
+                        <BarChart width={150} height={300} data={datayear}>
                           <XAxis dataKey="month" axisLine={false} tickLine={false} />
                           <YAxis
                             axisLine={false}
@@ -2223,7 +2223,7 @@ export default function Home(props) {
                       <ResponsiveContainer
                         style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
                       >
-                        <BarChart width={150} height={200} data={datamonth}>
+                        <BarChart width={150} height={300} data={datamonth}>
                           <XAxis dataKey="date" axisLine={false} tickLine={false} />
                           <YAxis
                             axisLine={false}
@@ -2337,9 +2337,9 @@ export default function Home(props) {
                 </div>
 
                 <div className="DAT_Home_Row2_Right_Top_State-Total">
-                  <div className="DAT_Home_Row2_Right_Top_State-Total-Icon">
+                  {/* <div className="DAT_Home_Row2_Right_Top_State-Total-Icon">
                     <FaSolarPanel color={COLOR.value.PrimaryColor} />
-                  </div>
+                  </div> */}
                   <span style={{ color: COLOR.value.grayText, fontSize: "16px" }}>
                     {dataLang.formatMessage({ id: "projectTotal" })}
                   </span>
