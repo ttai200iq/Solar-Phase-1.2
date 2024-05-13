@@ -1458,7 +1458,7 @@
 
                 &_Impact {
                     background-color: #fff;
-                    margin-bottom: 10px;
+                    // margin-bottom: 10px;
                 }
 
                 &_Graph {
@@ -1530,7 +1530,6 @@
                                     }
                                 }
                             }
-
                         }
 
                         &_Forecast {
@@ -1946,7 +1945,7 @@
                             gap: 20px;
                             white-space: nowrap; // ngan xuong dong
                             overflow: hidden; // an noi dung vuot ra ngoai
-                            text-overflow: ellipsis; // hien thi 3 cham khi vuot 
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot
 
                             &_Title {
                                 flex: 4;
@@ -1997,7 +1996,7 @@
                             padding: 8px;
                             white-space: nowrap; // ngan xuong dong
                             overflow: hidden; // an noi dung vuot ra ngoai
-                            text-overflow: ellipsis; // hien thi 3 cham khi vuot 
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot
 
                             &_Icon {
                                 min-width: 65px;
