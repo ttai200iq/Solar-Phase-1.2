@@ -38,7 +38,7 @@ export default function DashboardHistory(props) {
     date: moment(new Date()).format("MM/DD/YYYY"),
     month: moment(new Date()).format("MM/YYYY"),
     year: moment(new Date()).format("YYYY"),
-    total: "Tổng",
+    total: dataLang.formatMessage({ id: "total" }),
   });
 
   const [dataDay, setDataDay] = useState([]);
@@ -420,7 +420,7 @@ export default function DashboardHistory(props) {
   const Checkboxfilter = () => {
     return (
       <>
-        <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
           <input
             id={"productionData_" + projectData.value.plantmode}
             type="checkbox"
@@ -438,7 +438,7 @@ export default function DashboardHistory(props) {
           </label>
         </div>
 
-        <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
           <input
             id={"consumptionData_" + projectData.value.plantmode}
             type="checkbox"
@@ -456,7 +456,7 @@ export default function DashboardHistory(props) {
           </label>
         </div>
 
-        <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
           <input
             id={"dailygridin_" + projectData.value.plantmode}
             type="checkbox"
@@ -474,7 +474,7 @@ export default function DashboardHistory(props) {
           </label>
         </div>
 
-        <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
           <input
             id={"dailygridout_" + projectData.value.plantmode}
             type="checkbox"
@@ -492,7 +492,7 @@ export default function DashboardHistory(props) {
           </label>
         </div>
 
-        <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
           <input
             id={"charge_" + projectData.value.plantmode}
             type="checkbox"
@@ -510,7 +510,7 @@ export default function DashboardHistory(props) {
           </label>
         </div>
 
-        <div className="DAT_ProjectData_Dashboard_Filterlist_Body_Checkbox">
+        <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
           <input
             id={"discharge_" + projectData.value.plantmode}
             type="checkbox"
@@ -921,7 +921,7 @@ export default function DashboardHistory(props) {
       <div style={{ display: "flex", gap: "10px", width: "100%" }}>
         <div className="DAT_ProjectData_NewDashboard_Filterlist">
           <div className="DAT_ProjectData_NewDashboard_Filterlist_Head">
-            Select parameters
+            {dataLang.formatMessage({ id: "choosePara" })}
           </div>
           <div className="DAT_ProjectData_NewDashboard_Filterlist_Body">
             {(() => {

@@ -11,7 +11,7 @@ export default function ProjectInfo(props) {
   return (
     <div className="DAT_ProjectData_NewDashboard_More_Left">
       <div className="DAT_ProjectData_NewDashboard_More_Left_Tit">
-        <span>Thông tin dự án</span>
+        <span>{dataLang.formatMessage({ id: "projectInfo" })}</span>
       </div>
 
       <div className="DAT_ProjectData_NewDashboard_More_Left_Content">

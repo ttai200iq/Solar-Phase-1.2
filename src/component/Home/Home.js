@@ -50,6 +50,7 @@ import { VscDashboard } from "react-icons/vsc";
 import { IoCalendarOutline } from "react-icons/io5";
 import { isMobile } from "../Navigation/Navigation";
 import { set } from "lodash";
+import { isBrowser } from "react-device-detect";
 
 const plant = signal([]);
 const logger = signal([]);
@@ -131,7 +132,7 @@ export default function Home(props) {
       },
     },
     {
-      name: dataLang.formatMessage({ id: "name" }),
+      name: "Thông tin dự án",
       selector: (row) => (
         <div
           id={row.plantid_}
@@ -140,7 +141,8 @@ export default function Home(props) {
             handleInfo(e);
           }}
         >
-          {row.plantname}
+          <div className="DAT_Table_Infor_Name">{row.plantname}</div>
+          <div className="DAT_Table_Infor_Addr">{row.addr}</div>
         </div>
       ),
       sortable: true,
@@ -150,16 +152,22 @@ export default function Home(props) {
       },
     },
     {
-      name: dataLang.formatMessage({ id: "address" }),
-      selector: (row) => row.addr,
-      width: "250px",
+      name: dataLang.formatMessage({ id: "inCapacity" }),
+      selector: (row) =>
+        <>
+          {Number(parseFloat(convertUnit(row.capacity)).toFixed(2)).toLocaleString("en-US")}
+          &nbsp;
+          {showUnitk(row.capacity)}Wp
+        </>,
+      sortable: true,
+      width: "150px",
       style: {
-        justifyContent: "left !important",
+        justifyContent: "center !important",
       },
     },
 
     {
-      name: "kWh/kWp(h)",
+      name: "kWh/kWp (h)",
       selector: (row) =>
         parseFloat(sun[row.plantid_]).toFixed(2) === "NaN"
           ? 0
@@ -778,46 +786,914 @@ export default function Home(props) {
         </div>
       </div>
 
-      <div className="DAT_Home">
-        <div className="DAT_Home_Overview">
-          <div className="DAT_Home_Overview-Head">
-            <div className="DAT_Home_Overview-Head-Title">
-              {dataLang.formatMessage({ id: "overview" })}
-            </div>
-          </div>
-
-          <div className="DAT_Home_Overview-Main">
-            <div className="DAT_Home_Overview-Main-Percent">
-              <style>{keyframes}</style>
-
-              <div
-                className="DAT_Home_Overview-Main-Percent-Item"
-                style={{ animation: "home 30s linear infinite" }}
-              >
-                <div className="DAT_Home_Overview-Main-Percent-Item-value">
-                  <div className="DAT_Home_Overview-Main-Percent-Item-value_num">
-                    {Number(
-                      parseFloat((production / 1000 / capacity) * 100).toFixed(
-                        2
-                      )
-                    ).toLocaleString("en-US") === "NaN"
-                      ? "--"
-                      : Number(
-                        parseFloat(
-                          (production / 1000 / capacity) * 100
-                        ).toFixed(2)
-                      ).toLocaleString("en-US")}
+      {isBrowser
+        ?
+        <div className="DAT_Home">
+          <div className="DAT_Home_Row1">
+            <div className="DAT_Home_Row1_Left">
+              <div className="DAT_Home_Row1_Left_Overview">
+                <div className="DAT_Home_Row1_Left_Overview-Head">
+                  <div className="DAT_Home_Row1_Left_Overview-Head-Title">
+                    {dataLang.formatMessage({ id: "overview" })}
                   </div>
-                  <div className="DAT_Home_Overview-Main-Percent-Item-value_unit">
-                    %
+                </div>
+
+                <div className="DAT_Home_Row1_Left_Overview-Main">
+                  <div className="DAT_Home_Row1_Left_Overview-Main-Percent">
+                    <style>{keyframes}</style>
+
+                    <div className="DAT_Home_Row1_Left_Overview-Main-Percent-Item"
+                      style={{ animation: "home 30s linear infinite" }}
+                    >
+                      <div className="DAT_Home_Row1_Left_Overview-Main-Percent-Item-value">
+                        <div className="DAT_Home_Row1_Left_Overview-Main-Percent-Item-value_num">
+                          {Number(
+                            parseFloat((production / 1000 / capacity) * 100).toFixed(
+                              2
+                            )
+                          ).toLocaleString("en-US") === "NaN"
+                            ? "--"
+                            : Number(
+                              parseFloat(
+                                (production / 1000 / capacity) * 100
+                              ).toFixed(2)
+                            ).toLocaleString("en-US")}
+                        </div>
+                        <div className="DAT_Home_Row1_Left_Overview-Main-Percent-Item-value_unit">
+                          %
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Left_Overview-Main-Percent-Icon"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <PopupState variant="popper" popupId="demo-popup-popper">
+                        {(popupState) => (
+                          <div style={{ cursor: "pointer" }}>
+                            <HelpOutlineIcon
+                              {...bindHover(popupState)}
+                              color="action"
+                              fontSize="9px"
+                            />
+                            <Popper {...bindPopper(popupState)} transition>
+                              {({ TransitionProps }) => (
+                                <Fade {...TransitionProps} timeout={350}>
+                                  <Paper
+                                    sx={{ width: "400px", marginLeft: "200px", p: 2 }}
+                                  >
+                                    <Typography
+                                      sx={{
+                                        fontSize: "12px",
+                                        textAlign: "justify",
+                                        marginBottom: 1.7,
+                                      }}
+                                    >
+                                      {dataLang.formatMessage({ id: "overview1" })}
+                                    </Typography>
+                                    <Typography
+                                      sx={{
+                                        fontSize: "12px",
+                                        textAlign: "justify",
+                                        marginBottom: 1.7,
+                                      }}
+                                    >
+                                      {dataLang.formatMessage({ id: "overview2" })}
+                                    </Typography>
+                                    <Typography
+                                      sx={{ fontSize: "12px", textAlign: "justify" }}
+                                    >
+                                      {dataLang.formatMessage({ id: "overview3" })}
+                                    </Typography>
+                                  </Paper>
+                                </Fade>
+                              )}
+                            </Popper>
+                          </div>
+                        )}
+                      </PopupState>
+                    </div>
+                  </div>
+
+                  <div className="DAT_Home_Row1_Left_Overview-Main-Value">
+                    <div className="DAT_Home_Row1_Left_Overview-Main-Value-Item">
+                      <div className="DAT_Home_Row1_Left_Overview-Main-Value-Item-Title">
+                        {dataLang.formatMessage({ id: "totalOutput" })}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            color: "black",
+                            fontSize: "28px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {Number(
+                            parseFloat(convertUnit(production / 1000)).toFixed(2)
+                          ).toLocaleString("en-US")}
+                        </span>
+                        &nbsp;
+                        <span
+                          style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                        >
+                          {showUnit(production / 1000)}W
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Left_Overview-Main-Value-Item">
+                      <div className="DAT_Home_Row1_Left_Overview-Main-Value-Item-Title">
+                        {dataLang.formatMessage({ id: "inCapacity" })}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            color: "black",
+                            fontSize: "28px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {Number(
+                            parseFloat(convertUnit(capacity)).toFixed(2)
+                          ).toLocaleString("en-US")}
+                        </span>
+                        &nbsp;
+                        <span
+                          style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                        >
+                          {showUnitk(capacity)}Wp
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="DAT_Home_Row1_Right">
+              <div className="DAT_Home_Row1_Right_Top">
+                <div className="DAT_Home_Row1_Right_Top_Benefit">
+                  <div className="DAT_Home_Row1_Right_Top_Benefit-Head">
+                    <div className="DAT_Home_Row1_Right_Top_Benefit-Head-Title">
+                      {dataLang.formatMessage({ id: "environment" })}
+                      &nbsp;
+                      <PopupState variant="popper" popupId="demo-popup-popper">
+                        {(popupState) => (
+                          <div style={{ cursor: "pointer" }}>
+                            <HelpOutlineIcon
+                              {...bindHover(popupState)}
+                              color="action"
+                              fontSize="9px"
+                            />
+                            <Popper {...bindPopper(popupState)} transition>
+                              {({ TransitionProps }) => (
+                                <Fade {...TransitionProps} timeout={350}>
+                                  <Paper
+                                    sx={{
+                                      width: "400px",
+                                      marginTop: "10px",
+                                      marginLeft: "335px",
+                                      p: 2,
+                                    }}
+                                  >
+                                    <Typography
+                                      sx={{
+                                        fontSize: "12px",
+                                        textAlign: "justify",
+                                        marginBottom: 1.7,
+                                      }}
+                                    >
+                                      1.{" "}
+                                      {dataLang.formatMessage({ id: "environment1" })}
+                                    </Typography>
+                                    <Typography
+                                      sx={{
+                                        fontSize: "12px",
+                                        textAlign: "justify",
+                                        marginBottom: 1.7,
+                                      }}
+                                    >
+                                      2.{" "}
+                                      {dataLang.formatMessage({ id: "environment2" })}
+                                    </Typography>
+                                    <Typography
+                                      sx={{
+                                        fontSize: "12px",
+                                        textAlign: "justify",
+                                        marginBottom: 1.7,
+                                      }}
+                                    >
+                                      3.{" "}
+                                      {dataLang.formatMessage({ id: "environment3" })}
+                                    </Typography>
+                                    <Typography
+                                      sx={{ fontSize: "12px", textAlign: "justify" }}
+                                    >
+                                      4.{" "}
+                                      {dataLang.formatMessage({ id: "environment4" })}
+                                    </Typography>
+                                  </Paper>
+                                </Fade>
+                              )}
+                            </Popper>
+                          </div>
+                        )}
+                      </PopupState>
+                    </div>
+                  </div>
+
+                  <div className="DAT_Home_Row1_Right_Top_Benefit_Content">
+                    <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Icon">
+                        <img src="/dat_icon/coal.jpg" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "coalSave" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(
+                                coalsave.value.value * coalsave.value.ef
+                              ).toFixed(1)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            t
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Icon">
+                        <img src="/dat_icon/tree.jpg" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "cropYield" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(
+                                coalsave.value.value * coalsave.value.tree
+                              ).toFixed(1)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            {dataLang.formatMessage({ id: "tree" })}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Icon">
+                        <img src="/dat_icon/co2.jpg" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "C02" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(
+                                coalsave.value.value * coalsave.value.avr
+                              ).toFixed(1)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            t
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Icon">
+                        <img src="/dat_icon/money.jpg" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Top_Benefit_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "totalRevenue" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(parseFloat(convertUnit(price / 1000)).toFixed(1)).toLocaleString(
+                              "en-US"
+                            )}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            {showUnit(price)}VND
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div
-                className="DAT_Home_Overview-Main-Percent-Icon"
-                style={{ cursor: "pointer" }}
-              >
+              <div className="DAT_Home_Row1_Right_Bot">
+                <div className="DAT_Home_Row1_Right_Bot_Elec">
+                  <div className="DAT_Home_Row1_Right_Bot_Elec-Head">
+                    <div className="DAT_Home_Row1_Right_Bot_Elec-Head-Title">
+                      {dataLang.formatMessage({ id: "HomeProduction" })}
+                    </div>
+                  </div>
+
+                  <div className="DAT_Home_Row1_Right_Bot_Elec_Content">
+                    <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Icon">
+                        <img src="/dat_icon/24h.png" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "today" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(convertUnit(dailyproduction)).toFixed(2)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            {showUnitk(dailyproduction)}Wh
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Icon">
+                        <img src="/dat_icon/Thunder.png" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "month" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(convertUnit(monthlyproduction)).toFixed(2)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            {showUnitk(monthlyproduction)}Wh
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Icon">
+                        <img src="/dat_icon/globe.png" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "year" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(convertUnit(yearlyproduction)).toFixed(2)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            {showUnitk(yearlyproduction)}Wh
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item">
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Icon">
+                        <img src="/dat_icon/totalyear.png" alt="" />
+                      </div>
+                      <div className="DAT_Home_Row1_Right_Bot_Elec_Content_Item_Detail">
+                        <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
+                          {dataLang.formatMessage({ id: "total" })}
+                        </div>
+                        <div>
+                          <span style={{ fontSize: "28px" }}>
+                            {Number(
+                              parseFloat(convertUnit(totalproduction)).toFixed(2)
+                            ).toLocaleString("en-US")}
+                          </span>
+                          &nbsp;
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
+                          >
+                            {showUnitk(totalproduction)}Wh
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="DAT_Home_Row2">
+            <div className="DAT_Home_Row2_Left">
+              <div className="DAT_Home_Row2_Left_Top">
+                <div className="DAT_Home_Row2_Left_Top_History">
+                  <div className="DAT_Home_Row2_Left_Top_History-Head">
+                    <div className="DAT_Home_Row2_Left_Top_History-Head-Title">
+                      {dataLang.formatMessage({ id: "history" })}
+                    </div>
+
+                    <div className="DAT_Home_Row2_Left_Top_History-Head-Option">
+                      <span
+                        style={{
+                          backgroundColor:
+                            chart === "year" ? "rgba(43, 195, 253)" : "white",
+                          borderRight:
+                            chart === "year"
+                              ? "solid 1.5px rgba(11, 25, 103)"
+                              : "none",
+                          color: chart === "year" ? "rgba(11, 25, 103)" : "gray",
+                        }}
+                        onClick={() => {
+                          setChart("year");
+                        }}
+                      >
+                        {dataLang.formatMessage({ id: "year" })}
+                      </span>
+                      <span
+                        style={{
+                          backgroundColor:
+                            chart === "month" ? "rgba(43, 195, 253)" : "white",
+                          borderLeft:
+                            chart === "month"
+                              ? "solid 1.5px rgba(11, 25, 103)"
+                              : "none",
+                          color:
+                            chart === "month"
+                              ? COLOR.value.PrimaryColor
+                              : COLOR.value.grayText,
+                        }}
+                        onClick={() => {
+                          setChart("month");
+                        }}
+                      >
+                        {dataLang.formatMessage({ id: "month" })}
+                      </span>
+                    </div>
+
+                    <div className="DAT_Home_Row2_Left_Top_History-Head-Datetime">
+                      <DatePicker
+                        // id="datepicker"
+                        onChange={(date) => handleChart(date)}
+                        showMonthYearPicker={chart === "year" ? false : true}
+                        showYearPicker={chart === "month" ? false : true}
+                        customInput={
+                          <button className="DAT_CustomPicker">
+                            <span>{d[chart]}</span>
+                            <IoCalendarOutline color="gray" />
+                          </button>
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="DAT_Home_Row2_Left_Top_History-Chart">
+                    <div className="DAT_Home_Row2_Left_Top_History-Chart-label">
+                      <div className="DAT_Home_Row2_Left_Top_History-Chart-label-Unit">
+                        {chart === "year" ? (
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "15px" }}
+                          >
+                            {showUnitk(yearlyproduction)}Wh
+                          </span>
+                        ) : (
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "15px" }}
+                          >
+                            {showUnitk(monthlyproduction)}Wh
+                          </span>
+                        )}
+                      </div>
+                      <div className="DAT_Home_Row2_Left_Top_History-Chart-label-Label">
+                        {chart === "year"
+                          ? dataLang.formatMessage({ id: "yearOutput" })
+                          : dataLang.formatMessage({ id: "monthOutput" })}
+                        :{" "}
+                        {chart === "year"
+                          ? Number(
+                            parseFloat(convertUnit(yearlyproduction)).toFixed(2)
+                          ).toLocaleString("en-US")
+                          : Number(
+                            parseFloat(convertUnit(monthlyproduction)).toFixed(2)
+                          ).toLocaleString("en-US")}
+                        &nbsp;
+                        {chart === "year" ? (
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "15px" }}
+                          >
+                            {showUnitk(yearlyproduction)}Wh
+                          </span>
+                        ) : (
+                          <span
+                            style={{ color: COLOR.value.grayText, fontSize: "15px" }}
+                          >
+                            {showUnitk(monthlyproduction)}Wh
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="DAT_Home_Row2_Left_Top_History-Chart-Content">
+                      {chart === "year" ? (
+                        <ResponsiveContainer
+                          style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
+                        >
+                          <BarChart width={150} height={300} data={datayear}>
+                            <XAxis dataKey="month" axisLine={false} tickLine={false} />
+                            <YAxis
+                              axisLine={false}
+                              tickLine={false}
+                              domain={[
+                                0,
+                                Math.max(
+                                  ...datayear.map(
+                                    (item) =>
+                                      item[dataLang.formatMessage({ id: "yearOutput" })]
+                                  )
+                                ),
+                              ]}
+                            />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                            <Tooltip />
+                            <Legend />
+                            <Bar
+                              shape={<TriangleBar />}
+                              dataKey={dataLang.formatMessage({ id: "yearOutput" })}
+                              fill={COLOR.value.PrimaryColor}
+                              barSize={15}
+                              legendType="circle"
+                              style={{ fill: COLOR.value.PrimaryColor }}
+                            />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        <ResponsiveContainer
+                          style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
+                        >
+                          <BarChart width={150} height={300} data={datamonth}>
+                            <XAxis dataKey="date" axisLine={false} tickLine={false} />
+                            <YAxis
+                              axisLine={false}
+                              tickLine={false}
+                              domain={[
+                                0,
+                                Math.max(
+                                  ...datamonth.map(
+                                    (item) =>
+                                      item[
+                                      dataLang.formatMessage({ id: "monthOutput" })
+                                      ]
+                                  )
+                                ),
+                              ]}
+                            />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                            <Tooltip />
+                            <Legend />
+                            <Bar
+                              shape={<TriangleBar />}
+                              dataKey={dataLang.formatMessage({ id: "monthOutput" })}
+                              fill={COLOR.value.PrimaryColor}
+                              barSize={15}
+                              legendType="circle"
+                              style={{ fill: COLOR.value.PrimaryColor }}
+                            />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="DAT_Home_Row2_Left_Bot">
+                <div className="DAT_Home_Row2_Left_Bot_Rank">
+                  <div className="DAT_Home_Row2_Left_Bot_Rank-Head">
+                    <div className="DAT_Home_Row2_Left_Bot_Rank-Head-Title">
+                      {dataLang.formatMessage({ id: "rushhour" })}
+                    </div>
+                  </div>
+
+                  {isMobile.value ? (
+                    <div className="DAT_Home_Row2_Left_Bot_Rank-Container" >
+                      {plant.value.map((item, index) => {
+                        return (
+                          <div key={index} className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile">
+                            <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top">
+                              <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Ava">
+                                <img
+                                  src={
+                                    item.img ? item.img : "/dat_picture/solar_panel.png"
+                                  }
+                                  alt=""
+                                  id={item.plantid_}
+                                  onClick={(e) => handleInfo(e)}
+                                />
+                              </div>
+
+                              <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Info">
+                                <div
+                                  className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Info_Name"
+                                  id={item.plantid_}
+                                  onClick={(e) => handleInfo(e)}
+                                >
+                                  {item.plantname}
+                                </div>
+                                <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Info_Sun">
+                                  kWh/kWp(h):{" "}
+                                  {parseFloat(sun[item.plantid_]).toFixed(2) === "NaN"
+                                    ? 0
+                                    : Number(
+                                      parseFloat(
+                                        sun[item.plantid_] / item.capacity
+                                      ).toFixed(2)
+                                    ).toLocaleString("en-US")}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Bottom">
+                              {item.addr}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    // <div className="DAT_Home_Row2_Left_Bot_Rank-Content">
+                    //   <DataTable
+                    //     className="DAT_Table_Home"
+                    //     columns={columnHome}
+                    //     data={plant.value}
+                    //     // pagination
+                    //     // paginationComponentOptions={paginationComponentOptions}
+                    //     // fixedHeader={true}
+                    //     noDataComponent={<Empty />}
+                    //   />
+                    // </div>
+                    <>
+                      <div className="DAT_Home_Row2_Left_Bot_Rank-Content"
+                        style={{ paddingBottom: "0px" }}
+                      >
+                        <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item"
+                          style={{ padding: "0px" }}
+                        >
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_No"
+                            style={{ paddingLeft: "10px" }}
+                          >
+                            {dataLang.formatMessage({ id: "ordinalNumber" })}
+                          </div>
+
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info">
+                            {dataLang.formatMessage({ id: "projectInfo" })}
+                          </div>
+
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Capacity">
+                            {dataLang.formatMessage({ id: "inCapacity" })}
+                          </div>
+
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Data">
+                            kWh/kWp
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="DAT_Home_Row2_Left_Bot_Rank-Content">
+                        {plant.value.map((item, index) => {
+                          return (
+                            <div key={index} className="DAT_Home_Row2_Left_Bot_Rank-Content_Item"
+                              style={{ backgroundColor: index % 2 === 0 ? "#f5f5f5" : "white" }}
+                            >
+                              <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_No">
+                                {index + 1}
+                              </div>
+
+                              <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info"
+                                style={{ textAlign: "left", cursor: "pointer" }}
+                                id={item.plantid_}
+                                onClick={(e) => handleInfo(e)}
+                              >
+                                <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info_Name">{item.plantname}</div>
+                                <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info_Addr">{item.addr}</div>
+                              </div>
+
+                              <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Capacity">
+                                {item.capacity} (kWp)
+                              </div>
+
+                              <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Data">
+                                {parseFloat(sun[item.plantid_]).toFixed(2) === "NaN"
+                                  ? 0
+                                  : Number(
+                                    parseFloat(
+                                      sun[item.plantid_] / item.capacity
+                                    ).toFixed(2)
+                                  ).toLocaleString("en-US")} (h)
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="DAT_Home_Row2_Right">
+              <div className="DAT_Home_Row2_Right_Top">
+                <div className="DAT_Home_Row2_Right_Top_State">
+                  <div className="DAT_Home_Row2_Right_Top_State-Title">
+                    {dataLang.formatMessage({ id: "projectStatus" })}
+                  </div>
+
+                  <div className="DAT_Home_Row2_Right_Top_State-Total">
+                    <div className="DAT_Home_Row2_Right_Top_State-Total-Icon">
+                      <FaSolarPanel color={COLOR.value.PrimaryColor} />
+                    </div>
+                    <span style={{ color: COLOR.value.grayText, fontSize: "15px" }}>
+                      {dataLang.formatMessage({ id: "projectTotal" })}
+                    </span>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "28px",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {total}
+                    </span>
+                  </div>
+
+                  <div className="DAT_Home_Row2_Right_Top_State-Content">
+                    <div
+                      className="DAT_Home_Row2_Right_Top_State-Content-Item"
+                      onClick={() => {
+                        sidebartab.value = "Monitor";
+                        sidebartabli.value = "/Project";
+                        projtab.value = "online";
+                        navigate("/Project");
+                      }}
+                    >
+                      <div
+                        className="DAT_Home_Row2_Right_Top_State-Content-Item-Title"
+                        style={{ color: COLOR.value.DarkGreenColor }}
+                      >
+                        <img src="/dat_icon/online.png" alt="" />
+                        {dataLang.formatMessage({ id: "online" })}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            color: "black",
+                            fontSize: "28px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {online}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      className="DAT_Home_Row2_Right_Top_State-Content-Item"
+                      onClick={() => {
+                        sidebartab.value = "Monitor";
+                        sidebartabli.value = "/Project";
+                        projtab.value = "offline";
+                        navigate("/Project");
+                      }}
+                    >
+                      <div
+                        className="DAT_Home_Row2_Right_Top_State-Content-Item-Title"
+                        style={{ color: COLOR.value.WarningColor }}
+                      >
+                        <img src="/dat_icon/offline.png" alt="" />
+                        {dataLang.formatMessage({ id: "offline" })}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            color: "black",
+                            fontSize: "28px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {offline}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="DAT_Home_Row2_Right_Top_State-Content">
+                    <div
+                      className="DAT_Home_Row2_Right_Top_State-Content-Item"
+                      onClick={() => {
+                        sidebartab.value = "Monitor";
+                        sidebartabli.value = "/Project";
+                        projtab.value = "demo";
+                        navigate("/Project");
+                      }}
+                    >
+                      <div className="DAT_Home_Row2_Right_Top_State-Content-Item-Title">
+                        <img src="/dat_icon/shared.png" alt="" />
+                        {dataLang.formatMessage({ id: "demo" })}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            color: "black",
+                            fontSize: "28px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {trial}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      className="DAT_Home_Row2_Right_Top_State-Content-Item"
+                      onClick={() => {
+                        sidebartab.value = "Monitor";
+                        sidebartabli.value = "/Project";
+                        projtab.value = "warn";
+                        navigate("/Project");
+                      }}
+                    >
+                      <div
+                        className="DAT_Home_Row2_Right_Top_State-Content-Item-Title"
+                        style={{ color: COLOR.value.DarkOrangeColor }}
+                      >
+                        <img src="/dat_icon/warn.png" alt="" />
+                        {dataLang.formatMessage({ id: "projectWarn" })}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            color: "black",
+                            fontSize: "28px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {warn}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="map" className="DAT_Home_Row2_Right_Bot">
+                {/* <div className="DAT_Home_Row2_Right_Bot_Distribution">
+                <div className="DAT_Home_Row2_Right_Bot_Distribution-Map">
+                <div  style={{ width: "100%", height: "100%" }}></div>
+                </div>
+              </div> */}
+              </div>
+            </div>
+          </div>
+        </div>
+        :
+        <div className="DAT_HomeMobile">
+          <div className="DAT_HomeMobile_Benefit">
+            <div className="DAT_HomeMobile_Benefit-Head">
+              <div className="DAT_HomeMobile_Benefit-Head-Title">
+                {dataLang.formatMessage({ id: "environment" })}
+                &nbsp;
                 <PopupState variant="popper" popupId="demo-popup-popper">
                   {(popupState) => (
                     <div style={{ cursor: "pointer" }}>
@@ -830,7 +1706,12 @@ export default function Home(props) {
                         {({ TransitionProps }) => (
                           <Fade {...TransitionProps} timeout={350}>
                             <Paper
-                              sx={{ width: "400px", marginLeft: "435px", p: 2 }}
+                              sx={{
+                                width: "400px",
+                                marginTop: "10px",
+                                marginLeft: "335px",
+                                p: 2,
+                              }}
                             >
                               <Typography
                                 sx={{
@@ -839,7 +1720,8 @@ export default function Home(props) {
                                   marginBottom: 1.7,
                                 }}
                               >
-                                {dataLang.formatMessage({ id: "overview1" })}
+                                1.{" "}
+                                {dataLang.formatMessage({ id: "environment1" })}
                               </Typography>
                               <Typography
                                 sx={{
@@ -848,12 +1730,24 @@ export default function Home(props) {
                                   marginBottom: 1.7,
                                 }}
                               >
-                                {dataLang.formatMessage({ id: "overview2" })}
+                                2.{" "}
+                                {dataLang.formatMessage({ id: "environment2" })}
+                              </Typography>
+                              <Typography
+                                sx={{
+                                  fontSize: "12px",
+                                  textAlign: "justify",
+                                  marginBottom: 1.7,
+                                }}
+                              >
+                                3.{" "}
+                                {dataLang.formatMessage({ id: "environment3" })}
                               </Typography>
                               <Typography
                                 sx={{ fontSize: "12px", textAlign: "justify" }}
                               >
-                                {dataLang.formatMessage({ id: "overview3" })}
+                                4.{" "}
+                                {dataLang.formatMessage({ id: "environment4" })}
                               </Typography>
                             </Paper>
                           </Fade>
@@ -865,10 +1759,444 @@ export default function Home(props) {
               </div>
             </div>
 
-            <div className="DAT_Home_Overview-Main-Value">
-              <div className="DAT_Home_Overview-Main-Value-Item">
-                <div className="DAT_Home_Overview-Main-Value-Item-Title">
-                  {dataLang.formatMessage({ id: "totalOutput" })}
+            <div className="DAT_HomeMobile_Benefit_Content">
+              <div className="DAT_HomeMobile_Benefit_Content_Item">
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
+                  <GiCoalWagon size={24} color={COLOR.value.SecondaryColor} />
+                </div>
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
+                  <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
+                    {dataLang.formatMessage({ id: "coalSave" })}
+                  </div>
+                  <div>
+                    {Number(
+                      parseFloat(
+                        coalsave.value.value * coalsave.value.ef
+                      ).toFixed(2)
+                    ).toLocaleString("en-US")}
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      t
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="DAT_HomeMobile_Benefit_Content_Item">
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
+                  <FaTree size={24} color={COLOR.value.SecondaryColor} />
+                </div>
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
+                  <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
+                    {dataLang.formatMessage({ id: "cropYield" })}
+                  </div>
+                  <div>
+                    {Number(
+                      parseFloat(
+                        coalsave.value.value * coalsave.value.tree
+                      ).toFixed(2)
+                    ).toLocaleString("en-US")}
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      {dataLang.formatMessage({ id: "tree" })}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="DAT_HomeMobile_Benefit_Content">
+              <div className="DAT_HomeMobile_Benefit_Content_Item">
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
+                  <IoIosCloud size={24} color={COLOR.value.SecondaryColor} />
+                </div>
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
+                  <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
+                    {dataLang.formatMessage({ id: "C02" })}
+                  </div>
+                  <div>
+                    {Number(
+                      parseFloat(
+                        coalsave.value.value * coalsave.value.avr
+                      ).toFixed(2)
+                    ).toLocaleString("en-US")}
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      t
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="DAT_HomeMobile_Benefit_Content_Item">
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
+                  <FaMoneyBill size={24} color={COLOR.value.SecondaryColor} />
+                </div>
+                <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
+                  <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
+                    {dataLang.formatMessage({ id: "totalRevenue" })}
+                  </div>
+                  <div>
+                    {Number(parseFloat(price / 1000).toFixed(2)).toLocaleString(
+                      "en-US"
+                    )}
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      kVND
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="DAT_HomeMobile_Overview">
+            <div className="DAT_HomeMobile_Overview-Head">
+              <div className="DAT_HomeMobile_Overview-Head-Title">
+                {dataLang.formatMessage({ id: "overview" })}
+              </div>
+            </div>
+
+            <div className="DAT_HomeMobile_Overview-Main">
+              <div className="DAT_HomeMobile_Overview-Main-Percent">
+                <style>{keyframes}</style>
+
+                <div
+                  className="DAT_HomeMobile_Overview-Main-Percent-Item"
+                  style={{ animation: "home 30s linear infinite" }}
+                >
+                  <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value">
+                    <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value_num">
+                      {Number(
+                        parseFloat((production / 1000 / capacity) * 100).toFixed(
+                          2
+                        )
+                      ).toLocaleString("en-US") === "NaN"
+                        ? "--"
+                        : Number(
+                          parseFloat(
+                            (production / 1000 / capacity) * 100
+                          ).toFixed(2)
+                        ).toLocaleString("en-US")}
+                    </div>
+                    <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value_unit">
+                      %
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className="DAT_HomeMobile_Overview-Main-Percent-Icon"
+                  style={{ cursor: "pointer" }}
+                >
+                  <PopupState variant="popper" popupId="demo-popup-popper">
+                    {(popupState) => (
+                      <div style={{ cursor: "pointer" }}>
+                        <HelpOutlineIcon
+                          {...bindHover(popupState)}
+                          color="action"
+                          fontSize="9px"
+                        />
+                        <Popper {...bindPopper(popupState)} transition>
+                          {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                              <Paper
+                                sx={{ width: "400px", marginLeft: "435px", p: 2 }}
+                              >
+                                <Typography
+                                  sx={{
+                                    fontSize: "12px",
+                                    textAlign: "justify",
+                                    marginBottom: 1.7,
+                                  }}
+                                >
+                                  {dataLang.formatMessage({ id: "overview1" })}
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    fontSize: "12px",
+                                    textAlign: "justify",
+                                    marginBottom: 1.7,
+                                  }}
+                                >
+                                  {dataLang.formatMessage({ id: "overview2" })}
+                                </Typography>
+                                <Typography
+                                  sx={{ fontSize: "12px", textAlign: "justify" }}
+                                >
+                                  {dataLang.formatMessage({ id: "overview3" })}
+                                </Typography>
+                              </Paper>
+                            </Fade>
+                          )}
+                        </Popper>
+                      </div>
+                    )}
+                  </PopupState>
+                </div>
+              </div>
+
+              <div className="DAT_HomeMobile_Overview-Main-Value">
+                <div className="DAT_HomeMobile_Overview-Main-Value-Item">
+                  <div className="DAT_HomeMobile_Overview-Main-Value-Item-Title">
+                    {dataLang.formatMessage({ id: "totalOutput" })}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "20px",
+                        fontWeight: "650",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {Number(
+                        parseFloat(convertUnit(production / 1000)).toFixed(2)
+                      ).toLocaleString("en-US")}
+                    </span>
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    >
+                      {showUnit(production / 1000)}W
+                    </span>
+                  </div>
+                </div>
+
+                <div className="DAT_HomeMobile_Overview-Main-Value-Item">
+                  <div className="DAT_HomeMobile_Overview-Main-Value-Item-Title">
+                    {dataLang.formatMessage({ id: "inCapacity" })}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "20px",
+                        fontWeight: "650",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {Number(
+                        parseFloat(convertUnit(capacity)).toFixed(2)
+                      ).toLocaleString("en-US")}
+                    </span>
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    >
+                      {showUnitk(capacity)}Wp
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="DAT_HomeMobile_Overview-Sub">
+              <div
+                className="DAT_HomeMobile_Overview-Sub-Item"
+                // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
+                style={{ backgroundColor: "white" }}
+              >
+                <div>
+                  <img
+                    src="/dat_icon/day.png"
+                    alt=""
+                    style={{ width: "35px", height: "35px" }}
+                  />
+                </div>
+                <div>
+                  <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    {dataLang.formatMessage({ id: "today" })}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "16px",
+                        fontWeight: "650",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {Number(
+                        parseFloat(convertUnit(dailyproduction)).toFixed(2)
+                      ).toLocaleString("en-US")}
+                    </span>
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      {showUnitk(dailyproduction)}Wh
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="DAT_HomeMobile_Overview-Sub-Item"
+                // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
+                style={{ backgroundColor: "white" }}
+              >
+                <div>
+                  <img
+                    src="/dat_icon/month.png"
+                    alt=""
+                    style={{ width: "35px", height: "35px" }}
+                  />
+                </div>
+                <div>
+                  <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    {dataLang.formatMessage({ id: "month" })}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "16px",
+                        fontWeight: "650",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {Number(
+                        parseFloat(convertUnit(monthlyproduction)).toFixed(2)
+                      ).toLocaleString("en-US")}
+                    </span>
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      {showUnitk(monthlyproduction)}Wh
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="DAT_HomeMobile_Overview-Sub-Item"
+                // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
+                style={{ backgroundColor: "white" }}
+              >
+                <div>
+                  <img
+                    src="/dat_icon/year.png"
+                    alt=""
+                    style={{ width: "35px", height: "35px" }}
+                  />
+                </div>
+                <div>
+                  <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    {dataLang.formatMessage({ id: "year" })}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "16px",
+                        fontWeight: "650",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {Number(
+                        parseFloat(convertUnit(yearlyproduction)).toFixed(2)
+                      ).toLocaleString("en-US")}
+                    </span>
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      {showUnitk(yearlyproduction)}Wh
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="DAT_HomeMobile_Overview-Sub-Item"
+                // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
+                style={{ backgroundColor: "white" }}
+              >
+                <div>
+                  <img
+                    src="/dat_icon/total.png"
+                    alt=""
+                    style={{ width: "35px", height: "35px" }}
+                  />
+                </div>
+                <div>
+                  <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    {dataLang.formatMessage({ id: "total" })}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "16px",
+                        fontWeight: "650",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {Number(
+                        parseFloat(convertUnit(totalproduction)).toFixed(2)
+                      ).toLocaleString("en-US")}
+                    </span>
+                    &nbsp;
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "12px" }}
+                    >
+                      {showUnitk(totalproduction)}Wh
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="DAT_HomeMobile_State">
+            <div className="DAT_HomeMobile_State-Title">
+              {dataLang.formatMessage({ id: "projectStatus" })}
+            </div>
+
+            <div className="DAT_HomeMobile_State-Total">
+              <div className="DAT_HomeMobile_State-Total-Icon">
+                <FaSolarPanel color={COLOR.value.PrimaryColor} />
+              </div>
+              <span style={{ color: COLOR.value.grayText, fontSize: "13px" }}>
+                {dataLang.formatMessage({ id: "projectTotal" })}
+              </span>
+              <span
+                style={{
+                  color: "black",
+                  fontSize: "20px",
+                  fontWeight: "650",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                {total}
+              </span>
+            </div>
+
+            <div className="DAT_HomeMobile_State-Content">
+              <div
+                className="DAT_HomeMobile_State-Content-Item"
+                onClick={() => {
+                  sidebartab.value = "Monitor";
+                  sidebartabli.value = "/Project";
+                  projtab.value = "online";
+                  navigate("/Project");
+                }}
+              >
+                <div
+                  className="DAT_HomeMobile_State-Content-Item-Title"
+                  style={{ color: COLOR.value.DarkGreenColor }}
+                >
+                  {dataLang.formatMessage({ id: "online" })}
                 </div>
                 <div>
                   <span
@@ -879,22 +2207,25 @@ export default function Home(props) {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    {Number(
-                      parseFloat(convertUnit(production / 1000)).toFixed(2)
-                    ).toLocaleString("en-US")}
-                  </span>
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "13px" }}
-                  >
-                    {showUnit(production / 1000)}W
+                    {online}
                   </span>
                 </div>
               </div>
 
-              <div className="DAT_Home_Overview-Main-Value-Item">
-                <div className="DAT_Home_Overview-Main-Value-Item-Title">
-                  {dataLang.formatMessage({ id: "inCapacity" })}
+              <div
+                className="DAT_HomeMobile_State-Content-Item"
+                onClick={() => {
+                  sidebartab.value = "Monitor";
+                  sidebartabli.value = "/Project";
+                  projtab.value = "offline";
+                  navigate("/Project");
+                }}
+              >
+                <div
+                  className="DAT_HomeMobile_State-Content-Item-Title"
+                  style={{ color: COLOR.value.WarningColor }}
+                >
+                  {dataLang.formatMessage({ id: "offline" })}
                 </div>
                 <div>
                   <span
@@ -905,519 +2236,260 @@ export default function Home(props) {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    {Number(
-                      parseFloat(convertUnit(capacity)).toFixed(2)
-                    ).toLocaleString("en-US")}
+                    {offline}
                   </span>
-                  &nbsp;
+                </div>
+              </div>
+            </div>
+
+            <div className="DAT_HomeMobile_State-Content">
+              <div
+                className="DAT_HomeMobile_State-Content-Item"
+                onClick={() => {
+                  sidebartab.value = "Monitor";
+                  sidebartabli.value = "/Project";
+                  projtab.value = "demo";
+                  navigate("/Project");
+                }}
+              >
+                <div className="DAT_HomeMobile_State-Content-Item-Title">
+                  {dataLang.formatMessage({ id: "demo" })}
+                </div>
+                <div>
                   <span
-                    style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    style={{
+                      color: "black",
+                      fontSize: "20px",
+                      fontWeight: "650",
+                      fontFamily: "sans-serif",
+                    }}
                   >
-                    {showUnitk(capacity)}Wp
+                    {trial}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className="DAT_HomeMobile_State-Content-Item"
+                onClick={() => {
+                  sidebartab.value = "Monitor";
+                  sidebartabli.value = "/Project";
+                  projtab.value = "warn";
+                  navigate("/Project");
+                }}
+              >
+                <div
+                  className="DAT_HomeMobile_State-Content-Item-Title"
+                  style={{ color: COLOR.value.DarkOrangeColor }}
+                >
+                  {dataLang.formatMessage({ id: "projectWarn" })}
+                </div>
+                <div>
+                  <span
+                    style={{
+                      color: "black",
+                      fontSize: "20px",
+                      fontWeight: "650",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    {warn}
                   </span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="DAT_Home_Overview-Sub">
-            <div
-              className="DAT_Home_Overview-Sub-Item"
-              // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
-              style={{ backgroundColor: "white" }}
-            >
-              <div>
-                <img
-                  src="/dat_icon/day.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                />
+          <div className="DAT_HomeMobile_History">
+            <div className="DAT_HomeMobile_History-Head">
+              <div className="DAT_HomeMobile_History-Head-Title">
+                {dataLang.formatMessage({ id: "history" })}
               </div>
-              <div>
-                <div className="DAT_Home_Overview-Sub-Item-Title">
-                  {dataLang.formatMessage({ id: "today" })}
-                </div>
-                <div>
-                  <span
-                    style={{
-                      color: "black",
-                      fontSize: "16px",
-                      fontWeight: "650",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    {Number(
-                      parseFloat(convertUnit(dailyproduction)).toFixed(2)
-                    ).toLocaleString("en-US")}
-                  </span>
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    {showUnitk(dailyproduction)}Wh
-                  </span>
-                </div>
+
+              <div className="DAT_HomeMobile_History-Head-Option">
+                <span
+                  style={{
+                    backgroundColor:
+                      chart === "year" ? "rgba(43, 195, 253)" : "white",
+                    border:
+                      chart === "year"
+                        ? "solid 1.5px rgba(11, 25, 103)"
+                        : "solid 1.5px gray",
+                    color: chart === "year" ? "rgba(11, 25, 103)" : "gray",
+                  }}
+                  onClick={() => {
+                    setChart("year");
+                  }}
+                >
+                  {dataLang.formatMessage({ id: "year" })}
+                </span>
+                <span
+                  style={{
+                    backgroundColor:
+                      chart === "month" ? "rgba(43, 195, 253)" : "white",
+                    border:
+                      chart === "month"
+                        ? "solid 1.5px rgba(11, 25, 103)"
+                        : "solid 1.5px gray",
+                    color:
+                      chart === "month"
+                        ? COLOR.value.PrimaryColor
+                        : COLOR.value.grayText,
+                  }}
+                  onClick={() => {
+                    setChart("month");
+                  }}
+                >
+                  {dataLang.formatMessage({ id: "month" })}
+                </span>
+              </div>
+
+              <div className="DAT_HomeMobile_History-Head-Datetime">
+                <DatePicker
+                  // id="datepicker"
+                  onChange={(date) => handleChart(date)}
+                  showMonthYearPicker={chart === "year" ? false : true}
+                  showYearPicker={chart === "month" ? false : true}
+                  customInput={
+                    <button className="DAT_CustomPicker">
+                      <span>{d[chart]}</span>
+                      <IoCalendarOutline color="gray" />
+                    </button>
+                  }
+                />
               </div>
             </div>
 
-            <div
-              className="DAT_Home_Overview-Sub-Item"
-              // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
-              style={{ backgroundColor: "white" }}
-            >
-              <div>
-                <img
-                  src="/dat_icon/month.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                />
-              </div>
-              <div>
-                <div className="DAT_Home_Overview-Sub-Item-Title">
-                  {dataLang.formatMessage({ id: "month" })}
+            <div className="DAT_HomeMobile_History-Chart">
+              <div className="DAT_HomeMobile_History-Chart-label">
+                <div className="DAT_HomeMobile_History-Chart-label-Unit">
+                  {chart === "year" ? (
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    >
+                      {showUnitk(yearlyproduction)}Wh
+                    </span>
+                  ) : (
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    >
+                      {showUnitk(monthlyproduction)}Wh
+                    </span>
+                  )}
                 </div>
-                <div>
-                  <span
-                    style={{
-                      color: "black",
-                      fontSize: "16px",
-                      fontWeight: "650",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    {Number(
+                <div className="DAT_HomeMobile_History-Chart-label-Label">
+                  {chart === "year"
+                    ? dataLang.formatMessage({ id: "yearOutput" })
+                    : dataLang.formatMessage({ id: "monthOutput" })}
+                  :{" "}
+                  {chart === "year"
+                    ? Number(
+                      parseFloat(convertUnit(yearlyproduction)).toFixed(2)
+                    ).toLocaleString("en-US")
+                    : Number(
                       parseFloat(convertUnit(monthlyproduction)).toFixed(2)
                     ).toLocaleString("en-US")}
-                  </span>
                   &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    {showUnitk(monthlyproduction)}Wh
-                  </span>
+                  {chart === "year" ? (
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    >
+                      {showUnitk(yearlyproduction)}Wh
+                    </span>
+                  ) : (
+                    <span
+                      style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                    >
+                      {showUnitk(monthlyproduction)}Wh
+                    </span>
+                  )}
                 </div>
               </div>
-            </div>
-
-            <div
-              className="DAT_Home_Overview-Sub-Item"
-              // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
-              style={{ backgroundColor: "white" }}
-            >
-              <div>
-                <img
-                  src="/dat_icon/year.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                />
-              </div>
-              <div>
-                <div className="DAT_Home_Overview-Sub-Item-Title">
-                  {dataLang.formatMessage({ id: "year" })}
-                </div>
-                <div>
-                  <span
-                    style={{
-                      color: "black",
-                      fontSize: "16px",
-                      fontWeight: "650",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    {Number(
-                      parseFloat(convertUnit(yearlyproduction)).toFixed(2)
-                    ).toLocaleString("en-US")}
-                  </span>
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    {showUnitk(yearlyproduction)}Wh
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="DAT_Home_Overview-Sub-Item"
-              // style={{ backgroundColor: "rgba(68, 186, 255, 0.2)" }}
-              style={{ backgroundColor: "white" }}
-            >
-              <div>
-                <img
-                  src="/dat_icon/total.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                />
-              </div>
-              <div>
-                <div className="DAT_Home_Overview-Sub-Item-Title">
-                  {dataLang.formatMessage({ id: "total" })}
-                </div>
-                <div>
-                  <span
-                    style={{
-                      color: "black",
-                      fontSize: "16px",
-                      fontWeight: "650",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    {Number(
-                      parseFloat(convertUnit(totalproduction)).toFixed(2)
-                    ).toLocaleString("en-US")}
-                  </span>
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    {showUnitk(totalproduction)}Wh
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="DAT_Home_History">
-          <div className="DAT_Home_History-Head">
-            <div className="DAT_Home_History-Head-Title">
-              {dataLang.formatMessage({ id: "history" })}
-            </div>
-
-            <div className="DAT_Home_History-Head-Option">
-              <span
-                style={{
-                  backgroundColor:
-                    chart === "year" ? "rgba(43, 195, 253)" : "white",
-                  border:
-                    chart === "year"
-                      ? "solid 1.5px rgba(11, 25, 103)"
-                      : "solid 1.5px gray",
-                  color: chart === "year" ? "rgba(11, 25, 103)" : "gray",
-                }}
-                onClick={() => {
-                  setChart("year");
-                }}
-              >
-                {dataLang.formatMessage({ id: "year" })}
-              </span>
-              <span
-                style={{
-                  backgroundColor:
-                    chart === "month" ? "rgba(43, 195, 253)" : "white",
-                  border:
-                    chart === "month"
-                      ? "solid 1.5px rgba(11, 25, 103)"
-                      : "solid 1.5px gray",
-                  color:
-                    chart === "month"
-                      ? COLOR.value.PrimaryColor
-                      : COLOR.value.grayText,
-                }}
-                onClick={() => {
-                  setChart("month");
-                }}
-              >
-                {dataLang.formatMessage({ id: "month" })}
-              </span>
-            </div>
-
-            <div className="DAT_Home_History-Head-Datetime">
-              <DatePicker
-                // id="datepicker"
-                onChange={(date) => handleChart(date)}
-                showMonthYearPicker={chart === "year" ? false : true}
-                showYearPicker={chart === "month" ? false : true}
-                customInput={
-                  <button className="DAT_CustomPicker">
-                    <span>{d[chart]}</span>
-                    <IoCalendarOutline color="gray" />
-                  </button>
-                }
-              />
-            </div>
-          </div>
-
-          <div className="DAT_Home_History-Chart">
-            <div className="DAT_Home_History-Chart-label">
-              <div className="DAT_Home_History-Chart-label-Unit">
+              <div className="DAT_HomeMobile_History-Chart-Content">
                 {chart === "year" ? (
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                  <ResponsiveContainer
+                    style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
                   >
-                    {showUnitk(yearlyproduction)}Wh
-                  </span>
+                    <BarChart width={150} height={200} data={datayear}>
+                      <XAxis dataKey="month" axisLine={false} tickLine={false} />
+                      <YAxis
+                        axisLine={false}
+                        tickLine={false}
+                        domain={[
+                          0,
+                          Math.max(
+                            ...datayear.map(
+                              (item) =>
+                                item[dataLang.formatMessage({ id: "yearOutput" })]
+                            )
+                          ),
+                        ]}
+                      />
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                      <Tooltip />
+                      <Legend />
+                      <Bar
+                        shape={<TriangleBar />}
+                        dataKey={dataLang.formatMessage({ id: "yearOutput" })}
+                        fill={COLOR.value.PrimaryColor}
+                        barSize={15}
+                        legendType="circle"
+                        style={{ fill: COLOR.value.PrimaryColor }}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
                 ) : (
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "13px" }}
+                  <ResponsiveContainer
+                    style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
                   >
-                    {showUnitk(monthlyproduction)}Wh
-                  </span>
-                )}
-              </div>
-              <div className="DAT_Home_History-Chart-label-Label">
-                {chart === "year"
-                  ? dataLang.formatMessage({ id: "yearOutput" })
-                  : dataLang.formatMessage({ id: "monthOutput" })}
-                :{" "}
-                {chart === "year"
-                  ? Number(
-                    parseFloat(convertUnit(yearlyproduction)).toFixed(2)
-                  ).toLocaleString("en-US")
-                  : Number(
-                    parseFloat(convertUnit(monthlyproduction)).toFixed(2)
-                  ).toLocaleString("en-US")}
-                &nbsp;
-                {chart === "year" ? (
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "13px" }}
-                  >
-                    {showUnitk(yearlyproduction)}Wh
-                  </span>
-                ) : (
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "13px" }}
-                  >
-                    {showUnitk(monthlyproduction)}Wh
-                  </span>
+                    <BarChart width={150} height={200} data={datamonth}>
+                      <XAxis dataKey="date" axisLine={false} tickLine={false} />
+                      <YAxis
+                        axisLine={false}
+                        tickLine={false}
+                        domain={[
+                          0,
+                          Math.max(
+                            ...datamonth.map(
+                              (item) =>
+                                item[
+                                dataLang.formatMessage({ id: "monthOutput" })
+                                ]
+                            )
+                          ),
+                        ]}
+                      />
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                      <Tooltip />
+                      <Legend />
+                      <Bar
+                        shape={<TriangleBar />}
+                        dataKey={dataLang.formatMessage({ id: "monthOutput" })}
+                        fill={COLOR.value.PrimaryColor}
+                        barSize={15}
+                        legendType="circle"
+                        style={{ fill: COLOR.value.PrimaryColor }}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
                 )}
               </div>
             </div>
-            <div className="DAT_Home_History-Chart-Content">
-              {chart === "year" ? (
-                <ResponsiveContainer
-                  style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
-                >
-                  <BarChart width={150} height={200} data={datayear}>
-                    <XAxis dataKey="month" axisLine={false} tickLine={false} />
-                    <YAxis
-                      axisLine={false}
-                      tickLine={false}
-                      domain={[
-                        0,
-                        Math.max(
-                          ...datayear.map(
-                            (item) =>
-                              item[dataLang.formatMessage({ id: "yearOutput" })]
-                          )
-                        ),
-                      ]}
-                    />
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <Tooltip />
-                    <Legend />
-                    <Bar
-                      shape={<TriangleBar />}
-                      dataKey={dataLang.formatMessage({ id: "yearOutput" })}
-                      fill={COLOR.value.PrimaryColor}
-                      barSize={15}
-                      legendType="circle"
-                      style={{ fill: COLOR.value.PrimaryColor }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                <ResponsiveContainer
-                  style={{ width: "100%", height: "100%", marginLeft: "-20px" }}
-                >
-                  <BarChart width={150} height={200} data={datamonth}>
-                    <XAxis dataKey="date" axisLine={false} tickLine={false} />
-                    <YAxis
-                      axisLine={false}
-                      tickLine={false}
-                      domain={[
-                        0,
-                        Math.max(
-                          ...datamonth.map(
-                            (item) =>
-                              item[
-                              dataLang.formatMessage({ id: "monthOutput" })
-                              ]
-                          )
-                        ),
-                      ]}
-                    />
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <Tooltip />
-                    <Legend />
-                    <Bar
-                      shape={<TriangleBar />}
-                      dataKey={dataLang.formatMessage({ id: "monthOutput" })}
-                      fill={COLOR.value.PrimaryColor}
-                      barSize={15}
-                      legendType="circle"
-                      style={{ fill: COLOR.value.PrimaryColor }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="DAT_Home_State">
-          <div className="DAT_Home_State-Title">
-            {dataLang.formatMessage({ id: "projectStatus" })}
           </div>
 
-          <div className="DAT_Home_State-Total">
-            <div className="DAT_Home_State-Total-Icon">
-              <FaSolarPanel color={COLOR.value.PrimaryColor} />
-            </div>
-            <span style={{ color: COLOR.value.grayText, fontSize: "13px" }}>
-              {dataLang.formatMessage({ id: "projectTotal" })}
-            </span>
-            <span
-              style={{
-                color: "black",
-                fontSize: "20px",
-                fontWeight: "650",
-                fontFamily: "sans-serif",
-              }}
-            >
-              {total}
-            </span>
-          </div>
-
-          <div className="DAT_Home_State-Content">
-            <div
-              className="DAT_Home_State-Content-Item"
-              onClick={() => {
-                sidebartab.value = "Monitor";
-                sidebartabli.value = "/Project";
-                projtab.value = "online";
-                navigate("/Project");
-              }}
-            >
-              <div
-                className="DAT_Home_State-Content-Item-Title"
-                style={{ color: COLOR.value.DarkGreenColor }}
-              >
-                {dataLang.formatMessage({ id: "online" })}
-              </div>
-              <div>
-                <span
-                  style={{
-                    color: "black",
-                    fontSize: "20px",
-                    fontWeight: "650",
-                    fontFamily: "sans-serif",
-                  }}
-                >
-                  {online}
-                </span>
+          <div className="DAT_HomeMobile_Rank">
+            <div className="DAT_HomeMobile_Rank-Head">
+              <div className="DAT_HomeMobile_Rank-Head-Title">
+                {dataLang.formatMessage({ id: "rushhour" })}
               </div>
             </div>
 
-            <div
-              className="DAT_Home_State-Content-Item"
-              onClick={() => {
-                sidebartab.value = "Monitor";
-                sidebartabli.value = "/Project";
-                projtab.value = "offline";
-                navigate("/Project");
-              }}
-            >
-              <div
-                className="DAT_Home_State-Content-Item-Title"
-                style={{ color: COLOR.value.WarningColor }}
-              >
-                {dataLang.formatMessage({ id: "offline" })}
-              </div>
-              <div>
-                <span
-                  style={{
-                    color: "black",
-                    fontSize: "20px",
-                    fontWeight: "650",
-                    fontFamily: "sans-serif",
-                  }}
-                >
-                  {offline}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="DAT_Home_State-Content">
-            <div
-              className="DAT_Home_State-Content-Item"
-              onClick={() => {
-                sidebartab.value = "Monitor";
-                sidebartabli.value = "/Project";
-                projtab.value = "demo";
-                navigate("/Project");
-              }}
-            >
-              <div className="DAT_Home_State-Content-Item-Title">
-                {dataLang.formatMessage({ id: "demo" })}
-              </div>
-              <div>
-                <span
-                  style={{
-                    color: "black",
-                    fontSize: "20px",
-                    fontWeight: "650",
-                    fontFamily: "sans-serif",
-                  }}
-                >
-                  {trial}
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="DAT_Home_State-Content-Item"
-              onClick={() => {
-                sidebartab.value = "Monitor";
-                sidebartabli.value = "/Project";
-                projtab.value = "warn";
-                navigate("/Project");
-              }}
-            >
-              <div
-                className="DAT_Home_State-Content-Item-Title"
-                style={{ color: COLOR.value.DarkOrangeColor }}
-              >
-                {dataLang.formatMessage({ id: "projectWarn" })}
-              </div>
-              <div>
-                <span
-                  style={{
-                    color: "black",
-                    fontSize: "20px",
-                    fontWeight: "650",
-                    fontFamily: "sans-serif",
-                  }}
-                >
-                  {warn}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="DAT_Home_Distribution">
-          <div className="DAT_Home_Distribution-Map">
-            <div id="map" style={{ width: "100%", height: "100%" }}></div>
-          </div>
-        </div>
-
-        <div className="DAT_Home_Rank">
-          <div className="DAT_Home_Rank-Head">
-            <div className="DAT_Home_Rank-Head-Title">
-              {dataLang.formatMessage({ id: "rushhour" })}
-            </div>
-          </div>
-
-          {isMobile.value ? (
-            <div className="DAT_Home_Rank-Container" >
+            <div className="DAT_HomeMobile_Rank-Container" >
               {plant.value.map((item, index) => {
                 return (
-                  <div key={index} className="DAT_Home_Rank-Container-ContentMobile">
-                    <div className="DAT_Home_Rank-Container-ContentMobile_Top">
-                      <div className="DAT_Home_Rank-Container-ContentMobile_Top_Ava">
+                  <div key={index} className="DAT_HomeMobile_Rank-Container-ContentMobile">
+                    <div className="DAT_HomeMobile_Rank-Container-ContentMobile_Top">
+                      <div className="DAT_HomeMobile_Rank-Container-ContentMobile_Top_Ava">
                         <img
                           src={
                             item.img ? item.img : "/dat_picture/solar_panel.png"
@@ -1428,15 +2500,15 @@ export default function Home(props) {
                         />
                       </div>
 
-                      <div className="DAT_Home_Rank-Container-ContentMobile_Top_Info">
+                      <div className="DAT_HomeMobile_Rank-Container-ContentMobile_Top_Info">
                         <div
-                          className="DAT_Home_Rank-Container-ContentMobile_Top_Info_Name"
+                          className="DAT_HomeMobile_Rank-Container-ContentMobile_Top_Info_Name"
                           id={item.plantid_}
                           onClick={(e) => handleInfo(e)}
                         >
                           {item.plantname}
                         </div>
-                        <div className="DAT_Home_Rank-Container-ContentMobile_Top_Info_Sun">
+                        <div className="DAT_HomeMobile_Rank-Container-ContentMobile_Top_Info_Sun">
                           kWh/kWp(h):{" "}
                           {parseFloat(sun[item.plantid_]).toFixed(2) === "NaN"
                             ? 0
@@ -1449,197 +2521,22 @@ export default function Home(props) {
                       </div>
                     </div>
 
-                    <div className="DAT_Home_Rank-Container-ContentMobile_Bottom">
+                    <div className="DAT_HomeMobile_Rank-Container-ContentMobile_Bottom">
                       {item.addr}
                     </div>
                   </div>
                 );
               })}
             </div>
-          ) : (
-            <div className="DAT_Home_Rank-Content">
-              <DataTable
-                className="DAT_Table_Home"
-                columns={columnHome}
-                data={plant.value}
-                pagination
-                paginationComponentOptions={paginationComponentOptions}
-                // fixedHeader={true}
-                noDataComponent={<Empty />}
-              />
-            </div>
-          )}
-        </div>
-
-        <div className="DAT_Home_Benefit">
-          <div className="DAT_Home_Benefit-Head">
-            <div className="DAT_Home_Benefit-Head-Title">
-              {dataLang.formatMessage({ id: "environment" })}
-              &nbsp;
-              <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (
-                  <div style={{ cursor: "pointer" }}>
-                    <HelpOutlineIcon
-                      {...bindHover(popupState)}
-                      color="action"
-                      fontSize="9px"
-                    />
-                    <Popper {...bindPopper(popupState)} transition>
-                      {({ TransitionProps }) => (
-                        <Fade {...TransitionProps} timeout={350}>
-                          <Paper
-                            sx={{
-                              width: "400px",
-                              marginTop: "10px",
-                              marginLeft: "335px",
-                              p: 2,
-                            }}
-                          >
-                            <Typography
-                              sx={{
-                                fontSize: "12px",
-                                textAlign: "justify",
-                                marginBottom: 1.7,
-                              }}
-                            >
-                              1.{" "}
-                              {dataLang.formatMessage({ id: "environment1" })}
-                            </Typography>
-                            <Typography
-                              sx={{
-                                fontSize: "12px",
-                                textAlign: "justify",
-                                marginBottom: 1.7,
-                              }}
-                            >
-                              2.{" "}
-                              {dataLang.formatMessage({ id: "environment2" })}
-                            </Typography>
-                            <Typography
-                              sx={{
-                                fontSize: "12px",
-                                textAlign: "justify",
-                                marginBottom: 1.7,
-                              }}
-                            >
-                              3.{" "}
-                              {dataLang.formatMessage({ id: "environment3" })}
-                            </Typography>
-                            <Typography
-                              sx={{ fontSize: "12px", textAlign: "justify" }}
-                            >
-                              4.{" "}
-                              {dataLang.formatMessage({ id: "environment4" })}
-                            </Typography>
-                          </Paper>
-                        </Fade>
-                      )}
-                    </Popper>
-                  </div>
-                )}
-              </PopupState>
-            </div>
           </div>
 
-          <div className="DAT_Home_Benefit_Content">
-            <div className="DAT_Home_Benefit_Content_Item">
-              <div className="DAT_Home_Benefit_Content_Item_Icon">
-                <GiCoalWagon size={24} color={COLOR.value.SecondaryColor} />
-              </div>
-              <div className="DAT_Home_Benefit_Content_Item_Detail">
-                <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
-                  {dataLang.formatMessage({ id: "coalSave" })}
-                </div>
-                <div>
-                  {Number(
-                    parseFloat(
-                      coalsave.value.value * coalsave.value.ef
-                    ).toFixed(2)
-                  ).toLocaleString("en-US")}
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    t
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="DAT_Home_Benefit_Content_Item">
-              <div className="DAT_Home_Benefit_Content_Item_Icon">
-                <FaTree size={24} color={COLOR.value.SecondaryColor} />
-              </div>
-              <div className="DAT_Home_Benefit_Content_Item_Detail">
-                <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
-                  {dataLang.formatMessage({ id: "cropYield" })}
-                </div>
-                <div>
-                  {Number(
-                    parseFloat(
-                      coalsave.value.value * coalsave.value.tree
-                    ).toFixed(2)
-                  ).toLocaleString("en-US")}
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    {dataLang.formatMessage({ id: "tree" })}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="DAT_Home_Benefit_Content">
-            <div className="DAT_Home_Benefit_Content_Item">
-              <div className="DAT_Home_Benefit_Content_Item_Icon">
-                <IoIosCloud size={24} color={COLOR.value.SecondaryColor} />
-              </div>
-              <div className="DAT_Home_Benefit_Content_Item_Detail">
-                <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
-                  {dataLang.formatMessage({ id: "C02" })}
-                </div>
-                <div>
-                  {Number(
-                    parseFloat(
-                      coalsave.value.value * coalsave.value.avr
-                    ).toFixed(2)
-                  ).toLocaleString("en-US")}
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    t
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="DAT_Home_Benefit_Content_Item">
-              <div className="DAT_Home_Benefit_Content_Item_Icon">
-                <FaMoneyBill size={24} color={COLOR.value.SecondaryColor} />
-              </div>
-              <div className="DAT_Home_Benefit_Content_Item_Detail">
-                <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
-                  {dataLang.formatMessage({ id: "totalRevenue" })}
-                </div>
-                <div>
-                  {Number(parseFloat(price / 1000).toFixed(2)).toLocaleString(
-                    "en-US"
-                  )}
-                  &nbsp;
-                  <span
-                    style={{ color: COLOR.value.grayText, fontSize: "12px" }}
-                  >
-                    kVND
-                  </span>
-                </div>
-              </div>
+          <div className="DAT_HomeMobile_Distribution">
+            <div className="DAT_HomeMobile_Distribution-Map">
+              <div id="map" style={{ width: "100%", height: "100%" }}></div>
             </div>
           </div>
         </div>
-      </div>
+      }
 
       {(() => {
         switch (plantState.value) {
@@ -1652,7 +2549,8 @@ export default function Home(props) {
           default:
             return <></>;
         }
-      })()}
+      })()
+      }
     </>
   );
 }

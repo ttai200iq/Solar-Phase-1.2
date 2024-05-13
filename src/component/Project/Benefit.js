@@ -100,18 +100,18 @@ export default function Benefit(props) {
                         <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src="/dat_icon/Coal Cart.png" alt="coal" />
                         </div>
-                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Tit">
-                            <div style={{ fontSize: "16px", color: "grey" }}>
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container">
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Tit">
                                 {dataLang.formatMessage({ id: "coalSave" })}
                             </div>
-                            <div style={{ fontSize: "30px", color: "rgb(11, 25, 103)" }}>
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Number" >
                                 {Number(
                                     parseFloat(
                                         coalsave.value.value * coalsave.value.ef || 0
                                     ).toFixed(2)
                                 ).toLocaleString("en-US")}
                                 &nbsp;
-                                <span style={{ color: "grey", fontSize: "24px" }}>t</span>
+                                <span>t</span>
                             </div>
                         </div>
                     </div>
@@ -120,18 +120,18 @@ export default function Benefit(props) {
                         <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src="/dat_icon/CO2.png" alt="power" />
                         </div>
-                        <div>
-                            <div style={{ fontSize: "16px", color: "grey" }}>
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container">
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Tit">
                                 {dataLang.formatMessage({ id: "C02" })}
                             </div>
-                            <div style={{ fontSize: "30px", color: "rgb(11, 25, 103)" }}>
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Number" >
                                 {Number(
                                     parseFloat(
                                         coalsave.value.value * coalsave.value.avr || 0
                                     ).toFixed(2)
                                 ).toLocaleString("en-US")}
                                 &nbsp;
-                                <span style={{ color: "grey", fontSize: "24px" }}>t</span>
+                                <span>t</span>
                             </div>
                         </div>
                     </div>
@@ -140,18 +140,18 @@ export default function Benefit(props) {
                         <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src="/dat_icon/BlueTree.png" alt="tree" />
                         </div>
-                        <div>
-                            <div style={{ fontSize: "16px", color: "grey" }}>
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container">
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Tit">
                                 {dataLang.formatMessage({ id: "cropYield" })}
                             </div>
-                            <div style={{ fontSize: "30px", color: "rgb(11, 25, 103)" }}>
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Number" >
                                 {Number(
                                     parseFloat(
                                         coalsave.value.value * coalsave.value.tree || 0
                                     ).toFixed(2)
                                 ).toLocaleString("en-US")}
                                 &nbsp;
-                                <span style={{ color: "grey", fontSize: "24px" }}>
+                                <span>
                                     {dataLang.formatMessage({ id: "tree" })}
                                 </span>
                             </div>
@@ -162,19 +162,19 @@ export default function Benefit(props) {
                         <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Icon">
                             <img src="/dat_icon/Money.png" alt="money" />
                         </div>
-                        <div>
-                            <div style={{ fontSize: "16px", color: "grey" }}>
+                        <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container">
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Tit">
                                 {dataLang.formatMessage({ id: "totalRevenue" })}
                             </div>
-                            <div style={{ fontSize: "30px", color: "rgb(11, 25, 103)" }}>
+                            <div className="DAT_ProjectData_NewDashboard_More_Right_Content_Col_Item_Container_Number" >
                                 {Number(
                                     parseFloat(
                                         (coalsave.value.value * projectData.value.price) / 1000 || 0
                                     ).toFixed(2)
                                 ).toLocaleString("en-US")}
                                 &nbsp;
-                                <span style={{ color: "grey", fontSize: "24px" }}>
-                                    k{projectData.value.currency}
+                                <span style={{ textTransform: "uppercase" }}>
+                                    M{projectData.value.currency}
                                 </span>
                             </div>
                         </div>

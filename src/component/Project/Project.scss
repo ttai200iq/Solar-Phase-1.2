@@ -12,13 +12,14 @@
     justify-content: space-between;
     align-items: center;
 
+
     &_Title {
         font-size: 20px;
         display: flex;
         align-items: center;
         gap: 5px;
         color: COLOR.$Primary-color;
-        font-family: Montserrat-Bold;
+        font-family: segoeuib;
     }
 
     &_Filter {
@@ -36,7 +37,7 @@
             border: none;
             outline: none;
             font-size: 14px;
-            font-family: Montserrat-Regular;
+            font-family: segoeui;
         }
 
         & input::-webkit-outer-spin-button,
@@ -52,7 +53,7 @@
         background-color: COLOR.$Primary-color;
         color: white;
         border-radius: 5px;
-        font-family: Montserrat-SemiBold;
+        font-family: segoeui-sb;
         padding: 8px;
 
         & span {
@@ -392,6 +393,7 @@
     background-color: rgba(240, 242, 245, 1);
 
     &_Header {
+        font-family: segoeui-sb;
         background-color: white;
         display: flex;
         flex-wrap: wrap;
@@ -423,6 +425,7 @@
                         display: flex;
                         align-items: center;
                         gap: 10px;
+                        color: #0b1967;
                     }
 
                     &_Addr {
@@ -487,955 +490,955 @@
         }
     }
 
-    &_Dashboard {
-        position: relative;
-        margin-top: 16px;
-
-        &_Data {
-            width: 98%;
-            margin: auto;
-            margin-bottom: 16px;
-            display: flex;
-            gap: 16px;
-
-            &_Left {
-                width: 35%;
-                background-color: white;
-                border-radius: 3px;
-                border: solid 1px rgba(198, 197, 197, 0.5);
-                overflow: hidden;
-
-                &_Tit {
-                    width: 60%;
-                    display: flex;
-
-                    align-items: center;
-                    // justify-content: flex-end;
-                    background-color: rgba(247, 247, 247, 0.3);
-                    margin-bottom: 5px;
-                    border-radius: 10px;
-                    border: solid 1px rgba(198, 197, 197, 0.5);
-                    // margin-top: 5px;
-                    // justify-content: center;
-                    // justify-content: space-around;
-
-                    &_Item {
-                        flex: 1;
-                        padding: 5px;
-                        cursor: pointer;
-
-                        // display: flex;
-                        // align-items: center;
-                        // justify-content: center;
-                        // white-space: nowrap; // ngan xuong dong
-                        // overflow: hidden; // an noi dung vuot ra ngoai
-                        // text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                        // font-family: Montserrat-SemiBold;
-                        // background-color: #3e80fb;
-                    }
-                }
-            }
-
-            &_Center {
-                width: 35%;
-                background-color: white;
-                border-radius: 3px;
-                border: solid 1px rgba(198, 197, 197, 0.5);
-                overflow: hidden;
-
-                &_Tit {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    font-family: Montserrat-SemiBold;
-                    color: COLOR.$Primary-color;
-
-                    &_Item {
-                        padding: 16px;
-                        white-space: nowrap; // ngan xuong dong
-                        overflow: hidden; // an noi dung vuot ra ngoai
-                        text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                    }
-
-                    &_Timer {
-                        padding: 5px;
-                        font-size: 13px;
-                        color: grey;
-                        box-sizing: border-box;
-                        white-space: nowrap; // ngan xuong dong
-                        overflow: hidden; // an noi dung vuot ra ngoai
-                        text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                    }
-                }
-
-                &_Graph {
-                    position: relative;
-                    width: 100%;
-                    height: 300px;
-                    overflow: hidden;
-                    padding: 10px;
-                    box-sizing: border-box;
-                    gap: 200px;
-
-                    &_Solar {
-                        & img {
-                            width: 180px;
-                            height: 180px;
-                        }
-                    }
-
-                    &_Load {
-                        margin-top: 60px;
-
-                        & img {
-                            width: 70px;
-                            height: 70px;
-                        }
-                    }
-
-                    &_LineTop {
-                        display: flex;
-                        width: 100%;
-                        justify-content: center;
-                        align-items: center;
-
-                        &_P1 {
-                            flex: 1;
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-end;
-                        }
-
-                        &_P2 {
-                            width: 70px;
-
-                            &_Solar {
-                                & img {
-                                    width: 70px;
-                                    height: 70px;
-                                }
-                            }
-
-                            &_Load {
-                                & img {
-                                    width: 70px;
-                                    height: 70px;
-                                }
-                            }
-                        }
-
-                        &_P3 {
-                            flex: 1;
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-start;
-                        }
-                    }
-
-                    &_LineMid {
-                        display: flex;
-                        width: 100%;
-                        align-items: center;
-                        justify-content: center;
-
-                        &_Pin {
-                            & img {
-                                width: 70px;
-                                height: 70px;
-                            }
-                        }
-
-                        &_G {
-                            &_T {
-                                display: flex;
-                            }
-                        }
-
-                        &_Grid {
-                            & img {
-                                width: 70px;
-                                height: 70px;
-                            }
-                        }
-                    }
-
-                    &_LineBottom {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                    }
-
-                    &_SingleLine {
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        align-items: flex-end;
-                        justify-content: center;
-                        gap: 10px;
-                        padding: 20px;
-                        box-sizing: border-box;
-
-                        &_Solar {
-                            & img {
-                                width: 100px;
-                                height: 100px;
-                            }
-                        }
-
-                        &_Grid {
-                            & img {
-                                width: 120px;
-                                height: 180px;
-                            }
-                        }
-                    }
-                }
-
-                &_Production {
-                    &_Data {
-                        padding: 8px 16px 16px 16px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        overflow: hidden;
-                        gap: 16px;
-
-                        &_Chart {
-                            flex: 5;
-                            display: flex;
-                            justify-content: center;
-
-                            &_Data {
-                                border-radius: 50%;
-                                border: solid 2px rgb(103, 179, 255);
-                                padding: 16px;
-                                width: 80px;
-                                height: 80px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                flex-wrap: wrap;
-                                background-color: #3e80fb;
-                                position: relative;
-                                overflow: hidden;
-
-                                background: url("../../../public/dat_picture/wave2.png"),
-                                    url("../../../public/dat_picture/wave3.png"),
-                                    url("../../../public/dat_picture/wave4.png");
-                                background-size: 220px 200px;
-                                background-repeat: repeat-x;
-                                box-shadow: 0 0 3px 5px rgba(193, 193, 193, 0.5);
-
-                                &_value {
-                                    width: 100%;
-                                    position: absolute;
-                                    z-index: 20;
-
-                                    &_num {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: center;
-                                        color: black;
-                                    }
-
-                                    &_unit {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: center;
-                                        font-size: 15px;
-                                        color: black;
-                                    }
-                                }
-                            }
-                        }
-
-                        &_Detail {
-                            flex: 5;
-                        }
-                    }
-
-                    &_Total {
-                        padding: 16px;
-                        display: flex;
-                        gap: 10px;
-                        border-top: solid 1px rgba(198, 197, 197, 0.5);
-
-                        &_Left {
-                            flex: 5;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 8px;
-
-                            &_Item {
-                                padding: 8px;
-                                border-radius: 5px;
-                                display: flex;
-                                align-items: center;
-                                gap: 10px;
-                                border: solid 1px rgba(198, 197, 197, 0.5);
-
-                                &_Tit {
-                                    font-size: 12px;
-                                    color: gray;
-                                }
-
-                                &_Data {
-                                    margin: 4px 0px 0px 0px;
-                                }
-                            }
-                        }
-
-                        &_Right {
-                            flex: 5;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 8px;
-
-                            &_Item {
-                                padding: 8px;
-                                border-radius: 5px;
-                                display: flex;
-                                align-items: center;
-                                gap: 10px;
-                                border: solid 1px rgba(198, 197, 197, 0.5);
-
-                                &_Tit {
-                                    font-size: 12px;
-                                    color: gray;
-                                }
-
-                                &_Data {
-                                    margin: 4px 0px 0px 0px;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                &_Consumption {
-                    &_Data {
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
-                        padding: 16px;
-
-                        &_Img {
-                            & img {
-                                width: 70px;
-                                height: 70px;
-                            }
-                        }
-                    }
-
-                    &_Total {
-                        padding: 16px;
-                        display: flex;
-                        gap: 10px;
-
-                        &_Left {
-                            flex: 5;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 8px;
-
-                            &_Item {
-                                padding: 16px;
-                                border-radius: 5px;
-                                display: flex;
-                                align-items: center;
-                                gap: 10px;
-                                border: solid 1px rgba(198, 197, 197, 0.5);
-
-                                &_Tit {
-                                    font-size: 12px;
-                                    color: gray;
-                                }
-
-                                &_Data {
-                                    margin: 4px;
-                                }
-                            }
-                        }
-
-                        &_Right {
-                            flex: 5;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 8px;
-
-                            &_Item {
-                                padding: 16px;
-                                border-radius: 5px;
-                                display: flex;
-                                align-items: center;
-                                gap: 10px;
-                                border: solid 1px rgba(198, 197, 197, 0.5);
-
-                                &_Tit {
-                                    font-size: 12px;
-                                    color: gray;
-                                }
-
-                                &_Data {
-                                    margin: 4px;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                &_Grid {
-                    &_Data {
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
-                        padding: 16px;
-
-                        &_Img {
-                            & img {
-                                width: 60px;
-                                height: 70px;
-                            }
-                        }
-                    }
-
-                    &_Row {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 16px;
-                        padding: 16px;
-
-                        &_Left {
-                            display: flex;
-                            border: solid 1px rgba(198, 197, 197, 0.5);
-                            border-radius: 5px;
-
-                            &_Tit {
-                                padding: 16px 8px;
-                                display: flex;
-                                align-items: center;
-                                width: 70px;
-                                font-size: 14px;
-                            }
-
-                            &_Data {
-                                display: flex;
-
-                                &_Item {
-                                    padding: 16px 8px;
-                                    width: 70px;
-
-                                    &_Tit {
-                                        font-size: 12px;
-                                        color: grey;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                &_Battery {
-                    &_Data {
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
-                        padding: 16px;
-
-                        &_Img {
-                            & img {
-                                width: 60px;
-                                height: 70px;
-                            }
-                        }
-
-                        &_Status {
-                            display: flex;
-                            flex-direction: column;
-                        }
-                    }
-
-                    &_Row {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 16px;
-                        padding: 16px;
-
-                        &_Left {
-                            display: flex;
-                            border: solid 1px rgba(198, 197, 197, 0.5);
-                            border-radius: 5px;
-
-                            &_Tit {
-                                // // flex: 2;
-                                // padding: 16px;
-                                // display: flex;
-                                // align-items: center;
-                                // min-width: 70px;
-
-                                padding: 16px 8px;
-                                display: flex;
-                                align-items: center;
-                                width: 70px;
-                                font-size: 14px;
-                            }
-
-                            &_Data {
-                                // flex: 8;
-                                // width: 100px;
-                                display: flex;
-
-                                &_Item {
-                                    padding: 16px 8px;
-                                    width: 70px;
-
-                                    &_Tit {
-                                        font-size: 12px;
-                                        color: grey;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            &_Right {
-                width: 30%;
-                border-radius: 3px;
-                border: solid 1px rgba(198, 197, 197, 0.5);
-                overflow: hidden;
-                box-sizing: border-box;
-
-                &_Weather {
-                    width: 100%;
-                    height: 100%;
-                    background-color: #ffffff;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: left;
-
-                    &_Inside {
-                        padding: 10px;
-                        height: 100%;
-                        box-sizing: border-box;
-
-                        &_Current {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            gap: 20px;
-
-                            &_Left {
-                                display: flex;
-                                align-items: center;
-                                gap: 2px;
-                                color: gray !important;
-                                box-sizing: border-box;
-                                align-items: center;
-                                white-space: nowrap;
-
-                                &_Deg {
-                                    font-family: Arial, Helvetica, sans-serif;
-
-                                    &_Des {
-                                        font-size: 12px;
-                                        color: gray;
-                                    }
-                                }
-
-                                &_PickType {
-                                    font-family: Arial, Helvetica, sans-serif;
-                                    font-weight: 500;
-                                    font-size: 20px;
-                                    cursor: pointer;
-                                    padding-right: 7px;
-                                    height: 50px;
-                                    display: flex;
-                                    justify-content: center;
-                                    gap: 2px;
-                                }
-
-                                &_Describe {
-                                    width: 170px;
-                                    height: 70px;
-                                    font-size: 14px;
-                                    overflow: hidden;
-                                    color: gray;
-                                    white-space: nowrap;
-                                }
-                            }
-
-                            &_Right {
-                                display: flex;
-                                justify-content: flex-start;
-                                align-items: center;
-                                // white-space: nowrap;
-                                overflow: hidden;
-
-                                &_Tit {
-                                    display: flex;
-                                    align-items: flex-start;
-                                    flex-direction: column;
-
-                                    &_Temp {
-                                        font-size: 20px;
-                                        color: black;
-                                    }
-
-                                    &_Des {
-                                        width: 50px;
-                                        font-size: 12px;
-                                        color: gray;
-                                        white-space: nowrap; // ngan xuong dong
-                                        overflow: hidden; // an noi dung vuot ra ngoai
-                                        text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                                    }
-                                }
-                            }
-                        }
-
-                        &_Describe {
-                            display: flex;
-                            color: gray;
-                            font-size: 13px;
-                            justify-content: center;
-                            align-items: center;
-                            gap: 5px;
-                            width: 100%;
-                            padding-top: 5px;
-                        }
-
-                        &_Forecast {
-                            padding: 5px;
-                        }
-
-                        &_Bottom {
-                            padding: 0px 10px;
-                            display: flex;
-                            justify-content: space-between;
-                            gap: 5px;
-                            align-items: center;
-                            overflow: hidden;
-                            overflow-x: scroll;
-                            cursor: grab;
-                            scrollbar-width: none;
-
-                            &:active {
-                                cursor: grabbing;
-                            }
-
-                            &_Box {
-                                min-width: 90px;
-                                max-width: 20%;
-                                color: gray;
-                                font-size: 13px;
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center;
-                                justify-content: center;
-                                overflow: hidden;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &_Filterlist {
-            background-color: #fff;
-            width: 20%;
-            padding: 16px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-
-            &_Head {
-                min-width: 20px;
-                font-family: Montserrat-SemiBold;
-                color: COLOR.$Primary-color;
-                // overflow: hidden;
-                // text-overflow: ellipsis;
-                // white-space: nowrap;
-            }
-
-            &_Body {
-                margin-top: 35px;
-                display: flex;
-                flex-direction: column;
-                gap: 25px;
-                height: 250px;
-                overflow-y: scroll;
-                overflow-y: scroll;
-
-                &::-webkit-scrollbar {
-                    width: 7px;
-                    height: 10px;
-                }
-
-                /* Track */
-                &::-webkit-scrollbar-track {
-                    background-color: rgba(0, 0, 0, 0);
-                    border-radius: 2px;
-                }
-
-                /* Handle */
-                &::-webkit-scrollbar-thumb {
-                    background: #888;
-                    border-radius: 5px;
-                }
-
-                /* Handle on hover */
-                &::-webkit-scrollbar-thumb:hover {
-                    background: #555;
-                }
-
-                &_Checkbox {
-                    // font-family: Montserrat-regular;
-                    color: #0b1967;
-
-                    & input {
-                        accent-color: COLOR.$Primary-color;
-                    }
-                }
-            }
-        }
-
-        &_History {
-            position: relative;
-            width: 80%;
-            background-color: white;
-            border-radius: 3px;
-            overflow: hidden;
-
-            &_Tit {
-                padding: 16px;
-                display: flex;
-                flex-wrap: wrap;
-                overflow: hidden;
-                align-items: center;
-
-                &_Left {
-                    flex: 2;
-                    min-width: 200px;
-                    font-family: Montserrat-SemiBold;
-                    color: COLOR.$Primary-color;
-                }
-
-                &_Right {
-                    flex: 8;
-                    display: flex;
-                    flex-wrap: wrap;
-                    overflow: hidden;
-                    justify-content: flex-end;
-                    gap: 8px;
-
-                    &_Date {
-                        height: 25px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        overflow: hidden;
-                        border: solid 1px rgb(199, 199, 199);
-                        border-radius: 5px;
-
-                        &_Item {
-                            padding-left: 6px;
-                            padding-right: 6px;
-                            height: 25px;
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-self: center;
-
-                            &:hover {
-                                color: #6495ed;
-                            }
-                        }
-                    }
-
-                    & button {
-                        display: flex;
-                        align-items: center;
-                        height: 25px;
-                        font-size: 14px;
-                        cursor: pointer;
-                        background-color: white;
-                        border: solid 1px rgb(199, 199, 199);
-                        border-radius: 5px;
-                        font-family: Montserrat-Regular;
-
-                        &:hover {
-                            border: solid 1px #6495ed;
-                            color: #6495ed;
-                        }
-                    }
-
-                    &_Export {
-                        & button {
-                            display: flex;
-                            align-items: center;
-                            height: 25px;
-                            font-size: 14px;
-                            background-color: COLOR.$Primary-color;
-                            color: white;
-                            padding: 8px 16px;
-                            border-radius: 5px;
-                            border: none;
-                            cursor: pointer;
-                            font-family: Montserrat-SemiBold;
-
-                            &:hover {
-                                background-color: #3e80fb;
-                                color: white;
-                            }
-                        }
-                    }
-
-                    & input {
-                        border: solid 1px rgb(199, 199, 199);
-                        border-radius: 5px;
-                        box-sizing: border-box;
-                        -webkit-box-sizing: border-box;
-                        -moz-box-sizing: border-box;
-                    }
-                }
-            }
-
-            &_Day {
-                padding: 16px;
-                height: 250px; // lam xong xoa dong nay di
-            }
-
-            &_Month {
-                padding: 16px;
-                height: 250px; // lam xong xoa dong nay di
-            }
-
-            &_Year {
-                padding: 16px;
-                height: 250px;
-
-                &_Tit {
-                    display: flex;
-
-                    &-Unit {
-                        flex: 1;
-                        color: gray;
-                        font-size: 14px;
-                    }
-
-                    &-Label {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        color: gray;
-                        font-size: 14px;
-                    }
-                }
-
-                &_Chart {
-                    height: 100%;
-                    width: 100%;
-                }
-            }
-
-            &_Total {
-                padding: 16px;
-                height: 250px; // lam xong xoa dong nay di
-            }
-
-            &_SubConfig {
-                background-color: rgb(128, 128, 128, 0.5);
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 58.6px;
-
-                &_Dropdown {
-                    background-color: white;
-                    border-top: 1px solid #b8b8b8;
-                    padding: 16px;
-                    height: 100%;
-
-                    &_Btn {
-                        padding: 16px;
-                        display: flex;
-                        gap: 16px;
-
-                        & button {
-                            padding: 5px 15px;
-                            border-radius: 4px;
-                            cursor: pointer;
-                            border: none;
-                            box-shadow: 0 0 3px 3px rgba(193, 193, 193, 0.5);
-                            width: 100px;
-                            height: 35px;
-                            font-family: Montserrat-SemiBold;
-                        }
-                    }
-
-                    &_Search {
-                        display: flex;
-                        width: fit-content;
-                        justify-self: center;
-                        align-items: center;
-                        border: 1px solid rgb(142, 142, 142);
-                        padding: 3px;
-                        border-radius: 5px;
-
-                        & input {
-                            border: none;
-                            width: 200px;
-                        }
-                    }
-
-                    &_Item {
-                        padding-top: 16px;
-                        font-size: 15px;
-
-                        &_Table {
-                            border-top: solid 1px #b8b8b8;
-                            border-left: solid 1px #b8b8b8;
-                            border-right: solid 1px #b8b8b8;
-
-                            & tr:first-child {
-                                border-bottom: solid 1px #b8b8b8;
-                            }
-                        }
-
-                        &_Table {
-                            border-collapse: collapse;
-                            width: 100%;
-
-                            &_Tr {
-                                display: flex;
-                                align-items: center;
-
-                                &_Th {
-                                    padding: 12px;
-                                    background-color: #d4d4d4;
-                                    width: 140px;
-                                }
-
-                                &_Td {
-                                    padding-left: 16px;
-                                    display: flex;
-
-                                    &_Checkbox {
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 10px;
-                                        // padding-left: 10px;
-                                        width: 200px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // &_Dashboard {
+    //     position: relative;
+    //     margin-top: 16px;
+
+    //     &_Data {
+    //         width: 98%;
+    //         margin: auto;
+    //         margin-bottom: 16px;
+    //         display: flex;
+    //         gap: 16px;
+
+    //         &_Left {
+    //             width: 35%;
+    //             background-color: white;
+    //             border-radius: 3px;
+    //             border: solid 1px rgba(198, 197, 197, 0.5);
+    //             overflow: hidden;
+
+    //             &_Tit {
+    //                 width: 60%;
+    //                 display: flex;
+
+    //                 align-items: center;
+    //                 // justify-content: flex-end;
+    //                 background-color: rgba(247, 247, 247, 0.3);
+    //                 margin-bottom: 5px;
+    //                 border-radius: 10px;
+    //                 border: solid 1px rgba(198, 197, 197, 0.5);
+    //                 // margin-top: 5px;
+    //                 // justify-content: center;
+    //                 // justify-content: space-around;
+
+    //                 &_Item {
+    //                     flex: 1;
+    //                     padding: 5px;
+    //                     cursor: pointer;
+
+    //                     // display: flex;
+    //                     // align-items: center;
+    //                     // justify-content: center;
+    //                     // white-space: nowrap; // ngan xuong dong
+    //                     // overflow: hidden; // an noi dung vuot ra ngoai
+    //                     // text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+    //                     // font-family: Montserrat-SemiBold;
+    //                     // background-color: #3e80fb;
+    //                 }
+    //             }
+    //         }
+
+    //         &_Center {
+    //             width: 35%;
+    //             background-color: white;
+    //             border-radius: 3px;
+    //             border: solid 1px rgba(198, 197, 197, 0.5);
+    //             overflow: hidden;
+
+    //             &_Tit {
+    //                 display: flex;
+    //                 align-items: center;
+    //                 justify-content: space-between;
+    //                 font-family: Montserrat-SemiBold;
+    //                 color: COLOR.$Primary-color;
+
+    //                 &_Item {
+    //                     padding: 16px;
+    //                     white-space: nowrap; // ngan xuong dong
+    //                     overflow: hidden; // an noi dung vuot ra ngoai
+    //                     text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+    //                 }
+
+    //                 &_Timer {
+    //                     padding: 5px;
+    //                     font-size: 13px;
+    //                     color: grey;
+    //                     box-sizing: border-box;
+    //                     white-space: nowrap; // ngan xuong dong
+    //                     overflow: hidden; // an noi dung vuot ra ngoai
+    //                     text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+    //                 }
+    //             }
+
+    //             &_Graph {
+    //                 position: relative;
+    //                 width: 100%;
+    //                 height: 300px;
+    //                 overflow: hidden;
+    //                 padding: 10px;
+    //                 box-sizing: border-box;
+    //                 gap: 200px;
+
+    //                 &_Solar {
+    //                     & img {
+    //                         width: 180px;
+    //                         height: 180px;
+    //                     }
+    //                 }
+
+    //                 &_Load {
+    //                     margin-top: 60px;
+
+    //                     & img {
+    //                         width: 70px;
+    //                         height: 70px;
+    //                     }
+    //                 }
+
+    //                 &_LineTop {
+    //                     display: flex;
+    //                     width: 100%;
+    //                     justify-content: center;
+    //                     align-items: center;
+
+    //                     &_P1 {
+    //                         flex: 1;
+    //                         display: flex;
+    //                         align-items: center;
+    //                         justify-content: flex-end;
+    //                     }
+
+    //                     &_P2 {
+    //                         width: 70px;
+
+    //                         &_Solar {
+    //                             & img {
+    //                                 width: 70px;
+    //                                 height: 70px;
+    //                             }
+    //                         }
+
+    //                         &_Load {
+    //                             & img {
+    //                                 width: 70px;
+    //                                 height: 70px;
+    //                             }
+    //                         }
+    //                     }
+
+    //                     &_P3 {
+    //                         flex: 1;
+    //                         display: flex;
+    //                         align-items: center;
+    //                         justify-content: flex-start;
+    //                     }
+    //                 }
+
+    //                 &_LineMid {
+    //                     display: flex;
+    //                     width: 100%;
+    //                     align-items: center;
+    //                     justify-content: center;
+
+    //                     &_Pin {
+    //                         & img {
+    //                             width: 70px;
+    //                             height: 70px;
+    //                         }
+    //                     }
+
+    //                     &_G {
+    //                         &_T {
+    //                             display: flex;
+    //                         }
+    //                     }
+
+    //                     &_Grid {
+    //                         & img {
+    //                             width: 70px;
+    //                             height: 70px;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 &_LineBottom {
+    //                     width: 100%;
+    //                     display: flex;
+    //                     justify-content: center;
+    //                 }
+
+    //                 &_SingleLine {
+    //                     width: 100%;
+    //                     height: 100%;
+    //                     display: flex;
+    //                     align-items: flex-end;
+    //                     justify-content: center;
+    //                     gap: 10px;
+    //                     padding: 20px;
+    //                     box-sizing: border-box;
+
+    //                     &_Solar {
+    //                         & img {
+    //                             width: 100px;
+    //                             height: 100px;
+    //                         }
+    //                     }
+
+    //                     &_Grid {
+    //                         & img {
+    //                             width: 120px;
+    //                             height: 180px;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+
+    //             &_Production {
+    //                 &_Data {
+    //                     padding: 8px 16px 16px 16px;
+    //                     display: flex;
+    //                     flex-wrap: wrap;
+    //                     overflow: hidden;
+    //                     gap: 16px;
+
+    //                     &_Chart {
+    //                         flex: 5;
+    //                         display: flex;
+    //                         justify-content: center;
+
+    //                         &_Data {
+    //                             border-radius: 50%;
+    //                             border: solid 2px rgb(103, 179, 255);
+    //                             padding: 16px;
+    //                             width: 80px;
+    //                             height: 80px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             justify-content: center;
+    //                             flex-wrap: wrap;
+    //                             background-color: #3e80fb;
+    //                             position: relative;
+    //                             overflow: hidden;
+
+    //                             background: url("../../../public/dat_picture/wave2.png"),
+    //                                 url("../../../public/dat_picture/wave3.png"),
+    //                                 url("../../../public/dat_picture/wave4.png");
+    //                             background-size: 220px 200px;
+    //                             background-repeat: repeat-x;
+    //                             box-shadow: 0 0 3px 5px rgba(193, 193, 193, 0.5);
+
+    //                             &_value {
+    //                                 width: 100%;
+    //                                 position: absolute;
+    //                                 z-index: 20;
+
+    //                                 &_num {
+    //                                     width: 100%;
+    //                                     display: flex;
+    //                                     justify-content: center;
+    //                                     color: black;
+    //                                 }
+
+    //                                 &_unit {
+    //                                     width: 100%;
+    //                                     display: flex;
+    //                                     justify-content: center;
+    //                                     font-size: 15px;
+    //                                     color: black;
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+
+    //                     &_Detail {
+    //                         flex: 5;
+    //                     }
+    //                 }
+
+    //                 &_Total {
+    //                     padding: 16px;
+    //                     display: flex;
+    //                     gap: 10px;
+    //                     border-top: solid 1px rgba(198, 197, 197, 0.5);
+
+    //                     &_Left {
+    //                         flex: 5;
+    //                         display: flex;
+    //                         flex-direction: column;
+    //                         gap: 8px;
+
+    //                         &_Item {
+    //                             padding: 8px;
+    //                             border-radius: 5px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             gap: 10px;
+    //                             border: solid 1px rgba(198, 197, 197, 0.5);
+
+    //                             &_Tit {
+    //                                 font-size: 12px;
+    //                                 color: gray;
+    //                             }
+
+    //                             &_Data {
+    //                                 margin: 4px 0px 0px 0px;
+    //                             }
+    //                         }
+    //                     }
+
+    //                     &_Right {
+    //                         flex: 5;
+    //                         display: flex;
+    //                         flex-direction: column;
+    //                         gap: 8px;
+
+    //                         &_Item {
+    //                             padding: 8px;
+    //                             border-radius: 5px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             gap: 10px;
+    //                             border: solid 1px rgba(198, 197, 197, 0.5);
+
+    //                             &_Tit {
+    //                                 font-size: 12px;
+    //                                 color: gray;
+    //                             }
+
+    //                             &_Data {
+    //                                 margin: 4px 0px 0px 0px;
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+
+    //             &_Consumption {
+    //                 &_Data {
+    //                     display: flex;
+    //                     align-items: center;
+    //                     gap: 10px;
+    //                     padding: 16px;
+
+    //                     &_Img {
+    //                         & img {
+    //                             width: 70px;
+    //                             height: 70px;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 &_Total {
+    //                     padding: 16px;
+    //                     display: flex;
+    //                     gap: 10px;
+
+    //                     &_Left {
+    //                         flex: 5;
+    //                         display: flex;
+    //                         flex-direction: column;
+    //                         gap: 8px;
+
+    //                         &_Item {
+    //                             padding: 16px;
+    //                             border-radius: 5px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             gap: 10px;
+    //                             border: solid 1px rgba(198, 197, 197, 0.5);
+
+    //                             &_Tit {
+    //                                 font-size: 12px;
+    //                                 color: gray;
+    //                             }
+
+    //                             &_Data {
+    //                                 margin: 4px;
+    //                             }
+    //                         }
+    //                     }
+
+    //                     &_Right {
+    //                         flex: 5;
+    //                         display: flex;
+    //                         flex-direction: column;
+    //                         gap: 8px;
+
+    //                         &_Item {
+    //                             padding: 16px;
+    //                             border-radius: 5px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             gap: 10px;
+    //                             border: solid 1px rgba(198, 197, 197, 0.5);
+
+    //                             &_Tit {
+    //                                 font-size: 12px;
+    //                                 color: gray;
+    //                             }
+
+    //                             &_Data {
+    //                                 margin: 4px;
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+
+    //             &_Grid {
+    //                 &_Data {
+    //                     display: flex;
+    //                     align-items: center;
+    //                     gap: 10px;
+    //                     padding: 16px;
+
+    //                     &_Img {
+    //                         & img {
+    //                             width: 60px;
+    //                             height: 70px;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 &_Row {
+    //                     display: flex;
+    //                     flex-direction: column;
+    //                     gap: 16px;
+    //                     padding: 16px;
+
+    //                     &_Left {
+    //                         display: flex;
+    //                         border: solid 1px rgba(198, 197, 197, 0.5);
+    //                         border-radius: 5px;
+
+    //                         &_Tit {
+    //                             padding: 16px 8px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             width: 70px;
+    //                             font-size: 14px;
+    //                         }
+
+    //                         &_Data {
+    //                             display: flex;
+
+    //                             &_Item {
+    //                                 padding: 16px 8px;
+    //                                 width: 70px;
+
+    //                                 &_Tit {
+    //                                     font-size: 12px;
+    //                                     color: grey;
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+
+    //             &_Battery {
+    //                 &_Data {
+    //                     display: flex;
+    //                     align-items: center;
+    //                     gap: 10px;
+    //                     padding: 16px;
+
+    //                     &_Img {
+    //                         & img {
+    //                             width: 60px;
+    //                             height: 70px;
+    //                         }
+    //                     }
+
+    //                     &_Status {
+    //                         display: flex;
+    //                         flex-direction: column;
+    //                     }
+    //                 }
+
+    //                 &_Row {
+    //                     display: flex;
+    //                     flex-direction: column;
+    //                     gap: 16px;
+    //                     padding: 16px;
+
+    //                     &_Left {
+    //                         display: flex;
+    //                         border: solid 1px rgba(198, 197, 197, 0.5);
+    //                         border-radius: 5px;
+
+    //                         &_Tit {
+    //                             // // flex: 2;
+    //                             // padding: 16px;
+    //                             // display: flex;
+    //                             // align-items: center;
+    //                             // min-width: 70px;
+
+    //                             padding: 16px 8px;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             width: 70px;
+    //                             font-size: 14px;
+    //                         }
+
+    //                         &_Data {
+    //                             // flex: 8;
+    //                             // width: 100px;
+    //                             display: flex;
+
+    //                             &_Item {
+    //                                 padding: 16px 8px;
+    //                                 width: 70px;
+
+    //                                 &_Tit {
+    //                                     font-size: 12px;
+    //                                     color: grey;
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+
+    //         &_Right {
+    //             width: 30%;
+    //             border-radius: 3px;
+    //             border: solid 1px rgba(198, 197, 197, 0.5);
+    //             overflow: hidden;
+    //             box-sizing: border-box;
+
+    //             &_Weather {
+    //                 width: 100%;
+    //                 height: 100%;
+    //                 background-color: #ffffff;
+    //                 background-size: cover;
+    //                 background-repeat: no-repeat;
+    //                 background-position: left;
+
+    //                 &_Inside {
+    //                     padding: 10px;
+    //                     height: 100%;
+    //                     box-sizing: border-box;
+
+    //                     &_Current {
+    //                         display: flex;
+    //                         align-items: center;
+    //                         justify-content: center;
+    //                         gap: 20px;
+
+    //                         &_Left {
+    //                             display: flex;
+    //                             align-items: center;
+    //                             gap: 2px;
+    //                             color: gray !important;
+    //                             box-sizing: border-box;
+    //                             align-items: center;
+    //                             white-space: nowrap;
+
+    //                             &_Deg {
+    //                                 font-family: Arial, Helvetica, sans-serif;
+
+    //                                 &_Des {
+    //                                     font-size: 12px;
+    //                                     color: gray;
+    //                                 }
+    //                             }
+
+    //                             &_PickType {
+    //                                 font-family: Arial, Helvetica, sans-serif;
+    //                                 font-weight: 500;
+    //                                 font-size: 20px;
+    //                                 cursor: pointer;
+    //                                 padding-right: 7px;
+    //                                 height: 50px;
+    //                                 display: flex;
+    //                                 justify-content: center;
+    //                                 gap: 2px;
+    //                             }
+
+    //                             &_Describe {
+    //                                 width: 170px;
+    //                                 height: 70px;
+    //                                 font-size: 14px;
+    //                                 overflow: hidden;
+    //                                 color: gray;
+    //                                 white-space: nowrap;
+    //                             }
+    //                         }
+
+    //                         &_Right {
+    //                             display: flex;
+    //                             justify-content: flex-start;
+    //                             align-items: center;
+    //                             // white-space: nowrap;
+    //                             overflow: hidden;
+
+    //                             &_Tit {
+    //                                 display: flex;
+    //                                 align-items: flex-start;
+    //                                 flex-direction: column;
+
+    //                                 &_Temp {
+    //                                     font-size: 20px;
+    //                                     color: black;
+    //                                 }
+
+    //                                 &_Des {
+    //                                     width: 50px;
+    //                                     font-size: 12px;
+    //                                     color: gray;
+    //                                     white-space: nowrap; // ngan xuong dong
+    //                                     overflow: hidden; // an noi dung vuot ra ngoai
+    //                                     text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+
+    //                     &_Describe {
+    //                         display: flex;
+    //                         color: gray;
+    //                         font-size: 13px;
+    //                         justify-content: center;
+    //                         align-items: center;
+    //                         gap: 5px;
+    //                         width: 100%;
+    //                         padding-top: 5px;
+    //                     }
+
+    //                     &_Forecast {
+    //                         padding: 5px;
+    //                     }
+
+    //                     &_Bottom {
+    //                         padding: 0px 10px;
+    //                         display: flex;
+    //                         justify-content: space-between;
+    //                         gap: 5px;
+    //                         align-items: center;
+    //                         overflow: hidden;
+    //                         overflow-x: scroll;
+    //                         cursor: grab;
+    //                         scrollbar-width: none;
+
+    //                         &:active {
+    //                             cursor: grabbing;
+    //                         }
+
+    //                         &_Box {
+    //                             min-width: 90px;
+    //                             max-width: 20%;
+    //                             color: gray;
+    //                             font-size: 13px;
+    //                             display: flex;
+    //                             flex-direction: column;
+    //                             align-items: center;
+    //                             justify-content: center;
+    //                             overflow: hidden;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     &_Filterlist {
+    //         background-color: #fff;
+    //         width: 20%;
+    //         padding: 16px;
+    //         overflow: hidden;
+    //         text-overflow: ellipsis;
+    //         white-space: nowrap;
+
+    //         &_Head {
+    //             min-width: 20px;
+    //             font-family: Montserrat-SemiBold;
+    //             color: COLOR.$Primary-color;
+    //             // overflow: hidden;
+    //             // text-overflow: ellipsis;
+    //             // white-space: nowrap;
+    //         }
+
+    //         &_Body {
+    //             margin-top: 35px;
+    //             display: flex;
+    //             flex-direction: column;
+    //             gap: 25px;
+    //             height: 250px;
+    //             overflow-y: scroll;
+    //             overflow-y: scroll;
+
+    //             &::-webkit-scrollbar {
+    //                 width: 7px;
+    //                 height: 10px;
+    //             }
+
+    //             /* Track */
+    //             &::-webkit-scrollbar-track {
+    //                 background-color: rgba(0, 0, 0, 0);
+    //                 border-radius: 2px;
+    //             }
+
+    //             /* Handle */
+    //             &::-webkit-scrollbar-thumb {
+    //                 background: #888;
+    //                 border-radius: 5px;
+    //             }
+
+    //             /* Handle on hover */
+    //             &::-webkit-scrollbar-thumb:hover {
+    //                 background: #555;
+    //             }
+
+    //             &_Checkbox {
+    //                 // font-family: Montserrat-regular;
+    //                 color: #0b1967;
+
+    //                 & input {
+    //                     accent-color: COLOR.$Primary-color;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     &_History {
+    //         position: relative;
+    //         width: 80%;
+    //         background-color: white;
+    //         border-radius: 3px;
+    //         overflow: hidden;
+
+    //         &_Tit {
+    //             padding: 16px;
+    //             display: flex;
+    //             flex-wrap: wrap;
+    //             overflow: hidden;
+    //             align-items: center;
+
+    //             &_Left {
+    //                 flex: 2;
+    //                 min-width: 200px;
+    //                 font-family: Montserrat-SemiBold;
+    //                 color: COLOR.$Primary-color;
+    //             }
+
+    //             &_Right {
+    //                 flex: 8;
+    //                 display: flex;
+    //                 flex-wrap: wrap;
+    //                 overflow: hidden;
+    //                 justify-content: flex-end;
+    //                 gap: 8px;
+
+    //                 &_Date {
+    //                     height: 25px;
+    //                     display: flex;
+    //                     flex-wrap: wrap;
+    //                     overflow: hidden;
+    //                     border: solid 1px rgb(199, 199, 199);
+    //                     border-radius: 5px;
+
+    //                     &_Item {
+    //                         padding-left: 6px;
+    //                         padding-right: 6px;
+    //                         height: 25px;
+    //                         cursor: pointer;
+    //                         display: flex;
+    //                         align-items: center;
+    //                         justify-self: center;
+
+    //                         &:hover {
+    //                             color: #6495ed;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 & button {
+    //                     display: flex;
+    //                     align-items: center;
+    //                     height: 25px;
+    //                     font-size: 14px;
+    //                     cursor: pointer;
+    //                     background-color: white;
+    //                     border: solid 1px rgb(199, 199, 199);
+    //                     border-radius: 5px;
+    //                     font-family: Montserrat-Regular;
+
+    //                     &:hover {
+    //                         border: solid 1px #6495ed;
+    //                         color: #6495ed;
+    //                     }
+    //                 }
+
+    //                 &_Export {
+    //                     & button {
+    //                         display: flex;
+    //                         align-items: center;
+    //                         height: 25px;
+    //                         font-size: 14px;
+    //                         background-color: COLOR.$Primary-color;
+    //                         color: white;
+    //                         padding: 8px 16px;
+    //                         border-radius: 5px;
+    //                         border: none;
+    //                         cursor: pointer;
+    //                         font-family: Montserrat-SemiBold;
+
+    //                         &:hover {
+    //                             background-color: #3e80fb;
+    //                             color: white;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 & input {
+    //                     border: solid 1px rgb(199, 199, 199);
+    //                     border-radius: 5px;
+    //                     box-sizing: border-box;
+    //                     -webkit-box-sizing: border-box;
+    //                     -moz-box-sizing: border-box;
+    //                 }
+    //             }
+    //         }
+
+    //         &_Day {
+    //             padding: 16px;
+    //             height: 250px; // lam xong xoa dong nay di
+    //         }
+
+    //         &_Month {
+    //             padding: 16px;
+    //             height: 250px; // lam xong xoa dong nay di
+    //         }
+
+    //         &_Year {
+    //             padding: 16px;
+    //             height: 250px;
+
+    //             &_Tit {
+    //                 display: flex;
+
+    //                 &-Unit {
+    //                     flex: 1;
+    //                     color: gray;
+    //                     font-size: 14px;
+    //                 }
+
+    //                 &-Label {
+    //                     width: 100%;
+    //                     display: flex;
+    //                     justify-content: center;
+    //                     align-items: center;
+    //                     color: gray;
+    //                     font-size: 14px;
+    //                 }
+    //             }
+
+    //             &_Chart {
+    //                 height: 100%;
+    //                 width: 100%;
+    //             }
+    //         }
+
+    //         &_Total {
+    //             padding: 16px;
+    //             height: 250px; // lam xong xoa dong nay di
+    //         }
+
+    //         &_SubConfig {
+    //             background-color: rgb(128, 128, 128, 0.5);
+    //             width: 100%;
+    //             height: 100%;
+    //             position: absolute;
+    //             top: 58.6px;
+
+    //             &_Dropdown {
+    //                 background-color: white;
+    //                 border-top: 1px solid #b8b8b8;
+    //                 padding: 16px;
+    //                 height: 100%;
+
+    //                 &_Btn {
+    //                     padding: 16px;
+    //                     display: flex;
+    //                     gap: 16px;
+
+    //                     & button {
+    //                         padding: 5px 15px;
+    //                         border-radius: 4px;
+    //                         cursor: pointer;
+    //                         border: none;
+    //                         box-shadow: 0 0 3px 3px rgba(193, 193, 193, 0.5);
+    //                         width: 100px;
+    //                         height: 35px;
+    //                         font-family: Montserrat-SemiBold;
+    //                     }
+    //                 }
+
+    //                 &_Search {
+    //                     display: flex;
+    //                     width: fit-content;
+    //                     justify-self: center;
+    //                     align-items: center;
+    //                     border: 1px solid rgb(142, 142, 142);
+    //                     padding: 3px;
+    //                     border-radius: 5px;
+
+    //                     & input {
+    //                         border: none;
+    //                         width: 200px;
+    //                     }
+    //                 }
+
+    //                 &_Item {
+    //                     padding-top: 16px;
+    //                     font-size: 15px;
+
+    //                     &_Table {
+    //                         border-top: solid 1px #b8b8b8;
+    //                         border-left: solid 1px #b8b8b8;
+    //                         border-right: solid 1px #b8b8b8;
+
+    //                         & tr:first-child {
+    //                             border-bottom: solid 1px #b8b8b8;
+    //                         }
+    //                     }
+
+    //                     &_Table {
+    //                         border-collapse: collapse;
+    //                         width: 100%;
+
+    //                         &_Tr {
+    //                             display: flex;
+    //                             align-items: center;
+
+    //                             &_Th {
+    //                                 padding: 12px;
+    //                                 background-color: #d4d4d4;
+    //                                 width: 140px;
+    //                             }
+
+    //                             &_Td {
+    //                                 padding-left: 16px;
+    //                                 display: flex;
+
+    //                                 &_Checkbox {
+    //                                     display: flex;
+    //                                     align-items: center;
+    //                                     gap: 10px;
+    //                                     // padding-left: 10px;
+    //                                     width: 200px;
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     &_NewDashboard {
         margin: 10px 0 10px 10px;
@@ -1449,8 +1452,7 @@
             gap: 10px;
 
             &_Left {
-                width: 65%;
-                gap: 10px;
+                width: 70%;
                 display: flex;
                 flex-direction: column;
 
@@ -1466,11 +1468,10 @@
             }
 
             &_Right {
-                width: 35%;
+                width: 30%;
                 gap: 10px;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
 
                 &_Information {
                     background-color: #fff;
@@ -1504,6 +1505,12 @@
 
                                 &_Icon {
                                     height: 100%;
+                                    margin-right: 30px;
+
+                                    & img {
+                                        width: 80px;
+                                        height: 80px;
+                                    }
                                 }
 
                                 &_Text {
@@ -1518,7 +1525,7 @@
 
                                     & span {
                                         color: #000;
-                                        font-family: segoeuib;
+                                        font-family: segoeui-sb;
                                         font-size: 25px;
                                     }
                                 }
@@ -1536,13 +1543,19 @@
                                 height: 100px;
                                 display: flex;
                                 align-items: center;
-                                justify-content: center;
+                                justify-content: space-around;
 
                                 &_Icon {
+
                                     & img {
                                         width: 100%;
                                         height: 100%;
                                     }
+                                }
+
+                                &_Text {
+                                    margin-left: -20px;
+                                    font-family: segoeui;
                                 }
                             }
                         }
@@ -1562,7 +1575,7 @@
 
         &_Filterlist {
             background-color: #fff;
-            width: 20%;
+            width: 15%;
             padding: 16px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1570,15 +1583,16 @@
 
             &_Head {
                 min-width: 20px;
-                font-family: Montserrat-SemiBold;
+                font-family: segoeui-sb;
                 color: COLOR.$Primary-color;
+                font-size: 20px;
                 // overflow: hidden;
                 // text-overflow: ellipsis;
                 // white-space: nowrap;
             }
 
             &_Body {
-                margin-top: 35px;
+                margin-top: 25px;
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
@@ -1621,7 +1635,7 @@
 
         &_History {
             position: relative;
-            width: 80%;
+            width: 85%;
             background-color: white;
             border-radius: 3px;
             overflow: hidden;
@@ -1636,7 +1650,8 @@
                 &_Left {
                     flex: 2;
                     min-width: 200px;
-                    font-family: Montserrat-SemiBold;
+                    font-family: segoeui-sb;
+                    font-size: 20px;
                     color: COLOR.$Primary-color;
                 }
 
@@ -1649,7 +1664,6 @@
                     gap: 8px;
 
                     &_Date {
-                        height: 25px;
                         display: flex;
                         flex-wrap: wrap;
                         overflow: hidden;
@@ -1659,7 +1673,6 @@
                         &_Item {
                             padding-left: 6px;
                             padding-right: 6px;
-                            height: 25px;
                             cursor: pointer;
                             display: flex;
                             align-items: center;
@@ -1680,7 +1693,7 @@
                         background-color: white;
                         border: solid 1px rgb(199, 199, 199);
                         border-radius: 5px;
-                        font-family: Montserrat-Regular;
+                        font-family: segoeui;
 
                         &:hover {
                             border: solid 1px #6495ed;
@@ -1700,7 +1713,7 @@
                             border-radius: 5px;
                             border: none;
                             cursor: pointer;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
 
                             &:hover {
                                 background-color: #3e80fb;
@@ -1789,7 +1802,7 @@
                             box-shadow: 0 0 3px 3px rgba(193, 193, 193, 0.5);
                             width: 100px;
                             height: 35px;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
                         }
                     }
 
@@ -1873,9 +1886,11 @@
                     justify-content: space-between;
                     flex-wrap: wrap;
                     overflow: hidden;
-                    font-family: Montserrat-SemiBold;
+                    font-family: segoeui-sb;
                     color: COLOR.$Primary-color;
                     margin-bottom: 8px;
+                    margin-left: 10px;
+                    font-size: 20px;
 
                     &_Button {
                         display: flex;
@@ -1945,6 +1960,7 @@
                                 flex: 6;
                                 font-size: 14px;
                                 color: black;
+                                white-space: wrap; // ngan xuong dong
                                 overflow: hidden; // an noi dung vuot ra ngoai
                                 text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
                             }
@@ -1960,7 +1976,8 @@
 
                 &_Tit {
                     display: flex;
-                    font-family: Montserrat-SemiBold;
+                    font-family: segoeui-sb;
+                    font-size: 20px;
                     color: COLOR.$Primary-color;
                 }
 
@@ -1993,10 +2010,27 @@
                                 }
                             }
 
-                            &_Tit {
+                            &_Container {
                                 white-space: nowrap;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
+
+                                &_Tit {
+                                    font-size: 15px;
+                                }
+
+                                &_Number {
+                                    font-size: 28px;
+                                    color: rgb(11, 25, 103);
+                                    white-space: nowrap; // ngan xuong dong
+                                    overflow: hidden; // an noi dung vuot ra ngoai
+                                    text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+
+                                    & span {
+                                        font-size: 20px;
+                                        color: grey;
+                                    }
+                                }
                             }
                         }
                     }
@@ -2179,8 +2213,8 @@
 
         &_Header {
             color: COLOR.$Primary-color;
-            font-family: Montserrat-SemiBold;
-            font-size: 16px;
+            font-family: segoeui-sb;
+            font-size: 20px;
             padding: 16px;
             background-color: rgba(233, 233, 233, 0.5);
         }
@@ -2391,7 +2425,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -2503,7 +2537,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -2634,7 +2668,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -2733,7 +2767,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -2866,7 +2900,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -3016,7 +3050,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -3128,7 +3162,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -3259,7 +3293,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -3358,7 +3392,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
@@ -3491,7 +3525,7 @@
 
         &_Tit {
             padding: 16px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
