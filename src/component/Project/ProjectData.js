@@ -32,6 +32,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit, FiFilter } from "react-icons/fi";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
+import { isBrowser } from "react-device-detect";
 
 export const temp = signal([]);
 export const inverterDB = signal([]);
@@ -1107,28 +1108,58 @@ export default function ProjectData(props) {
                 //     <Benefit />
                 //   </div>
                 // </div>
+
                 <div className="DAT_ProjectData_NewDashboard">
-                  <div className="DAT_ProjectData_NewDashboard_Top">
-                    <div className="DAT_ProjectData_NewDashboard_Top_Left">
-                      <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
-                        <Benefit />
-                      </div>
-                      <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
-                        Graph
-                      </div>
-                    </div>
-                    <div className="DAT_ProjectData_NewDashboard_Top_Right">
-                      <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
-                        <ProjectInfo />
-                      </div>
-                      <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
-                        <Weather />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="DAT_ProjectData_NewDashboard_Bottom">
-                    <DashboardHistory />
-                  </div>
+                  {
+                    isBrowser ?
+                      <>
+                        <div className="DAT_ProjectData_NewDashboard_Top">
+                          <div className="DAT_ProjectData_NewDashboard_Top_Left">
+                            <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
+                              <Benefit />
+                            </div>
+                            <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
+                              Graph
+                            </div>
+                          </div>
+                          <div className="DAT_ProjectData_NewDashboard_Top_Right">
+                            <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
+                              <ProjectInfo />
+                            </div>
+                            <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
+                              <Weather />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="DAT_ProjectData_NewDashboard_Bottom">
+                          <DashboardHistory />
+                        </div>
+                      </>
+                      :
+                      <>
+                        <div className="DAT_ProjectData_Dashboard_Top">
+                          <div className="DAT_ProjectData_Dashboard_Top_Left">
+                            <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
+                              <Benefit />
+                            </div>
+                            <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
+                              Graph
+                            </div>
+                          </div>
+                          <div className="DAT_ProjectData_Dashboard_Top_Right">
+                            <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
+                              <ProjectInfo />
+                            </div>
+                            <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
+                              <Weather />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="DAT_ProjectData_Dashboard_Bottom">
+                          <DashboardHistory />
+                        </div>
+                      </>
+                  }
                 </div>
               );
             case "device":

@@ -30,7 +30,7 @@ export const messages = {
     user: "User",
     mainadmin: "Manager",
     projname: "Project name",
-    phone: "Phone number",
+    phone: "Phone Number",
     notification: "Notification",
     maintain: "Analytics",
     analytic: "Analytic",
