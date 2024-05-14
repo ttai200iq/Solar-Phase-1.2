@@ -1678,11 +1678,6 @@ export default function Home(props) {
               </div>
 
               <div id="map" className="DAT_Home_Row2_Right_Bot">
-                {/* <div className="DAT_Home_Row2_Right_Bot_Distribution">
-                <div className="DAT_Home_Row2_Right_Bot_Distribution-Map">
-                <div  style={{ width: "100%", height: "100%" }}></div>
-                </div>
-              </div> */}
               </div>
             </div>
           </div>
