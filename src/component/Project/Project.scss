@@ -494,6 +494,119 @@
         position: relative;
         margin-top: 16px;
 
+        &_Top {
+            margin-bottom: 10px;
+
+            &_Left {
+                display: flex;
+                flex-direction: column;
+
+                &_Impact {
+                    background-color: #fff;
+                    margin-bottom: 10px;
+                }
+
+                &_Graph {
+                    background-color: #fff;
+                    height: 100%;
+                    margin-bottom: 10px;
+                }
+            }
+
+            &_Right {
+                gap: 10px;
+                display: block;
+
+                &_Information {
+                    background-color: #fff;
+                    margin-right: 10px;
+                }
+
+                &_PredictDeg {
+                    // background-color: #fff;
+                    width: 100%;
+
+                    &_Weather {
+                        display: flex;
+                        gap: 10px;
+
+                        &_CurDeg {
+                            height: 100px;
+                            background-color: #fff;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            padding: 10px;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden;
+                            margin-right: 10px;
+
+                            &_Box {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                &_Icon {
+                                    height: 100%;
+                                    margin-right: 30px;
+
+                                    & img {
+                                        width: 80px;
+                                        height: 80px;
+                                    }
+                                }
+
+                                &_Text {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: center;
+                                    white-space: nowrap; // ngan xuong dong
+                                    text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                                    font-size: 15px;
+                                    color: grey;
+
+                                    & span {
+                                        color: #000;
+                                        font-family: segoeui-sb;
+                                        font-size: 25px;
+                                    }
+                                }
+                            }
+                        }
+
+                        &_Forecast {
+                            // background-color: #fff;
+                            display: flex;
+                            gap: 10px;
+
+                            &_Box {
+                                background-color: #fff;
+                                width: calc(100% / 3 - 10px);
+                                height: 100px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-around;
+
+                                &_Icon {
+
+                                    & img {
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+                                }
+
+                                &_Text {
+                                    font-family: segoeui;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         &_More {
             width: 98%;
             margin: auto;
@@ -501,6 +614,99 @@
             display: flex;
             overflow: hidden;
             gap: 16px;
+
+            &_Left {
+                background-color: white;
+                padding: 16px;
+                margin-bottom: 10px;
+
+                &_Tit {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    font-family: segoeui-sb;
+                    color: COLOR.$Primary-color;
+                    margin-bottom: 8px;
+                    margin-left: 10px;
+                    font-size: 20px;
+
+                    &_Button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        background-color: rgb(231, 231, 231);
+                        color: grey;
+                        padding: 4px;
+                        cursor: pointer;
+                    }
+                }
+
+                &_Content {
+                    overflow: hidden;
+
+                    &_Left {
+                        flex: 5;
+
+                        &_Item {
+                            box-sizing: border-box;
+                            padding: 10px;
+                            display: flex;
+                            gap: 20px;
+
+                            &_Title {
+                                flex: 4;
+                                font-size: 14px;
+                                color: rgb(128, 128, 128);
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+
+                            &_Content {
+                                flex: 6;
+                                font-size: 14px;
+                                color: black;
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+                        }
+                    }
+
+                    &_Right {
+                        flex: 5;
+
+                        &_Item {
+                            box-sizing: border-box;
+                            padding: 10px;
+                            display: flex;
+                            gap: 20px;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden; // an noi dung vuot ra ngoai
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot
+
+                            &_Title {
+                                flex: 4;
+                                font-size: 14px;
+                                color: rgb(128, 128, 128);
+                                white-space: nowrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+
+                            &_Content {
+                                flex: 6;
+                                font-size: 14px;
+                                color: black;
+                                white-space: wrap; // ngan xuong dong
+                                overflow: hidden; // an noi dung vuot ra ngoai
+                                text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                            }
+                        }
+                    }
+                }
+            }
 
             &_Right {
                 background-color: white;
@@ -859,110 +1065,49 @@
             }
         }
 
-        &_Filterlist {
-            background-color: #fff;
-            width: 20%;
-            padding: 16px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-
-            &_Head {
-                min-width: 20px;
-                font-family: Montserrat-SemiBold;
-                color: COLOR.$Primary-color;
-                // overflow: hidden;
-                // text-overflow: ellipsis;
-                // white-space: nowrap;
-            }
-
-            &_Body {
-                margin-top: 35px;
-                display: flex;
-                flex-direction: column;
-                gap: 25px;
-                height: 250px;
-                overflow-y: scroll;
-                overflow-y: scroll;
-
-                &::-webkit-scrollbar {
-                    width: 7px;
-                    height: 10px;
-                }
-
-                /* Track */
-                &::-webkit-scrollbar-track {
-                    background-color: rgba(0, 0, 0, 0);
-                    border-radius: 2px;
-                }
-
-                /* Handle */
-                &::-webkit-scrollbar-thumb {
-                    background: #888;
-                    border-radius: 5px;
-                }
-
-                /* Handle on hover */
-                &::-webkit-scrollbar-thumb:hover {
-                    background: #555;
-                }
-
-                &_Checkbox {
-                    // font-family: Montserrat-regular;
-                    color: #0b1967;
-
-                    & input {
-                        accent-color: COLOR.$Primary-color;
-                    }
-                }
-            }
-        }
-
         &_History {
             position: relative;
-            width: 80%;
             background-color: white;
             border-radius: 3px;
             overflow: hidden;
+            margin-right: 10px;
 
             &_Tit {
-                padding: 16px;
+                padding: 12px;
                 display: flex;
-                flex-wrap: wrap;
-                overflow: hidden;
-                align-items: center;
+                justify-content: space-between;
 
                 &_Left {
-                    flex: 2;
-                    min-width: 200px;
-                    font-family: Montserrat-SemiBold;
+                    width: 25%;
+                    font-family: segoeui-sb;
                     color: COLOR.$Primary-color;
                 }
 
                 &_Right {
-                    flex: 8;
+                    width: 75%;
                     display: flex;
-                    flex-wrap: wrap;
-                    overflow: hidden;
-                    justify-content: flex-end;
-                    gap: 8px;
+                    flex-direction: column;
+                    align-items: end;
+
+                    &_Config {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                    }
 
                     &_Date {
                         height: 25px;
+                        width: 220px;
                         display: flex;
-                        flex-wrap: wrap;
-                        overflow: hidden;
                         border: solid 1px rgb(199, 199, 199);
                         border-radius: 5px;
 
                         &_Item {
-                            padding-left: 6px;
-                            padding-right: 6px;
+                            padding-left: 8px;
+                            padding-right: 8px;
                             height: 25px;
                             cursor: pointer;
                             display: flex;
-                            align-items: center;
-                            justify-self: center;
 
                             &:hover {
                                 color: #6495ed;
@@ -974,12 +1119,11 @@
                         display: flex;
                         align-items: center;
                         height: 25px;
-                        font-size: 14px;
-                        cursor: pointer;
                         background-color: white;
                         border: solid 1px rgb(199, 199, 199);
                         border-radius: 5px;
-                        font-family: Montserrat-Regular;
+                        font-family: segoeui;
+                        color: #808080;
 
                         &:hover {
                             border: solid 1px #6495ed;
@@ -987,23 +1131,24 @@
                         }
                     }
 
-                    &_Export {
-                        & button {
-                            display: flex;
-                            align-items: center;
-                            height: 25px;
-                            font-size: 14px;
-                            background-color: COLOR.$Primary-color;
-                            color: white;
-                            padding: 8px 16px;
-                            border-radius: 5px;
-                            border: none;
-                            cursor: pointer;
-                            font-family: Montserrat-SemiBold;
+                    &_Below {
 
-                            &:hover {
-                                background-color: #3e80fb;
-                                color: white;
+                        &_Export {
+                            display: flex;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
+
+                            & button {
+                                display: flex;
+                                align-items: center;
+                                height: 25px;
+                                font-size: 14px;
+                                border-radius: 5px;
+                                font-family: segoeiu-sb;
+
+                                &:hover {
+                                    color: #3e80fb;
+                                }
                             }
                         }
                     }
@@ -1065,18 +1210,17 @@
             &_SubConfig {
                 background-color: rgb(128, 128, 128, 0.5);
                 width: 100%;
-                height: 100%;
                 position: absolute;
-                top: 58.6px;
+                top: 105px;
+                font-family: segoeui;
 
                 &_Dropdown {
                     background-color: white;
                     border-top: 1px solid #b8b8b8;
-                    padding: 16px;
                     height: 100%;
 
                     &_Btn {
-                        padding: 16px;
+                        padding: 10px;
                         display: flex;
                         gap: 16px;
 
@@ -1088,7 +1232,7 @@
                             box-shadow: 0 0 3px 3px rgba(193, 193, 193, 0.5);
                             width: 100px;
                             height: 35px;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb !important;
                         }
                     }
 
@@ -1108,11 +1252,9 @@
                     }
 
                     &_Item {
-                        padding-top: 16px;
                         font-size: 15px;
 
                         &_Table {
-                            border-top: solid 1px #b8b8b8;
                             border-left: solid 1px #b8b8b8;
                             border-right: solid 1px #b8b8b8;
 
@@ -1124,6 +1266,8 @@
                         &_Table {
                             border-collapse: collapse;
                             width: 100%;
+                            border: none;
+                            outline: none;
 
                             &_Tr {
                                 display: flex;
@@ -1132,18 +1276,19 @@
                                 &_Th {
                                     padding: 12px;
                                     background-color: #d4d4d4;
-                                    width: 140px;
+                                    width: 120px;
+                                    font-size: 14px;
                                 }
 
                                 &_Td {
-                                    padding-left: 16px;
+                                    padding-left: 12px;
                                     display: flex;
 
                                     &_Checkbox {
                                         display: flex;
                                         align-items: center;
                                         gap: 10px;
-                                        // padding-left: 10px;
+                                        font-size: 14px;
                                         width: 200px;
                                     }
                                 }
@@ -1258,7 +1403,7 @@
                                 height: 100px;
                                 display: flex;
                                 align-items: center;
-                                justify-content: space-around;
+                                justify-content: space-evenly;
 
                                 &_Icon {
 
@@ -1269,7 +1414,6 @@
                                 }
 
                                 &_Text {
-                                    margin-left: -20px;
                                     font-family: segoeui;
                                 }
                             }
@@ -1449,16 +1593,17 @@
 
             &_Day {
                 padding: 16px;
-                height: 250px; // lam xong xoa dong nay di
+                height: 250px;
             }
 
             &_Month {
                 padding: 16px;
-                height: 250px; // lam xong xoa dong nay di
+                height: 250px;
             }
 
             &_Year {
                 padding: 16px;
+                margin-left: 16px;
                 height: 250px;
 
                 &_Tit {

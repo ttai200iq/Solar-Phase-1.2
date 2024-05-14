@@ -203,9 +203,8 @@ export default function Benefit(props) {
                                             <Fade {...TransitionProps} timeout={350}>
                                                 <Paper
                                                     sx={{
-                                                        width: "400px",
-                                                        marginTop: "10px",
-                                                        marginLeft: "335px",
+                                                        width: "300px",
+                                                        marginTop: "5px",
                                                         p: 2,
                                                     }}
                                                 >
