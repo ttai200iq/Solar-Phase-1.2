@@ -885,7 +885,7 @@ export default function Home(props) {
                           style={{
                             color: "black",
                             fontSize: "28px",
-                            fontFamily: "sans-serif",
+                            fontFamily: "segoeui-sb",
                           }}
                         >
                           {Number(
@@ -910,7 +910,7 @@ export default function Home(props) {
                           style={{
                             color: "black",
                             fontSize: "28px",
-                            fontFamily: "sans-serif",
+                            fontFamily: "segoeui-sb",
                           }}
                         >
                           {Number(
@@ -1063,19 +1063,14 @@ export default function Home(props) {
                         <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
                           {dataLang.formatMessage({ id: "C02" })}
                         </div>
-                        <div>
-                          <span style={{ fontSize: "28px" }}>
-                            {Number(
-                              parseFloat(
-                                coalsave.value.value * coalsave.value.avr
-                              ).toFixed(1)
-                            ).toLocaleString("en-US")}
-                          </span>
+                        <div>{Number(
+                          parseFloat(
+                            (coalsave.value.value * projectData.value.price) / 1000 || 0
+                          ).toFixed(2)
+                        ).toLocaleString("en-US")}
                           &nbsp;
-                          <span
-                            style={{ color: COLOR.value.grayText, fontSize: "20px" }}
-                          >
-                            t
+                          <span style={{ textTransform: "uppercase" }}>
+                            M{projectData.value.currency}
                           </span>
                         </div>
                       </div>
@@ -1273,7 +1268,7 @@ export default function Home(props) {
                         showYearPicker={chart === "month" ? false : true}
                         customInput={
                           <button className="DAT_CustomPicker">
-                            <span>{d[chart]}</span>
+                            <span style={{ fontFamily: "segoeui" }}>{d[chart]}</span>
                             <IoCalendarOutline color="gray" />
                           </button>
                         }
@@ -1551,7 +1546,7 @@ export default function Home(props) {
                       style={{
                         color: "black",
                         fontSize: "28px",
-                        fontFamily: "sans-serif",
+                        fontFamily: "segoeui",
                       }}
                     >
                       {total}
@@ -1580,7 +1575,7 @@ export default function Home(props) {
                           style={{
                             color: "black",
                             fontSize: "28px",
-                            fontFamily: "sans-serif",
+                            fontFamily: "segoeui",
                           }}
                         >
                           {online}
@@ -1609,7 +1604,7 @@ export default function Home(props) {
                           style={{
                             color: "black",
                             fontSize: "28px",
-                            fontFamily: "sans-serif",
+                            fontFamily: "segoeui",
                           }}
                         >
                           {offline}
@@ -1637,7 +1632,7 @@ export default function Home(props) {
                           style={{
                             color: "black",
                             fontSize: "28px",
-                            fontFamily: "sans-serif",
+                            fontFamily: "segoeui",
                           }}
                         >
                           {trial}
@@ -1666,7 +1661,7 @@ export default function Home(props) {
                           style={{
                             color: "black",
                             fontSize: "28px",
-                            fontFamily: "sans-serif",
+                            fontFamily: "segoeui",
                           }}
                         >
                           {warn}
@@ -1702,9 +1697,8 @@ export default function Home(props) {
                           <Fade {...TransitionProps} timeout={350}>
                             <Paper
                               sx={{
-                                width: "400px",
-                                marginTop: "10px",
-                                marginLeft: "335px",
+                                width: "300px",
+                                marginTop: "5px",
                                 p: 2,
                               }}
                             >
@@ -1716,7 +1710,9 @@ export default function Home(props) {
                                 }}
                               >
                                 1.{" "}
-                                {dataLang.formatMessage({ id: "environment1" })}
+                                {dataLang.formatMessage({
+                                  id: "environment1",
+                                })}
                               </Typography>
                               <Typography
                                 sx={{
@@ -1726,7 +1722,9 @@ export default function Home(props) {
                                 }}
                               >
                                 2.{" "}
-                                {dataLang.formatMessage({ id: "environment2" })}
+                                {dataLang.formatMessage({
+                                  id: "environment2",
+                                })}
                               </Typography>
                               <Typography
                                 sx={{
@@ -1736,13 +1734,20 @@ export default function Home(props) {
                                 }}
                               >
                                 3.{" "}
-                                {dataLang.formatMessage({ id: "environment3" })}
+                                {dataLang.formatMessage({
+                                  id: "environment3",
+                                })}
                               </Typography>
                               <Typography
-                                sx={{ fontSize: "12px", textAlign: "justify" }}
+                                sx={{
+                                  fontSize: "12px",
+                                  textAlign: "justify",
+                                }}
                               >
                                 4.{" "}
-                                {dataLang.formatMessage({ id: "environment4" })}
+                                {dataLang.formatMessage({
+                                  id: "environment4",
+                                })}
                               </Typography>
                             </Paper>
                           </Fade>
@@ -1948,7 +1953,7 @@ export default function Home(props) {
                         color: "black",
                         fontSize: "20px",
                         fontWeight: "650",
-                        fontFamily: "sans-serif",
+                        fontFamily: "segoeui-sb",
                       }}
                     >
                       {Number(
@@ -1974,7 +1979,7 @@ export default function Home(props) {
                         color: "black",
                         fontSize: "20px",
                         fontWeight: "650",
-                        fontFamily: "sans-serif",
+                        fontFamily: "segoeui-sb",
                       }}
                     >
                       {Number(
@@ -2198,7 +2203,7 @@ export default function Home(props) {
                       color: "black",
                       fontSize: "20px",
                       fontWeight: "650",
-                      fontFamily: "sans-serif",
+                      fontFamily: "segoeui",
                     }}
                   >
                     {online}
@@ -2228,7 +2233,7 @@ export default function Home(props) {
                       color: "black",
                       fontSize: "20px",
                       fontWeight: "650",
-                      fontFamily: "sans-serif",
+                      fontFamily: "segoeui",
                     }}
                   >
                     {offline}
@@ -2257,7 +2262,7 @@ export default function Home(props) {
                       color: "black",
                       fontSize: "20px",
                       fontWeight: "650",
-                      fontFamily: "sans-serif",
+                      fontFamily: "segoeui",
                     }}
                   >
                     {trial}
@@ -2287,7 +2292,7 @@ export default function Home(props) {
                       color: "black",
                       fontSize: "20px",
                       fontWeight: "650",
-                      fontFamily: "sans-serif",
+                      fontFamily: "segoeui",
                     }}
                   >
                     {warn}

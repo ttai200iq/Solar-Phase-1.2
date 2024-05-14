@@ -16,12 +16,12 @@
     text-overflow: ellipsis;
 
     &_Title {
-        font-size: 18px;
+        font-size: 20px;
         display: flex;
         align-items: center;
         gap: 5px;
         color: COLOR.$Primary-color;
-        font-family: Montserrat-Bold;
+        font-family: segoeuib;
     }
 }
 
@@ -74,7 +74,7 @@
 
                     &-Title {
                         color: COLOR.$Primary-color;
-                        font-family: Montserrat-SemiBold;
+                        font-family: segoeui-sb;
                     }
                 }
 
@@ -193,7 +193,7 @@
                             justify-content: center;
                             align-items: center;
                             color: COLOR.$Primary-color;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
                         }
                     }
 
@@ -243,13 +243,13 @@
                         flex-wrap: wrap;
                         justify-content: space-between;
                         align-items: center;
-                        padding: 15px;
-                        padding-bottom: 0px;
                         -webkit-box-sizing: border-box;
                         /* Safari/Chrome, other WebKit */
                         -moz-box-sizing: border-box;
                         /* Firefox, other Gecko */
                         box-sizing: border-box;
+                        padding: 15px;
+                        padding-bottom: 0px;
                         font-size: 20px;
                         white-space: nowrap;
                         overflow: hidden;
@@ -260,7 +260,7 @@
                             justify-content: center;
                             align-items: center;
                             color: COLOR.$Primary-color;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
                         }
                     }
 
@@ -353,7 +353,7 @@
 
                         &-Title {
                             color: COLOR.$Primary-color;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
                         }
                     }
 
@@ -426,7 +426,7 @@
 
                         &-Title {
                             color: COLOR.$Primary-color;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
                         }
                     }
 
@@ -533,7 +533,7 @@
                                         cursor: pointer;
                                         display: flex;
                                         justify-content: space-between;
-                                        font-family: Montserrat-SemiBold;
+                                        font-family: segoeui-sb;
                                     }
 
                                     &_Sun {
@@ -582,7 +582,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         color: COLOR.$Primary-color;
-                        font-family: Montserrat-SemiBold;
+                        font-family: segoeui-sb;
                     }
 
                     &-Total {
@@ -751,7 +751,7 @@
 
             &-Title {
                 color: COLOR.$Primary-color;
-                font-family: Montserrat-SemiBold;
+                font-family: segoeui-sb;
             }
         }
 
@@ -922,7 +922,7 @@
 
             &-Title {
                 color: COLOR.$Primary-color;
-                font-family: Montserrat-SemiBold;
+                font-family: segoeui-sb;
             }
         }
 
@@ -990,7 +990,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             color: COLOR.$Primary-color;
-            font-family: Montserrat-SemiBold;
+            font-family: segoeui-sb;
         }
 
         &-Total {
@@ -1060,7 +1060,7 @@
                 &-Title {
                     font-size: 13px;
                     color: gray;
-                    white-space: nowrap;
+                    // white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     display: flex;
@@ -1124,7 +1124,7 @@
 
             &-Title {
                 color: COLOR.$Primary-color;
-                font-family: Montserrat-SemiBold;
+                font-family: segoeui-sb;
             }
         }
 
@@ -1191,7 +1191,7 @@
                             cursor: pointer;
                             display: flex;
                             justify-content: space-between;
-                            font-family: Montserrat-SemiBold;
+                            font-family: segoeui-sb;
                         }
 
                         &_Sun {
@@ -1242,7 +1242,7 @@
                 justify-content: center;
                 align-items: center;
                 color: COLOR.$Primary-color;
-                font-family: Montserrat-SemiBold;
+                font-family: segoeui-sb;
             }
         }
 

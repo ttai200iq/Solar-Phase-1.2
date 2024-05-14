@@ -614,6 +614,11 @@
             display: flex;
             overflow: hidden;
             gap: 16px;
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
 
             &_Left {
                 background-color: white;
@@ -781,6 +786,11 @@
             margin-bottom: 16px;
             display: flex;
             gap: 16px;
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
 
             &_Left {
                 width: 35%;
@@ -1071,6 +1081,11 @@
             border-radius: 3px;
             overflow: hidden;
             margin-right: 10px;
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
 
             &_Tit {
                 padding: 12px;
@@ -1324,6 +1339,7 @@
                 &_Graph {
                     background-color: #fff;
                     height: 100%;
+                    margin-top: 10px;
                 }
             }
 
@@ -1849,11 +1865,11 @@
 
                         &_Item {
                             display: flex;
-                            flex: 1;
+                            // flex: 1;
                             text-align: left;
                             border: 1px solid #dee1e6;
                             border-radius: 4px;
-                            padding: 8px;
+                            padding: 16px;
                             white-space: nowrap; // ngan xuong dong
                             overflow: hidden; // an noi dung vuot ra ngoai
                             text-overflow: ellipsis; // hien thi 3 cham khi vuot
