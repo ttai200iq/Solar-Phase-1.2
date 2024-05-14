@@ -1678,11 +1678,6 @@ export default function Home(props) {
               </div>
 
               <div id="map" className="DAT_Home_Row2_Right_Bot">
-                {/* <div className="DAT_Home_Row2_Right_Bot_Distribution">
-                <div className="DAT_Home_Row2_Right_Bot_Distribution-Map">
-                <div  style={{ width: "100%", height: "100%" }}></div>
-                </div>
-              </div> */}
               </div>
             </div>
           </div>
@@ -1762,7 +1757,7 @@ export default function Home(props) {
             <div className="DAT_HomeMobile_Benefit_Content">
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
-                  <GiCoalWagon size={24} color={COLOR.value.SecondaryColor} />
+                  <img src="/dat_icon/coal.jpg" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -1772,7 +1767,7 @@ export default function Home(props) {
                     {Number(
                       parseFloat(
                         coalsave.value.value * coalsave.value.ef
-                      ).toFixed(2)
+                      ).toFixed(1)
                     ).toLocaleString("en-US")}
                     &nbsp;
                     <span
@@ -1786,7 +1781,7 @@ export default function Home(props) {
 
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
-                  <FaTree size={24} color={COLOR.value.SecondaryColor} />
+                  <img src="/dat_icon/tree.jpg" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -1796,7 +1791,7 @@ export default function Home(props) {
                     {Number(
                       parseFloat(
                         coalsave.value.value * coalsave.value.tree
-                      ).toFixed(2)
+                      ).toFixed(1)
                     ).toLocaleString("en-US")}
                     &nbsp;
                     <span
@@ -1807,12 +1802,10 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="DAT_HomeMobile_Benefit_Content">
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
-                  <IoIosCloud size={24} color={COLOR.value.SecondaryColor} />
+                  <img src="/dat_icon/co2.jpg" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -1822,7 +1815,7 @@ export default function Home(props) {
                     {Number(
                       parseFloat(
                         coalsave.value.value * coalsave.value.avr
-                      ).toFixed(2)
+                      ).toFixed(1)
                     ).toLocaleString("en-US")}
                     &nbsp;
                     <span
@@ -1836,21 +1829,21 @@ export default function Home(props) {
 
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
-                  <FaMoneyBill size={24} color={COLOR.value.SecondaryColor} />
+                  <img src="/dat_icon/money.jpg" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
                     {dataLang.formatMessage({ id: "totalRevenue" })}
                   </div>
                   <div>
-                    {Number(parseFloat(price / 1000).toFixed(2)).toLocaleString(
+                    {Number(parseFloat(convertUnit(price / 1000)).toFixed(1)).toLocaleString(
                       "en-US"
                     )}
                     &nbsp;
                     <span
                       style={{ color: COLOR.value.grayText, fontSize: "12px" }}
                     >
-                      kVND
+                      {showUnit(price)}VND
                     </span>
                   </div>
                 </div>
@@ -2007,7 +2000,7 @@ export default function Home(props) {
               >
                 <div>
                   <img
-                    src="/dat_icon/day.png"
+                    src="/dat_icon/24h.png"
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   />
@@ -2021,8 +2014,8 @@ export default function Home(props) {
                       style={{
                         color: "black",
                         fontSize: "16px",
-                        fontWeight: "650",
-                        fontFamily: "sans-serif",
+                        // fontWeight: "650",
+                        // fontFamily: "sans-serif",
                       }}
                     >
                       {Number(
@@ -2046,7 +2039,7 @@ export default function Home(props) {
               >
                 <div>
                   <img
-                    src="/dat_icon/month.png"
+                    src="/dat_icon/Thunder.png"
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   />
@@ -2060,8 +2053,8 @@ export default function Home(props) {
                       style={{
                         color: "black",
                         fontSize: "16px",
-                        fontWeight: "650",
-                        fontFamily: "sans-serif",
+                        // fontWeight: "650",
+                        // fontFamily: "sans-serif",
                       }}
                     >
                       {Number(
@@ -2085,7 +2078,7 @@ export default function Home(props) {
               >
                 <div>
                   <img
-                    src="/dat_icon/year.png"
+                    src="/dat_icon/globe.png"
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   />
@@ -2099,8 +2092,8 @@ export default function Home(props) {
                       style={{
                         color: "black",
                         fontSize: "16px",
-                        fontWeight: "650",
-                        fontFamily: "sans-serif",
+                        // fontWeight: "650",
+                        // fontFamily: "sans-serif",
                       }}
                     >
                       {Number(
@@ -2124,7 +2117,7 @@ export default function Home(props) {
               >
                 <div>
                   <img
-                    src="/dat_icon/total.png"
+                    src="/dat_icon/totalyear.png"
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   />
@@ -2138,8 +2131,8 @@ export default function Home(props) {
                       style={{
                         color: "black",
                         fontSize: "16px",
-                        fontWeight: "650",
-                        fontFamily: "sans-serif",
+                        // fontWeight: "650",
+                        // fontFamily: "sans-serif",
                       }}
                     >
                       {Number(
@@ -2174,8 +2167,8 @@ export default function Home(props) {
                 style={{
                   color: "black",
                   fontSize: "20px",
-                  fontWeight: "650",
-                  fontFamily: "sans-serif",
+                  // fontWeight: "650",
+                  // fontFamily: "sans-serif",
                 }}
               >
                 {total}
@@ -2196,6 +2189,7 @@ export default function Home(props) {
                   className="DAT_HomeMobile_State-Content-Item-Title"
                   style={{ color: COLOR.value.DarkGreenColor }}
                 >
+                  <img src="/dat_icon/online.png" alt="" />
                   {dataLang.formatMessage({ id: "online" })}
                 </div>
                 <div>
@@ -2225,6 +2219,7 @@ export default function Home(props) {
                   className="DAT_HomeMobile_State-Content-Item-Title"
                   style={{ color: COLOR.value.WarningColor }}
                 >
+                  <img src="/dat_icon/offline.png" alt="" />
                   {dataLang.formatMessage({ id: "offline" })}
                 </div>
                 <div>
@@ -2253,6 +2248,7 @@ export default function Home(props) {
                 }}
               >
                 <div className="DAT_HomeMobile_State-Content-Item-Title">
+                  <img src="/dat_icon/shared.png" alt="" />
                   {dataLang.formatMessage({ id: "demo" })}
                 </div>
                 <div>
@@ -2282,6 +2278,7 @@ export default function Home(props) {
                   className="DAT_HomeMobile_State-Content-Item-Title"
                   style={{ color: COLOR.value.DarkOrangeColor }}
                 >
+                  <img src="/dat_icon/warn.png" alt="" />
                   {dataLang.formatMessage({ id: "projectWarn" })}
                 </div>
                 <div>
@@ -2311,10 +2308,10 @@ export default function Home(props) {
                   style={{
                     backgroundColor:
                       chart === "year" ? "rgba(43, 195, 253)" : "white",
-                    border:
+                    borderRight:
                       chart === "year"
                         ? "solid 1.5px rgba(11, 25, 103)"
-                        : "solid 1.5px gray",
+                        : "none",
                     color: chart === "year" ? "rgba(11, 25, 103)" : "gray",
                   }}
                   onClick={() => {
@@ -2327,10 +2324,10 @@ export default function Home(props) {
                   style={{
                     backgroundColor:
                       chart === "month" ? "rgba(43, 195, 253)" : "white",
-                    border:
+                    borderLeft:
                       chart === "month"
                         ? "solid 1.5px rgba(11, 25, 103)"
-                        : "solid 1.5px gray",
+                        : "none",
                     color:
                       chart === "month"
                         ? COLOR.value.PrimaryColor
