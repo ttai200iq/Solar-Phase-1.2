@@ -883,7 +883,7 @@ export default function Home(props) {
                       <div>
                         <span
                           style={{
-                            color: "black",
+                            color: COLOR.value.PrimaryColor,
                             fontSize: "28px",
                             fontFamily: "segoeui-sb",
                           }}
@@ -908,7 +908,7 @@ export default function Home(props) {
                       <div>
                         <span
                           style={{
-                            color: "black",
+                            color: COLOR.value.PrimaryColor,
                             fontSize: "28px",
                             fontFamily: "segoeui-sb",
                           }}
@@ -1544,7 +1544,7 @@ export default function Home(props) {
                     </span>
                     <span
                       style={{
-                        color: "black",
+                        color: COLOR.value.PrimaryColor,
                         fontSize: "28px",
                         fontFamily: "segoeui",
                       }}
@@ -1573,7 +1573,7 @@ export default function Home(props) {
                       <div>
                         <span
                           style={{
-                            color: "black",
+                            color: COLOR.value.PrimaryColor,
                             fontSize: "28px",
                             fontFamily: "segoeui",
                           }}
@@ -1602,7 +1602,7 @@ export default function Home(props) {
                       <div>
                         <span
                           style={{
-                            color: "black",
+                            color: COLOR.value.PrimaryColor,
                             fontSize: "28px",
                             fontFamily: "segoeui",
                           }}
@@ -1630,7 +1630,7 @@ export default function Home(props) {
                       <div>
                         <span
                           style={{
-                            color: "black",
+                            color: COLOR.value.PrimaryColor,
                             fontSize: "28px",
                             fontFamily: "segoeui",
                           }}
@@ -1659,7 +1659,7 @@ export default function Home(props) {
                       <div>
                         <span
                           style={{
-                            color: "black",
+                            color: COLOR.value.PrimaryColor,
                             fontSize: "28px",
                             fontFamily: "segoeui",
                           }}
