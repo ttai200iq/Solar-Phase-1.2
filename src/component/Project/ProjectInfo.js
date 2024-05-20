@@ -87,7 +87,9 @@ export default function ProjectInfo(props) {
               </div>
 
               {/* Address */}
-              <div className="DAT_ProjectData_NewDashboard_More_Left_Content_Right_Item">
+              <div className="DAT_ProjectData_NewDashboard_More_Left_Content_Right_Item"
+                style={{ paddingBottom: "15px" }}
+              >
                 <div className="DAT_ProjectData_NewDashboard_More_Left_Content_Right_Item_Title">
                   {dataLang.formatMessage({ id: "address" })}:
                 </div>

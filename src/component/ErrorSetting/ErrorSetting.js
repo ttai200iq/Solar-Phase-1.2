@@ -16,9 +16,9 @@ import RemoveErr from "./RemoveErr";
 import { alertDispatch } from "../Alert/Alert";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
-import { isMobile } from "../Navigation/Navigation";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
+import { isBrowser } from "react-device-detect";
 
 export const lowercasedata = (str) => {
   return str
@@ -557,8 +557,55 @@ export default function ErrorSetting(props) {
 
   return (
     <>
-      {isMobile.value
+      {isBrowser
         ?
+        <>
+          <div className="DAT_ErrSetting">
+            <div className="DAT_ErrSetting_Title">
+              <MdOutlineManageHistory color="gray" size={25} />
+              <span>{dataLang.formatMessage({ id: "errorsetting" })}</span>
+            </div>
+
+            <div className="DAT_ErrSetting_Filter">
+              <input
+                type="text"
+                placeholder={dataLang.formatMessage({ id: "enterError" }) + "..."}
+                ref={filterRef}
+                onChange={(e) => { handleFilter(e) }}
+              />
+              <CiSearch color="gray" size={20} />
+            </div>
+
+            <button className="DAT_ErrSetting_New"
+              onClick={() => setCreateState(true)}
+            >
+              <span>
+                <MdOutlineManageHistory color="white" size={20} />
+                &nbsp;
+                {dataLang.formatMessage({ id: "createNew" })}
+              </span>
+            </button>
+          </div>
+
+          <div className="DAT_ErrSet">
+            <div className="DAT_ErrSet_Header">
+              {dataLang.formatMessage({ id: "errlist" })}
+            </div>
+
+            <div className="DAT_ErrSet_Content">
+              <DataTable
+                className="DAT_Table_Container"
+                columns={columnLog}
+                data={data}
+                pagination
+                paginationComponentOptions={paginationComponentOptions}
+                // fixedHeader={true}
+                noDataComponent={<Empty />}
+              />
+            </div>
+          </div>
+        </>
+        :
         <>
           <div className="DAT_ErrSettingHeaderMobile">
             <div className="DAT_ErrSettingHeaderMobile_Top">
@@ -721,53 +768,6 @@ export default function ErrorSetting(props) {
                 </div>
               );
             })}
-          </div>
-        </>
-        :
-        <>
-          <div className="DAT_ErrSetting">
-            <div className="DAT_ErrSetting_Title">
-              <MdOutlineManageHistory color="gray" size={25} />
-              <span>{dataLang.formatMessage({ id: "errorsetting" })}</span>
-            </div>
-
-            <div className="DAT_ErrSetting_Filter">
-              <input
-                type="text"
-                placeholder={dataLang.formatMessage({ id: "enterError" }) + "..."}
-                ref={filterRef}
-                onChange={(e) => { handleFilter(e) }}
-              />
-              <CiSearch color="gray" size={20} />
-            </div>
-
-            <button className="DAT_ErrSetting_New"
-              onClick={() => setCreateState(true)}
-            >
-              <span>
-                <MdOutlineManageHistory color="white" size={20} />
-                &nbsp;
-                {dataLang.formatMessage({ id: "createNew" })}
-              </span>
-            </button>
-          </div>
-
-          <div className="DAT_ErrSet">
-            <div className="DAT_ErrSet_Header">
-              {dataLang.formatMessage({ id: "errlist" })}
-            </div>
-
-            <div className="DAT_ErrSet_Content">
-              <DataTable
-                className="DAT_Table_Container"
-                columns={columnLog}
-                data={data}
-                pagination
-                paginationComponentOptions={paginationComponentOptions}
-                // fixedHeader={true}
-                noDataComponent={<Empty />}
-              />
-            </div>
           </div>
         </>
       }

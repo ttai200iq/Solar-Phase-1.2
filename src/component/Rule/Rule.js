@@ -9,7 +9,6 @@ import ConfirmDeleteRule from "./ConfirmDeleteRule";
 import EditRule, { editruledata } from "./EditRule";
 import { alertDispatch } from "../Alert/Alert";
 import { useIntl } from "react-intl";
-import { isMobile } from "../Navigation/Navigation";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
 import { partnerInfor, ruleInfor, userInfor } from "../../App";
@@ -23,6 +22,7 @@ import { FiEdit } from "react-icons/fi";
 import { lowercasedata } from "../ErrorSetting/ErrorSetting";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
+import { isBrowser } from "react-device-detect";
 
 export const datarule = signal([]);
 
@@ -251,10 +251,15 @@ export default function Rule() {
 
   return (
     <>
-      {isMobile.value ? (
-        <div className="DAT_RuleHeaderMobile">
-          <div className="DAT_RuleHeaderMobile_Top">
-            <div className="DAT_RuleHeaderMobile_Top_Filter">
+      {isBrowser
+        ?
+        <>
+          <div className="DAT_RuleHeader">
+            <div className="DAT_RuleHeader_Title">
+              <MdOutlineAdminPanelSettings color="gray" size={25} />
+              <span>{dataLang.formatMessage({ id: "rule" })}</span>
+            </div>
+            <div className="DAT_RuleHeader_Filter">
               <input
                 type="text"
                 placeholder={dataLang.formatMessage({ id: "enterRight" })}
@@ -264,110 +269,108 @@ export default function Rule() {
             </div>
             {ruleInfor.value.setting.rule.add ? (
               <button
-                className="DAT_RuleHeaderMobile_Top_New"
+                className="DAT_RuleHeader_New"
                 onClick={() => setViewState("create")}
               >
-                <IoAddOutline color="white" size={20} />
+                <span>
+                  <GrUserAdmin color="white" size={20} />
+                  &nbsp;
+                  {dataLang.formatMessage({ id: "newRule" })}
+                </span>
               </button>
             ) : (<></>)}
+
           </div>
 
-          <div className="DAT_RuleHeaderMobile_Title">
-            <MdOutlineAdminPanelSettings color="gray" size={25} />
-            <span>{dataLang.formatMessage({ id: "rule" })}</span>
-          </div>
-        </div>
-      ) : (
-        <div className="DAT_RuleHeader">
-          <div className="DAT_RuleHeader_Title">
-            <MdOutlineAdminPanelSettings color="gray" size={25} />
-            <span>{dataLang.formatMessage({ id: "rule" })}</span>
-          </div>
-          <div className="DAT_RuleHeader_Filter">
-            <input
-              type="text"
-              placeholder={dataLang.formatMessage({ id: "enterRight" })}
-              onChange={(e) => handleFilter(e)}
-            />
-            <CiSearch color="gray" size={20} />
-          </div>
-          {ruleInfor.value.setting.rule.add ? (
-            <button
-              className="DAT_RuleHeader_New"
-              onClick={() => setViewState("create")}
-            >
-              <span>
-                <GrUserAdmin color="white" size={20} />
-                &nbsp;
-                {dataLang.formatMessage({ id: "newRule" })}
-              </span>
-            </button>
-          ) : (<></>)}
+          <div className="DAT_Rule">
+            <div className="DAT_Rule_Header">
+              {dataLang.formatMessage({ id: "ruleList" })}
+            </div>
 
-        </div>
-      )}
+            <div className="DAT_Rule_Content">
+              <DataTable
+                className="DAT_Table_Container"
+                columns={columnrule}
+                data={datafilter}
+                pagination
+                paginationComponentOptions={paginationComponentOptions}
+                // fixedHeader={true}
+                noDataComponent={<Empty />}
+              />
+            </div>
+          </div>
+        </>
+        :
+        <>
+          <div className="DAT_RuleHeaderMobile">
+            <div className="DAT_RuleHeaderMobile_Top">
+              <div className="DAT_RuleHeaderMobile_Top_Filter">
+                <input
+                  type="text"
+                  placeholder={dataLang.formatMessage({ id: "enterRight" })}
+                  onChange={(e) => handleFilter(e)}
+                />
+                <CiSearch color="gray" size={20} />
+              </div>
+              {ruleInfor.value.setting.rule.add ? (
+                <button
+                  className="DAT_RuleHeaderMobile_Top_New"
+                  onClick={() => setViewState("create")}
+                >
+                  <IoAddOutline color="white" size={20} />
+                </button>
+              ) : (<></>)}
+            </div>
 
-      {isMobile.value ? (
-        <div className="DAT_RuleMobile">
-          {datafilter.map((item, i) => {
-            return (
-              <div key={i} className="DAT_RuleMobile_Content">
-                <div className="DAT_RuleMobile_Content_Top">
-                  <div className="DAT_RuleMobile_Content_Top_Ava">
-                    {i + 1}
+            <div className="DAT_RuleHeaderMobile_Title">
+              <MdOutlineAdminPanelSettings color="gray" size={25} />
+              <span>{dataLang.formatMessage({ id: "rule" })}</span>
+            </div>
+          </div>
+
+          <div className="DAT_RuleMobile">
+            {datafilter.map((item, i) => {
+              return (
+                <div key={i} className="DAT_RuleMobile_Content">
+                  <div className="DAT_RuleMobile_Content_Top">
+                    <div className="DAT_RuleMobile_Content_Top_Ava">
+                      {i + 1}
+                    </div>
+                    <div className="DAT_RuleMobile_Content_Top_Info">
+                      <div className="DAT_RuleMobile_Content_Top_Info_Name">
+                        {item.rulename_}
+                      </div>
+                    </div>
                   </div>
-                  <div className="DAT_RuleMobile_Content_Top_Info">
-                    <div className="DAT_RuleMobile_Content_Top_Info_Name">
-                      {item.rulename_}
+
+                  <div className="DAT_RuleMobile_Content_Bottom">
+                    <div className="DAT_RuleMobile_Content_Bottom_State">
+                      {dataLang.formatMessage({ id: "createdate" })}: ...
+                    </div>
+                    <div className="DAT_RuleMobile_Content_Bottom_Right">
+                      {ruleInfor.value.setting.rule.modify ? (
+                        <div className="DAT_RuleMobile_Content_Bottom_Right_Item"
+                          id={item.ruleid_}
+                          onClick={(e) => handleEdit(e)}
+                        >
+                          <FiEdit size={14} />
+                        </div>
+                      ) : (<></>)}
+                      {ruleInfor.value.setting.rule.remove ? (
+                        <div className="DAT_RuleMobile_Content_Bottom_Right_Item"
+                          onClick={(e) => handleDel(e)}
+                        >
+                          <IoTrashOutline size={16} />
+                        </div>
+                      ) : (<></>)}
                     </div>
                   </div>
                 </div>
-
-                <div className="DAT_RuleMobile_Content_Bottom">
-                  <div className="DAT_RuleMobile_Content_Bottom_State">
-                    {dataLang.formatMessage({ id: "createdate" })}: ...
-                  </div>
-                  <div className="DAT_RuleMobile_Content_Bottom_Right">
-                    {ruleInfor.value.setting.rule.modify ? (
-                      <div className="DAT_RuleMobile_Content_Bottom_Right_Item"
-                        id={item.ruleid_}
-                        onClick={(e) => handleEdit(e)}
-                      >
-                        <FiEdit size={14} />
-                      </div>
-                    ) : (<></>)}
-                    {ruleInfor.value.setting.rule.remove ? (
-                      <div className="DAT_RuleMobile_Content_Bottom_Right_Item"
-                        onClick={(e) => handleDel(e)}
-                      >
-                        <IoTrashOutline size={16} />
-                      </div>
-                    ) : (<></>)}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="DAT_Rule">
-          <div className="DAT_Rule_Header">
-            {dataLang.formatMessage({ id: "ruleList" })}
+              );
+            })}
           </div>
-
-          <div className="DAT_Rule_Content">
-            <DataTable
-              className="DAT_Table_Container"
-              columns={columnrule}
-              data={datafilter}
-              pagination
-              paginationComponentOptions={paginationComponentOptions}
-              // fixedHeader={true}
-              noDataComponent={<Empty />}
-            />
-          </div>
-        </div>
-      )}
+        </>
+      }
 
       <div className="DAT_ViewPopup"
         style={{

@@ -24,6 +24,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { FiEdit, FiFilter } from "react-icons/fi";
 import { IoTrashOutline } from "react-icons/io5";
+import { isBrowser } from "react-device-detect";
 
 export const tab = signal("logger");
 export const info = signal({});
@@ -650,10 +651,15 @@ export default function Device(props) {
 
   return (
     <>
-      {isMobile.value ? (
-        <div className="DAT_DeviceHeaderMobile">
-          <div className="DAT_DeviceHeaderMobile_Top">
-            <div className="DAT_DeviceHeaderMobile_Top_Filter">
+      {isBrowser
+        ?
+        <>
+          <div className="DAT_DeviceHeader">
+            <div className="DAT_DeviceHeader_Title">
+              <MdDevices color="gray" size={25} />
+              <span>{dataLang.formatMessage({ id: "device" })}</span>
+            </div>
+            <div className="DAT_DeviceHeader_Filter">
               <input
                 type="text"
                 id="search"
@@ -667,338 +673,335 @@ export default function Device(props) {
               />
               <CiSearch color="gray" size={20} />
             </div>
+            <div></div>
           </div>
 
-          <div className="DAT_DeviceHeaderMobile_Title">
-            <MdDevices color="gray" size={25} />
-            <span>{dataLang.formatMessage({ id: "device" })}</span>
-          </div>
-        </div>
-      ) : (
-        <div className="DAT_DeviceHeader">
-          <div className="DAT_DeviceHeader_Title">
-            <MdDevices color="gray" size={25} />
-            <span>{dataLang.formatMessage({ id: "device" })}</span>
-          </div>
-          <div className="DAT_DeviceHeader_Filter">
-            <input
-              type="text"
-              id="search"
-              placeholder={
-                tab.value == "logger"
-                  ? dataLang.formatMessage({ id: "enterLogger" })
-                  : dataLang.formatMessage({ id: "enterInverter" })
-              }
-              autoComplete="off"
-              onChange={(e) => handleSearch(e)}
-            />
-            <CiSearch color="gray" size={20} />
-          </div>
-          <div></div>
-        </div>
-
-      )}
-
-      {isMobile.value ? (
-        <div className="DAT_DeviceMobile">
-          <div className="DAT_Toollist_Tab_Mobile">
-            <button className="DAT_Toollist_Tab_Mobile_content"
-              onClick={() => (tabMobile.value = !tabMobile.value)}
-            >
-              <span> {tabLable.value}</span>
-              <div className="DAT_Toollist_Tab_Mobile_content_Icon">
-                <FiFilter />
-                {tabMobile.value ? <IoIosArrowDown /> : <IoIosArrowForward />}
-              </div>
-            </button>
-
-            <div className="DAT_Toollist_Tab_Mobile_list"
-              style={{
-                top: "50px",
-                height: tabMobile.value ? "66px" : "0",
-                transition: "0.5s",
-                boxShadow: tabMobile.value ? "0 0 4px 4px rgba(193, 193, 193, 0.5)" : "none"
-              }}
-            >
+          <div className="DAT_Device">
+            <div className="DAT_Toollist_Tab">
               {listTab.map((item, i) => {
-                return (
-                  <div
-                    className="DAT_Toollist_Tab_Mobile_list_item"
+                return tab.value === item.id ? (
+                  <div key={i} className="DAT_Toollist_Tab_main">
+                    <p className="DAT_Toollist_Tab_main_left"></p>
+                    <span
+                      className="DAT_Toollist_Tab_main_content1"
+                      id={item.id}
+                      style={{
+                        backgroundColor: "White",
+                        color: "black",
+                        borderRadius: "10px 10px 0 0",
+                      }}
+                      onClick={(e) => (tab.value = item.id)}
+                    >
+                      {item.name}
+                    </span>
+                    <p className="DAT_Toollist_Tab_main_right"></p>
+                  </div>
+                ) : (
+                  <span
+                    className="DAT_Toollist_Tab_main_content2"
                     key={i}
                     id={item.id}
-                    onClick={(e) => {
-                      handleTabMobile(e);
-                      tabMobile.value = false
-                    }}
-                  >
-                    {i + 1}: {item.name}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {(() => {
-            switch (tab.value) {
-              case "inverter":
-                return (
-                  <>
-                    {datafilerInvert.map((item, i) => {
-                      return (
-                        <div key={i} className="DAT_DeviceMobile_Content">
-                          <div className="DAT_DeviceMobile_Content_Top">
-                            <div className="DAT_DeviceMobile_Content_Top_Type"
-                              style={{ backgroundColor: COLOR.value.DarkGreenColor }}
-                              id={`${item.psn}_${tab.value}_${item.plogger}`}
-                              onClick={(e) => handleShowInfo(e)}
-                            >
-                              {item.pdata.mode}
-                            </div>
-                            <div className="DAT_DeviceMobile_Content_Top_Info">
-                              <div className="DAT_DeviceMobile_Content_Top_Info_Name"
-                                id={`${item.psn}_${tab.value}_${item.plogger}`}
-                                onClick={(e) => handleShowInfo(e)}
-                              >
-                                {item.pname}
-                              </div>
-                              <div className="DAT_DeviceMobile_Content_Top_Info_Sn">
-                                SN: {item.psn}
-                              </div>
-                              <div className="DAT_DeviceMobile_Content_Top_Info_OgLog">
-                                {dataLang.formatMessage({ id: "ogLog" })}: {item.plogger}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="DAT_DeviceMobile_Content_Bottom">
-                            <div className="DAT_DeviceMobile_Content_Bottom_State">
-                              {invt[item.plogger]?.[item.pdata.status] == 2 ? (
-                                <>
-                                  <FaCheckCircle size={16} color="green" />
-                                  <span>
-                                    {dataLang.formatMessage({ id: "online" })}
-                                  </span>
-                                </>
-                              ) : (
-                                <>
-                                  <MdOutlineError size={16} color="red" />
-                                  <span>
-                                    {dataLang.formatMessage({ id: "offline" })}
-                                  </span>
-                                </>
-                              )}
-                            </div>
-
-                            <div className="DAT_DeviceMobile_Content_Bottom_Right">
-                              {ruleInfor.value.setting.device.modify ===
-                                true ? (
-                                <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
-                                  <FiEdit
-                                    size={14}
-                                    id={`${item.psn}-${item.pname}-edit`}
-                                    onClick={(e) => handleEdit(e)}
-                                  />
-                                </div>
-                              ) : (
-                                <div></div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </>
-                );
-              case "meter":
-                return (<></>);
-              case "logger":
-                return (
-                  <>
-                    {datafilter.map((item, i) => {
-                      return (
-                        <div key={i} className="DAT_DeviceMobile_Content">
-                          <div className="DAT_DeviceMobile_Content_Top">
-                            <div className="DAT_DeviceMobile_Content_Top_Type"
-                              id={`${item.pid}_${tab.value}`}
-                              onClick={(e) => handleShowInfo(e)}
-                            >
-                              {item.ptype}
-                            </div>
-                            <div className="DAT_DeviceMobile_Content_Top_Info">
-                              <div className="DAT_DeviceMobile_Content_Top_Info_Name"
-                                id={`${item.pid}_${tab.value}`}
-                                onClick={(e) => handleShowInfo(e)}
-                              >
-                                {item.pname}
-                              </div>
-                              <div className="DAT_DeviceMobile_Content_Top_Info_Sn">
-                                SN: {item.psn}
-                              </div>
-                              <div className="DAT_DeviceMobile_Content_Top_Info_Plant">
-                                {dataLang.formatMessage({ id: "project" })}: {item.pplantname}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="DAT_DeviceMobile_Content_Bottom">
-                            <div className="DAT_DeviceMobile_Content_Bottom_State">
-                              {item.pstate === 1 ? (
-                                <>
-                                  <FaCheckCircle size={16} color="green" />
-                                  <span>
-                                    {dataLang.formatMessage({ id: "online" })}
-                                  </span>
-                                </>
-                              ) : (
-                                <>
-                                  <MdOutlineError size={16} color="red" />
-                                  <span>
-                                    {dataLang.formatMessage({ id: "offline" })}
-                                  </span>
-                                </>
-                              )}
-                            </div>
-                            <div className="DAT_DeviceMobile_Content_Bottom_Right">
-                              {ruleInfor.value.setting.device.modify ===
-                                true ? (
-                                <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
-                                  <FiEdit
-                                    size={14}
-                                    id={`${item.psn}-${item.pname}-edit`}
-                                    onClick={(e) => handleEdit(e)}
-                                  />
-                                </div>
-                              ) : (
-                                <div></div>
-                              )}
-                              {ruleInfor.value.setting.device.remove ===
-                                true ? (
-                                <div
-                                  className="DAT_DeviceMobile_Content_Bottom_Right_Item"
-                                  id={`${item.psn}_${item.pplantid}_remove`}
-                                  onClick={(e) => handleRemove(e)}
-                                >
-                                  <IoTrashOutline size={16} />
-                                </div>
-                              ) : (
-                                <div></div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </>
-                );
-              default:
-                return <></>;
-            }
-          })()}
-        </div>
-      ) : (
-        <div className="DAT_Device">
-          <div className="DAT_Toollist_Tab">
-            {listTab.map((item, i) => {
-              return tab.value === item.id ? (
-                <div key={i} className="DAT_Toollist_Tab_main">
-                  <p className="DAT_Toollist_Tab_main_left"></p>
-                  <span
-                    className="DAT_Toollist_Tab_main_content1"
-                    id={item.id}
-                    style={{
-                      backgroundColor: "White",
-                      color: "black",
-                      borderRadius: "10px 10px 0 0",
-                    }}
+                    style={{ backgroundColor: "#dadada" }}
                     onClick={(e) => (tab.value = item.id)}
                   >
                     {item.name}
                   </span>
-                  <p className="DAT_Toollist_Tab_main_right"></p>
-                </div>
-              ) : (
-                <span
-                  className="DAT_Toollist_Tab_main_content2"
-                  key={i}
-                  id={item.id}
-                  style={{ backgroundColor: "#dadada" }}
-                  onClick={(e) => (tab.value = item.id)}
-                >
-                  {item.name}
-                </span>
-              );
-            })}
+                );
+              })}
 
-            <div
-              className="DAT_Device_Filter"
-              onClick={(e) => setDisplay(!display)}
-            >
-              <FiFilter />
-              <IoIosArrowUp
-                style={{
-                  transform: display ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "0.5s",
-                }}
-                onClick={() => handleFilterDevice()}
+              <div
+                className="DAT_Device_Filter"
+                onClick={(e) => setDisplay(!display)}
+              >
+                <FiFilter />
+                <IoIosArrowUp
+                  style={{
+                    transform: display ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "0.5s",
+                  }}
+                  onClick={() => handleFilterDevice()}
+                />
+              </div>
+            </div>
+
+            <div className="DAT_Device_Content">
+              {(() => {
+                switch (tab.value) {
+                  case "inverter":
+                    return (
+                      <DataTable
+                        className="DAT_Table_Container"
+                        columns={columnDevice}
+                        data={datafilerInvert}
+                        pagination
+                        paginationComponentOptions={paginationComponentOptions}
+                        // fixedHeader={true}
+                        noDataComponent={<Empty />}
+                      />
+                    );
+                  case "meter":
+                    return (
+                      <DataTable
+                        className="DAT_Table_Container"
+                        columns={columnDevice}
+                        data={dataMeter}
+                        pagination
+                        paginationComponentOptions={paginationComponentOptions}
+                        // fixedHeader={true}
+                        noDataComponent={<Empty />}
+                      />
+                    );
+                  case "logger":
+                    return (
+                      <DataTable
+                        className="DAT_Table_Container"
+                        columns={columnRemote}
+                        data={datafilter}
+                        pagination
+                        paginationComponentOptions={paginationComponentOptions}
+                        // fixedHeader={true}
+                        noDataComponent={<Empty />}
+                      />
+                    );
+                  default:
+                    return <></>;
+                }
+              })()}
+
+              <Filter
+                type="device"
+                display={display}
+                handlefilterdevice={handleFilterDevice}
+                handleReset={handleReset}
+                handleClose={handleCloseFilter}
+                handleCancel={closeFilter}
               />
             </div>
           </div>
+        </>
+        :
+        <>
+          <div className="DAT_DeviceHeaderMobile">
+            <div className="DAT_DeviceHeaderMobile_Top">
+              <div className="DAT_DeviceHeaderMobile_Top_Filter">
+                <input
+                  type="text"
+                  id="search"
+                  placeholder={
+                    tab.value == "logger"
+                      ? dataLang.formatMessage({ id: "enterLogger" })
+                      : dataLang.formatMessage({ id: "enterInverter" })
+                  }
+                  autoComplete="off"
+                  onChange={(e) => handleSearch(e)}
+                />
+                <CiSearch color="gray" size={20} />
+              </div>
+            </div>
 
-          <div className="DAT_Device_Content">
+            <div className="DAT_DeviceHeaderMobile_Title">
+              <MdDevices color="gray" size={25} />
+              <span>{dataLang.formatMessage({ id: "device" })}</span>
+            </div>
+          </div>
+
+          <div className="DAT_DeviceMobile">
+            <div className="DAT_Toollist_Tab_Mobile">
+              <button className="DAT_Toollist_Tab_Mobile_content"
+                onClick={() => (tabMobile.value = !tabMobile.value)}
+              >
+                <span> {tabLable.value}</span>
+                <div className="DAT_Toollist_Tab_Mobile_content_Icon">
+                  <FiFilter />
+                  {tabMobile.value ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                </div>
+              </button>
+
+              <div className="DAT_Toollist_Tab_Mobile_list"
+                style={{
+                  top: "50px",
+                  height: tabMobile.value ? "66px" : "0",
+                  transition: "0.5s",
+                  boxShadow: tabMobile.value ? "0 0 4px 4px rgba(193, 193, 193, 0.5)" : "none"
+                }}
+              >
+                {listTab.map((item, i) => {
+                  return (
+                    <div
+                      className="DAT_Toollist_Tab_Mobile_list_item"
+                      key={i}
+                      id={item.id}
+                      onClick={(e) => {
+                        handleTabMobile(e);
+                        tabMobile.value = false
+                      }}
+                    >
+                      {i + 1}: {item.name}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             {(() => {
               switch (tab.value) {
                 case "inverter":
                   return (
-                    <DataTable
-                      className="DAT_Table_Container"
-                      columns={columnDevice}
-                      data={datafilerInvert}
-                      pagination
-                      paginationComponentOptions={paginationComponentOptions}
-                      // fixedHeader={true}
-                      noDataComponent={<Empty />}
-                    />
+                    <>
+                      {datafilerInvert.map((item, i) => {
+                        return (
+                          <div key={i} className="DAT_DeviceMobile_Content">
+                            <div className="DAT_DeviceMobile_Content_Top">
+                              <div className="DAT_DeviceMobile_Content_Top_Type"
+                                style={{ backgroundColor: COLOR.value.DarkGreenColor }}
+                                id={`${item.psn}_${tab.value}_${item.plogger}`}
+                                onClick={(e) => handleShowInfo(e)}
+                              >
+                                {item.pdata.mode}
+                              </div>
+                              <div className="DAT_DeviceMobile_Content_Top_Info">
+                                <div className="DAT_DeviceMobile_Content_Top_Info_Name"
+                                  id={`${item.psn}_${tab.value}_${item.plogger}`}
+                                  onClick={(e) => handleShowInfo(e)}
+                                >
+                                  {item.pname}
+                                </div>
+                                <div className="DAT_DeviceMobile_Content_Top_Info_Sn">
+                                  SN: {item.psn}
+                                </div>
+                                <div className="DAT_DeviceMobile_Content_Top_Info_OgLog">
+                                  {dataLang.formatMessage({ id: "ogLog" })}: {item.plogger}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="DAT_DeviceMobile_Content_Bottom">
+                              <div className="DAT_DeviceMobile_Content_Bottom_State">
+                                {invt[item.plogger]?.[item.pdata.status] == 2 ? (
+                                  <>
+                                    <FaCheckCircle size={16} color="green" />
+                                    <span>
+                                      {dataLang.formatMessage({ id: "online" })}
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <MdOutlineError size={16} color="red" />
+                                    <span>
+                                      {dataLang.formatMessage({ id: "offline" })}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
+
+                              <div className="DAT_DeviceMobile_Content_Bottom_Right">
+                                {ruleInfor.value.setting.device.modify ===
+                                  true ? (
+                                  <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
+                                    <FiEdit
+                                      size={14}
+                                      id={`${item.psn}-${item.pname}-edit`}
+                                      onClick={(e) => handleEdit(e)}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div></div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
                   );
                 case "meter":
-                  return (
-                    <DataTable
-                      className="DAT_Table_Container"
-                      columns={columnDevice}
-                      data={dataMeter}
-                      pagination
-                      paginationComponentOptions={paginationComponentOptions}
-                      // fixedHeader={true}
-                      noDataComponent={<Empty />}
-                    />
-                  );
+                  return (<></>);
                 case "logger":
                   return (
-                    <DataTable
-                      className="DAT_Table_Container"
-                      columns={columnRemote}
-                      data={datafilter}
-                      pagination
-                      paginationComponentOptions={paginationComponentOptions}
-                      // fixedHeader={true}
-                      noDataComponent={<Empty />}
-                    />
+                    <>
+                      {datafilter.map((item, i) => {
+                        return (
+                          <div key={i} className="DAT_DeviceMobile_Content">
+                            <div className="DAT_DeviceMobile_Content_Top">
+                              <div className="DAT_DeviceMobile_Content_Top_Type"
+                                id={`${item.pid}_${tab.value}`}
+                                onClick={(e) => handleShowInfo(e)}
+                              >
+                                {item.ptype}
+                              </div>
+                              <div className="DAT_DeviceMobile_Content_Top_Info">
+                                <div className="DAT_DeviceMobile_Content_Top_Info_Name"
+                                  id={`${item.pid}_${tab.value}`}
+                                  onClick={(e) => handleShowInfo(e)}
+                                >
+                                  {item.pname}
+                                </div>
+                                <div className="DAT_DeviceMobile_Content_Top_Info_Sn">
+                                  SN: {item.psn}
+                                </div>
+                                <div className="DAT_DeviceMobile_Content_Top_Info_Plant">
+                                  {dataLang.formatMessage({ id: "project" })}: {item.pplantname}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="DAT_DeviceMobile_Content_Bottom">
+                              <div className="DAT_DeviceMobile_Content_Bottom_State">
+                                {item.pstate === 1 ? (
+                                  <>
+                                    <FaCheckCircle size={16} color="green" />
+                                    <span>
+                                      {dataLang.formatMessage({ id: "online" })}
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <MdOutlineError size={16} color="red" />
+                                    <span>
+                                      {dataLang.formatMessage({ id: "offline" })}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
+                              <div className="DAT_DeviceMobile_Content_Bottom_Right">
+                                {ruleInfor.value.setting.device.modify ===
+                                  true ? (
+                                  <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
+                                    <FiEdit
+                                      size={14}
+                                      id={`${item.psn}-${item.pname}-edit`}
+                                      onClick={(e) => handleEdit(e)}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div></div>
+                                )}
+                                {ruleInfor.value.setting.device.remove ===
+                                  true ? (
+                                  <div
+                                    className="DAT_DeviceMobile_Content_Bottom_Right_Item"
+                                    id={`${item.psn}_${item.pplantid}_remove`}
+                                    onClick={(e) => handleRemove(e)}
+                                  >
+                                    <IoTrashOutline size={16} />
+                                  </div>
+                                ) : (
+                                  <div></div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
                   );
                 default:
                   return <></>;
               }
             })()}
-
-            <Filter
-              type="device"
-              display={display}
-              handlefilterdevice={handleFilterDevice}
-              handleReset={handleReset}
-              handleClose={handleCloseFilter}
-              handleCancel={closeFilter}
-            />
           </div>
-        </div>
-      )}
+        </>
+      }
 
       <div className="DAT_DeviceInfor"
         style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}

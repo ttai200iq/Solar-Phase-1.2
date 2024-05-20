@@ -2,18 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Project.scss";
 
 import axios from "axios";
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { PacmanLoader } from "react-spinners";
 import { projectData } from "./Project";
 import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
-import { IoLocation } from "react-icons/io5";
 import { host } from "../Lang/Contant";
-import PopupState, { bindHover, bindPopper } from "material-ui-popup-state";
-import { Fade, Paper, Popper, Typography } from "@mui/material";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { tab } from "../Device/Device";
-import { COLOR } from "../../App";
 import { isBrowser } from "react-device-detect";
 
 export default function Weather() {
@@ -279,7 +272,7 @@ export default function Weather() {
             <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
               <img
                 src={"/dat_picture/station.jpg"}
-                style={{ width: "180px", height: "100px", marginRight: "20px" }}
+                style={{ width: "160px", height: "80px" }}
                 alt=""
               />
               <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Icon">
@@ -440,7 +433,6 @@ export default function Weather() {
           </div>
         </>
       }
-
     </div>
   );
 }
