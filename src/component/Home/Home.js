@@ -234,7 +234,7 @@ export default function Home(props) {
         y={y}
         width={width}
         height={height}
-        fill={"#FFD580"}
+        fill={"#ffac1c"}
         rx="3"
         ry="3"
         opacity="1"
@@ -1200,7 +1200,7 @@ export default function Home(props) {
                         )}
                       </span>
                       <span
-                        style={{ color: COLOR.value.grayText, fontSize: "18px" }}
+                        style={{ fontSize: "18px" }}
                       >
                         {showUnit(price)}
                       </span>
@@ -1338,10 +1338,10 @@ export default function Home(props) {
                             <Bar
                               shape={<TriangleBar />}
                               dataKey={dataLang.formatMessage({ id: "yearOutput" })}
-                              fill={"#FFD580"}
+                              fill={"#ffac1c"}
                               barSize={15}
                               legendType="circle"
-                              style={{ fill: "#FFD580" }}
+                              style={{ fill: "#ffac1c" }}
                             />
                           </BarChart>
                         </ResponsiveContainer>
@@ -1372,10 +1372,10 @@ export default function Home(props) {
                             <Bar
                               shape={<TriangleBar />}
                               dataKey={dataLang.formatMessage({ id: "monthOutput" })}
-                              fill={"#FFD580"}
+                              fill={"#ffac1c"}
                               barSize={15}
                               legendType="circle"
-                              style={{ fill: "#FFD580" }}
+                              style={{ fill: "#ffac1c" }}
                             />
                           </BarChart>
                         </ResponsiveContainer>

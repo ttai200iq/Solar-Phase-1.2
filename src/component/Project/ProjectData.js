@@ -1072,7 +1072,7 @@ export default function ProjectData(props) {
                   />
                 </div>
 
-                {ruleInfor.value.setting.device.add ? (
+                {/* {ruleInfor.value.setting.device.add ? (
                   projectData.value.shared === 1 ? (
                     <></>
                   ) : (
@@ -1093,7 +1093,7 @@ export default function ProjectData(props) {
                   )
                 ) : (
                   <></>
-                )}
+                )} */}
 
                 <div
                   className="DAT_ProjectData_Header_Right_Close"
@@ -1138,57 +1138,56 @@ export default function ProjectData(props) {
                 //   </div>
                 // </div>
 
-                <div className="DAT_ProjectData_NewDashboard">
-                  {
-                    isBrowser
-                      ?
-                      <>
-                        <div className="DAT_ProjectData_NewDashboard_Top">
-                          <div className="DAT_ProjectData_NewDashboard_Top_Left">
-                            <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
-                              Graph
-                            </div>
-                            <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
-                              <Benefit />
-                            </div>
+                <div>
+                  {isBrowser
+                    ?
+                    <>
+                      <div className="DAT_ProjectData_NewDashboard_Top">
+                        <div className="DAT_ProjectData_NewDashboard_Top_Left">
+                          <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
+                            Graph
                           </div>
-                          <div className="DAT_ProjectData_NewDashboard_Top_Right">
-                            <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
-                              <ProjectInfo />
-                            </div>
-                            <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
-                              <Weather />
-                            </div>
+                          <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
+                            <Benefit />
                           </div>
                         </div>
-                        <div className="DAT_ProjectData_NewDashboard_Bottom">
-                          <DashboardHistory />
-                        </div>
-                      </>
-                      :
-                      <>
-                        <div className="DAT_ProjectData_Dashboard_Top">
-                          <div className="DAT_ProjectData_Dashboard_Top_Left">
-                            <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
-                              Graph
-                            </div>
-                            <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
-                              <Benefit />
-                            </div>
+                        <div className="DAT_ProjectData_NewDashboard_Top_Right">
+                          <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
+                            <ProjectInfo />
                           </div>
-                          <div className="DAT_ProjectData_Dashboard_Top_Right">
-                            <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
-                              <ProjectInfo />
-                            </div>
-                            <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
-                              <Weather />
-                            </div>
+                          <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
+                            <Weather />
                           </div>
                         </div>
-                        <div className="DAT_ProjectData_Dashboard_Bottom">
-                          <DashboardHistory />
+                      </div>
+                      <div className="DAT_ProjectData_NewDashboard_Bottom">
+                        <DashboardHistory />
+                      </div>
+                    </>
+                    :
+                    <>
+                      <div className="DAT_ProjectData_Dashboard_Top">
+                        <div className="DAT_ProjectData_Dashboard_Top_Left">
+                          <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
+                            Graph
+                          </div>
+                          <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
+                            <Benefit />
+                          </div>
                         </div>
-                      </>
+                        <div className="DAT_ProjectData_Dashboard_Top_Right">
+                          <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
+                            <ProjectInfo />
+                          </div>
+                          <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
+                            <Weather />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="DAT_ProjectData_Dashboard_Bottom">
+                        <DashboardHistory />
+                      </div>
+                    </>
                   }
                 </div>
               );

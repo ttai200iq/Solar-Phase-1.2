@@ -16,6 +16,7 @@
     /* Firefox */
     box-shadow: 2px 2px 5px rgba(198, 197, 197, 0.4);
     transition: all 0.2s;
+    font-family: segoeui !important;
 
     &::-webkit-scrollbar {
         display: none;
@@ -50,7 +51,6 @@
         }
 
         & label {
-            font-family: Montserrat-Medium;
             cursor: pointer;
             flex: 8;
             font-size: 15px;
