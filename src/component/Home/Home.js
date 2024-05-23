@@ -234,7 +234,7 @@ export default function Home(props) {
         y={y}
         width={width}
         height={height}
-        fill={"#ffac1c"}
+        fill={"#2661F8"}
         rx="3"
         ry="3"
         opacity="1"
@@ -930,7 +930,7 @@ export default function Home(props) {
               >
                 <div className="DAT_Home_Row1_Elec_Content_Item">
                   <div className="DAT_Home_Row1_Elec_Content_Item_Icon">
-                    <img src="/dat_icon/day-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-01.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Elec_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -954,7 +954,7 @@ export default function Home(props) {
 
                 <div className="DAT_Home_Row1_Elec_Content_Item">
                   <div className="DAT_Home_Row1_Elec_Content_Item_Icon">
-                    <img src="/dat_icon/thunder-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-02.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Elec_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -982,7 +982,7 @@ export default function Home(props) {
               >
                 <div className="DAT_Home_Row1_Elec_Content_Item">
                   <div className="DAT_Home_Row1_Elec_Content_Item_Icon">
-                    <img src="/dat_icon/total-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-03.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Elec_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -1006,7 +1006,7 @@ export default function Home(props) {
 
                 <div className="DAT_Home_Row1_Elec_Content_Item">
                   <div className="DAT_Home_Row1_Elec_Content_Item_Icon">
-                    <img src="/dat_icon/year-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-04.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Elec_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -1105,7 +1105,7 @@ export default function Home(props) {
               >
                 <div className="DAT_Home_Row1_Benefit_Content_Item">
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Icon">
-                    <img src="/dat_icon/coal-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-05.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -1131,7 +1131,7 @@ export default function Home(props) {
 
                 <div className="DAT_Home_Row1_Benefit_Content_Item">
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Icon">
-                    <img src="/dat_icon/tree-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-06.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -1161,7 +1161,7 @@ export default function Home(props) {
               >
                 <div className="DAT_Home_Row1_Benefit_Content_Item">
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Icon">
-                    <img src="/dat_icon/co2-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-08.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -1187,7 +1187,7 @@ export default function Home(props) {
 
                 <div className="DAT_Home_Row1_Benefit_Content_Item">
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Icon">
-                    <img src="/dat_icon/money-orange.png" alt="" />
+                    <img src="/dat_icon/3_Icon_AppEmbody-07.png" alt="" />
                   </div>
                   <div className="DAT_Home_Row1_Benefit_Content_Item_Detail">
                     <div style={{ fontSize: "15px", color: COLOR.value.grayText }}>
@@ -1338,10 +1338,10 @@ export default function Home(props) {
                             <Bar
                               shape={<TriangleBar />}
                               dataKey={dataLang.formatMessage({ id: "yearOutput" })}
-                              fill={"#ffac1c"}
+                              fill={"#2661F8"}
                               barSize={15}
                               legendType="circle"
-                              style={{ fill: "#ffac1c" }}
+                              style={{ fill: "#2661F8" }}
                             />
                           </BarChart>
                         </ResponsiveContainer>
@@ -1372,10 +1372,10 @@ export default function Home(props) {
                             <Bar
                               shape={<TriangleBar />}
                               dataKey={dataLang.formatMessage({ id: "monthOutput" })}
-                              fill={"#ffac1c"}
+                              fill={"#2661F8"}
                               barSize={15}
                               legendType="circle"
-                              style={{ fill: "#ffac1c" }}
+                              style={{ fill: "#2661F8" }}
                             />
                           </BarChart>
                         </ResponsiveContainer>

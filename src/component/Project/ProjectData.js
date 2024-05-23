@@ -31,6 +31,7 @@ import { FiEdit, FiFilter } from "react-icons/fi";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
 import { isBrowser } from "react-device-detect";
+import GraphComponent from "./GraphComponent";
 
 export const temp = signal([]);
 export const inverterDB = signal([]);
@@ -1145,7 +1146,7 @@ export default function ProjectData(props) {
                       <div className="DAT_ProjectData_NewDashboard_Top">
                         <div className="DAT_ProjectData_NewDashboard_Top_Left">
                           <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
-                            Graph
+                            <GraphComponent />
                           </div>
                           <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
                             <Benefit />
@@ -1169,7 +1170,7 @@ export default function ProjectData(props) {
                       <div className="DAT_ProjectData_Dashboard_Top">
                         <div className="DAT_ProjectData_Dashboard_Top_Left">
                           <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
-                            Graph
+                            <GraphComponent />
                           </div>
                           <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
                             <Benefit />
@@ -1635,6 +1636,59 @@ export default function ProjectData(props) {
                   }
                 </div>
               );
+            case "share":
+              return (
+                <div className="DAT_ProjectData_Share">
+                  <div
+                    className="DAT_ProjectData_Share_Header"
+                    style={{
+                      padding: "15px",
+                      backgroundColor: "rgba(233, 233, 233, 0.5)",
+                    }}
+                  >
+                    {dataLang.formatMessage({ id: "share" })}
+                  </div>
+
+                  {isBrowser
+                    ?
+                    <div className="DAT_ProjectData_Share_Content">
+                      <DataTable
+                        className="DAT_Table_Device"
+                        columns={columnShare}
+                        data={getShared}
+                        pagination
+                        paginationComponentOptions={paginationComponentOptions}
+                        // fixedHeader={true}
+                        noDataComponent={<Empty />}
+                      />
+                    </div>
+                    :
+                    <div className="DAT_ProjectData_Share_ContentMobile">
+                      {getShared.map((item, i) => {
+                        return (
+                          <div key={i} className="DAT_ProjectData_Share_ContentMobile_Item">
+                            <div className="DAT_ProjectData_Share_ContentMobile_Item_Left">
+                              {i + 1}
+                            </div>
+
+                            <div className="DAT_ProjectData_Share_ContentMobile_Item_Right">
+                              <div className="DAT_ProjectData_Share_ContentMobile_Item_Right_Name">
+                                {item.name_}
+                              </div>
+                              <div className="DAT_ProjectData_Share_ContentMobile_Item_Right_Phone">
+                                {item.phone_}
+                              </div>
+                              <div className="DAT_ProjectData_Share_ContentMobile_Item_Right_Email">
+                                {item.mail_}
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  }
+                </div>
+              );
             // case "alert":
             //   return (
             //     <div className="DAT_ProjectData_Alert">
@@ -1765,32 +1819,6 @@ export default function ProjectData(props) {
             //       </div>
             //     </div>
             //   );
-            case "share":
-              return (
-                <div className="DAT_ProjectData_Share">
-                  <div
-                    className="DAT_ProjectData_Share_Header"
-                    style={{
-                      padding: "15px",
-                      backgroundColor: "rgba(233, 233, 233, 0.5)",
-                    }}
-                  >
-                    {dataLang.formatMessage({ id: "share" })}
-                  </div>
-
-                  <div className="DAT_ProjectData_Share_Content">
-                    <DataTable
-                      className="DAT_Table_Device"
-                      columns={columnShare}
-                      data={getShared}
-                      pagination
-                      paginationComponentOptions={paginationComponentOptions}
-                      // fixedHeader={true}
-                      noDataComponent={<Empty />}
-                    />
-                  </div>
-                </div>
-              );
             default:
               <></>;
           }

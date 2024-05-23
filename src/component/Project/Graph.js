@@ -179,21 +179,21 @@ const GraphGrid = (props) => {
                 <LineD dur="10s" strokeWidth="3" state={props.state} />
 
                 <foreignObject x="5" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/production.png" width="30" color="black" height="30" val={Number(parseFloat(props.cal?.pro_1 / 1000 || 0).toFixed(3)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-09.png" width="30" color="black" height="30" val={Number(parseFloat(props.cal?.pro_1 / 1000 || 0).toFixed(3)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 <foreignObject x="193" y="233" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <SolarImg src="/dat_icon/consumption.png" width="30" height="30" />
+                    <SolarImg src="/dat_icon/3_Icon_AppEmbody-14.png" width="30" height="30" />
                 </foreignObject>
 
 
                 <foreignObject x="395" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <SolarImg src="/dat_icon/grid.png" width="30" height="30" />
+                    <SolarImg src="/dat_icon/3_Icon_AppEmbody-10.png" width="30" height="30" />
                 </foreignObject>
 
                 <foreignObject x="193" y="92" width="102.628" height="68.353" style={{ overflow: "hidden", padding: "2px" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", backgroundColor: "white", borderRadius: "3px" }}>
-                        <img src="/dat_icon/Inverter.png" width="60" height="60" alt="" />
+                        <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" />
                     </div>
                 </foreignObject>
             </svg>
@@ -342,20 +342,20 @@ const GraphConsumption = (props) => {
                 <LineD dur="10s" strokeWidth="3" />
 
                 <foreignObject x="5" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/production.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.pro_1 / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-09.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.pro_1 / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 <foreignObject x="193" y="233" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/consumption.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.con_1 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-14.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.con_1 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 <foreignObject x="395" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/grid.png" width="30" height="30" color={props.cal?.grid_1 < 0 ? "red" : "black"} val={Number(parseFloat(Math.abs(props.cal?.grid_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-10.png" width="30" height="30" color={props.cal?.grid_1 < 0 ? "red" : "black"} val={Number(parseFloat(Math.abs(props.cal?.grid_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 <foreignObject x="193" y="92" width="102.628" height="68.353" style={{ overflow: "hidden", padding: "2px" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", backgroundColor: "white", borderRadius: "3px" }}>
-                        <img src="/dat_icon/Inverter.png" width="60" height="60" alt="" />
+                        <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" />
                     </div>
                 </foreignObject>
             </svg>
@@ -363,14 +363,11 @@ const GraphConsumption = (props) => {
     );
 };
 
-
-
 const GraphFull = (props) => {
     const [lineA_, setLinA] = useState("Default");
     const [lineB_, setLinB] = useState("Default");
     const [lineC_, setLinC] = useState("Default");
     const [lineD_, setLinD] = useState("Default");
-
 
     useEffect(() => {
 
@@ -418,9 +415,6 @@ const GraphFull = (props) => {
         }
 
     }, [props.cal.pro_1, props.cal.con_1, props.cal.grid_1, props.cal.bat_1]);
-
-
-
 
     const LineA = (props) => {
         return (
@@ -545,18 +539,18 @@ const GraphFull = (props) => {
                 <LineD dur="10s" strokeWidth="3" />
 
                 <foreignObject x="5" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/production.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.pro_1 / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-09.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.pro_1 / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 {/* <foreignObject x="395" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
                     <Solar src="/dat_icon/consumption.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.con_1).toFixed(2) || 0).toLocaleString("en-US")} unit="kW" />
                 </foreignObject> */}
                 <foreignObject x="395" y="5" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/grid.png" width="30" height="30" color={props.cal?.grid_1 < 0 ? "red" : "black"} val={Number(parseFloat(Math.abs(props.cal?.grid_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-10.png" width="30" height="30" color={props.cal?.grid_1 < 0 ? "red" : "black"} val={Number(parseFloat(Math.abs(props.cal?.grid_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 <foreignObject x="5" y="235" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/bat.png" width="20" height="30" color={props.cal?.bat_1 < 0 ? "red" : "black"} val={Number(parseFloat(Math.abs(props.cal?.bat_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-11.png" width="30" height="30" color={props.cal?.bat_1 < 0 ? "red" : "black"} val={Number(parseFloat(Math.abs(props.cal?.bat_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 {/* <foreignObject x="395" y="235" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
@@ -564,7 +558,7 @@ const GraphFull = (props) => {
                 </foreignObject> */}
 
                 <foreignObject x="395" y="235" width="100" height="60" style={{ overflow: "hidden", padding: "2px" }}>
-                    <Solar src="/dat_icon/consumption.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.con_1 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar src="/dat_icon/3_Icon_AppEmbody-14.png" width="30" height="30" color="black" val={Number(parseFloat(props.cal?.con_1 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
 
                 <foreignObject x="5.138" y="215.936" width="99.953" height="22.554" style={{ overflow: "hidden", padding: "2px" }}>
@@ -575,7 +569,7 @@ const GraphFull = (props) => {
 
                 <foreignObject x="193" y="112" width="102" height="68" style={{ overflow: "hidden", padding: "2px" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", backgroundColor: "white", borderRadius: "3px" }}>
-                        <img src="/dat_icon/Inverter.png" width="60" height="60" alt="" />
+                        <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" />
                     </div>
                 </foreignObject>
             </svg>

@@ -1,10 +1,8 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import "./Project.scss";
 
 import { projectData } from './Project';
 import { useIntl } from 'react-intl';
-import { CiClock1 } from 'react-icons/ci';
-import { FcAlarmClock } from "react-icons/fc";
 import Graph from './Graph';
 import { useSelector } from 'react-redux';
 import { signal } from "@preact/signals-react";
@@ -16,7 +14,6 @@ export default function GraphComponent(props) {
     const intervalIDRef = useReducer(null);
     const dashArray = 10 * Math.PI * 2;
     const max = 258
-
 
     useEffect(function () {
 
@@ -51,7 +48,6 @@ export default function GraphComponent(props) {
 
     }, [cal])
 
-
     return (
         <div className="DAT_ProjectData_Dashboard_Data_Center">
             <div className="DAT_ProjectData_Dashboard_Data_Center_Tit">
@@ -60,19 +56,11 @@ export default function GraphComponent(props) {
                         switch (projectData.value.plantmode) {
                             case "consumption":
                                 return (
-                                    <>
-                                        {dataLang.formatMessage({
-                                            id: "consumptionType",
-                                        })}
-                                    </>
+                                    <>{dataLang.formatMessage({ id: "consumptionType" })}</>
                                 );
                             case "hybrid":
                                 return (
-                                    <>
-                                        {dataLang.formatMessage({
-                                            id: "hybridType",
-                                        })}
-                                    </>
+                                    <>{dataLang.formatMessage({ id: "hybridType" })}</>
                                 );
                             case "ESS":
                                 return (
@@ -80,16 +68,13 @@ export default function GraphComponent(props) {
                                 );
                             default:
                                 return (
-                                    <>
-                                        {dataLang.formatMessage({ id: "gridType" })}
-                                    </>
+                                    <>{dataLang.formatMessage({ id: "gridType" })}</>
                                 );
                         }
                     })()}
                 </div>
                 {projectData.value.state
                     ? <div className="DAT_ProjectData_Dashboard_Data_Center_Tit_Timer" style={{ width: "40px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-
                         <svg viewBox='0 0 24 24' xmlns="http://www.w3.org/2000/svg" width={"100%"} height={"100%"}
                             style={{
                                 rotate: '-90deg',
@@ -112,8 +97,8 @@ export default function GraphComponent(props) {
                             <image href="/dat_icon/clock.png" x="4" y="4" width="16" height="16" />
                         </svg>
                     </div>
-                    : <></>}
-
+                    : <></>
+                }
             </div>
             <Graph
                 type={projectData.value.plantmode}

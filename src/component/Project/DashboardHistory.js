@@ -1592,9 +1592,7 @@ export default function DashboardHistory(props) {
                     id="datepicker"
                     onChange={(date) => handleChart(date)}
                     showMonthYearPicker={dateType === "date" ? false : true}
-                    showYearPicker={
-                      dateType === "date" || dateType === "month" ? false : true
-                    }
+                    showYearPicker={dateType === "date" || dateType === "month" ? false : true}
                     disabled={dateType === "total" ? true : false}
                     customInput={
                       <button className="DAT_CustomPicker">
