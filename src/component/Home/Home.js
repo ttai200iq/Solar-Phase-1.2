@@ -1805,7 +1805,7 @@ export default function Home(props) {
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   /> */}
-                  <img src="/dat_icon/day-orange.png" style={{ width: "40px", height: "40px" }} alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-01.png" style={{ width: "40px", height: "40px" }} alt="" />
                 </div>
                 <div>
                   <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
@@ -1834,7 +1834,7 @@ export default function Home(props) {
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   /> */}
-                  <img src="/dat_icon/thunder-orange.png" style={{ width: "40px", height: "40px" }} alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-02.png" style={{ width: "40px", height: "40px" }} alt="" />
                 </div>
                 <div>
                   <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
@@ -1863,7 +1863,7 @@ export default function Home(props) {
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   /> */}
-                  <img src="/dat_icon/total-orange.png" style={{ width: "40px", height: "40px" }} alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-03.png" style={{ width: "40px", height: "40px" }} alt="" />
                 </div>
                 <div>
                   <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
@@ -1892,7 +1892,7 @@ export default function Home(props) {
                     alt=""
                     style={{ width: "35px", height: "35px" }}
                   /> */}
-                  <img src="/dat_icon/year-orange.png" style={{ width: "40px", height: "40px" }} alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-04.png" style={{ width: "40px", height: "40px" }} alt="" />
                 </div>
                 <div>
                   <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
@@ -2000,7 +2000,7 @@ export default function Home(props) {
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                   {/* <img src="/dat_icon/coal.jpg" alt="" /> */}
-                  <img src="/dat_icon/coal-orange.png" alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-05.png" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -2027,7 +2027,7 @@ export default function Home(props) {
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                   {/* <img src="/dat_icon/tree.jpg" alt="" /> */}
-                  <img src="/dat_icon/tree-orange.png" alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-06.png" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -2054,7 +2054,7 @@ export default function Home(props) {
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                   {/* <img src="/dat_icon/co2.jpg" alt="" /> */}
-                  <img src="/dat_icon/co2-orange.png" alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-08.png" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -2081,7 +2081,7 @@ export default function Home(props) {
               <div className="DAT_HomeMobile_Benefit_Content_Item">
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                   {/* <img src="/dat_icon/money.jpg" alt="" /> */}
-                  <img src="/dat_icon/money-orange.png" alt="" />
+                  <img src="/dat_icon/3_Icon_AppEmbody-07.png" alt="" />
                 </div>
                 <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
                   <div style={{ fontSize: "14px", color: COLOR.value.grayText }}>
@@ -2368,10 +2368,10 @@ export default function Home(props) {
                       <Bar
                         shape={<TriangleBar />}
                         dataKey={dataLang.formatMessage({ id: "yearOutput" })}
-                        fill={"#FFD580"}
+                        fill={"#2661F8"}
                         barSize={15}
                         legendType="circle"
-                        style={{ fill: "#FFD580" }}
+                        style={{ fill: "#2661F8" }}
                       />
                     </BarChart>
                   </ResponsiveContainer>
@@ -2402,10 +2402,10 @@ export default function Home(props) {
                       <Bar
                         shape={<TriangleBar />}
                         dataKey={dataLang.formatMessage({ id: "monthOutput" })}
-                        fill={"#FFD580"}
+                        fill={"#2661F8"}
                         barSize={15}
                         legendType="circle"
-                        style={{ fill: "#FFD580" }}
+                        style={{ fill: "#2661F8" }}
                       />
                     </BarChart>
                   </ResponsiveContainer>

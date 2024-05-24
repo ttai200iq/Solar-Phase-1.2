@@ -193,7 +193,8 @@ const GraphGrid = (props) => {
 
                 <foreignObject x="193" y="92" width="102.628" height="68.353" style={{ overflow: "hidden", padding: "2px" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", backgroundColor: "white", borderRadius: "3px" }}>
-                        <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" />
+                        {/* <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" /> */}
+                        <img src="/dat_icon/inverter_2.png" width="100" height="100" alt="" />
                     </div>
                 </foreignObject>
             </svg>
@@ -355,7 +356,8 @@ const GraphConsumption = (props) => {
 
                 <foreignObject x="193" y="92" width="102.628" height="68.353" style={{ overflow: "hidden", padding: "2px" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", backgroundColor: "white", borderRadius: "3px" }}>
-                        <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" />
+                        {/* <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" /> */}
+                        <img src="/dat_icon/inverter_2.png" width="100" height="100" alt="" />
                     </div>
                 </foreignObject>
             </svg>
@@ -569,7 +571,8 @@ const GraphFull = (props) => {
 
                 <foreignObject x="193" y="112" width="102" height="68" style={{ overflow: "hidden", padding: "2px" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", backgroundColor: "white", borderRadius: "3px" }}>
-                        <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" />
+                        {/* <img src="/dat_icon/3_Icon_AppEmbody-15.png" width="60" height="60" alt="" /> */}
+                        <img src="/dat_icon/inverter_2.png" width="100" height="100" alt="" />
                     </div>
                 </foreignObject>
             </svg>

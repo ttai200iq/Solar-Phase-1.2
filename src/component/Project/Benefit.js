@@ -234,7 +234,7 @@ export default function Benefit(props) {
                                             )}
                                         </span>
                                         <span
-                                            style={{ color: COLOR.value.grayText, fontSize: "18px" }}
+                                            style={{ fontSize: "18px" }}
                                         >
                                             {showUnit(coalsave.value.value * projectData.value.price)}
                                         </span>
@@ -334,7 +334,7 @@ export default function Benefit(props) {
                             <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
                                     {/* <img src="/dat_icon/Coal Cart.png" alt="coal" /> */}
-                                    <img src="/dat_icon/coal-orange.png" alt="" />
+                                    <img src="/dat_icon/3_Icon_AppEmbody-05.png" alt="" />
                                 </div>
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container">
                                     <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container_Tit">
@@ -361,7 +361,7 @@ export default function Benefit(props) {
                             <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
                                     {/* <img src="/dat_icon/CO2.png" alt="power" /> */}
-                                    <img src="/dat_icon/co2-orange.png" alt="" />
+                                    <img src="/dat_icon/3_Icon_AppEmbody-06.png" alt="" />
                                 </div>
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container">
                                     <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container_Tit">
@@ -388,7 +388,7 @@ export default function Benefit(props) {
                             <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
                                     {/* <img src="/dat_icon/BlueTree.png" alt="tree" /> */}
-                                    <img src="/dat_icon/tree-orange.png" alt="" />
+                                    <img src="/dat_icon/3_Icon_AppEmbody-08.png" alt="" />
                                 </div>
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container">
                                     <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container_Tit">
@@ -415,7 +415,7 @@ export default function Benefit(props) {
                             <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item">
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Icon">
                                     {/* <img src="/dat_icon/Money.png" alt="money" /> */}
-                                    <img src="/dat_icon/money-orange.png" alt="" />
+                                    <img src="/dat_icon/3_Icon_AppEmbody-07.png" alt="" />
                                 </div>
                                 <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container">
                                     <div className="DAT_ProjectData_Dashboard_More_Right_Content_Col_Item_Container_Tit">
@@ -428,7 +428,7 @@ export default function Benefit(props) {
                                             )}
                                         </span>
                                         <span
-                                            style={{ color: COLOR.value.grayText, fontSize: "18px" }}
+                                            style={{ fontSize: "18px" }}
                                         >
                                             {showUnit(coalsave.value.value * projectData.value.price)}
                                         </span>

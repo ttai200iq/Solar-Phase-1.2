@@ -754,8 +754,10 @@
                     justify-content: center;
                     font-size: 25px;
 
-                    background: url("../../../public/dat_picture/wave-orange.png"),
-                        url("../../../public/dat_picture/wave3-orange.png"), url("../../../public/dat_picture/wave2-orange.png");
+                    // background: url("../../../public/dat_picture/wave-orange.png"),
+                    //     url("../../../public/dat_picture/wave3-orange.png"), url("../../../public/dat_picture/wave2-orange.png");
+                    background: url("../../../public/dat_picture/wave.png"),
+                        url("../../../public/dat_picture/wave3.png"), url("../../../public/dat_picture/wave2.png");
                     background-size: 150px 150px;
                     background-repeat: repeat-x;
                     box-shadow: 0 0 4px 3px rgba(193, 193, 193, 0.4);
