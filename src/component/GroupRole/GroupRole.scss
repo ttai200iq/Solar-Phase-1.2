@@ -132,6 +132,13 @@
                             text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
                         }
 
+                        &_Info {
+                            max-width: 150px;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden; // an noi dung vuot ra ngoai
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                        }
+
                         &:hover {
                             background-color: rgba(198, 198, 198, 0.5);
                         }
