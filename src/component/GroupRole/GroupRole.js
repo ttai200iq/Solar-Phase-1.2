@@ -17,9 +17,13 @@ import { AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { lowercasedata } from "../ErrorSetting/ErrorSetting";
 import EditRole from "../Role/EditRole";
 import { Usr_, roleData } from "../Role/Role";
-import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
-import { Menu, MenuItem } from "@mui/material";
-
+import PopupState, {
+  bindHover,
+  bindMenu,
+  bindPopper,
+  bindToggle,
+} from "material-ui-popup-state";
+import { Fade, Menu, MenuItem, Paper, Popper, Typography } from "@mui/material";
 import { IoCaretBackOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
 import { IoMdMore } from "react-icons/io";
@@ -27,6 +31,8 @@ import { IoAddOutline, IoTrashOutline } from "react-icons/io5";
 import { PiUsersFour } from "react-icons/pi";
 import { CiSearch } from "react-icons/ci";
 import { isBrowser } from "react-device-detect";
+import { LuRouter } from "react-icons/lu";
+import { BiMessageAltError } from "react-icons/bi";
 
 //DATA TEMP
 export const group = signal([]);
@@ -49,6 +55,8 @@ export default function GroupRole(props) {
   const [editState, setEditState] = useState(false);
   const [groupDelState, setGroupDelState] = useState(false);
   const [editrole, setEditrole] = useState(false);
+  const [filterType, setFilterType] = useState(true);
+  const [dataPartner, setDataPartner] = useState();
 
   const GroupUsers = (props) => {
     const dataLang = useIntl();
@@ -152,25 +160,36 @@ export default function GroupRole(props) {
               //   </span>
               // </div>
               <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (<div className="DAT_TableEdit">
-                  <IoMdMore size={20}   {...bindToggle(popupState)} />
-                  <Menu {...bindMenu(popupState)}>
+                {(popupState) => (
+                  <div className="DAT_TableEdit">
+                    <IoMdMore size={20} {...bindToggle(popupState)} />
+                    <Menu {...bindMenu(popupState)}>
+                      <MenuItem
+                        id={user.id_}
+                        onClick={(e) => {
+                          handleEdit(e);
+                          popupState.close();
+                        }}
+                      >
+                        <FiEdit size={14} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "change" })}
+                      </MenuItem>
 
-                    <MenuItem id={user.id_} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                      <FiEdit size={14} />&nbsp;
-                      {dataLang.formatMessage({ id: "change" })}
-                    </MenuItem>
-
-
-                    <MenuItem id={user.id_} onClick={(e) => { handleDeleteUser(e); popupState.close() }}>
-                      <IoTrashOutline size={16} />
-                      &nbsp;
-                      {dataLang.formatMessage({ id: "delete" })}
-                    </MenuItem>
-
-
-                  </Menu>
-                </div>)}
+                      <MenuItem
+                        id={user.id_}
+                        onClick={(e) => {
+                          handleDeleteUser(e);
+                          popupState.close();
+                        }}
+                      >
+                        <IoTrashOutline size={16} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "delete" })}
+                      </MenuItem>
+                    </Menu>
+                  </div>
+                )}
               </PopupState>
             )}
             {/* <div
@@ -259,6 +278,7 @@ export default function GroupRole(props) {
     const colorbackground = {
       master: "rgba(255, 0, 0)",
       user: "rgba(247, 148, 29)",
+      mainadmin: "#0082CA",
       admin: "rgba(11, 25, 103)",
     };
 
@@ -267,8 +287,7 @@ export default function GroupRole(props) {
       // className="DAT_GR_Content_DevideTable"
       // style={{ height: "100% !important", width: "100% !important" }}
       >
-        {isBrowser
-          ?
+        {isBrowser ? (
           <>
             <div className="DAT_GR_Content_DevideTable">
               <div
@@ -291,7 +310,9 @@ export default function GroupRole(props) {
                             ? "rgb(207, 207, 207, 0.4)"
                             : "",
                       }}
-                      onClick={(e) => handleChangeGroup(e)}
+                      onClick={(e) => {
+                        handleChangeGroup(e);
+                      }}
                     >
                       <div>
                         <div
@@ -376,7 +397,7 @@ export default function GroupRole(props) {
               </div>
             </div>
           </>
-          :
+        ) : (
           <>
             {userList ? (
               <>
@@ -536,16 +557,17 @@ export default function GroupRole(props) {
                             : "",
                       }}
                       id={item.id_}
+                      onClick={(e) => {
+                        handleChangeGroup(e);
+                        setUserlist(true);
+                        setFilterType(false);
+                      }}
                     >
                       <div>
                         <div
                           className="DAT_GR_Content_DevideTable_Left_ItemList_Item_Name"
                           style={{ fontSize: "15px" }}
                           id={item.id_}
-                          onClick={(e) => {
-                            handleChangeGroup(e);
-                            setUserlist(true);
-                          }}
                         >
                           {item.name_}
                         </div>
@@ -609,7 +631,7 @@ export default function GroupRole(props) {
               </div>
             )}
           </>
-        }
+        )}
       </div>
     );
   };
@@ -623,6 +645,22 @@ export default function GroupRole(props) {
           lowercasedata(item.name_).includes(t) ||
           lowercasedata(item.phone_).includes(t) ||
           lowercasedata(item.usr_).includes(t)
+        );
+      });
+      console.log(datafilter.value);
+    }
+  };
+
+  const handleFilterPartner = (e) => {
+    const input = lowercasedata(e.currentTarget.value);
+    const data = dataPartner;
+    if (input === "") {
+      group.value = dataPartner;
+    } else {
+      group.value = data.filter((item) => {
+        return (
+          lowercasedata(item.name_).includes(input) ||
+          lowercasedata(item.code_).includes(input)
         );
       });
     }
@@ -669,10 +707,17 @@ export default function GroupRole(props) {
       const allPartner = await callApi("get", host.DATA + "/getallPartner", "");
       if (allPartner.status) {
         group.value = allPartner.data.sort((a, b) => a.id_ - b.id_);
+        setDataPartner(allPartner.data.sort((a, b) => a.id_ - b.id_));
       }
     };
     checkApi();
   }, []);
+
+  useEffect(() => {
+    if (groupID.value !== 0) {
+      datafilter.value = groupUser.value;
+    }
+  }, [groupID.value]);
 
   const handleCloseEditRole = () => {
     setEditrole(false);
@@ -680,38 +725,84 @@ export default function GroupRole(props) {
 
   return (
     <>
-      {isBrowser
-        ?
+      {isBrowser ? (
         <>
           <div className="DAT_GRHeader">
             <div className="DAT_GRHeader_Title">
               <PiUsersFour color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "roleList" })}</span>
             </div>
-            <div
-              className="DAT_GRHeader_Filter"
-              style={{
-                backgroundColor:
-                  groupID.value === 0 ? "rgba(233, 233, 233, 0.5)" : "white",
-              }}
-            >
-              {groupID.value === 0 ? (
+            <div style={{ display: "flex", alignItems: "center", gap: "1px" }}>
+              <PopupState variant="popper" popupId="demo-popup-popper">
+                {(popupState) => (
+                  <div style={{ cursor: "pointer" }}>
+                    <div
+                      className="DAT_GRHeader_Select"
+                      onClick={() => setFilterType(!filterType)}
+                      {...bindHover(popupState)}
+                    >
+                      {filterType ? (
+                        <LuRouter size={17} color="#0b1967" />
+                      ) : (
+                        <BiMessageAltError size={17} color="#0b1967" />
+                      )}
+                    </div>
+                    <Popper {...bindPopper(popupState)} transition>
+                      {({ TransitionProps }) => (
+                        <Fade {...TransitionProps} timeout={350}>
+                          <Paper
+                            sx={{
+                              width: "fit-content",
+                              marginLeft: "0px",
+                              marginTop: "5px",
+                              height: "20px",
+                              p: 2,
+                            }}
+                          >
+                            <Typography
+                              sx={{
+                                fontSize: "12px",
+                                textAlign: "justify",
+                                justifyItems: "center",
+                                // marginBottom: 1.7,
+                              }}
+                            >
+                              {dataLang.formatMessage({
+                                id: filterType ? "grouproleList" : "roleList",
+                              })}
+                            </Typography>
+                          </Paper>
+                        </Fade>
+                      )}
+                    </Popper>
+                  </div>
+                )}
+              </PopupState>
+
+              <div
+                className="DAT_GRHeader_Filter"
+                style={{ backgroundColor: "white" }}
+              >
                 <input
-                  disabled
                   type="text"
                   autoComplete="off"
                   placeholder={dataLang.formatMessage({ id: "enterInfo" })}
+                  style={{
+                    display: filterType ? "block" : "none",
+                  }}
+                  onChange={(e) => handleFilterPartner(e)}
                 />
-              ) : (
                 <input
                   type="text"
                   autoComplete="on"
                   placeholder={dataLang.formatMessage({ id: "enterInfo" })}
                   onChange={(e) => handleFilter(e)}
+                  style={{ display: filterType ? "none" : "block" }}
                 />
-              )}
-              <CiSearch color="gray" size={20} />
+                <CiSearch color="gray" size={20} />
+              </div>
             </div>
+
             <button
               className="DAT_GRHeader_New"
               onClick={() => setCreateState(true)}
@@ -738,29 +829,38 @@ export default function GroupRole(props) {
             </div>
           </div>
         </>
-        :
+      ) : (
         <>
           <div className="DAT_ProjectHeaderMobile">
             <div className="DAT_ProjectHeaderMobile_Top">
               <div
                 className="DAT_ProjectHeaderMobile_Top_Filter"
-                style={{
-                  backgroundColor:
-                    groupID.value === 0 ? "rgb(235, 235, 228)" : "white",
-                }}
+                style={{ backgroundColor: "white" }}
               >
                 <CiSearch color="gray" size={20} />
-                <input
-                  disabled={groupID.value === 0 ? true : false}
-                  type="text"
-                  placeholder={dataLang.formatMessage({ id: "enterInfo" })}
-                  // value={filter}
-                  onChange={(e) => handleFilter(e)}
-                />
+                {filterType ? (
+                  <input
+                    type="text"
+                    placeholder={dataLang.formatMessage({ id: "enterInfo" })}
+                    onChange={(e) => {
+                      handleFilterPartner(e);
+                      console.log("outside");
+                    }}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    placeholder={dataLang.formatMessage({ id: "enterInfo" })}
+                    onChange={(e) => {
+                      handleFilter(e);
+                      console.log("inside");
+                    }}
+                  />
+                )}
               </div>
               <button
                 className="DAT_ProjectHeaderMobile_Top_New"
-              // onClick={() => setRoleState("create")}
+                onClick={() => setCreateState(true)}
               >
                 <IoAddOutline color="white" size={20} />
               </button>
@@ -786,7 +886,7 @@ export default function GroupRole(props) {
             </div>
           </div>
         </>
-      }
+      )}
 
       {/* {isMobile.value ? (
         <>
