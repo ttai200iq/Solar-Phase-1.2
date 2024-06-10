@@ -909,6 +909,7 @@ iframe {
     align-items: center;
     box-sizing: border-box;
     cursor: pointer;
+
     &:hover {
       background-color: rgb(202, 201, 201);
       transition: 0.3s;
@@ -977,6 +978,71 @@ iframe {
       align-items: center;
       font-size: 14px;
     }
+  }
+}
+
+.DAT_HeaderMobile {
+  width: 98%;
+  margin: auto;
+  margin-top: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-wrap: wrap;
+
+  &_Top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+
+    &_Filter {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background-color: white;
+      padding: 8px;
+      border-radius: 5px;
+      overflow: hidden;
+      border: solid 1px rgba(198, 197, 197, 0.5);
+
+      & input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        font-family: segoeui;
+      }
+
+      & input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &_New {
+      cursor: pointer;
+      border: none;
+      background-color: $Primary-color;
+      color: white;
+      border-radius: 50%;
+      font-family: segoeui-sb;
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &_Title {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: $Primary-color;
+    font-family: segoeui-sb;
   }
 }
 

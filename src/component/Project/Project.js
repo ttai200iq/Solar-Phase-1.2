@@ -363,64 +363,6 @@ export default function Project(props) {
             <div></div>
           )}
 
-          {/* <div
-            className="DAT_ModifyBox"
-            id={row.plantid_ + "_Modify"}
-            style={{ display: "none", marginTop: "3px", marginRight: "3px" }}
-            onMouseLeave={(e) => handleModify(e, "none")}
-          >
-            {ruleInfor.value.setting.project.modify === true ? (
-              <div
-                className="DAT_ModifyBox_Fix"
-                id={row.plantid_}
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                }}
-                onClick={(e) => handleEdit(e)}
-              >
-                <FiEdit size={14} />
-                &nbsp;
-                {dataLang.formatMessage({ id: "change" })}
-              </div>
-            ) : (
-              <div></div>
-            )}
-            {ruleInfor.value.setting.project.remove === true ? (
-              <div
-                className="DAT_ModifyBox_Remove"
-                id={row.plantid_}
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                }}
-                onClick={(e) => handleDelete(e)}
-              >
-                <IoTrashOutline size={16} />
-                &nbsp;
-                {dataLang.formatMessage({ id: "delete" })}
-              </div>
-            ) : (
-              <div></div>
-            )}
-            <div
-              className="DAT_ModifyBox_Share"
-              id={row.plantid_}
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-              onClick={(e) => handleShare(e)}
-            >
-              <RiShareForwardLine size={16} />
-              &nbsp;
-              {dataLang.formatMessage({ id: "share" })}
-            </div>
-          </div> */}
-
           <div className="DAT_TableMark">
             <FaStar
               id={row.plantid_}
@@ -1072,9 +1014,9 @@ export default function Project(props) {
         </div>
       ) : (
         <>
-          <div className="DAT_ProjectHeaderMobile">
-            <div className="DAT_ProjectHeaderMobile_Top">
-              <div className="DAT_ProjectHeaderMobile_Top_Filter">
+          <div className="DAT_HeaderMobile">
+            <div className="DAT_HeaderMobile_Top">
+              <div className="DAT_HeaderMobile_Top_Filter">
                 <CiSearch color="gray" size={20} />
                 <input
                   id="search"
@@ -1089,7 +1031,7 @@ export default function Project(props) {
               </div>
               {ruleInfor.value.setting.project.add === true ? (
                 <button
-                  className="DAT_ProjectHeaderMobile_Top_New"
+                  className="DAT_HeaderMobile_Top_New"
                   onClick={() => (plantState.value = "add")}
                 >
                   <IoAddOutline color="white" size={20} />
@@ -1099,7 +1041,7 @@ export default function Project(props) {
               )}
             </div>
 
-            <div className="DAT_ProjectHeaderMobile_Title">
+            <div className="DAT_HeaderMobile_Title">
               <GoProject color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "project" })}</span>
             </div>
