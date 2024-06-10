@@ -48,6 +48,36 @@
     border-radius: 5px;
     font-family: Montserrat-SemiBold;
     padding: 8px;
+  }
+
+  &_Select {
+    border-radius: 5px 0 0 5px;
+    border: solid 1px rgba(198, 197, 197, 0.5);
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(202, 201, 201);
+      transition: 0.3s;
+    }
+  }
+
+  &_Filter {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: solid 1px rgba(198, 197, 197, 0.5);
 
     & span {
       display: flex;
@@ -517,5 +547,6 @@
     &_Content {
       height: calc(100vh - 300px);
     }
+
   }
 }

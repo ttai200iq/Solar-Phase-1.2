@@ -8,6 +8,7 @@ import Consumption from "./Consumption";
 import Grid from "./Grid";
 import Battery from "./Battery";
 import { IoClose } from "react-icons/io5";
+import { isBrowser } from "react-device-detect";
 
 export default function Data(props) {
   const dataLang = useIntl();
@@ -41,89 +42,179 @@ export default function Data(props) {
   };
 
   return (
-    <div className="DAT_ProjectData_Dashboard_Data_Left">
-      <div
-        style={{
-          padding: "16px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            fontFamily: "segoeui-sb",
-            fontSize: "19px",
-          }}
-        >
-          {dataLang.formatMessage({ id: tit[props.type] })}
+    <>
+      {isBrowser
+        ?
+        <div className="DAT_ProjectData_Dashboard_Data_Left">
           <div
-            style={{ cursor: "pointer" }}
-            onClick={() => props.setType("default")}
+            style={{
+              padding: "16px",
+            }}
           >
-            <IoClose
-              size={25}
-              id="Popup"
-              onMouseEnter={(e) => handlePopup("new")}
-              onMouseLeave={(e) => handlePopup("pre")}
-            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                fontFamily: "segoeui-sb",
+                fontSize: "19px",
+              }}
+            >
+              {dataLang.formatMessage({ id: tit[props.type] })}
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => props.setType("default")}
+              >
+                <IoClose
+                  size={25}
+                  id="Popup"
+                  onMouseEnter={(e) => handlePopup("new")}
+                  onMouseLeave={(e) => handlePopup("pre")}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                fontFamily: "segoeui",
+                color: "grey",
+                fontSize: "14px",
+              }}
+            >
+              {(() => {
+                switch (props.type) {
+                  case "production":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "ProductionDesc" })}
+                      </>
+                    );
+                  case "consumption":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "ConsumptionDesc" })}
+                      </>
+                    );
+                  case "grid":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "GridDesc" })}
+                      </>
+                    );
+                  case "battery":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "BatteryDesc" })} <br />
+                        {dataLang.formatMessage({ id: "SoCDesc" })}
+                      </>
+                    );
+                  default:
+                    return <></>;
+                }
+              })()}
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            fontFamily: "segoeui",
-            color: "grey",
-            fontSize: "14px",
-          }}
-        >
+
           {(() => {
             switch (props.type) {
               case "production":
-                return (
-                  <>
-                    {dataLang.formatMessage({ id: "ProductionDesc" })}
-                  </>
-                );
+                return <Production cal={cal} />;
               case "consumption":
-                return (
-                  <>
-                    {dataLang.formatMessage({ id: "ConsumptionDesc" })}
-                  </>
-                );
+                return <Consumption cal={cal} />;
               case "grid":
-                return (
-                  <>
-                    {dataLang.formatMessage({ id: "GridDesc" })}
-                  </>
-                );
+                return <Grid cal={cal} />;
               case "battery":
-                return (
-                  <>
-                    {dataLang.formatMessage({ id: "BatteryDesc" })} <br />
-                    {dataLang.formatMessage({ id: "SoCDesc" })}
-                  </>
-                );
+                return <Battery cal={cal} />;
               default:
-                return <></>;
+                <></>;
             }
           })()}
         </div>
-      </div>
+        :
+        <div className="DAT_ProjectData_Dashboard_Data_LeftMobile">
+          <div
+            style={{
+              padding: "16px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                fontFamily: "segoeui-sb",
+                fontSize: "19px",
+              }}
+            >
+              {dataLang.formatMessage({ id: tit[props.type] })}
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => props.setType("default")}
+              >
+                <IoClose
+                  size={25}
+                  id="Popup"
+                  onMouseEnter={(e) => handlePopup("new")}
+                  onMouseLeave={(e) => handlePopup("pre")}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                fontFamily: "segoeui",
+                color: "grey",
+                fontSize: "14px",
+              }}
+            >
+              {(() => {
+                switch (props.type) {
+                  case "production":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "ProductionDesc" })}
+                      </>
+                    );
+                  case "consumption":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "ConsumptionDesc" })}
+                      </>
+                    );
+                  case "grid":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "GridDesc" })}
+                      </>
+                    );
+                  case "battery":
+                    return (
+                      <>
+                        {dataLang.formatMessage({ id: "BatteryDesc" })} <br />
+                        {dataLang.formatMessage({ id: "SoCDesc" })}
+                      </>
+                    );
+                  default:
+                    return <></>;
+                }
+              })()}
+            </div>
+          </div>
 
-      {(() => {
-        switch (props.type) {
-          case "production":
-            return <Production cal={cal} />;
-          case "consumption":
-            return <Consumption cal={cal} />;
-          case "grid":
-            return <Grid cal={cal} />;
-          case "battery":
-            return <Battery cal={cal} />;
-          default:
-            <></>;
-        }
-      })()}
-    </div>
+          {(() => {
+            switch (props.type) {
+              case "production":
+                return <Production cal={cal} />;
+              case "consumption":
+                return <Consumption cal={cal} />;
+              case "grid":
+                return <Grid cal={cal} />;
+              case "battery":
+                return <Battery cal={cal} />;
+              default:
+                <></>;
+            }
+          })()}
+        </div>
+      }
+    </>
   );
 }
