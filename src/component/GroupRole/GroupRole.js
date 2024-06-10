@@ -899,19 +899,28 @@ export default function GroupRole(props) {
             <div className="DAT_ProjectHeaderMobile_Top">
               <div
                 className="DAT_ProjectHeaderMobile_Top_Filter"
-                style={{
-                  backgroundColor:
-                    groupID.value === 0 ? "rgb(235, 235, 228)" : "white",
-                }}
+                style={{ backgroundColor: "white" }}
               >
                 <CiSearch color="gray" size={20} />
-                <input
-                  disabled={groupID.value === 0 ? true : false}
-                  type="text"
-                  placeholder={dataLang.formatMessage({ id: "enterInfo" })}
-                  // value={filter}
-                  onChange={(e) => handleFilter(e)}
-                />
+                {filterType ? (
+                  <input
+                    type="text"
+                    placeholder={dataLang.formatMessage({ id: "enterInfo" })}
+                    onChange={(e) => {
+                      handleFilterPartner(e);
+                      console.log("outside");
+                    }}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    placeholder={dataLang.formatMessage({ id: "enterInfo" })}
+                    onChange={(e) => {
+                      handleFilter(e);
+                      console.log("inside");
+                    }}
+                  />
+                )}
               </div>
               <button
                 className="DAT_ProjectHeaderMobile_Top_New"
