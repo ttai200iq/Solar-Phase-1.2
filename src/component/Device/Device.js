@@ -6,7 +6,6 @@ import Popup from "./Popup";
 import DataTable from "react-data-table-component";
 import { signal } from "@preact/signals-react";
 import { Empty, connectval } from "../Project/Project";
-import { isMobile } from "../Navigation/Navigation";
 import { useSelector } from "react-redux";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
@@ -19,7 +18,12 @@ import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
 
 import { MdDevices, MdOutlineError } from "react-icons/md";
-import { IoIosArrowDown, IoIosArrowForward, IoIosArrowUp, IoMdMore } from "react-icons/io";
+import {
+  IoIosArrowDown,
+  IoIosArrowForward,
+  IoIosArrowUp,
+  IoMdMore,
+} from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { FiEdit, FiFilter } from "react-icons/fi";
@@ -162,7 +166,7 @@ export default function Device(props) {
           });
           power = parseFloat(
             num.reduce((a, b) => Number(a) + Number(b), 0) *
-            row.pdata.total?.cal
+              row.pdata.total?.cal
           ).toFixed(2);
         }
         if (row.pdata.mode === "GRID") {
@@ -183,13 +187,13 @@ export default function Device(props) {
         <>
           {row.pdata.daily?.register
             ? Number(
-              parseFloat(
-                convertUnit(
-                  invt[row.plogger]?.[row.pdata.daily.register] *
-                  row.pdata.daily?.cal
-                )
-              ).toFixed(2)
-            ).toLocaleString("en-US")
+                parseFloat(
+                  convertUnit(
+                    invt[row.plogger]?.[row.pdata.daily.register] *
+                      row.pdata.daily?.cal
+                  )
+                ).toFixed(2)
+              ).toLocaleString("en-US")
             : 0}
           kWh
         </>
@@ -208,7 +212,7 @@ export default function Device(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.device.modify === true ||
-            ruleInfor.value.setting.device.delete === true ? (
+          ruleInfor.value.setting.device.delete === true ? (
             // <div className="DAT_TableEdit">
             //   <span
             //     id={row.psn + "_MORE"}
@@ -218,17 +222,24 @@ export default function Device(props) {
             //   </span>
             // </div>
             <PopupState variant="popper" popupId="demo-popup-popper">
-              {(popupState) => (<div className="DAT_TableEdit">
-                <IoMdMore size={20}   {...bindToggle(popupState)} />
-                <Menu {...bindMenu(popupState)}>
-
-                  <MenuItem id={`${row.psn}-${row.pname}-edit`} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                    <FiEdit size={14} />&nbsp;
-                    {dataLang.formatMessage({ id: "change" })}
-                  </MenuItem>
-
-                </Menu>
-              </div>)}
+              {(popupState) => (
+                <div className="DAT_TableEdit">
+                  <IoMdMore size={20} {...bindToggle(popupState)} />
+                  <Menu {...bindMenu(popupState)}>
+                    <MenuItem
+                      id={`${row.psn}-${row.pname}-edit`}
+                      onClick={(e) => {
+                        handleEdit(e);
+                        popupState.close();
+                      }}
+                    >
+                      <FiEdit size={14} />
+                      &nbsp;
+                      {dataLang.formatMessage({ id: "change" })}
+                    </MenuItem>
+                  </Menu>
+                </div>
+              )}
             </PopupState>
           ) : (
             <div></div>
@@ -313,7 +324,7 @@ export default function Device(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.device.modify === true ||
-            ruleInfor.value.setting.device.delete === true ? (
+          ruleInfor.value.setting.device.delete === true ? (
             // <div className="DAT_TableEdit">
             //   <span
             //     id={row.psn + "_MORE"}
@@ -323,27 +334,43 @@ export default function Device(props) {
             //   </span>
             // </div>
             <PopupState variant="popper" popupId="demo-popup-popper">
-              {(popupState) => (<div className="DAT_TableEdit">
-                <IoMdMore size={20}   {...bindToggle(popupState)} />
-                <Menu {...bindMenu(popupState)}>
-                  {ruleInfor.value.setting.device.modify === true ?
-                    <MenuItem id={`${row.psn}-${row.pname}-edit`} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                      <FiEdit size={14} />&nbsp;
-                      {dataLang.formatMessage({ id: "change" })}
-                    </MenuItem>
-                    : <></>
-                  }
-                  {ruleInfor.value.setting.device.remove === true ?
-                    <MenuItem id={row.psn + "_" + row.pplantid + "_remove"} onClick={(e) => { handleRemove(e); popupState.close() }}>
-                      <IoTrashOutline size={16} />
-                      &nbsp;
-                      {dataLang.formatMessage({ id: "delete" })}
-                    </MenuItem>
-                    : <></>}
-
-
-                </Menu>
-              </div>)}
+              {(popupState) => (
+                <div className="DAT_TableEdit">
+                  <IoMdMore size={20} {...bindToggle(popupState)} />
+                  <Menu {...bindMenu(popupState)}>
+                    {ruleInfor.value.setting.device.modify === true ? (
+                      <MenuItem
+                        id={`${row.psn}-${row.pname}-edit`}
+                        onClick={(e) => {
+                          handleEdit(e);
+                          popupState.close();
+                        }}
+                      >
+                        <FiEdit size={14} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "change" })}
+                      </MenuItem>
+                    ) : (
+                      <></>
+                    )}
+                    {ruleInfor.value.setting.device.remove === true ? (
+                      <MenuItem
+                        id={row.psn + "_" + row.pplantid + "_remove"}
+                        onClick={(e) => {
+                          handleRemove(e);
+                          popupState.close();
+                        }}
+                      >
+                        <IoTrashOutline size={16} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "delete" })}
+                      </MenuItem>
+                    ) : (
+                      <></>
+                    )}
+                  </Menu>
+                </div>
+              )}
             </PopupState>
           ) : (
             <div></div>
@@ -651,15 +678,22 @@ export default function Device(props) {
 
   return (
     <>
-      {isBrowser
-        ?
-        <>
-          <div className="DAT_DeviceHeader">
-            <div className="DAT_DeviceHeader_Title">
+      {isBrowser ? (
+        <div
+          style={{
+            position: "relative",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
+          <div className="DAT_Header">
+            <div className="DAT_Header_Title">
               <MdDevices color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "device" })}</span>
             </div>
-            <div className="DAT_DeviceHeader_Filter">
+            <div className="DAT_Header_Filter">
               <input
                 type="text"
                 id="search"
@@ -778,8 +812,31 @@ export default function Device(props) {
               />
             </div>
           </div>
-        </>
-        :
+
+          <div
+            className="DAT_ViewPopup"
+            style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
+          >
+            {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}
+          </div>
+
+          {popupState ? (
+            <div className="DAT_PopupBG">
+              <Popup
+                plantid={plantid}
+                sn={snlogger}
+                name={devname}
+                type={type}
+                devtype={devtype}
+                handleClose={handleClosePopup}
+                handleCancel={closeFilter}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
         <>
           <div className="DAT_DeviceHeaderMobile">
             <div className="DAT_DeviceHeaderMobile_Top">
@@ -807,7 +864,8 @@ export default function Device(props) {
 
           <div className="DAT_DeviceMobile">
             <div className="DAT_Toollist_Tab_Mobile">
-              <button className="DAT_Toollist_Tab_Mobile_content"
+              <button
+                className="DAT_Toollist_Tab_Mobile_content"
                 onClick={() => (tabMobile.value = !tabMobile.value)}
               >
                 <span> {tabLable.value}</span>
@@ -817,12 +875,15 @@ export default function Device(props) {
                 </div>
               </button>
 
-              <div className="DAT_Toollist_Tab_Mobile_list"
+              <div
+                className="DAT_Toollist_Tab_Mobile_list"
                 style={{
                   top: "50px",
                   height: tabMobile.value ? "66px" : "0",
                   transition: "0.5s",
-                  boxShadow: tabMobile.value ? "0 0 4px 4px rgba(193, 193, 193, 0.5)" : "none"
+                  boxShadow: tabMobile.value
+                    ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"
+                    : "none",
                 }}
               >
                 {listTab.map((item, i) => {
@@ -833,7 +894,7 @@ export default function Device(props) {
                       id={item.id}
                       onClick={(e) => {
                         handleTabMobile(e);
-                        tabMobile.value = false
+                        tabMobile.value = false;
                       }}
                     >
                       {i + 1}: {item.name}
@@ -852,15 +913,19 @@ export default function Device(props) {
                         return (
                           <div key={i} className="DAT_DeviceMobile_Content">
                             <div className="DAT_DeviceMobile_Content_Top">
-                              <div className="DAT_DeviceMobile_Content_Top_Type"
-                                style={{ backgroundColor: COLOR.value.DarkGreenColor }}
+                              <div
+                                className="DAT_DeviceMobile_Content_Top_Type"
+                                style={{
+                                  backgroundColor: COLOR.value.DarkGreenColor,
+                                }}
                                 id={`${item.psn}_${tab.value}_${item.plogger}`}
                                 onClick={(e) => handleShowInfo(e)}
                               >
                                 {item.pdata.mode}
                               </div>
                               <div className="DAT_DeviceMobile_Content_Top_Info">
-                                <div className="DAT_DeviceMobile_Content_Top_Info_Name"
+                                <div
+                                  className="DAT_DeviceMobile_Content_Top_Info_Name"
                                   id={`${item.psn}_${tab.value}_${item.plogger}`}
                                   onClick={(e) => handleShowInfo(e)}
                                 >
@@ -870,14 +935,16 @@ export default function Device(props) {
                                   SN: {item.psn}
                                 </div>
                                 <div className="DAT_DeviceMobile_Content_Top_Info_OgLog">
-                                  {dataLang.formatMessage({ id: "ogLog" })}: {item.plogger}
+                                  {dataLang.formatMessage({ id: "ogLog" })}:{" "}
+                                  {item.plogger}
                                 </div>
                               </div>
                             </div>
 
                             <div className="DAT_DeviceMobile_Content_Bottom">
                               <div className="DAT_DeviceMobile_Content_Bottom_State">
-                                {invt[item.plogger]?.[item.pdata.status] == 2 ? (
+                                {invt[item.plogger]?.[item.pdata.status] ==
+                                2 ? (
                                   <>
                                     <FaCheckCircle size={16} color="green" />
                                     <span>
@@ -888,7 +955,9 @@ export default function Device(props) {
                                   <>
                                     <MdOutlineError size={16} color="red" />
                                     <span>
-                                      {dataLang.formatMessage({ id: "offline" })}
+                                      {dataLang.formatMessage({
+                                        id: "offline",
+                                      })}
                                     </span>
                                   </>
                                 )}
@@ -896,7 +965,7 @@ export default function Device(props) {
 
                               <div className="DAT_DeviceMobile_Content_Bottom_Right">
                                 {ruleInfor.value.setting.device.modify ===
-                                  true ? (
+                                true ? (
                                   <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
                                     <FiEdit
                                       size={14}
@@ -915,7 +984,7 @@ export default function Device(props) {
                     </>
                   );
                 case "meter":
-                  return (<></>);
+                  return <></>;
                 case "logger":
                   return (
                     <>
@@ -923,14 +992,16 @@ export default function Device(props) {
                         return (
                           <div key={i} className="DAT_DeviceMobile_Content">
                             <div className="DAT_DeviceMobile_Content_Top">
-                              <div className="DAT_DeviceMobile_Content_Top_Type"
+                              <div
+                                className="DAT_DeviceMobile_Content_Top_Type"
                                 id={`${item.pid}_${tab.value}`}
                                 onClick={(e) => handleShowInfo(e)}
                               >
                                 {item.ptype}
                               </div>
                               <div className="DAT_DeviceMobile_Content_Top_Info">
-                                <div className="DAT_DeviceMobile_Content_Top_Info_Name"
+                                <div
+                                  className="DAT_DeviceMobile_Content_Top_Info_Name"
                                   id={`${item.pid}_${tab.value}`}
                                   onClick={(e) => handleShowInfo(e)}
                                 >
@@ -940,7 +1011,8 @@ export default function Device(props) {
                                   SN: {item.psn}
                                 </div>
                                 <div className="DAT_DeviceMobile_Content_Top_Info_Plant">
-                                  {dataLang.formatMessage({ id: "project" })}: {item.pplantname}
+                                  {dataLang.formatMessage({ id: "project" })}:{" "}
+                                  {item.pplantname}
                                 </div>
                               </div>
                             </div>
@@ -958,14 +1030,16 @@ export default function Device(props) {
                                   <>
                                     <MdOutlineError size={16} color="red" />
                                     <span>
-                                      {dataLang.formatMessage({ id: "offline" })}
+                                      {dataLang.formatMessage({
+                                        id: "offline",
+                                      })}
                                     </span>
                                   </>
                                 )}
                               </div>
                               <div className="DAT_DeviceMobile_Content_Bottom_Right">
                                 {ruleInfor.value.setting.device.modify ===
-                                  true ? (
+                                true ? (
                                   <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
                                     <FiEdit
                                       size={14}
@@ -977,7 +1051,7 @@ export default function Device(props) {
                                   <div></div>
                                 )}
                                 {ruleInfor.value.setting.device.remove ===
-                                  true ? (
+                                true ? (
                                   <div
                                     className="DAT_DeviceMobile_Content_Bottom_Right_Item"
                                     id={`${item.psn}_${item.pplantid}_remove`}
@@ -1000,29 +1074,30 @@ export default function Device(props) {
               }
             })()}
           </div>
+
+          <div
+            className="DAT_ViewPopupMobile"
+            style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
+          >
+            {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}
+          </div>
+
+          {popupState ? (
+            <div className="DAT_PopupBGMobile">
+              <Popup
+                plantid={plantid}
+                sn={snlogger}
+                name={devname}
+                type={type}
+                devtype={devtype}
+                handleClose={handleClosePopup}
+                handleCancel={closeFilter}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </>
-      }
-
-      <div className="DAT_DeviceInfor"
-        style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
-      >
-        {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}
-      </div>
-
-      {popupState ? (
-        <div className="DAT_DevicePopup">
-          <Popup
-            plantid={plantid}
-            sn={snlogger}
-            name={devname}
-            type={type}
-            devtype={devtype}
-            handleClose={handleClosePopup}
-            handleCancel={closeFilter}
-          />
-        </div>
-      ) : (
-        <></>
       )}
     </>
   );

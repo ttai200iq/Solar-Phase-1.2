@@ -1,201 +1,200 @@
 @use "../../index.scss" as COLOR;
 
 .DAT_GRHeader {
-    width: 98%;
-    margin: auto;
-    margin-top: 70px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  width: 98%;
+  margin: auto;
+  margin-top: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  &_Title {
+    font-size: 20px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
+    gap: 5px;
+    color: COLOR.$Primary-color;
+    font-family: segoeui-sb;
+  }
 
-    &_Title {
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: COLOR.$Primary-color;
-        font-family: Montserrat-Bold;
+  &_Filter {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: solid 1px rgba(198, 197, 197, 0.5);
+
+    & input {
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-family: Montserrat-Regular;
     }
+  }
 
-    &_Filter {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
-        background-color: white;
-        padding: 8px;
-        border-radius: 5px;
-        overflow: hidden;
-        border: solid 1px rgba(198, 197, 197, 0.5);
+  &_New {
+    cursor: pointer;
+    border: none;
+    background-color: COLOR.$Primary-color;
+    color: white;
+    border-radius: 5px;
+    font-family: Montserrat-SemiBold;
+    padding: 8px;
 
-        & input {
-            border: none;
-            outline: none;
-            font-size: 14px;
-            font-family: Montserrat-Regular;
-        }
+    & span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
     }
-
-    &_New {
-        cursor: pointer;
-        border: none;
-        background-color: COLOR.$Primary-color;
-        color: white;
-        border-radius: 5px;
-        font-family: Montserrat-SemiBold;
-        padding: 8px;
-
-        & span {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-        }
-    }
+  }
 }
 
 .DAT_GR {
-    width: 98%;
-    margin: auto;
-    margin-top: 15px;
-    overflow: hidden;
+  width: 98%;
+  margin: auto;
+  margin-top: 15px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255, 0.95);
+  box-shadow: 2px 2px 5px rgba(198, 197, 197, 0.4),
+    -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+  &_Header {
+    color: COLOR.$Primary-color;
+    font-family: segoeui-sb;
+    font-size: 16px;
+    padding: 16px;
+    background-color: rgba(233, 233, 233, 0.5);
+  }
+
+  &_Content {
+    height: calc(100vh - 180px);
     -webkit-box-sizing: border-box;
     /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;
     /* Firefox, other Gecko */
     box-sizing: border-box;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255, 0.95);
-    box-shadow:
-        2px 2px 5px rgba(198, 197, 197, 0.4),
-        -2px -2px 5px rgba(198, 197, 197, 0.4);
+    background-color: rgb(207, 207, 207, 0.3);
+    width: 100%;
 
-    &_Header {
-        color: COLOR.$Primary-color;
-        font-family: Montserrat-SemiBold;
-        font-size: 16px;
-        padding: 16px;
-        background-color: rgba(233, 233, 233, 0.5);
-    }
+    &_DevideTable {
+      width: 100%;
+      display: flex;
 
-    &_Content {
-        height: calc(100vh - 180px);
-        -webkit-box-sizing: border-box;
-        /* Safari/Chrome, other WebKit */
-        -moz-box-sizing: border-box;
-        /* Firefox, other Gecko */
-        box-sizing: border-box;
-        background-color: rgb(207, 207, 207, 0.3);
-        width: 100%;
+      &_Left {
+        // width: 300px;
+        border-right: solid 1px rgba(198, 197, 197, 0.5);
 
-        &_DevideTable {
-            width: 100%;
-            display: flex;
-
-            &_Left {
-                // width: 300px;
-                border-right: solid 1px rgba(198, 197, 197, 0.5);
-
-                &_Head {
-                    height: 52px;
-                    font-size: 14px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: COLOR.$Primary-color;
-                    color: white;
-                    font-family: Montserrat-SemiBold;
-                }
-
-                &_ItemList {
-                    width: 100%;
-                    background-color: white;
-                    cursor: pointer;
-
-                    &_Item {
-                        height: 61px;
-                        padding: 8px;
-                        box-sizing: border-box;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        border-bottom: solid 1px rgba(198, 198, 198, 0.5);
-
-                        &_Name {
-                            max-width: 150px;
-                            white-space: nowrap; // ngan xuong dong
-                            overflow: hidden; // an noi dung vuot ra ngoai
-                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                        }
-
-                        &_Info {
-                            max-width: 150px;
-                            white-space: nowrap; // ngan xuong dong
-                            overflow: hidden; // an noi dung vuot ra ngoai
-                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
-                        }
-
-                        &:hover {
-                            background-color: rgba(198, 198, 198, 0.5);
-                        }
-
-                        &_More {
-                            background-color: #e1e1e1;
-                            padding: 5px;
-                            box-sizing: border-box;
-                            border-radius: 5px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            gap: 5px;
-                            box-shadow: 3px 3px 5px rgba(226, 226, 226, 0.5);
-                        }
-                    }
-                }
-            }
-
-            &_Right {
-                &_Head {
-                    height: 52px;
-                    font-size: 14px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: COLOR.$Primary-color;
-                    color: white;
-                    font-family: Montserrat-SemiBold;
-                }
-
-                width: 100%;
-                overflow-y: auto;
-                overflow-x: auto;
-
-                &_ItemList {
-                    width: 100%;
-                    height: 100%;
-                    background-color: white;
-                }
-
-                &_MobileItem {
-                    height: calc(100vh - 250px);
-                    padding-top: 10px;
-                    // margin-top: 10px;
-                    overflow-y: scroll;
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-
-                    &::-webkit-scrollbar {
-                        display: none;
-                        /* Safari and Chrome */
-                    }
-                }
-            }
+        &_Head {
+          height: 52px;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: COLOR.$Primary-color;
+          color: white;
+          font-family: segoeui-sb;
         }
+
+        &_ItemList {
+          width: 100%;
+          background-color: white;
+          cursor: pointer;
+
+          &_Item {
+            height: 61px;
+            padding: 8px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: solid 1px rgba(198, 198, 198, 0.5);
+
+            &_Name {
+              max-width: 150px;
+              white-space: nowrap; // ngan xuong dong
+              overflow: hidden; // an noi dung vuot ra ngoai
+              text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+            }
+
+            &_Info {
+              max-width: 150px;
+              white-space: nowrap; // ngan xuong dong
+              overflow: hidden; // an noi dung vuot ra ngoai
+              text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+            }
+
+            &:hover {
+              background-color: rgba(198, 198, 198, 0.5);
+            }
+
+            &_More {
+              background-color: #e1e1e1;
+              padding: 5px;
+              box-sizing: border-box;
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 5px;
+              box-shadow: 3px 3px 5px rgba(226, 226, 226, 0.5);
+            }
+          }
+        }
+      }
+
+      &_Right {
+        &_Head {
+          height: 52px;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: COLOR.$Primary-color;
+          color: white;
+          font-family: segoeui-sb;
+        }
+
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: auto;
+
+        &_ItemList {
+          width: 100%;
+          height: 100%;
+          background-color: white;
+        }
+
+        &_MobileItem {
+          height: calc(100vh - 250px);
+          padding-top: 10px;
+          // margin-top: 10px;
+          overflow-y: scroll;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+
+          &::-webkit-scrollbar {
+            display: none;
+            /* Safari and Chrome */
+          }
+        }
+      }
     }
+  }
 }
 
 // .DAT_PopupBG {
@@ -212,315 +211,311 @@
 // }
 
 .DAT_CreateGroupRole {
-    position: relative;
-    width: 400px;
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow:
-        2px 2px 5px rgb(73, 73, 73, 0.2),
-        -2px -2px 5px rgb(67, 67, 67, 0.2);
+  position: relative;
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgb(73, 73, 73, 0.2),
+    -2px -2px 5px rgb(67, 67, 67, 0.2);
 
-    &_Header {
+  &_Header {
+    display: flex;
+    align-items: center;
+    background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+    padding: 16px;
+    color: white;
+    font-family: segoeui-sb;
+
+    &_Left {
+      flex: 5;
+
+      & p {
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+
+    &_Right {
+      display: flex;
+      justify-content: flex-end;
+      flex: 5;
+
+      &_Close {
         display: flex;
         align-items: center;
-        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
-        padding: 16px;
-        color: white;
-        font-family: Montserrat-Bold;
-
-        &_Left {
-            flex: 5;
-
-            & p {
-                font-size: 16px;
-                margin: 0;
-            }
-        }
-
-        &_Right {
-            display: flex;
-            justify-content: flex-end;
-            flex: 5;
-
-            &_Close {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-            }
-        }
+        cursor: pointer;
+      }
     }
+  }
 
-    &_Body {
-        font-size: 14px;
-        padding: 16px;
-        color: #505050;
-        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  &_Body {
+    font-size: 14px;
+    padding: 16px;
+    color: #505050;
+    border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        &_Item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
-            margin: auto;
-            gap: 5px;
+    &_Item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      margin: auto;
+      gap: 5px;
 
-            &_Input {
-                margin-bottom: 8px;
+      &_Input {
+        margin-bottom: 8px;
 
-                & input {
-                    width: 100%;
-                    height: 30px;
-                    border-radius: 5px;
-                    border: solid 1px rgba(198, 197, 197, 0.5);
-                    padding: 8px;
-                    outline: none;
-                    box-sizing: border-box;
-                    -webkit-box-sizing: border-box;
-                    -moz-box-sizing: border-box;
-                    font-family: Montserrat-Regular;
-                }
-            }
+        & input {
+          width: 100%;
+          height: 30px;
+          border-radius: 5px;
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          padding: 8px;
+          outline: none;
+          box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          font-family: segoeui;
         }
+      }
     }
+  }
 
-    &_Foot {
-        display: flex;
-        justify-content: flex-end;
-        padding: 8px;
+  &_Foot {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
 
-        & button {
-            padding: 8px 16px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-family: Montserrat-SemiBold;
-            color: white;
-            background-color: COLOR.$Primary-color;
-        }
+    & button {
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: segoeui-sb;
+      color: white;
+      background-color: COLOR.$Primary-color;
     }
+  }
 }
 
 .DAT_Popup_Box {
-    position: relative;
-    width: 400px;
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow:
-        2px 2px 5px rgb(73, 73, 73, 0.2),
-        -2px -2px 5px rgb(67, 67, 67, 0.2);
+  position: relative;
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgb(73, 73, 73, 0.2),
+    -2px -2px 5px rgb(67, 67, 67, 0.2);
 
-    &_Head {
+  &_Head {
+    display: flex;
+    background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+    padding: 16px;
+    color: white;
+    font-family: segoeui-sb;
+
+    &_Left {
+      flex: 9;
+
+      & p {
+        margin: 0;
+      }
+    }
+
+    &_Right {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+
+      &_Icon {
         display: flex;
-        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
-        padding: 16px;
-        color: white;
-        font-family: Montserrat-Bold;
-
-        &_Left {
-            flex: 9;
-
-            & p {
-                margin: 0;
-            }
-        }
-
-        &_Right {
-            display: flex;
-            justify-content: flex-end;
-            flex: 1;
-
-            &_Icon {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-            }
-        }
+        align-items: center;
+        cursor: pointer;
+      }
     }
+  }
 
-    &_Body {
-        font-size: 13px;
-        padding: 16px;
-        color: COLOR.$Gray-color;
-        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+  &_Body {
+    font-size: 13px;
+    padding: 16px;
+    color: COLOR.$Gray-color;
+    border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+  }
+
+  &_Foot {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+
+    & button {
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: segoeui-sb;
     }
-
-    &_Foot {
-        display: flex;
-        justify-content: flex-end;
-        padding: 8px;
-
-        & button {
-            padding: 8px 16px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-family: Montserrat-SemiBold;
-        }
-    }
+  }
 }
 
 .DAT_AddUserPopup_Box {
-    position: relative;
-    width: 400px;
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow:
-        2px 2px 5px rgb(73, 73, 73, 0.2),
-        -2px -2px 5px rgb(67, 67, 67, 0.2);
+  position: relative;
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgb(73, 73, 73, 0.2),
+    -2px -2px 5px rgb(67, 67, 67, 0.2);
 
-    &_Head {
-        display: flex;
-        align-items: center;
-        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
-        padding: 16px;
-        color: white;
-        font-family: Montserrat-Bold;
+  &_Head {
+    display: flex;
+    align-items: center;
+    background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+    padding: 16px;
+    color: white;
+    font-family: segoeui-sb;
 
-        &_Left {
-            flex: 5;
+    &_Left {
+      flex: 5;
 
-            & p {
-                font-size: 16px;
-                margin: 0;
-            }
-        }
-
-        &_Right {
-            display: flex;
-            justify-content: flex-end;
-            flex: 5;
-
-            &_Icon {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-            }
-        }
+      & p {
+        font-size: 16px;
+        margin: 0;
+      }
     }
 
-    &_Body {
-        font-size: 14px;
-        padding: 16px;
-        color: #505050;
-        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+    &_Right {
+      display: flex;
+      justify-content: flex-end;
+      flex: 5;
+
+      &_Icon {
         display: flex;
-        justify-content: center;
         align-items: center;
-
-        &_Input {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
-            margin: auto;
-            gap: 5px;
-
-            & input {
-                width: 100%;
-                height: 30px;
-                border-radius: 5px;
-                border: solid 1px rgba(198, 197, 197, 0.5);
-                padding: 8px;
-                outline: none;
-                box-sizing: border-box;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                font-family: Montserrat-Regular;
-            }
-        }
+        cursor: pointer;
+      }
     }
+  }
 
-    &_Foot {
-        display: flex;
-        justify-content: flex-end;
+  &_Body {
+    font-size: 14px;
+    padding: 16px;
+    color: #505050;
+    border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_Input {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      margin: auto;
+      gap: 5px;
+
+      & input {
+        width: 100%;
+        height: 30px;
+        border-radius: 5px;
+        border: solid 1px rgba(198, 197, 197, 0.5);
         padding: 8px;
-
-        & button {
-            padding: 8px 16px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-family: Montserrat-SemiBold;
-            color: white;
-            background-color: COLOR.$Primary-color;
-        }
+        outline: none;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        font-family: segoeui;
+      }
     }
+  }
+
+  &_Foot {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+
+    & button {
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: segoeui-sb;
+      color: white;
+      background-color: COLOR.$Primary-color;
+    }
+  }
 }
 
 .DAT_DeleteGroupPopup_Box {
-    position: relative;
-    width: 400px;
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow:
-        2px 2px 5px rgb(73, 73, 73, 0.2),
-        -2px -2px 5px rgb(67, 67, 67, 0.2);
+  position: relative;
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgb(73, 73, 73, 0.2),
+    -2px -2px 5px rgb(67, 67, 67, 0.2);
 
-    &_Head {
+  &_Head {
+    display: flex;
+    background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+    padding: 16px;
+    color: white;
+    font-family: segoeui-sb;
+
+    &_Left {
+      flex: 9;
+
+      & p {
+        margin: 0;
+      }
+    }
+
+    &_Right {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+
+      &_Icon {
         display: flex;
-        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
-        padding: 16px;
-        color: white;
-        font-family: Montserrat-Bold;
-
-        &_Left {
-            flex: 9;
-
-            & p {
-                margin: 0;
-            }
-        }
-
-        &_Right {
-            display: flex;
-            justify-content: flex-end;
-            flex: 1;
-
-            &_Icon {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-            }
-        }
+        align-items: center;
+        cursor: pointer;
+      }
     }
+  }
 
-    &_Body {
-        font-size: 13px;
-        padding: 16px;
-        color: COLOR.$Gray-color;
-        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+  &_Body {
+    font-size: 13px;
+    padding: 16px;
+    color: COLOR.$Gray-color;
+    border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+  }
+
+  &_Foot {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+
+    & button {
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: segoeui-sb;
     }
-
-    &_Foot {
-        display: flex;
-        justify-content: flex-end;
-        padding: 8px;
-
-        & button {
-            padding: 8px 16px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-family: Montserrat-SemiBold;
-        }
-    }
+  }
 }
 
 @media (max-width: 900px) {
-    .DAT_Role {
-        width: 98%;
+  .DAT_Role {
+    width: 98%;
 
-        //height: 68vh;
-        // overflow: hidden;
-        &_Content {
-            height: calc(100vh - 300px);
-        }
+    //height: 68vh;
+    // overflow: hidden;
+    &_Content {
+      height: calc(100vh - 300px);
     }
+  }
 }

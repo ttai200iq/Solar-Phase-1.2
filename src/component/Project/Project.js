@@ -7,12 +7,20 @@ import AddProject from "./AddProject";
 import Filter from "./Filter";
 import Popup from "./Popup";
 import ShareBox from "./ShareBox";
-import { isMobile, warnfilter } from "../Navigation/Navigation";
-import { sidebartab, sidebartabli } from "../Sidenar/Sidenar";
+import { warnfilter } from "../Navigation/Navigation";
+import { sidebartab, sidebartabli, sidenar } from "../Sidenar/Sidenar";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
 import { alertDispatch } from "../Alert/Alert";
-import { ruleInfor, Token, partnerInfor, userInfor, convertUnit, showUnitk, showUnit, } from "../../App";
+import {
+  ruleInfor,
+  Token,
+  partnerInfor,
+  userInfor,
+  convertUnit,
+  showUnitk,
+  showUnit,
+} from "../../App";
 import { useSelector } from "react-redux";
 import { signal } from "@preact/signals-react";
 import { useIntl } from "react-intl";
@@ -25,13 +33,18 @@ import { FaCheckCircle, FaRegFileAlt, FaStar } from "react-icons/fa";
 import { MdOutlineError, MdAddchart } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { GoProject } from "react-icons/go";
-import { IoIosArrowDown, IoIosArrowForward, IoIosArrowUp, IoMdMore } from "react-icons/io";
+import {
+  IoIosArrowDown,
+  IoIosArrowForward,
+  IoIosArrowUp,
+  IoMdMore,
+} from "react-icons/io";
 import { IoAddOutline, IoTrashOutline } from "react-icons/io5";
 import { FiEdit, FiFilter } from "react-icons/fi";
 import { RiShareForwardLine } from "react-icons/ri";
 import PopupState, { bindToggle, bindMenu } from "material-ui-popup-state";
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { isBrowser } from "react-device-detect";
 
 const tabLable = signal("");
@@ -126,12 +139,16 @@ export default function Project(props) {
     {
       name: dataLang.formatMessage({ id: "name" }),
       selector: (row) => (
-        <div className="DAT_Table"
+        <div
+          className="DAT_Table"
           id={row.plantid_}
           style={{ cursor: "pointer" }}
           onClick={(e) => handlePlant(e)}
         >
-          <img src={row.img ? row.img : "/dat_picture/solar_panel.png"} alt="" />
+          <img
+            src={row.img ? row.img : "/dat_picture/solar_panel.png"}
+            alt=""
+          />
 
           <div className="DAT_Table_Infor">
             <div className="DAT_Table_Infor_Name">{row.plantname}</div>
@@ -191,7 +208,10 @@ export default function Project(props) {
       width: "100px",
     },
     {
-      name: dataLang.formatMessage({ id: "electricType", defaultMessage: "Plant Mode", }),
+      name: dataLang.formatMessage({
+        id: "electricType",
+        defaultMessage: "Plant Mode",
+      }),
       selector: (row) => dataLang.formatMessage({ id: `${row.plantmode}Type` }),
       width: "250px",
       style: {
@@ -202,7 +222,9 @@ export default function Project(props) {
       name: dataLang.formatMessage({ id: "inCapacity" }),
       selector: (row) => (
         <>
-          {Number(parseFloat(convertUnit(row.capacity)).toFixed(2)).toLocaleString("en-US")}
+          {Number(
+            parseFloat(convertUnit(row.capacity)).toFixed(2)
+          ).toLocaleString("en-US")}
           &nbsp;
           {showUnitk(row.capacity)}Wp
         </>
@@ -213,38 +235,40 @@ export default function Project(props) {
     {
       name: dataLang.formatMessage({ id: "daily" }),
       selector: (row) =>
-        parseFloat(dailyProduction[row.plantid_]).toFixed(2) === "NaN"
-          ?
+        parseFloat(dailyProduction[row.plantid_]).toFixed(2) === "NaN" ? (
           <>
             0 &nbsp;
             {showUnitk(dailyProduction[row.plantid_])}Wh
           </>
-          :
+        ) : (
           <>
-            {Number(parseFloat(convertUnit(dailyProduction[row.plantid_])).toFixed(2)).toLocaleString("en-US")}
+            {Number(
+              parseFloat(convertUnit(dailyProduction[row.plantid_])).toFixed(2)
+            ).toLocaleString("en-US")}
             &nbsp;
             {showUnitk(dailyProduction[row.plantid_])}Wh
           </>
-      ,
+        ),
       sortable: true,
       width: "160px",
     },
     {
       name: dataLang.formatMessage({ id: "power" }),
       selector: (row) =>
-        parseFloat(power[row.plantid_]).toFixed(2) === "NaN"
-          ?
+        parseFloat(power[row.plantid_]).toFixed(2) === "NaN" ? (
           <>
             0 &nbsp;
             {showUnitk(power[row.plantid_])}W
           </>
-          :
+        ) : (
           <>
-            {Number(parseFloat(convertUnit(power[row.plantid_] / 1000)).toFixed(2)).toLocaleString("en-US")}
+            {Number(
+              parseFloat(convertUnit(power[row.plantid_] / 1000)).toFixed(2)
+            ).toLocaleString("en-US")}
             &nbsp;
             {showUnit(power[row.plantid_])}W
           </>
-      ,
+        ),
       sortable: true,
       width: "160px",
     },
@@ -270,38 +294,64 @@ export default function Project(props) {
             alignItems: "center",
           }}
         >
-          {ruleInfor.value.setting.project.modify == true || ruleInfor.value.setting.project.remove == true
-            ?
-            row.shared == 1
-              ? <></>
-              :
+          {ruleInfor.value.setting.project.modify == true ||
+            ruleInfor.value.setting.project.remove == true ? (
+            row.shared == 1 ? (
+              <></>
+            ) : (
               <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (<div className="DAT_TableEdit">
-                  <IoMdMore size={20}   {...bindToggle(popupState)} />
-                  <Menu {...bindMenu(popupState)}>
-                    {ruleInfor.value.setting.project.modify === true ?
-                      <MenuItem id={row.plantid_} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                        <FiEdit size={14} />&nbsp;
-                        {dataLang.formatMessage({ id: "change" })}
-                      </MenuItem>
-                      : <></>
-                    }
-                    {ruleInfor.value.setting.project.remove === true ?
-                      <MenuItem id={row.plantid_} onClick={(e) => { handleDelete(e); popupState.close() }}>
-                        <IoTrashOutline size={16} />
-                        &nbsp;
-                        {dataLang.formatMessage({ id: "delete" })}
-                      </MenuItem>
-                      : <></>}
+                {(popupState) => (
+                  <div className="DAT_TableEdit">
+                    <IoMdMore size={20} {...bindToggle(popupState)} />
+                    <Menu {...bindMenu(popupState)}>
+                      {ruleInfor.value.setting.project.modify === true ? (
+                        <MenuItem
+                          id={row.plantid_}
+                          onClick={(e) => {
+                            handleEdit(e);
+                            popupState.close();
+                          }}
+                        >
+                          <FiEdit size={14} />
+                          &nbsp;
+                          {dataLang.formatMessage({ id: "change" })}
+                        </MenuItem>
+                      ) : (
+                        <></>
+                      )}
+                      {ruleInfor.value.setting.project.remove === true ? (
+                        <MenuItem
+                          id={row.plantid_}
+                          onClick={(e) => {
+                            handleDelete(e);
+                            popupState.close();
+                          }}
+                        >
+                          <IoTrashOutline size={16} />
+                          &nbsp;
+                          {dataLang.formatMessage({ id: "delete" })}
+                        </MenuItem>
+                      ) : (
+                        <></>
+                      )}
 
-                    <MenuItem id={row.plantid_} onClick={(e) => { handleShare(e); popupState.close() }}>
-                      <RiShareForwardLine size={16} />
-                      &nbsp;
-                      {dataLang.formatMessage({ id: "share" })}
-                    </MenuItem>
-                  </Menu>
-                </div>)}
+                      <MenuItem
+                        id={row.plantid_}
+                        onClick={(e) => {
+                          handleShare(e);
+                          popupState.close();
+                        }}
+                      >
+                        <RiShareForwardLine size={16} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "share" })}
+                      </MenuItem>
+                    </Menu>
+                  </div>
+                )}
               </PopupState>
+            )
+          ) : (
             // <div className="DAT_TableEdit">
             //   <span
             //     id={row.plantid_ + "_MORE"}
@@ -310,8 +360,8 @@ export default function Project(props) {
             //     <IoMdMore size={20} />
             //   </span>
             // </div>
-            : <div></div>
-          }
+            <div></div>
+          )}
 
           {/* <div
             className="DAT_ModifyBox"
@@ -391,6 +441,7 @@ export default function Project(props) {
   ];
 
   const handlePlant = (e) => {
+    sidenar.value = false;
     plantState.value = "info";
     const newPlant = dataproject.value.find(
       (item) => item.plantid_ == e.currentTarget.id
@@ -585,7 +636,6 @@ export default function Project(props) {
       filter3 = [...filter3, ...t];
     }
 
-
     const set1 = new Set(filter1.map((obj) => Object.values(obj)[0]));
     const set2 = new Set(filter2.map((obj) => Object.values(obj)[0]));
     const set3 = new Set(filter3.map((obj) => Object.values(obj)[0]));
@@ -773,16 +823,23 @@ export default function Project(props) {
 
   return (
     <>
-      {isBrowser
-        ?
-        <>
-          <div className="DAT_ProjectHeader">
-            <div className="DAT_ProjectHeader_Title">
+      {isBrowser ? (
+        <div
+          style={{
+            position: "relative",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
+          <div className="DAT_Header">
+            <div className="DAT_Header_Title">
               <GoProject color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "project" })}</span>
             </div>
 
-            <div className="DAT_ProjectHeader_Filter">
+            <div className="DAT_Header_Filter">
               <input
                 id="search"
                 type="text"
@@ -797,7 +854,7 @@ export default function Project(props) {
             </div>
             {ruleInfor.value.setting.project.add === true ? (
               <button
-                className="DAT_ProjectHeader_New"
+                className="DAT_Header_New"
                 onClick={() => (plantState.value = "add")}
               >
                 <span value={"createdate"}>
@@ -948,8 +1005,72 @@ export default function Project(props) {
               />
             </div>
           </div>
-        </>
-        :
+
+          {(() => {
+            switch (plantState.value) {
+              case "info":
+                return (
+                  <div
+                    className="DAT_ViewPopup"
+                    style={{
+                      height: plantState.value === "default" ? "0px" : "100vh",
+                      transition: "0.5s",
+                    }}
+                  >
+                    <ProjectData />
+                  </div>
+                );
+              case "edit":
+                return (
+                  <div
+                    className="DAT_ViewPopup"
+                    style={{
+                      height: plantState.value === "default" ? "0px" : "100vh",
+                      transition: "0.5s",
+                    }}
+                  >
+                    <EditProject usr={user} />
+                  </div>
+                );
+              case "add":
+                return (
+                  <div
+                    className="DAT_ViewPopup"
+                    style={{
+                      height: plantState.value === "default" ? "0px" : "100vh",
+                      transition: "0.5s",
+                    }}
+                  >
+                    <AddProject usr={user} />
+                  </div>
+                );
+              default:
+                return <></>;
+            }
+          })()}
+
+          {popupState.value ? (
+            <div className="DAT_PopupBG">
+              <Popup
+                plantid={projectData.value.plantid_}
+                func="remove"
+                type="plant"
+                usr={user}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {shareState.value ? (
+            <div className="DAT_PopupBG">
+              <ShareBox plantid={projectData.value.plantid_} usr={user} />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
         <>
           <div className="DAT_ProjectHeaderMobile">
             <div className="DAT_ProjectHeaderMobile_Top">
@@ -1076,7 +1197,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.state ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "online",
@@ -1097,7 +1221,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.warn ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "noAlert",
@@ -1203,7 +1330,8 @@ export default function Project(props) {
                             <div className="DAT_ProjectMobile_Content_Bottom">
                               <div className="DAT_ProjectMobile_Content_Bottom_Left">
                                 <span>
-                                  {dataLang.formatMessage({ id: "lastupdate" })}:
+                                  {dataLang.formatMessage({ id: "lastupdate" })}
+                                  :
                                 </span>
                                 &nbsp;
                                 <span>{item.lastupdate}</span>
@@ -1297,7 +1425,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.state ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "online",
@@ -1318,7 +1449,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.warn ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "noAlert",
@@ -1351,7 +1485,9 @@ export default function Project(props) {
 
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({ id: "capacity" })}
+                                      {dataLang.formatMessage({
+                                        id: "capacity",
+                                      })}
                                     </div>
                                     <div>
                                       {item.capacity}
@@ -1377,7 +1513,8 @@ export default function Project(props) {
                             <div className="DAT_ProjectMobile_Content_Bottom">
                               <div className="DAT_ProjectMobile_Content_Bottom_Left">
                                 <span>
-                                  {dataLang.formatMessage({ id: "lastupdate" })}:
+                                  {dataLang.formatMessage({ id: "lastupdate" })}
+                                  :
                                 </span>
                                 &nbsp;
                                 <span>{item.lastupdate}</span>
@@ -1471,7 +1608,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.state ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "online",
@@ -1492,7 +1632,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.warn ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "noAlert",
@@ -1525,7 +1668,9 @@ export default function Project(props) {
 
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({ id: "capacity" })}
+                                      {dataLang.formatMessage({
+                                        id: "capacity",
+                                      })}
                                     </div>
                                     <div>
                                       {item.capacity}
@@ -1551,7 +1696,8 @@ export default function Project(props) {
                             <div className="DAT_ProjectMobile_Content_Bottom">
                               <div className="DAT_ProjectMobile_Content_Bottom_Left">
                                 <span>
-                                  {dataLang.formatMessage({ id: "lastupdate" })}:
+                                  {dataLang.formatMessage({ id: "lastupdate" })}
+                                  :
                                 </span>
                                 &nbsp;
                                 <span>{item.lastupdate}</span>
@@ -1645,7 +1791,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.state ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "online",
@@ -1666,7 +1815,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.warn ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "noAlert",
@@ -1699,7 +1851,9 @@ export default function Project(props) {
 
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({ id: "capacity" })}
+                                      {dataLang.formatMessage({
+                                        id: "capacity",
+                                      })}
                                     </div>
                                     <div>
                                       {item.capacity}
@@ -1725,7 +1879,8 @@ export default function Project(props) {
                             <div className="DAT_ProjectMobile_Content_Bottom">
                               <div className="DAT_ProjectMobile_Content_Bottom_Left">
                                 <span>
-                                  {dataLang.formatMessage({ id: "lastupdate" })}:
+                                  {dataLang.formatMessage({ id: "lastupdate" })}
+                                  :
                                 </span>
                                 &nbsp;
                                 <span>{item.lastupdate}</span>
@@ -1819,7 +1974,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.state ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "online",
@@ -1840,7 +1998,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.warn ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "noAlert",
@@ -1873,7 +2034,9 @@ export default function Project(props) {
 
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({ id: "capacity" })}
+                                      {dataLang.formatMessage({
+                                        id: "capacity",
+                                      })}
                                     </div>
                                     <div>
                                       {item.capacity}
@@ -1899,7 +2062,8 @@ export default function Project(props) {
                             <div className="DAT_ProjectMobile_Content_Bottom">
                               <div className="DAT_ProjectMobile_Content_Bottom_Left">
                                 <span>
-                                  {dataLang.formatMessage({ id: "lastupdate" })}:
+                                  {dataLang.formatMessage({ id: "lastupdate" })}
+                                  :
                                 </span>
                                 &nbsp;
                                 <span>{item.lastupdate}</span>
@@ -1993,7 +2157,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.state ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "online",
@@ -2014,7 +2181,10 @@ export default function Project(props) {
                                   <div className="DAT_ProjectMobile_Content_Top_Info_State_Item">
                                     {item.warn ? (
                                       <>
-                                        <FaCheckCircle size={14} color="green" />
+                                        <FaCheckCircle
+                                          size={14}
+                                          color="green"
+                                        />
                                         <span>
                                           {dataLang.formatMessage({
                                             id: "noAlert",
@@ -2047,7 +2217,9 @@ export default function Project(props) {
 
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({ id: "capacity" })}
+                                      {dataLang.formatMessage({
+                                        id: "capacity",
+                                      })}
                                     </div>
                                     <div>
                                       {item.capacity}
@@ -2073,7 +2245,8 @@ export default function Project(props) {
                             <div className="DAT_ProjectMobile_Content_Bottom">
                               <div className="DAT_ProjectMobile_Content_Bottom_Left">
                                 <span>
-                                  {dataLang.formatMessage({ id: "lastupdate" })}:
+                                  {dataLang.formatMessage({ id: "lastupdate" })}
+                                  :
                                 </span>
                                 &nbsp;
                                 <span>{item.lastupdate}</span>
@@ -2123,48 +2296,71 @@ export default function Project(props) {
               }
             })()}
           </div>
+
+          {(() => {
+            switch (plantState.value) {
+              case "info":
+                return (
+                  <div
+                    className="DAT_ViewPopupMobile"
+                    style={{
+                      height: plantState.value === "default" ? "0px" : "100vh",
+                      transition: "0.5s",
+                    }}
+                  >
+                    <ProjectData />
+                  </div>
+                );
+              case "edit":
+                return (
+                  <div
+                    className="DAT_ViewPopupMobile"
+                    style={{
+                      height: plantState.value === "default" ? "0px" : "100vh",
+                      transition: "0.5s",
+                    }}
+                  >
+                    <EditProject usr={user} />
+                  </div>
+                );
+              case "add":
+                return (
+                  <div
+                    className="DAT_ViewPopupMobile"
+                    style={{
+                      height: plantState.value === "default" ? "0px" : "100vh",
+                      transition: "0.5s",
+                    }}
+                  >
+                    <AddProject usr={user} />
+                  </div>
+                );
+              default:
+                return <></>;
+            }
+          })()}
+
+          {popupState.value ? (
+            <div className="DAT_PopupBGMobile">
+              <Popup
+                plantid={projectData.value.plantid_}
+                func="remove"
+                type="plant"
+                usr={user}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {shareState.value ? (
+            <div className="DAT_PopupBGMobile">
+              <ShareBox plantid={projectData.value.plantid_} usr={user} />
+            </div>
+          ) : (
+            <></>
+          )}
         </>
-      }
-
-      <div className="DAT_ProjectInfor"
-        style={{
-          height: plantState.value === "default" ? "0px" : "100vh",
-          transition: "0.5s",
-        }}
-      >
-        {(() => {
-          switch (plantState.value) {
-            case "info":
-              return <ProjectData />;
-            case "edit":
-              return <EditProject usr={user} />;
-            case "add":
-              return <AddProject usr={user} />;
-            default:
-              return <></>;
-          }
-        })()}
-      </div>
-
-      {popupState.value ? (
-        <div className="DAT_DevicePopup">
-          <Popup
-            plantid={projectData.value.plantid_}
-            func="remove"
-            type="plant"
-            usr={user}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {shareState.value ? (
-        <div className="DAT_DevicePopup">
-          <ShareBox plantid={projectData.value.plantid_} usr={user} />
-        </div>
-      ) : (
-        <></>
       )}
     </>
   );

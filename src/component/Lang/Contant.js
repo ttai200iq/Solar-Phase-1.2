@@ -145,7 +145,7 @@ export const messages = {
     C02: "CO₂ Reduction",
     cropYield: "Trees Planted",
     tree: "trees",
-    coalSave: "Standard Coal Saved",
+    coalSave: "Coal Saved",
     frequency: "Frequency",
     capacity: "Capacity",
     gridfeed: "From Grid",
@@ -154,6 +154,11 @@ export const messages = {
     day: "Day",
     month: "Month",
     year: "Year",
+    ProductionDesc: "Measures value the amount of electricity your solar system actually produces",
+    ConsumptionDesc: "The amount of electricity used by load of customers over the course of a day, a month, a year",
+    GridDesc: "Displays the measures value of the amount of electricity you take in or push onto the grid from the solar system",
+    BatteryDesc: "Battery: Displays the measures value of the amount of electricity battery charge or discharge over the course of a day, a month, a year",
+    SoCDesc: "SoC: State of Charge",
     ordinalNumber: "No.",
     dailyOutput: "Daily Production",
     monthOutput: "Monthly Production",
@@ -564,7 +569,7 @@ export const messages = {
     LeadAcidBattery: "Lead Acid Battery",
     LithumBattery: "Lithum Battery",
 
-    // Others 
+    // Others
     RatedPower: "Rated power",
 
     //--------------------
@@ -1049,6 +1054,11 @@ export const messages = {
     day: "Ngày",
     month: "Tháng",
     year: "Năm",
+    ProductionDesc: "Hiển thị giá trị đo đếm điện năng mà hệ thống năng lượng mặt trời của bạn phát ra",
+    ConsumptionDesc: "Điện năng tiêu thụ là lượng điện mà phụ tải trong nhà của bạn sử dụng theo ngày, tháng, năm",
+    GridDesc: "Hiển thị giá trị đo đếm điện năng mà hệ thống lấy từ lưới vào hoặc từ hệ thống năng lượng mặt trời đẩy ra lưới",
+    BatteryDesc: "Pin: Hiển thị giá trị điện năng mà pin sạc hoặc xả theo ngày, tháng, năm",
+    SoCDesc: "SoC: Dung lượng còn lại của Pin",
     ordinalNumber: "STT",
     dailyOutput: "Sản lượng ngày",
     monthOutput: "Sản lượng tháng",
@@ -1458,7 +1468,7 @@ export const messages = {
     LeadAcidBattery: "Ắc quy axit chì",
     LithumBattery: "Ắc quy Lithum",
 
-    // Others 
+    // Others
     RatedPower: "Công suất danh định",
 
     //--------------------

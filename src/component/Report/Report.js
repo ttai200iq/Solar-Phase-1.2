@@ -53,24 +53,32 @@ export default function Report(props) {
         usr: usr,
         partnerid: userInfor.value.partnerid,
         type: userInfor.value.type,
-      })
+      });
       if (d.status) {
         ReportData.value = d.data;
       }
-    }
-    getReport()
-  }, [])
+    };
+    getReport();
+  }, []);
 
   return (
-    <>
-      <div className="DAT_ReportHeader">
-        <div className="DAT_ReportHeader_Title">
+    <div
+      style={{
+        position: "relative",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <div className="DAT_Header">
+        <div className="DAT_Header_Title">
           <HiOutlineDocumentReport color="gray" size={25} />
           <span>{dataLang.formatMessage({ id: "report" })}</span>
         </div>
         {ruleInfor.value.setting.report.add ? (
           <button
-            className="DAT_ReportHeader_New"
+            className="DAT_Header_New"
             onClick={() => setViewState("create")}
           >
             <span>
@@ -91,13 +99,14 @@ export default function Report(props) {
               <div className="DAT_Report_List_Form" key={i}>
                 <div className="DAT_Report_List_Form_Title">{item.name}</div>
                 <div className="DAT_Report_List_Form_Type">
-                  {dataLang.formatMessage({ id: "type" })}: {dataLang.formatMessage({ id: item.type })}
+                  {dataLang.formatMessage({ id: "type" })}:{" "}
+                  {dataLang.formatMessage({ id: item.type })}
                 </div>
                 <div className="DAT_Report_List_Form_Create">
                   {dataLang.formatMessage({ id: "createBy" })}: {item.createby}
                 </div>
                 <div className="DAT_Report_List_Form_Date">
-                  {dataLang.formatMessage({ id: 'createdate' })}: {item.date}
+                  {dataLang.formatMessage({ id: "createdate" })}: {item.date}
                 </div>
                 <div className="DAT_Report_List_Form_Custom">
                   {ruleInfor.value.setting.report.modify ? (
@@ -138,7 +147,8 @@ export default function Report(props) {
         </div>
       </div>
 
-      <div className="DAT_ViewPopup"
+      <div
+        className="DAT_ViewPopup"
         style={{
           height: viewState === "default" ? "0px" : "100vh",
           transition: "0.5s",
@@ -163,6 +173,6 @@ export default function Report(props) {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 }

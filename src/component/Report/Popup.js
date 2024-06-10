@@ -40,7 +40,6 @@ export default function Popup(props) {
     }
   };
 
-
   // Handle close when press ESC
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -61,7 +60,7 @@ export default function Popup(props) {
     <div className="DAT_PopupReport_Box">
       <div className="DAT_PopupReport_Box_Head">
         <div className="DAT_PopupReport_Box_Head_Left">
-          {dataLang.formatMessage({ id: "delReport" })}
+          {dataLang.formatMessage({ id: "delete" })}
         </div>
         <div className="DAT_PopupReport_Box_Head_Right">
           <div

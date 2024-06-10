@@ -8,7 +8,7 @@ import AnaCreate from "./AnaCreate";
 import { useIntl } from "react-intl";
 
 import { TiFlowSwitch } from "react-icons/ti";
-import { isMobile } from "../Navigation/Navigation";
+import { isBrowser } from "react-device-detect";
 
 export const anaState = signal("default");
 
@@ -16,23 +16,23 @@ export default function Analytics(props) {
   const dataLang = useIntl();
 
   const paginationComponentOptions = {
-    rowsPerPageText: dataLang.formatMessage({ id: 'row' }),
-    rangeSeparatorText: dataLang.formatMessage({ id: 'to' }),
+    rowsPerPageText: dataLang.formatMessage({ id: "row" }),
+    rangeSeparatorText: dataLang.formatMessage({ id: "to" }),
     selectAllRowsItem: true,
-    selectAllRowsItemText: dataLang.formatMessage({ id: 'showAll' }),
+    selectAllRowsItemText: dataLang.formatMessage({ id: "showAll" }),
   };
 
   const dataAna = [];
 
   const columnAna = [
     {
-      name: dataLang.formatMessage({ id: 'name' }),
+      name: dataLang.formatMessage({ id: "name" }),
       selector: (row) => row.name,
       sortable: true,
       minWidth: "350px",
     },
     {
-      name: dataLang.formatMessage({ id: 'setting' }),
+      name: dataLang.formatMessage({ id: "setting" }),
       selector: (row) => (
         <>
           <div className="DAT_TableEdit">
@@ -44,16 +44,17 @@ export default function Analytics(props) {
             </span>
           </div>
 
-          <div className="DAT_ModifyBox"
+          <div
+            className="DAT_ModifyBox"
             id={row.id + "_Modify"}
             style={{ display: "none" }}
             onMouseLeave={(e) => handleModify(e, "none")}
           >
             <div className="DAT_ModifyBox_Fix">
-              {dataLang.formatMessage({ id: 'edits' })}
+              {dataLang.formatMessage({ id: "edits" })}
             </div>
             <div className="DAT_ModifyBox_Remove">
-              {dataLang.formatMessage({ id: 'remove' })}
+              {dataLang.formatMessage({ id: "remove" })}
             </div>
           </div>
         </>
@@ -71,31 +72,12 @@ export default function Analytics(props) {
 
   return (
     <>
-      {isMobile.value
-        ? <>
-          <div className="DAT_AnaHeaderMobile">
-            <div className="DAT_AnaHeaderMobile_Top">
-              {/* <div className="DAT_LogHeaderMobile_Top_Filter">
-                                <input type="text" placeholder={dataLang.formatMessage({ id: 'enterDev' })} />
-                                <CiSearch color="gray" size={20} />
-                            </div> */}
-            </div>
-
-            <div className="DAT_AnaHeaderMobile_Title">
+      {isBrowser ? (
+        <>
+          <div className="DAT_Header">
+            <div className="DAT_Header_Title">
               <TiFlowSwitch color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "analytic" })}</span>
-            </div>
-          </div>
-
-          <div></div>
-        </>
-        : <>
-          <div className="DAT_AnaHeader">
-            <div className="DAT_AnaHeader_Title">
-              <TiFlowSwitch color="gray" size={25} />
-              <span>
-                {dataLang.formatMessage({ id: 'analytic' })}
-              </span>
             </div>
 
             {/* <button className="DAT_AnaHeader_New"
@@ -110,8 +92,14 @@ export default function Analytics(props) {
           </div>
 
           <div className="DAT_Ana">
-            <div className='DAT_Ana_Header' style={{ padding: "15px", backgroundColor: "rgba(233, 233, 233, 0.5)" }}>
-              {dataLang.formatMessage({ id: 'analyticsList' })}
+            <div
+              className="DAT_Ana_Header"
+              style={{
+                padding: "15px",
+                backgroundColor: "rgba(233, 233, 233, 0.5)",
+              }}
+            >
+              {dataLang.formatMessage({ id: "analyticsList" })}
             </div>
             <div className="DAT_Ana_Content">
               <DataTable
@@ -126,9 +114,28 @@ export default function Analytics(props) {
             </div>
           </div>
         </>
-      }
+      ) : (
+        <>
+          <div className="DAT_AnaHeaderMobile">
+            <div className="DAT_AnaHeaderMobile_Top">
+              {/* <div className="DAT_LogHeaderMobile_Top_Filter">
+                      <input type="text" placeholder={dataLang.formatMessage({ id: 'enterDev' })} />
+                      <CiSearch color="gray" size={20} />
+                  </div> */}
+            </div>
 
-      <div className="DAT_AnaInfor"
+            <div className="DAT_AnaHeaderMobile_Title">
+              <TiFlowSwitch color="gray" size={25} />
+              <span>{dataLang.formatMessage({ id: "analytic" })}</span>
+            </div>
+          </div>
+
+          <div></div>
+        </>
+      )}
+
+      <div
+        className="DAT_AnaInfor"
         style={{
           height: anaState.value === "default" ? "0px" : "100vh",
           transition: "0.5s",

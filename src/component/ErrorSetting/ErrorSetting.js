@@ -232,20 +232,24 @@ export default function ErrorSetting(props) {
             //   </span>
             // </div>
             <PopupState variant="popper" popupId="demo-popup-popper">
-              {(popupState) => (<div className="DAT_TableEdit">
-                <IoMdMore size={20}   {...bindToggle(popupState)} />
-                <Menu {...bindMenu(popupState)}>
-
-                  <MenuItem id={row.boxid_} onClick={(e) => { handleDelete(e); popupState.close() }}>
-                    <IoTrashOutline size={16} />
-                    &nbsp;
-                    {dataLang.formatMessage({ id: "delete" })}
-                  </MenuItem>
-
-
-
-                </Menu>
-              </div>)}
+              {(popupState) => (
+                <div className="DAT_TableEdit">
+                  <IoMdMore size={20} {...bindToggle(popupState)} />
+                  <Menu {...bindMenu(popupState)}>
+                    <MenuItem
+                      id={row.boxid_}
+                      onClick={(e) => {
+                        handleDelete(e);
+                        popupState.close();
+                      }}
+                    >
+                      <IoTrashOutline size={16} />
+                      &nbsp;
+                      {dataLang.formatMessage({ id: "delete" })}
+                    </MenuItem>
+                  </Menu>
+                </div>
+              )}
             </PopupState>
           )}
           {/* <div
@@ -500,10 +504,12 @@ export default function ErrorSetting(props) {
           ...bigdata[index].solution_,
           {
             id: bigdata[index].solution_[solutionlength - 1].id + 1,
-            vi: `Giải pháp ${bigdata[index].solution_[solutionlength - 1].id + 1
-              }`,
-            en: `Solution ${bigdata[index].solution_[solutionlength - 1].id + 1
-              }`,
+            vi: `Giải pháp ${
+              bigdata[index].solution_[solutionlength - 1].id + 1
+            }`,
+            en: `Solution ${
+              bigdata[index].solution_[solutionlength - 1].id + 1
+            }`,
           },
         ];
         setData([...bigdata]);
@@ -557,26 +563,38 @@ export default function ErrorSetting(props) {
 
   return (
     <>
-      {isBrowser
-        ?
-        <>
-          <div className="DAT_ErrSetting">
-            <div className="DAT_ErrSetting_Title">
+      {isBrowser ? (
+        <div
+          style={{
+            position: "relative",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
+          <div className="DAT_Header">
+            <div className="DAT_Header_Title">
               <MdOutlineManageHistory color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "errorsetting" })}</span>
             </div>
 
-            <div className="DAT_ErrSetting_Filter">
+            <div className="DAT_Header_Filter">
               <input
                 type="text"
-                placeholder={dataLang.formatMessage({ id: "enterError" }) + "..."}
+                placeholder={
+                  dataLang.formatMessage({ id: "enterError" }) + "..."
+                }
                 ref={filterRef}
-                onChange={(e) => { handleFilter(e) }}
+                onChange={(e) => {
+                  handleFilter(e);
+                }}
               />
               <CiSearch color="gray" size={20} />
             </div>
 
-            <button className="DAT_ErrSetting_New"
+            <button
+              className="DAT_Header_New"
               onClick={() => setCreateState(true)}
             >
               <span>
@@ -604,8 +622,46 @@ export default function ErrorSetting(props) {
               />
             </div>
           </div>
-        </>
-        :
+
+          {createState ? (
+            <div className="DAT_PopupBG">
+              <CreateErrSetting
+                handleClose={handleCloseCreate}
+                handleConfirm={handleConfirmCreate}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {editState ? (
+            <div className="DAT_PopupBG">
+              <EditErr
+                type={editType}
+                handleClose={handleCloseEdit}
+                editVi={editVi}
+                editEn={editEn}
+                confirmEdit={confirmEdit}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {removeState ? (
+            <div className="DAT_PopupBG">
+              <RemoveErr
+                type={removeType}
+                handleClose={handleCloseRemove}
+                handleDel={handleDelete}
+                confirmDel={confirmDelete}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
         <>
           <div className="DAT_ErrSettingHeaderMobile">
             <div className="DAT_ErrSettingHeaderMobile_Top">
@@ -769,45 +825,45 @@ export default function ErrorSetting(props) {
               );
             })}
           </div>
+
+          {createState ? (
+            <div className="DAT_PopupBGMobile">
+              <CreateErrSetting
+                handleClose={handleCloseCreate}
+                handleConfirm={handleConfirmCreate}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {editState ? (
+            <div className="DAT_PopupBGMobile">
+              <EditErr
+                type={editType}
+                handleClose={handleCloseEdit}
+                editVi={editVi}
+                editEn={editEn}
+                confirmEdit={confirmEdit}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {removeState ? (
+            <div className="DAT_PopupBGMobile">
+              <RemoveErr
+                type={removeType}
+                handleClose={handleCloseRemove}
+                handleDel={handleDelete}
+                confirmDel={confirmDelete}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </>
-      }
-
-      {createState ? (
-        <div className="DAT_PopupBG">
-          <CreateErrSetting
-            handleClose={handleCloseCreate}
-            handleConfirm={handleConfirmCreate}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {editState ? (
-        <div className="DAT_PopupBG">
-          <EditErr
-            type={editType}
-            handleClose={handleCloseEdit}
-            editVi={editVi}
-            editEn={editEn}
-            confirmEdit={confirmEdit}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {removeState ? (
-        <div className="DAT_PopupBG">
-          <RemoveErr
-            type={removeType}
-            handleClose={handleCloseRemove}
-            handleDel={handleDelete}
-            confirmDel={confirmDelete}
-          />
-        </div>
-      ) : (
-        <></>
       )}
     </>
   );

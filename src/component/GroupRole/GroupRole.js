@@ -10,7 +10,6 @@ import EditGroup from "./EditGroup";
 import DataTable from "react-data-table-component";
 import { Empty } from "../Project/Project";
 import { useIntl } from "react-intl";
-import { isMobile } from "../Navigation/Navigation";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
 import { AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
@@ -152,25 +151,36 @@ export default function GroupRole(props) {
               //   </span>
               // </div>
               <PopupState variant="popper" popupId="demo-popup-popper">
-                {(popupState) => (<div className="DAT_TableEdit">
-                  <IoMdMore size={20}   {...bindToggle(popupState)} />
-                  <Menu {...bindMenu(popupState)}>
+                {(popupState) => (
+                  <div className="DAT_TableEdit">
+                    <IoMdMore size={20} {...bindToggle(popupState)} />
+                    <Menu {...bindMenu(popupState)}>
+                      <MenuItem
+                        id={user.id_}
+                        onClick={(e) => {
+                          handleEdit(e);
+                          popupState.close();
+                        }}
+                      >
+                        <FiEdit size={14} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "change" })}
+                      </MenuItem>
 
-                    <MenuItem id={user.id_} onClick={(e) => { handleEdit(e); popupState.close() }}>
-                      <FiEdit size={14} />&nbsp;
-                      {dataLang.formatMessage({ id: "change" })}
-                    </MenuItem>
-
-
-                    <MenuItem id={user.id_} onClick={(e) => { handleDeleteUser(e); popupState.close() }}>
-                      <IoTrashOutline size={16} />
-                      &nbsp;
-                      {dataLang.formatMessage({ id: "delete" })}
-                    </MenuItem>
-
-
-                  </Menu>
-                </div>)}
+                      <MenuItem
+                        id={user.id_}
+                        onClick={(e) => {
+                          handleDeleteUser(e);
+                          popupState.close();
+                        }}
+                      >
+                        <IoTrashOutline size={16} />
+                        &nbsp;
+                        {dataLang.formatMessage({ id: "delete" })}
+                      </MenuItem>
+                    </Menu>
+                  </div>
+                )}
               </PopupState>
             )}
             {/* <div
@@ -267,8 +277,7 @@ export default function GroupRole(props) {
       // className="DAT_GR_Content_DevideTable"
       // style={{ height: "100% !important", width: "100% !important" }}
       >
-        {isBrowser
-          ?
+        {isBrowser ? (
           <>
             <div className="DAT_GR_Content_DevideTable">
               <div
@@ -376,7 +385,7 @@ export default function GroupRole(props) {
               </div>
             </div>
           </>
-          :
+        ) : (
           <>
             {userList ? (
               <>
@@ -584,7 +593,7 @@ export default function GroupRole(props) {
                             onClick={(e) => handleDeleteUser(e)}
                             style={{ cursor: "pointer" }}
                           >
-                            {/* <IoTrashOutline size={18} /> */}
+                            <IoTrashOutline size={18} />
                           </div>
                         )}
                         <div
@@ -609,7 +618,7 @@ export default function GroupRole(props) {
               </div>
             )}
           </>
-        }
+        )}
       </div>
     );
   };
@@ -680,16 +689,23 @@ export default function GroupRole(props) {
 
   return (
     <>
-      {isBrowser
-        ?
-        <>
-          <div className="DAT_GRHeader">
-            <div className="DAT_GRHeader_Title">
+      {isBrowser ? (
+        <div
+          style={{
+            position: "relative",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
+          <div className="DAT_Header">
+            <div className="DAT_Header_Title">
               <PiUsersFour color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "roleList" })}</span>
             </div>
             <div
-              className="DAT_GRHeader_Filter"
+              className="DAT_Header_Filter"
               style={{
                 backgroundColor:
                   groupID.value === 0 ? "rgba(233, 233, 233, 0.5)" : "white",
@@ -713,7 +729,7 @@ export default function GroupRole(props) {
               <CiSearch color="gray" size={20} />
             </div>
             <button
-              className="DAT_GRHeader_New"
+              className="DAT_Header_New"
               onClick={() => setCreateState(true)}
             >
               <span>
@@ -737,8 +753,56 @@ export default function GroupRole(props) {
               />
             </div>
           </div>
-        </>
-        :
+
+          {createState ? (
+            <div className="DAT_PopupBG">
+              <CreateGroupRole handleClose={handleCloseCreate} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {popupState ? (
+            <div className="DAT_PopupBG">
+              <Popup handleClose={handleCloseDel} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {addState ? (
+            <div className="DAT_PopupBG">
+              <AddUsers handleClose={handleCloseAdd} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {groupDelState ? (
+            <div className="DAT_PopupBG">
+              <ConfirmDeleteGroup handleClose={handleCloseGroupDel} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {editState ? (
+            <div className="DAT_PopupBG">
+              <EditGroup handleClose={handleCloseEdit} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {editrole ? (
+            <div className="DAT_PopupBG">
+              <EditRole handleClose={handleCloseEditRole} />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
         <>
           <div className="DAT_ProjectHeaderMobile">
             <div className="DAT_ProjectHeaderMobile_Top">
@@ -760,7 +824,7 @@ export default function GroupRole(props) {
               </div>
               <button
                 className="DAT_ProjectHeaderMobile_Top_New"
-              // onClick={() => setRoleState("create")}
+                onClick={() => setCreateState(true)}
               >
                 <IoAddOutline color="white" size={20} />
               </button>
@@ -785,164 +849,55 @@ export default function GroupRole(props) {
               />
             </div>
           </div>
+
+          {createState ? (
+            <div className="DAT_PopupBGMobile">
+              <CreateGroupRole handleClose={handleCloseCreate} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {popupState ? (
+            <div className="DAT_PopupBGMobile">
+              <Popup handleClose={handleCloseDel} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {addState ? (
+            <div className="DAT_PopupBGMobile">
+              <AddUsers handleClose={handleCloseAdd} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {groupDelState ? (
+            <div className="DAT_PopupBGMobile">
+              <ConfirmDeleteGroup handleClose={handleCloseGroupDel} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {editState ? (
+            <div className="DAT_PopupBGMobile">
+              <EditGroup handleClose={handleCloseEdit} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {editrole ? (
+            <div className="DAT_PopupBGMobile">
+              <EditRole handleClose={handleCloseEditRole} />
+            </div>
+          ) : (
+            <></>
+          )}
         </>
-      }
-
-      {/* {isMobile.value ? (
-        <>
-          <div className="DAT_ProjectHeaderMobile">
-            <div className="DAT_ProjectHeaderMobile_Top">
-              <div
-                className="DAT_ProjectHeaderMobile_Top_Filter"
-                style={{
-                  backgroundColor:
-                    groupID.value === 0 ? "rgb(235, 235, 228)" : "white",
-                }}
-              >
-                <CiSearch color="gray" size={20} />
-                <input
-                  disabled={groupID.value === 0 ? true : false}
-                  type="text"
-                  placeholder={dataLang.formatMessage({ id: "enterInfo" })}
-                  // value={filter}
-                  onChange={(e) => handleFilter(e)}
-                />
-              </div>
-              <button
-                className="DAT_ProjectHeaderMobile_Top_New"
-              // onClick={() => setRoleState("create")}
-              >
-                <IoAddOutline color="white" size={20} />
-              </button>
-            </div>
-
-            <div
-              className="DAT_ProjectHeaderMobile_Title"
-              style={{ marginBottom: "10px" }}
-            >
-              <PiUsersFour color="gray" size={25} />
-              <span>{dataLang.formatMessage({ id: "roleList" })}</span>
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="DAT_GRHeader">
-            <div className="DAT_GRHeader_Title">
-              <PiUsersFour color="gray" size={25} />
-              <span>{dataLang.formatMessage({ id: "roleList" })}</span>
-            </div>
-            <div
-              className="DAT_GRHeader_Filter"
-              style={{
-                backgroundColor:
-                  groupID.value === 0 ? "rgba(233, 233, 233, 0.5)" : "white",
-              }}
-            >
-              {groupID.value === 0 ? (
-                <input
-                  disabled
-                  type="text"
-                  autoComplete="off"
-                  placeholder={dataLang.formatMessage({ id: "enterInfo" })}
-                />
-              ) : (
-                <input
-                  type="text"
-                  autoComplete="on"
-                  placeholder={dataLang.formatMessage({ id: "enterInfo" })}
-                  onChange={(e) => handleFilter(e)}
-                />
-              )}
-              <CiSearch color="gray" size={20} />
-            </div>
-            <button
-              className="DAT_GRHeader_New"
-              onClick={() => setCreateState(true)}
-            >
-              <span>
-                <AiOutlineUsergroupAdd color="white" size={20} />
-                &nbsp;
-                {dataLang.formatMessage({ id: "createNewGroup" })}
-              </span>
-            </button>
-          </div>
-        </>
-      )} */}
-
-      {/* {isMobile.value ? (
-        <div className="DAT_GR">
-          <div className="DAT_GR_Content">
-            <GroupUsers
-              addState={handleAddState}
-              delState={handleDelState}
-              editState={handleEditState}
-              groupDelState={handleGroupDelState}
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="DAT_GR">
-          <div className="DAT_GR_Header">
-            {dataLang.formatMessage({ id: "grouproleList" })}
-          </div>
-          <div className="DAT_GR_Content">
-            <GroupUsers
-              addState={handleAddState}
-              delState={handleDelState}
-              editState={handleEditState}
-              groupDelState={handleGroupDelState}
-            />
-          </div>
-        </div>
-      )} */}
-
-      {createState ? (
-        <div className="DAT_PopupBG">
-          <CreateGroupRole handleClose={handleCloseCreate} />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {popupState ? (
-        <div className="DAT_PopupBG">
-          <Popup handleClose={handleCloseDel} />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {addState ? (
-        <div className="DAT_PopupBG">
-          <AddUsers handleClose={handleCloseAdd} />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {groupDelState ? (
-        <div className="DAT_PopupBG">
-          <ConfirmDeleteGroup handleClose={handleCloseGroupDel} />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {editState ? (
-        <div className="DAT_PopupBG">
-          <EditGroup handleClose={handleCloseEdit} />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {editrole ? (
-        <div className="DAT_PopupBG">
-          <EditRole handleClose={handleCloseEditRole} />
-        </div>
-      ) : (
-        <></>
       )}
     </>
   );

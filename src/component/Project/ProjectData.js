@@ -160,9 +160,9 @@ export default function ProjectData(props) {
         <>
           {row.data.daily?.register
             ? parseFloat(
-              invt[row.logger_]?.[row.data.daily.register] *
-              row.data.daily?.cal
-            ).toFixed(2)
+                invt[row.logger_]?.[row.data.daily.register] *
+                  row.data.daily?.cal
+              ).toFixed(2)
             : 0}{" "}
           kWh
         </>
@@ -181,7 +181,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-            ruleInfor.value.setting.project.delete === true ? (
+          ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -337,7 +337,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-            ruleInfor.value.setting.project.delete === true ? (
+          ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -943,10 +943,9 @@ export default function ProjectData(props) {
   }, []);
 
   return (
-    <div ref={box} style={{ width: "98%", margin: "auto" }}>
+    <div ref={box}>
       <div className="DAT_ProjectData">
-        {isBrowser
-          ?
+        {isBrowser ? (
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
@@ -1030,7 +1029,7 @@ export default function ProjectData(props) {
               </div>
             </div>
           </>
-          :
+        ) : (
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
@@ -1114,7 +1113,7 @@ export default function ProjectData(props) {
               </div>
             </div>
           </>
-        }
+        )}
 
         {(() => {
           switch (view) {
@@ -1139,9 +1138,8 @@ export default function ProjectData(props) {
                 //   </div>
                 // </div>
 
-                <div>
-                  {isBrowser
-                    ?
+                <>
+                  {isBrowser ? (
                     <>
                       <div className="DAT_ProjectData_NewDashboard_Top">
                         <div className="DAT_ProjectData_NewDashboard_Top_Left">
@@ -1165,7 +1163,7 @@ export default function ProjectData(props) {
                         <DashboardHistory />
                       </div>
                     </>
-                    :
+                  ) : (
                     <>
                       <div className="DAT_ProjectData_Dashboard_Top">
                         <div className="DAT_ProjectData_Dashboard_Top_Left">
@@ -1189,14 +1187,13 @@ export default function ProjectData(props) {
                         <DashboardHistory />
                       </div>
                     </>
-                  }
-                </div>
+                  )}
+                </>
               );
             case "device":
               return (
                 <div className="DAT_ProjectData_Device">
-                  {isBrowser
-                    ?
+                  {isBrowser ? (
                     <>
                       <div className="DAT_ProjectData_Device_Table">
                         <div className="DAT_Toollist_Tab">
@@ -1287,7 +1284,7 @@ export default function ProjectData(props) {
                         </div>
                       </div>
                     </>
-                    :
+                  ) : (
                     <>
                       <div className="DAT_ProjectData_Device_TableMobile">
                         <div className="DAT_Toollist_Tab_Mobile">
@@ -1374,7 +1371,9 @@ export default function ProjectData(props) {
                                           <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info">
                                             <div
                                               className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
-                                              onClick={(e) => handleInfoLogger(e)}
+                                              onClick={(e) =>
+                                                handleInfoLogger(e)
+                                              }
                                             >
                                               {item.name}
                                             </div>
@@ -1633,7 +1632,7 @@ export default function ProjectData(props) {
                         })()}
                       </div>
                     </>
-                  }
+                  )}
                 </div>
               );
             case "share":
@@ -1649,8 +1648,7 @@ export default function ProjectData(props) {
                     {dataLang.formatMessage({ id: "share" })}
                   </div>
 
-                  {isBrowser
-                    ?
+                  {isBrowser ? (
                     <div className="DAT_ProjectData_Share_Content">
                       <DataTable
                         className="DAT_Table_Device"
@@ -1662,11 +1660,14 @@ export default function ProjectData(props) {
                         noDataComponent={<Empty />}
                       />
                     </div>
-                    :
+                  ) : (
                     <div className="DAT_ProjectData_Share_ContentMobile">
                       {getShared.map((item, i) => {
                         return (
-                          <div key={i} className="DAT_ProjectData_Share_ContentMobile_Item">
+                          <div
+                            key={i}
+                            className="DAT_ProjectData_Share_ContentMobile_Item"
+                          >
                             <div className="DAT_ProjectData_Share_ContentMobile_Item_Left">
                               {i + 1}
                             </div>
@@ -1683,10 +1684,10 @@ export default function ProjectData(props) {
                               </div>
                             </div>
                           </div>
-                        )
+                        );
                       })}
                     </div>
-                  }
+                  )}
                 </div>
               );
             // case "alert":
@@ -1826,7 +1827,7 @@ export default function ProjectData(props) {
       </div>
 
       {popupAddGateway ? (
-        <div className="DAT_AddGatewayPopup">
+        <div className="DAT_PopupBG">
           <AddGateway
             data={temp.value}
             handleInvt={handleInvt}
@@ -1838,7 +1839,7 @@ export default function ProjectData(props) {
       )}
 
       {popupState.value ? (
-        <div className="DAT_DevicePopup">
+        <div className="DAT_PopupBG">
           <Popup
             plantid={projectData.value.plantid_}
             type="logger"
@@ -2011,7 +2012,8 @@ export default function ProjectData(props) {
         </>
       )}
 
-      <div className="DAT_DeviceInfor"
+      <div
+        className="DAT_ViewPopup"
         style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
       >
         {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}
