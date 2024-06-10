@@ -949,12 +949,15 @@ export default function ProjectData(props) {
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
+                <img src={projectData.value.img
+                  ? projectData.value.img
+                  : "/dat_picture/solar_panel.png"} alt="" />
                 {projectData.value.plantname}
-                {/* {projectData.value.state === 1 ? (
+                {projectData.value.state === 1 ? (
                   <FaCheckCircle size={20} color="green" />
                 ) : (
                   <MdOutlineError size={20} color="red" />
-                )} */}
+                )}
               </div>
 
               <div className="DAT_ProjectData_Header_Right">
@@ -1017,11 +1020,11 @@ export default function ProjectData(props) {
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
                 {projectData.value.plantname}
-                {/* {projectData.value.state === 1 ? (
+                {projectData.value.state === 1 ? (
                   <FaCheckCircle size={20} color="green" />
                 ) : (
                   <MdOutlineError size={20} color="red" />
-                )} */}
+                )}
               </div>
 
               <div className="DAT_ProjectData_Header_Right">
