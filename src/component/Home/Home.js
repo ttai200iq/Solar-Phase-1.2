@@ -515,12 +515,27 @@ export default function Home(props) {
     let map = new Map(document.getElementById("map"), defaultProps);
 
     data.map((item) => {
-      const marker = { lat: parseFloat(item.lat), lng: parseFloat(item.long) };
-      const markerElement = new AdvancedMarkerElement({
-        position: marker,
-        map: map,
-        title: item.plantname,
-      });
+      // const marker = { lat: parseFloat(item.lat), lng: parseFloat(item.long) };
+      // const markerElement = new AdvancedMarkerElement({
+      //   position: marker,
+      //   map: map,
+      //   title: item.plantname,
+      // });
+
+      const priceTag = document.createElement("div");
+            const src = item?.img ? item.img : `/dat_picture/solar_panel.png`
+            priceTag.className = "price-tag";
+            priceTag.innerHTML = `<img src='${src}'></img>`
+            // priceTag.textContent = item.name_;
+            const marker = { lat: parseFloat(item.lat), lng: parseFloat(item.long) };
+            const markerElement = new AdvancedMarkerElement({
+                position: marker,
+                map: map,
+                title: item.plantname,
+                content:  priceTag,
+            });
+
+
       markerElement.addListener("click", () => {
         plantState.value = "info";
         projectData.value = item;
