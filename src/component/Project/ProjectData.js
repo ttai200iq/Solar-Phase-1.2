@@ -160,9 +160,9 @@ export default function ProjectData(props) {
         <>
           {row.data.daily?.register
             ? parseFloat(
-                invt[row.logger_]?.[row.data.daily.register] *
-                  row.data.daily?.cal
-              ).toFixed(2)
+              invt[row.logger_]?.[row.data.daily.register] *
+              row.data.daily?.cal
+            ).toFixed(2)
             : 0}{" "}
           kWh
         </>
@@ -181,7 +181,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-          ruleInfor.value.setting.project.delete === true ? (
+            ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -337,7 +337,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-          ruleInfor.value.setting.project.delete === true ? (
+            ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -949,29 +949,12 @@ export default function ProjectData(props) {
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
-                <div
-                  className="DAT_ProjectData_Header_Left_Top"
-                  style={{ fontSize: 22 }}
-                >
-                  <img
-                    src={
-                      projectData.value.img
-                        ? projectData.value.img
-                        : "/dat_picture/solar_panel.png"
-                    }
-                    alt=""
-                  />
-                  <div className="DAT_ProjectData_Header_Left_Top_Content">
-                    <div className="DAT_ProjectData_Header_Left_Top_Content_Name">
-                      {projectData.value.plantname}
-                      {projectData.value.state === 1 ? (
-                        <FaCheckCircle size={20} color="green" />
-                      ) : (
-                        <MdOutlineError size={20} color="red" />
-                      )}
-                    </div>
-                  </div>
-                </div>
+                {projectData.value.plantname}
+                {/* {projectData.value.state === 1 ? (
+                  <FaCheckCircle size={20} color="green" />
+                ) : (
+                  <MdOutlineError size={20} color="red" />
+                )} */}
               </div>
 
               <div className="DAT_ProjectData_Header_Right">
@@ -1033,29 +1016,12 @@ export default function ProjectData(props) {
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
-                <div
-                  className="DAT_ProjectData_Header_Left_Top"
-                  style={{ fontSize: 22 }}
-                >
-                  <img
-                    src={
-                      projectData.value.img
-                        ? projectData.value.img
-                        : "/dat_picture/solar_panel.png"
-                    }
-                    alt=""
-                  />
-                  <div className="DAT_ProjectData_Header_Left_Top_Content">
-                    <div className="DAT_ProjectData_Header_Left_Top_Content_Name">
-                      {projectData.value.plantname}
-                      {projectData.value.state === 1 ? (
-                        <FaCheckCircle size={20} color="green" />
-                      ) : (
-                        <MdOutlineError size={20} color="red" />
-                      )}
-                    </div>
-                  </div>
-                </div>
+                {projectData.value.plantname}
+                {/* {projectData.value.state === 1 ? (
+                  <FaCheckCircle size={20} color="green" />
+                ) : (
+                  <MdOutlineError size={20} color="red" />
+                )} */}
               </div>
 
               <div className="DAT_ProjectData_Header_Right">

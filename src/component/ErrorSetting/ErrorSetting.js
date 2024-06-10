@@ -18,7 +18,7 @@ import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 export const lowercasedata = (str) => {
   return str
@@ -62,6 +62,7 @@ export default function ErrorSetting(props) {
   const [editEn, setEditEn] = useState("");
   const [editarray, setEditarray] = useState();
   const filterRef = useRef();
+  const { isLandscape } = useMobileOrientation();
 
   const paginationComponentOptions = {
     rowsPerPageText: dataLang.formatMessage({ id: "row" }),
@@ -504,12 +505,10 @@ export default function ErrorSetting(props) {
           ...bigdata[index].solution_,
           {
             id: bigdata[index].solution_[solutionlength - 1].id + 1,
-            vi: `Giải pháp ${
-              bigdata[index].solution_[solutionlength - 1].id + 1
-            }`,
-            en: `Solution ${
-              bigdata[index].solution_[solutionlength - 1].id + 1
-            }`,
+            vi: `Giải pháp ${bigdata[index].solution_[solutionlength - 1].id + 1
+              }`,
+            en: `Solution ${bigdata[index].solution_[solutionlength - 1].id + 1
+              }`,
           },
         ];
         setData([...bigdata]);
@@ -838,15 +837,30 @@ export default function ErrorSetting(props) {
           )}
 
           {editState ? (
-            <div className="DAT_PopupBGMobile">
-              <EditErr
-                type={editType}
-                handleClose={handleCloseEdit}
-                editVi={editVi}
-                editEn={editEn}
-                confirmEdit={confirmEdit}
-              />
-            </div>
+            <>
+              {isLandscape
+                ?
+                <div className="DAT_ViewPopupMobile">
+                  <EditErr
+                    type={editType}
+                    handleClose={handleCloseEdit}
+                    editVi={editVi}
+                    editEn={editEn}
+                    confirmEdit={confirmEdit}
+                  />
+                </div>
+                :
+                <div className="DAT_PopupBGMobile">
+                  <EditErr
+                    type={editType}
+                    handleClose={handleCloseEdit}
+                    editVi={editVi}
+                    editEn={editEn}
+                    confirmEdit={confirmEdit}
+                  />
+                </div>
+              }
+            </>
           ) : (
             <></>
           )}
