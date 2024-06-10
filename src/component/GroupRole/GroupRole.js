@@ -262,7 +262,6 @@ export default function GroupRole(props) {
     const handleShowFunction = (e) => {
       const id = e.currentTarget.id;
       const idArr = id.split("_");
-
       const mod = document.getElementById(idArr[0] + "_function");
       const t = document.getElementById(idArr[0] + "_dot");
       if (t.style.display === "none") {
@@ -336,7 +335,10 @@ export default function GroupRole(props) {
                       <div
                         className="DAT_GR_Content_DevideTable_Left_ItemList_Item_Shortcut"
                         id={item.id_ + "_dot"}
-                        onClick={(e) => handleShowFunction(e)}
+                        onClick={(e) => {
+                          handleShowFunction(e);
+                          console.log(item.id_);
+                        }}
                       >
                         <IoMdMore size={20} color="grey" />
                       </div>
@@ -345,9 +347,11 @@ export default function GroupRole(props) {
                         className="DAT_GR_Content_DevideTable_Left_ItemList_Item_More"
                         id={item.id_ + "_function"}
                         style={{ display: "none" }}
-                        onMouseLeave={(e) => handleShowFunction(e)}
+                        onMouseLeave={(e) => {
+                          handleShowFunction(e);
+                        }}
                       >
-                        {item.id_ === 1 ? (
+                        {parseInt(item.id_) === 1 ? (
                           <></>
                         ) : (
                           <div
@@ -410,6 +414,7 @@ export default function GroupRole(props) {
                       onClick={() => {
                         setUserlist(false);
                         groupID.value = 0;
+                        setFilterType(true);
                       }}
                     />
                     <div>{dataLang.formatMessage({ id: "roleList" })}</div>
@@ -556,14 +561,15 @@ export default function GroupRole(props) {
                             ? "rgb(207, 207, 207, 0.4)"
                             : "",
                       }}
-                      id={item.id_}
-                      onClick={(e) => {
-                        handleChangeGroup(e);
-                        setUserlist(true);
-                        setFilterType(false);
-                      }}
                     >
-                      <div>
+                      <div
+                        id={item.id_}
+                        onClick={(e) => {
+                          handleChangeGroup(e);
+                          setUserlist(true);
+                          setFilterType(false);
+                        }}
+                      >
                         <div
                           className="DAT_GR_Content_DevideTable_Left_ItemList_Item_Name"
                           style={{ fontSize: "15px" }}
@@ -586,7 +592,10 @@ export default function GroupRole(props) {
                       <div
                         className="DAT_GR_Content_DevideTable_Left_ItemList_Item_Shortcut"
                         id={item.id_ + "_dot"}
-                        onClick={(e) => handleShowFunction(e)}
+                        onClick={(e) => {
+                          handleShowFunction(e);
+                          console.log(item.id_);
+                        }}
                       >
                         <IoMdMore size={20} color="grey" />
                       </div>
@@ -597,7 +606,7 @@ export default function GroupRole(props) {
                         style={{ display: "none" }}
                         onMouseLeave={(e) => handleShowFunction(e)}
                       >
-                        {item.id_ === 1 ? (
+                        {parseInt(item.id_) === 1 ? (
                           <></>
                         ) : (
                           <div
@@ -606,7 +615,7 @@ export default function GroupRole(props) {
                             onClick={(e) => handleDeleteUser(e)}
                             style={{ cursor: "pointer" }}
                           >
-                            {/* <IoTrashOutline size={18} /> */}
+                            <IoTrashOutline size={18} />
                           </div>
                         )}
                         <div
