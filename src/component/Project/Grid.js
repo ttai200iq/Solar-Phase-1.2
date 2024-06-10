@@ -241,7 +241,7 @@ export default function Grid(props) {
             </div>
             <div className="DAT_ProjectData_Dashboard_Data_Center_GridMobile_Data_Data">
               <div style={{ marginBottom: "8px", color: "grey" }}>
-                {dataLang.formatMessage({ id: "GridMobileData_" })}
+                {dataLang.formatMessage({ id: "gridData_" })}
               </div>
               <div style={{ marginBottom: "8px" }}>
                 <span
