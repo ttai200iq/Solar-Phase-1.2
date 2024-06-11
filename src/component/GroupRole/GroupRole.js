@@ -225,8 +225,23 @@ export default function GroupRole(props) {
     const handleEdit = (e) => {
       const id = parseInt(e.currentTarget.id);
       roleData.value = Usr_.value.find((item) => item.id_ == id);
+      // console.log(id, roleData.value, Usr_.value);
       setEditrole(true);
     };
+
+    useEffect(() => {
+      const fetchUsr = async () => {
+        const d = await callApi("post", host.DATA + "/getallUser", {
+          partnerid: groupID.value,
+        });
+        if (d.status === true) {
+          console.log(d.data);
+          Usr_.value = d.data;
+          Usr_.value = Usr_.value.sort((a, b) => a.ruleid_ - b.ruleid_);
+        }
+      };
+      fetchUsr();
+    }, []);
 
     const handleChangeGroup = (e) => {
       groupID.value = Number(e.currentTarget.id);
@@ -237,6 +252,7 @@ export default function GroupRole(props) {
         if (getUser.status) {
           Usr_.value = getUser.data.sort((a, b) => a.id_ - b.id_);
           groupUser.value = getUser.data.sort((a, b) => a.id_ - b.id_);
+          console.log(getUser.data);
         }
       };
       checkApi();
