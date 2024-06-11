@@ -195,7 +195,7 @@ $colorWhite: rgb(229, 229, 229, 0.5);
       // box-shadow: inset 2px 2px 5px #cbced1, inset -2px -2px 5px #fff;
 
       & input {
-        font-family: Montserrat-Regular;
+        font-family: segoeui;
         padding: 10px;
         -webkit-box-sizing: border-box;
         /* Safari/Chrome, other WebKit */
@@ -263,7 +263,7 @@ $colorWhite: rgb(229, 229, 229, 0.5);
         display: none;
       }
 
-      & input + label:before {
+      & input+label:before {
         cursor: pointer;
         margin-right: 10px;
         padding-bottom: 5px;
@@ -284,12 +284,12 @@ $colorWhite: rgb(229, 229, 229, 0.5);
         box-sizing: border-box;
       }
 
-      & input:checked + label:before {
+      & input:checked+label:before {
         //background-color: rgb(255, 255, 255);
         color: #6495ed;
       }
 
-      & input + label:active:before {
+      & input+label:active:before {
         transform: scale(0);
       }
     }
@@ -303,7 +303,7 @@ $colorWhite: rgb(229, 229, 229, 0.5);
       height: 40px;
       outline: none;
       border: none;
-      font-family: Montserrat-SemiBold;
+      font-family: segoeui-sb;
     }
 
     &-footer {
@@ -324,7 +324,7 @@ $colorWhite: rgb(229, 229, 229, 0.5);
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: Montserrat-Regular;
+        font-family: segoeui;
       }
     }
   }

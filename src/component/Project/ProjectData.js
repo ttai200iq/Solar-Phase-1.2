@@ -32,6 +32,7 @@ import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
 import { isBrowser } from "react-device-detect";
 import GraphComponent from "./GraphComponent";
+import { isDesktop } from "../Home/Home";
 
 export const temp = signal([]);
 export const inverterDB = signal([]);
@@ -40,6 +41,16 @@ export const coalsave = signal({
   ef: 0.7221,
   avr: 0.517,
   tree: 0.054,
+});
+
+export const projectdatasize = signal({
+  icon: { fontSize: 35 },
+  label: { fontSize: 15 },
+  value: { fontSize: 26 },
+  unit: { fontSize: 18 },
+  valuepro: { fontSize: 28 },
+  unitpro: { fontSize: 26 },
+  boxpro: { fontSize: 150 },
 });
 
 const tabMobile = signal(false);
@@ -160,9 +171,9 @@ export default function ProjectData(props) {
         <>
           {row.data.daily?.register
             ? parseFloat(
-                invt[row.logger_]?.[row.data.daily.register] *
-                  row.data.daily?.cal
-              ).toFixed(2)
+              invt[row.logger_]?.[row.data.daily.register] *
+              row.data.daily?.cal
+            ).toFixed(2)
             : 0}{" "}
           kWh
         </>
@@ -181,7 +192,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-          ruleInfor.value.setting.project.delete === true ? (
+            ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -337,7 +348,7 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.project.modify === true ||
-          ruleInfor.value.setting.project.delete === true ? (
+            ruleInfor.value.setting.project.delete === true ? (
             projectData.value.shared == 1 ? (
               <></>
             ) : (
@@ -723,6 +734,115 @@ export default function ProjectData(props) {
     }, 250);
   };
 
+  const handleWindowResize = () => {
+    let home = document.getElementById("dashboard");
+    console.log(home.offsetWidth);
+
+    if (home?.offsetWidth >= 1300) {
+      console.log("max");
+      projectdatasize.value = {
+        icon: { fontSize: 35 },
+        label: { fontSize: 15 },
+        value: { fontSize: 26 },
+        unit: { fontSize: 18 },
+        valuepro: { fontSize: 28 },
+        unitpro: { fontSize: 26 },
+        boxpro: { fontSize: 150 },
+      };
+    } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
+      console.log("middle");
+      projectdatasize.value = {
+        icon: { fontSize: 30 },
+        label: { fontSize: 12 },
+        value: { fontSize: 22 },
+        unit: { fontSize: 14 },
+        valuepro: { fontSize: 24 },
+        unitpro: { fontSize: 22 },
+        boxpro: { fontSize: 140 },
+      };
+    } else {
+      console.log("small");
+      projectdatasize.value = {
+        icon: { fontSize: 25 },
+        label: { fontSize: 11 },
+        value: { fontSize: 20 },
+        unit: { fontSize: 10 },
+        valuepro: { fontSize: 22 },
+        unitpro: { fontSize: 20 },
+        boxpro: { fontSize: 130 },
+      };
+    }
+
+    if (home?.offsetWidth > 900) {
+      isDesktop.value = true;
+    } else {
+      isDesktop.value = false;
+      // initMap(plant.value);
+    }
+
+    // else {
+    //   console.log("min");
+    //   sizedesktop.value = {
+    //     icon: { fontSize: 25 },
+    //     label: { fontSize: 11 },
+    //     value: { fontSize: 20 },
+    //     unit: { fontSize: 12 },
+    //   };
+    // }
+  };
+
+  useEffect(function () {
+    let home = document.getElementById("dashboard");
+    console.log(home.offsetWidth);
+
+    if (home?.offsetWidth >= 1300) {
+      console.log("max");
+      projectdatasize.value = {
+        icon: { fontSize: 35 },
+        label: { fontSize: 15 },
+        value: { fontSize: 26 },
+        unit: { fontSize: 18 },
+        valuepro: { fontSize: 28 },
+        unitpro: { fontSize: 26 },
+        boxpro: { fontSize: 150 },
+      };
+    } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
+      console.log("middle");
+      projectdatasize.value = {
+        icon: { fontSize: 30 },
+        label: { fontSize: 12 },
+        value: { fontSize: 22 },
+        unit: { fontSize: 14 },
+        valuepro: { fontSize: 24 },
+        unitpro: { fontSize: 22 },
+        boxpro: { fontSize: 140 },
+      };
+    } else {
+      console.log("small");
+      projectdatasize.value = {
+        icon: { fontSize: 25 },
+        label: { fontSize: 11 },
+        value: { fontSize: 20 },
+        unit: { fontSize: 10 },
+        valuepro: { fontSize: 22 },
+        unitpro: { fontSize: 20 },
+        boxpro: { fontSize: 130 },
+      };
+    }
+
+    if (home?.offsetWidth > 900) {
+      isDesktop.value = true;
+    } else {
+      isDesktop.value = false;
+      // initMap(plant.value);
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   useEffect(() => {
     // filter data AlertTable
     // open.value = dataAlert.filter((item) => item.status == true);
@@ -929,7 +1049,9 @@ export default function ProjectData(props) {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        // plantState.value = "default";
+        if (popupAddGateway === false) {
+          // plantState.value = "default";
+        }
         setDropState(false);
       }
     };
@@ -949,29 +1071,15 @@ export default function ProjectData(props) {
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
-                <div
-                  className="DAT_ProjectData_Header_Left_Top"
-                  style={{ fontSize: 22 }}
-                >
-                  <img
-                    src={
-                      projectData.value.img
-                        ? projectData.value.img
-                        : "/dat_picture/solar_panel.png"
-                    }
-                    alt=""
-                  />
-                  <div className="DAT_ProjectData_Header_Left_Top_Content">
-                    <div className="DAT_ProjectData_Header_Left_Top_Content_Name">
-                      {projectData.value.plantname}
-                      {projectData.value.state === 1 ? (
-                        <FaCheckCircle size={20} color="green" />
-                      ) : (
-                        <MdOutlineError size={20} color="red" />
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <img src={projectData.value.img
+                  ? projectData.value.img
+                  : "/dat_picture/solar_panel.png"} alt="" />
+                {projectData.value.plantname}
+                {projectData.value.state === 1 ? (
+                  <FaCheckCircle size={20} color="green" />
+                ) : (
+                  <MdOutlineError size={20} color="red" />
+                )}
               </div>
 
               <div className="DAT_ProjectData_Header_Right">
@@ -1033,29 +1141,12 @@ export default function ProjectData(props) {
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
-                <div
-                  className="DAT_ProjectData_Header_Left_Top"
-                  style={{ fontSize: 22 }}
-                >
-                  <img
-                    src={
-                      projectData.value.img
-                        ? projectData.value.img
-                        : "/dat_picture/solar_panel.png"
-                    }
-                    alt=""
-                  />
-                  <div className="DAT_ProjectData_Header_Left_Top_Content">
-                    <div className="DAT_ProjectData_Header_Left_Top_Content_Name">
-                      {projectData.value.plantname}
-                      {projectData.value.state === 1 ? (
-                        <FaCheckCircle size={20} color="green" />
-                      ) : (
-                        <MdOutlineError size={20} color="red" />
-                      )}
-                    </div>
-                  </div>
-                </div>
+                {projectData.value.plantname}
+                {projectData.value.state === 1 ? (
+                  <FaCheckCircle size={20} color="green" />
+                ) : (
+                  <MdOutlineError size={20} color="red" />
+                )}
               </div>
 
               <div className="DAT_ProjectData_Header_Right">
@@ -1139,55 +1230,82 @@ export default function ProjectData(props) {
                 // </div>
 
                 <>
-                  {isBrowser ? (
-                    <>
-                      <div className="DAT_ProjectData_NewDashboard_Top">
-                        <div className="DAT_ProjectData_NewDashboard_Top_Left">
-                          <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
-                            <GraphComponent />
+                  {isBrowser
+                    ? (
+                      isDesktop.value
+                        ?
+                        <div id="dashboard">
+                          <div className="DAT_ProjectData_NewDashboard_Top">
+                            <div className="DAT_ProjectData_NewDashboard_Top_Left">
+                              <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
+                                <GraphComponent />
+                              </div>
+                              <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
+                                <Benefit />
+                              </div>
+                            </div>
+                            <div className="DAT_ProjectData_NewDashboard_Top_Right">
+                              <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
+                                <ProjectInfo />
+                              </div>
+                              <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
+                                <Weather />
+                              </div>
+                            </div>
                           </div>
-                          <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
-                            <Benefit />
-                          </div>
-                        </div>
-                        <div className="DAT_ProjectData_NewDashboard_Top_Right">
-                          <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
-                            <ProjectInfo />
-                          </div>
-                          <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
-                            <Weather />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="DAT_ProjectData_NewDashboard_Bottom">
-                        <DashboardHistory />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="DAT_ProjectData_Dashboard_Top">
-                        <div className="DAT_ProjectData_Dashboard_Top_Left">
-                          <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
-                            <GraphComponent />
-                          </div>
-                          <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
-                            <Benefit />
+                          <div className="DAT_ProjectData_NewDashboard_Bottom">
+                            <DashboardHistory />
                           </div>
                         </div>
-                        <div className="DAT_ProjectData_Dashboard_Top_Right">
-                          <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
-                            <ProjectInfo />
+                        :
+                        <div id="dashboard">
+                          <div className="DAT_ProjectData_Dashboard_Top">
+                            <div className="DAT_ProjectData_Dashboard_Top_Left">
+                              <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
+                                <GraphComponent />
+                              </div>
+                              <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
+                                <Benefit />
+                              </div>
+                            </div>
+                            <div className="DAT_ProjectData_Dashboard_Top_Right">
+                              <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
+                                <ProjectInfo />
+                              </div>
+                              <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
+                                <Weather />
+                              </div>
+                            </div>
                           </div>
-                          <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
-                            <Weather />
+                          <div className="DAT_ProjectData_Dashboard_Bottom">
+                            <DashboardHistory />
                           </div>
                         </div>
+                    ) : (
+                      <div id="dashboard">
+                        <div className="DAT_ProjectData_Dashboard_Top">
+                          <div className="DAT_ProjectData_Dashboard_Top_Left">
+                            <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
+                              <GraphComponent />
+                            </div>
+                            <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
+                              <Benefit />
+                            </div>
+                          </div>
+                          <div className="DAT_ProjectData_Dashboard_Top_Right">
+                            <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
+                              <ProjectInfo />
+                            </div>
+                            <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
+                              <Weather />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="DAT_ProjectData_Dashboard_Bottom">
+                          <DashboardHistory />
+                        </div>
                       </div>
-                      <div className="DAT_ProjectData_Dashboard_Bottom">
-                        <DashboardHistory />
-                      </div>
-                    </>
-                  )}
+                    )}
                 </>
               );
             case "device":

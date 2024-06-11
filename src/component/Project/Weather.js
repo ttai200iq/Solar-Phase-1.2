@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 import { host } from "../Lang/Contant";
 import { isBrowser } from "react-device-detect";
+import { isDesktop } from "../Home/Home";
+import { projectdatasize } from "./ProjectData";
 
 export default function Weather() {
   const [data, setData] = useState({});
@@ -270,18 +272,114 @@ export default function Weather() {
         :
         <>
           {isBrowser ?
-            <>
-              <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather">
-                <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg">
-                  <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
+            isDesktop.value
+              ?
+              <>
+                <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather">
+                  <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg">
+                    <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
+                      <img
+                        src={"/dat_picture/station.jpg"}
+                        style={{ width: "120px", height: "70px" }}
+                        alt=""
+                      />
+                      <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Icon">
+                      </div>
+                      <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Text"
+                        style={{ fontSize: projectdatasize.value.label.fontSize }}
+                      >
+                        <span style={{ fontSize: projectdatasize.value.value.fontSize }}>
+                          <img
+                            src={"https:" + data.current.condition.icon}
+                            style={{
+                              marginBottom: "-10px",
+                            }}
+                            alt=""
+                          />
+                          {data.current.temp_c}°C
+                        </span>
+                        {data.current.condition.text}
+                      </div>
+                    </div>
+                  </div>
+
+                  {projectdatasize.value.label.fontSize <= 12
+                    ?
+                    <></>
+                    :
+                    <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast">
+                      {data.forecast.forecastday.map((item, index) => {
+                        let weekdays = [];
+                        if (lang === "en") {
+                          weekdays = [
+                            "Sun",
+                            "Mon",
+                            "Tue",
+                            "Wed",
+                            "Thu",
+                            "Fri",
+                            "Sat",
+                          ];
+                        } else if (lang === "vi") {
+                          weekdays = [
+                            "Chủ nhật",
+                            "Thứ hai",
+                            "Thứ ba",
+                            "Thứ tư",
+                            "Thứ năm",
+                            "Thứ sáu",
+                            "Thứ bảy",
+                          ];
+                        }
+                        const dateObj = new Date(item.date);
+                        const weekday = weekdays[dateObj.getUTCDay()];
+                        const isToday = new Date(item.date).toDateString() === today;
+                        return (
+                          <div
+                            key={index}
+                            className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box"
+                          >
+                            <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Icon">
+                              <img
+                                draggable="true" // Enable drag for images
+                                onDragStart={(e) => e.preventDefault()}
+                                src={"https:" + item.day.condition.icon}
+                                alt=""
+                              />
+                            </div>
+                            <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text">
+                              {item.day.avgtemp_c}°C
+                              <div
+                                className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text_Weekday"
+                                style={{
+                                  fontFamily: isToday
+                                    ? "segoeuib"
+                                    : "segoeui",
+                                  color: "rgba(11, 25, 103)",
+                                }}
+                              >
+                                {weekday}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  }
+                </div>
+              </>
+              :
+              <>
+                <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_CurDeg">
+                  <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_CurDeg_Box">
                     <img
                       src={"/dat_picture/station.jpg"}
                       style={{ width: "120px", height: "70px" }}
                       alt=""
                     />
-                    <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Icon">
+                    <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Icon">
                     </div>
-                    <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Text">
+                    <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_CurDeg_Box_Text">
                       <span>
                         <img
                           src={"https:" + data.current.condition.icon}
@@ -296,7 +394,7 @@ export default function Weather() {
                     </div>
                   </div>
                 </div>
-                <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast">
+                <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_Forecast">
                   {data.forecast.forecastday.map((item, index) => {
                     let weekdays = [];
                     if (lang === "en") {
@@ -326,9 +424,9 @@ export default function Weather() {
                     return (
                       <div
                         key={index}
-                        className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box"
+                        className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_Forecast_Box"
                       >
-                        <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Icon">
+                        <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Icon">
                           <img
                             draggable="true" // Enable drag for images
                             onDragStart={(e) => e.preventDefault()}
@@ -336,10 +434,10 @@ export default function Weather() {
                             alt=""
                           />
                         </div>
-                        <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text">
+                        <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text">
                           {item.day.avgtemp_c}°C
                           <div
-                            className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text_Weekday"
+                            className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text_Weekday"
                             style={{
                               fontFamily: isToday
                                 ? "segoeuib"
@@ -354,8 +452,7 @@ export default function Weather() {
                     );
                   })}
                 </div>
-              </div>
-            </>
+              </>
             :
             <>
               <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg_Weather_CurDeg">

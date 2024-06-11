@@ -176,7 +176,7 @@ export default function Navigation(props) {
               handleMenu(event);
             }}
           >
-            <BsFillMenuButtonWideFill color="white" size={22} />
+            <BsFillMenuButtonWideFill color="rgba(11, 25, 103)" size={22} />
           </button>
         </div>
 
@@ -201,7 +201,7 @@ export default function Navigation(props) {
             onClick={() => (notifNav.value = !notifNav.value)}
             ref={notif_icon}
           >
-            <IoIosNotificationsOutline color="white" size={22} />
+            <IoIosNotificationsOutline color="rgba(11, 25, 103)" size={22} />
 
             {dataWarn.value.filter((item) => item.state == 1).length === 0 ? (
               <></>
@@ -220,7 +220,7 @@ export default function Navigation(props) {
             }}
             onMouseLeave={() => handleOutsideLang()}
           >
-            <MdOutlineLanguage color="white" size={22} />
+            <MdOutlineLanguage color="rgba(11, 25, 103)" size={22} />
             <span>{lang === "vi" ? "Vi" : "En"}</span>
           </button>
 

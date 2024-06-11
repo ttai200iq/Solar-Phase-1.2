@@ -3,6 +3,7 @@ import "./Project.scss";
 import { signal } from "@preact/signals-react";
 import { useIntl } from 'react-intl';
 import Data from "./Data.js";
+import { isBrowser, useMobileOrientation } from 'react-device-detect';
 
 const move = signal({
     moveLtoR: 0,
@@ -45,6 +46,7 @@ export default function Graph(props) {
     // }, [])
 
     const [dataType, setDataType] = useState("default");
+    const { isLandscape } = useMobileOrientation();
 
     const handleDataType = (type) => {
         setDataType(type);
@@ -72,9 +74,27 @@ export default function Graph(props) {
             {dataType === "default" ? (
                 <> </>
             ) : (
-                <div className="DAT_ExportBG">
-                    <Data type={dataType} setType={handleDataType} />
-                </div>
+                <>
+                    {isBrowser
+                        ?
+                        <div className="DAT_ExportBG">
+                            <Data type={dataType} setType={handleDataType} />
+                        </div>
+                        :
+                        <>
+                            {isLandscape
+                                ?
+                                <div className="DAT_ViewPopupMobile">
+                                    <Data type={dataType} setType={handleDataType} />
+                                </div>
+                                :
+                                <div className="DAT_PopupBGMobile">
+                                    <Data type={dataType} setType={handleDataType} />
+                                </div>
+                            }
+                        </>
+                    }
+                </>
             )}
         </>
     );
