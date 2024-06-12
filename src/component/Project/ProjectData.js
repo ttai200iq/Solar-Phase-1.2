@@ -736,10 +736,10 @@ export default function ProjectData(props) {
 
   const handleWindowResize = () => {
     let home = document.getElementById("dashboard");
-    console.log(home.offsetWidth);
+    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      console.log("max");
+      // console.log("max");
       projectdatasize.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
@@ -750,7 +750,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 150 },
       };
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      console.log("middle");
+      // console.log("middle");
       projectdatasize.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
@@ -761,7 +761,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 140 },
       };
     } else {
-      console.log("small");
+      // console.log("small");
       projectdatasize.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
@@ -793,10 +793,10 @@ export default function ProjectData(props) {
 
   useEffect(function () {
     let home = document.getElementById("dashboard");
-    console.log(home.offsetWidth);
+    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      console.log("max");
+      // console.log("max");
       projectdatasize.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
@@ -807,7 +807,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 150 },
       };
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      console.log("middle");
+      // console.log("middle");
       projectdatasize.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
@@ -818,7 +818,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 140 },
       };
     } else {
-      console.log("small");
+      // console.log("small");
       projectdatasize.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },

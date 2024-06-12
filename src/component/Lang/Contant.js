@@ -1525,7 +1525,7 @@ export const messages = {
     alert_6: "Thiết lập thành công!",
     alert_7: "Thiết lập không thành công, vui lòng thử lại!",
     alert_8: "Bạn vui lòng truy cập vào Email của bạn và xác nhận!",
-    alert_9: "Dăng ký thành công!",
+    alert_9: "Đăng ký thành công!",
     alert_10: "Tài khoản hoặc email đã được sử dụng!",
     alert_11: "Email này đã tồn tại!",
     alert_12: "Mã OTP không đúng!",

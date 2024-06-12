@@ -16,8 +16,8 @@ export default function Production(props) {
   const year = useSelector((state) => state.tool.year);
   const in_max = 100;
   const in_min = 0;
-  const out_max = -10;
-  const out_min = 140;
+  const out_max = 0;
+  const out_min = 90;
   const [per, setPer] = useState(0);
 
   const mapValue = (data, in_min, in_max, out_min, out_max) => {
