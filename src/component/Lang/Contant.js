@@ -154,10 +154,14 @@ export const messages = {
     day: "Day",
     month: "Month",
     year: "Year",
-    ProductionDesc: "Measures value the amount of electricity your solar system actually produces",
-    ConsumptionDesc: "The amount of electricity used by load of customers over the course of a day, a month, a year",
-    GridDesc: "Displays the measures value of the amount of electricity you take in or push onto the grid from the solar system",
-    BatteryDesc: "Battery: Displays the measures value of the amount of electricity battery charge or discharge over the course of a day, a month, a year",
+    ProductionDesc:
+      "Measures value the amount of electricity your solar system actually produces",
+    ConsumptionDesc:
+      "The amount of electricity used by load of customers over the course of a day, a month, a year",
+    GridDesc:
+      "Displays the measures value of the amount of electricity you take in or push onto the grid from the solar system",
+    BatteryDesc:
+      "Battery: Displays the measures value of the amount of electricity battery charge or discharge over the course of a day, a month, a year",
     SoCDesc: "SoC: State of Charge",
     ordinalNumber: "No.",
     dailyOutput: "Daily Production",
@@ -1054,10 +1058,14 @@ export const messages = {
     day: "Ngày",
     month: "Tháng",
     year: "Năm",
-    ProductionDesc: "Hiển thị giá trị đo đếm điện năng mà hệ thống năng lượng mặt trời của bạn phát ra",
-    ConsumptionDesc: "Điện năng tiêu thụ là lượng điện mà phụ tải trong nhà của bạn sử dụng theo ngày, tháng, năm",
-    GridDesc: "Hiển thị giá trị đo đếm điện năng mà hệ thống lấy từ lưới vào hoặc từ hệ thống năng lượng mặt trời đẩy ra lưới",
-    BatteryDesc: "Pin: Hiển thị giá trị điện năng mà pin sạc hoặc xả theo ngày, tháng, năm",
+    ProductionDesc:
+      "Hiển thị giá trị đo đếm điện năng mà hệ thống năng lượng mặt trời của bạn phát ra",
+    ConsumptionDesc:
+      "Điện năng tiêu thụ là lượng điện mà phụ tải trong nhà của bạn sử dụng theo ngày, tháng, năm",
+    GridDesc:
+      "Hiển thị giá trị đo đếm điện năng mà hệ thống lấy từ lưới vào hoặc từ hệ thống năng lượng mặt trời đẩy ra lưới",
+    BatteryDesc:
+      "Pin: Hiển thị giá trị điện năng mà pin sạc hoặc xả theo ngày, tháng, năm",
     SoCDesc: "SoC: Dung lượng còn lại của Pin",
     ordinalNumber: "STT",
     dailyOutput: "Sản lượng ngày",
@@ -1525,7 +1533,7 @@ export const messages = {
     alert_6: "Thiết lập thành công!",
     alert_7: "Thiết lập không thành công, vui lòng thử lại!",
     alert_8: "Bạn vui lòng truy cập vào Email của bạn và xác nhận!",
-    alert_9: "Dăng ký thành công!",
+    alert_9: "Đăng ký thành công!",
     alert_10: "Tài khoản hoặc email đã được sử dụng!",
     alert_11: "Email này đã tồn tại!",
     alert_12: "Mã OTP không đúng!",
