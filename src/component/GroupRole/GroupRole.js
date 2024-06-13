@@ -32,6 +32,7 @@ import { CiSearch } from "react-icons/ci";
 import { isBrowser } from "react-device-detect";
 import { LuRouter } from "react-icons/lu";
 import { BiMessageAltError } from "react-icons/bi";
+import { datarule } from "../Rule/Rule";
 
 //DATA TEMP
 export const group = signal([]);
@@ -225,8 +226,9 @@ export default function GroupRole(props) {
     const handleEdit = (e) => {
       const id = parseInt(e.currentTarget.id);
       roleData.value = Usr_.value.find((item) => item.id_ == id);
-      // console.log(id, roleData.value, Usr_.value);
       setEditrole(true);
+      console.log(roleData.value);
+      console.log(datarule.value);
     };
 
     useEffect(() => {

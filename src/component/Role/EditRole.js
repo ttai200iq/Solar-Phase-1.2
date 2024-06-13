@@ -98,7 +98,7 @@ export default function EditRole(props) {
       }
     };
     getRule();
-  }, [partnerInfor.value.partnerid]);
+  }, [groupID.value]);
 
   return (
     <div className="DAT_EditRole">
@@ -174,11 +174,11 @@ export default function EditRole(props) {
               {dataLang.formatMessage({ id: "rule" })}: &nbsp;
             </span>
           </div>
-          <select defaultValue={roleData.value.ruleid_} ref={ruleidRef}>
+          <select defaultValue={roleData.value.rulename_} ref={ruleidRef}>
             {datarule.value
               .filter((item, key) => item.ruleid_ !== 1)
               .map((item, key) => (
-                <option key={key} value={item.ruleid_}>
+                <option key={key} value={item.rulename_}>
                   {item.rulename_}
                 </option>
               ))}

@@ -317,6 +317,7 @@ export default function Role(props) {
     setType("edit");
     const id = e.currentTarget.id;
     roleData.value = Usr_.value.find((item) => item.id_ == id);
+    console.log(roleData.value.ruleid_);
   };
 
   const handleClosePopup = () => {
