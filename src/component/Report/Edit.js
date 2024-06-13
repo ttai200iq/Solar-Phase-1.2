@@ -8,6 +8,7 @@ import { isMobile } from "../Navigation/Navigation";
 import { FaSave } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { IoSaveOutline } from "react-icons/io5";
+import { isBrowser } from "react-device-detect";
 
 export const checkbox = signal({
   tthtc: { status: false },
@@ -102,7 +103,9 @@ export default function Create() {
 
   return (
     <div>
-      <div className="DAT_Edit">
+      <div className="DAT_Edit"
+        style={{ marginBottom: isBrowser ? "30px" : "100px" }}
+      >
         <div className="DAT_Edit_Header">
           <div className="DAT_Edit_Header_Left">
             <p style={{ fontSize: "20px" }}>Chỉnh sửa</p>

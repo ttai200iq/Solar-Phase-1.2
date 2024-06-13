@@ -45,7 +45,7 @@ import { RiShareForwardLine } from "react-icons/ri";
 import PopupState, { bindToggle, bindMenu } from "material-ui-popup-state";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 const tabLable = signal("");
 const tabMobile = signal(false);
@@ -98,6 +98,7 @@ export const Empty = (props) => {
 
 export default function Project(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const user = useSelector((state) => state.admin.usr);
   const navigate = useNavigate();
   const [datafilter, setDatafilter] = useState([]);
@@ -1047,7 +1048,9 @@ export default function Project(props) {
             </div>
           </div>
 
-          <div className="DAT_ProjectMobile">
+          <div className="DAT_ProjectMobile"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             <div className="DAT_Toollist_Tab_Mobile">
               <button
                 className="DAT_Toollist_Tab_Mobile_content"
@@ -1063,7 +1066,7 @@ export default function Project(props) {
                 className="DAT_Toollist_Tab_Mobile_list"
                 style={{
                   top: "50px",
-                  height: tabMobile.value ? "200px" : "0",
+                  height: tabMobile.value ? "220px" : "0",
                   transition: "0.5s",
                   boxShadow: tabMobile.value
                     ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"
@@ -2296,9 +2299,15 @@ export default function Project(props) {
           )}
 
           {shareState.value ? (
-            <div className="DAT_PopupBGMobile">
-              <ShareBox plantid={projectData.value.plantid_} usr={user} />
-            </div>
+            isLandscape
+              ?
+              <div className="DAT_ViewPopupMobile">
+                <ShareBox plantid={projectData.value.plantid_} usr={user} />
+              </div>
+              :
+              <div className="DAT_PopupBGMobile">
+                <ShareBox plantid={projectData.value.plantid_} usr={user} />
+              </div>
           ) : (
             <></>
           )}

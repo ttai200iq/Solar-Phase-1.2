@@ -21,7 +21,7 @@ import { LuUserSquare } from "react-icons/lu";
 import { FiEdit } from "react-icons/fi";
 import { MdAddchart } from "react-icons/md";
 import { GoProject } from "react-icons/go";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 export const roleData = signal({});
 export const Usr_ = signal([]);
@@ -55,6 +55,7 @@ export const access = {
 
 export default function Role(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const [temp, setTemp] = useState();
   // const [filter, setFilter] = useState(false);
   const [datafilter, setdatafilter] = useState([]);
@@ -242,8 +243,8 @@ export default function Role(props) {
                 return (
                   <>
                     {row.type_ === "master" ||
-                    row.type_ === "mainadmin" ||
-                    row.type_ === "admin" ? (
+                      row.type_ === "mainadmin" ||
+                      row.type_ === "admin" ? (
                       <></>
                     ) : ruleInfor.value.setting.user.modify ||
                       ruleInfor.value.setting.user.remove ? (
@@ -520,7 +521,9 @@ export default function Role(props) {
             </div>
           </div>
 
-          <div className="DAT_ProjectMobile">
+          <div className="DAT_ProjectMobile"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             {datafilter?.map((item, i) => {
               return (
                 <div key={i} className="DAT_ProjectMobile_Content">

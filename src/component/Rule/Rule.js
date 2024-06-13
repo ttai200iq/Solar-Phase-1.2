@@ -22,12 +22,13 @@ import { FiEdit } from "react-icons/fi";
 import { lowercasedata } from "../ErrorSetting/ErrorSetting";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 export const datarule = signal([]);
 
 export default function Rule() {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   // const [filter, setFilter] = useState(false);
   const [idDel, setIdDel] = useState();
   const [datafilter, setdatafilter] = useState([]);
@@ -412,7 +413,9 @@ export default function Rule() {
             </div>
           </div>
 
-          <div className="DAT_RuleMobile">
+          <div className="DAT_RuleMobile"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             {datafilter.map((item, i) => {
               return (
                 <div key={i} className="DAT_RuleMobile_Content">

@@ -45,7 +45,7 @@ import { useNavigate } from "react-router-dom";
 import { VscDashboard } from "react-icons/vsc";
 import { IoCalendarOutline } from "react-icons/io5";
 import { isMobile } from "../Navigation/Navigation";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 import { size } from "lodash";
 
 const plant = signal([]);
@@ -67,6 +67,7 @@ const sizedesktop = signal({
 export default function Home(props) {
   const usr = useSelector((state) => state.admin.usr);
   const lang = useSelector((state) => state.admin.lang);
+  const { isLandscape } = useMobileOrientation();
   const [total, setTotal] = useState(0);
   const [online, setOnline] = useState(0);
   const [offline, setOffline] = useState(0);
@@ -2794,7 +2795,9 @@ export default function Home(props) {
               </div>
             </div>
         ) : (
-          <div className="DAT_HomeMobile" id="Home">
+          <div className="DAT_HomeMobile" id="Home"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             <div className="DAT_HomeMobile_Overview">
               <div className="DAT_HomeMobile_Overview-Head">
                 <div className="DAT_HomeMobile_Overview-Head-Title">
@@ -2808,7 +2811,11 @@ export default function Home(props) {
 
                   <div
                     className="DAT_HomeMobile_Overview-Main-Percent-Item"
-                    style={{ animation: "home 30s linear infinite" }}
+                    style={{
+                      animation: "home 30s linear infinite",
+                      width: sizedesktop.value.boxpro.fontSize,
+                      height: sizedesktop.value.boxpro.fontSize
+                    }}
                   >
                     <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value">
                       <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value_num">

@@ -17,6 +17,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoClose, IoSaveOutline } from "react-icons/io5";
 import { Loader } from "@googlemaps/js-api-loader";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 export const plantData = signal({
   addr: "",
@@ -678,6 +679,7 @@ const OwnerInfo = (props) => {
 
 export default function AddProject(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
 
   const popup_state = {
     pre: { transform: "rotate(0deg)", transition: "0.5s", color: "white" },
@@ -775,7 +777,9 @@ export default function AddProject(props) {
   }, [plantState.value]);
 
   return (
-    <div className="DAT_AddProject">
+    <div className="DAT_AddProject"
+      style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+    >
       <div className="DAT_AddProject_Header">
         <div className="DAT_AddProject_Header_Left">
           {dataLang.formatMessage({ id: "addProj" })}

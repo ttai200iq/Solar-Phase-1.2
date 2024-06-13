@@ -15,6 +15,7 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlinePostAdd } from "react-icons/md";
 import { IoTrashOutline } from "react-icons/io5";
+import { isBrowser } from "react-device-detect";
 
 export const editData = signal({});
 export const idReport = signal(0);
@@ -92,7 +93,9 @@ export default function Report(props) {
         )}
       </div>
 
-      <div className="DAT_Report">
+      <div className="DAT_Report"
+        style={{ height: isBrowser ? "82vh" : "72vh" }}
+      >
         <div className="DAT_Report_List">
           {ReportData.value.map((item, i) => {
             return (

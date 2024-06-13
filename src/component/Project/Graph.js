@@ -65,24 +65,24 @@ export default function Graph(props) {
                                 }
                             </>)
                         case "consumption":
-                            return(<>
+                            return (<>
                                 {isBrowser
-                                    ?<GraphConsumption cal={props.cal} state={props.state} setType={handleDataType} />
-                                    :<GraphConsumptionMobile cal={props.cal} state={props.state} setType={handleDataType} />
+                                    ? <GraphConsumption cal={props.cal} state={props.state} setType={handleDataType} />
+                                    : <GraphConsumptionMobile cal={props.cal} state={props.state} setType={handleDataType} />
                                 }
-                                </>) 
+                            </>)
                         case "hybrid":
                             return (<>
                                 {isBrowser
-                                    ?<GraphFull cal={props.cal} state={props.state} setType={handleDataType} />
-                                    :<GraphFullMobile cal={props.cal} state={props.state} setType={handleDataType} />
+                                    ? <GraphFull cal={props.cal} state={props.state} setType={handleDataType} />
+                                    : <GraphFullMobile cal={props.cal} state={props.state} setType={handleDataType} />
                                 }
                             </>)
                         case "ESS":
                             return (<>
                                 {isBrowser
-                                    ?<GraphFull cal={props.cal} state={props.state} setType={handleDataType} />
-                                    :<GraphFullMobile cal={props.cal} state={props.state} setType={handleDataType} />
+                                    ? <GraphFull cal={props.cal} state={props.state} setType={handleDataType} />
+                                    : <GraphFullMobile cal={props.cal} state={props.state} setType={handleDataType} />
                                 }
                             </>)
                         default:
@@ -101,18 +101,9 @@ export default function Graph(props) {
                             <Data type={dataType} setType={handleDataType} />
                         </div>
                         :
-                        <>
-                            {isLandscape
-                                ?
-                                <div className="DAT_ViewPopupMobile">
-                                    <Data type={dataType} setType={handleDataType} />
-                                </div>
-                                :
-                                <div className="DAT_PopupBGMobile">
-                                    <Data type={dataType} setType={handleDataType} />
-                                </div>
-                            }
-                        </>
+                        <div className="DAT_ViewPopupMobile">
+                            <Data type={dataType} setType={handleDataType} />
+                        </div>
                     }
                 </>
             )}
@@ -702,7 +693,7 @@ const GraphConsumption = (props) => {
             const pathC = document.getElementById("LineC");
             const pathD = document.getElementById("LineD");
 
-            if(lineA_.value === "moveLtoR") {     
+            if (lineA_.value === "moveLtoR") {
                 if (Proref.value.lineA2.count + 1 <= pathA.getTotalLength()) {
                     const point = pathA.getPointAtLength(Proref.value.lineA2.count + 1);
                     Proref.value = {
@@ -714,7 +705,7 @@ const GraphConsumption = (props) => {
                             count: Proref.value.lineA2.count + 1
                         }
                     }
-    
+
                 } else {
                     Proref.value.lineA2 = {
                         ...Proref.value.lineA2,
@@ -723,7 +714,7 @@ const GraphConsumption = (props) => {
                 }
             }
 
-            if(lineC_.value !== "Default") {     
+            if (lineC_.value !== "Default") {
                 if (Proref.value.lineC.count + 1 <= pathC.getTotalLength()) {
                     const point = pathC.getPointAtLength(Proref.value.lineC.count + 1);
                     Proref.value = {
@@ -735,7 +726,7 @@ const GraphConsumption = (props) => {
                             count: Proref.value.lineC.count + 1
                         }
                     }
-    
+
                 } else {
                     Proref.value.lineC = {
                         ...Proref.value.lineC,
@@ -744,7 +735,7 @@ const GraphConsumption = (props) => {
                 }
             }
 
-            if(lineD_.value === "moveLtoR") {      
+            if (lineD_.value === "moveLtoR") {
                 if (Proref.value.lineD.count + 1 <= pathD.getTotalLength()) {
                     const point = pathD.getPointAtLength(Proref.value.lineD.count + 1);
                     Proref.value = {
@@ -756,7 +747,7 @@ const GraphConsumption = (props) => {
                             count: Proref.value.lineD.count + 1
                         }
                     }
-    
+
                 } else {
                     Proref.value.lineD = {
                         ...Proref.value.lineD,
@@ -1213,7 +1204,7 @@ const GraphConsumptionMobile = (props) => {
                 }}
             >
                 <LineA dur="10s" strokeWidth="3" />
-   
+
                 <LineC dur="10s" strokeWidth="3" />
                 <LineD dur="10s" strokeWidth="3" />
 

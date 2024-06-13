@@ -34,12 +34,14 @@ import { IoClose } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 const viewNav = signal(false);
 const viewStateNav = signal([false, false]);
 
 export default function Info(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const [dropState, setDropState] = useState(false);
   const [view, setView] = useState("detail");
   const [nav, setNav] = useState("batch");
@@ -104,7 +106,9 @@ export default function Info(props) {
 
   return (
     <div ref={box} style={{ width: "98%", margin: "auto" }}>
-      <div className="DAT_Info">
+      <div className="DAT_Info"
+        style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+      >
         <div className="DAT_Info_Header">
           <div className="DAT_Info_Header_Left">
             <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "16px" }}>
