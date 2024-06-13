@@ -694,7 +694,9 @@ export default function ErrorSetting(props) {
             </div>
           </div>
 
-          <div className="DAT_ErrSetMobile">
+          <div className="DAT_ErrSetMobile"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             {data.map((item, index) => {
               return (
                 <div key={index} className="DAT_ErrSetMobile_Content">

@@ -13,6 +13,7 @@ import { userInfor } from "../../App";
 import { alertDispatch } from "../Alert/Alert";
 
 import { IoClose, IoSaveOutline } from "react-icons/io5";
+import { isBrowser } from "react-device-detect";
 
 const newdata = signal({
   id: 1,
@@ -317,7 +318,9 @@ export default function Create(props) {
   }, []);
 
   return (
-    <div className="DAT_Create">
+    <div className="DAT_Create"
+      style={{ marginBottom: isBrowser ? "30px" : "100px" }}
+    >
       <div className="DAT_Create_Header">
         <div className="DAT_Create_Header_Left">
           <p style={{ fontSize: "20px" }}>

@@ -28,7 +28,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { FiEdit, FiFilter } from "react-icons/fi";
 import { IoTrashOutline } from "react-icons/io5";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 export const tab = signal("logger");
 export const info = signal({});
@@ -41,6 +41,7 @@ const tabLable = signal("");
 
 export default function Device(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const user = useSelector((state) => state.admin.usr);
   // const [filter, setFilter] = useState(false);
   const [type, setType] = useState("");
@@ -166,7 +167,7 @@ export default function Device(props) {
           });
           power = parseFloat(
             num.reduce((a, b) => Number(a) + Number(b), 0) *
-              row.pdata.total?.cal
+            row.pdata.total?.cal
           ).toFixed(2);
         }
         if (row.pdata.mode === "GRID") {
@@ -187,13 +188,13 @@ export default function Device(props) {
         <>
           {row.pdata.daily?.register
             ? Number(
-                parseFloat(
-                  convertUnit(
-                    invt[row.plogger]?.[row.pdata.daily.register] *
-                      row.pdata.daily?.cal
-                  )
-                ).toFixed(2)
-              ).toLocaleString("en-US")
+              parseFloat(
+                convertUnit(
+                  invt[row.plogger]?.[row.pdata.daily.register] *
+                  row.pdata.daily?.cal
+                )
+              ).toFixed(2)
+            ).toLocaleString("en-US")
             : 0}
           kWh
         </>
@@ -212,7 +213,7 @@ export default function Device(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.device.modify === true ||
-          ruleInfor.value.setting.device.delete === true ? (
+            ruleInfor.value.setting.device.delete === true ? (
             // <div className="DAT_TableEdit">
             //   <span
             //     id={row.psn + "_MORE"}
@@ -324,7 +325,7 @@ export default function Device(props) {
       selector: (row) => (
         <>
           {ruleInfor.value.setting.device.modify === true ||
-          ruleInfor.value.setting.device.delete === true ? (
+            ruleInfor.value.setting.device.delete === true ? (
             // <div className="DAT_TableEdit">
             //   <span
             //     id={row.psn + "_MORE"}
@@ -862,7 +863,9 @@ export default function Device(props) {
             </div>
           </div>
 
-          <div className="DAT_DeviceMobile">
+          <div className="DAT_DeviceMobile"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             <div className="DAT_Toollist_Tab_Mobile">
               <button
                 className="DAT_Toollist_Tab_Mobile_content"
@@ -879,7 +882,7 @@ export default function Device(props) {
                 className="DAT_Toollist_Tab_Mobile_list"
                 style={{
                   top: "50px",
-                  height: tabMobile.value ? "66px" : "0",
+                  height: tabMobile.value ? "70px" : "0",
                   transition: "0.5s",
                   boxShadow: tabMobile.value
                     ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"
@@ -944,7 +947,7 @@ export default function Device(props) {
                             <div className="DAT_DeviceMobile_Content_Bottom">
                               <div className="DAT_DeviceMobile_Content_Bottom_State">
                                 {invt[item.plogger]?.[item.pdata.status] ==
-                                2 ? (
+                                  2 ? (
                                   <>
                                     <FaCheckCircle size={16} color="green" />
                                     <span>
@@ -965,7 +968,7 @@ export default function Device(props) {
 
                               <div className="DAT_DeviceMobile_Content_Bottom_Right">
                                 {ruleInfor.value.setting.device.modify ===
-                                true ? (
+                                  true ? (
                                   <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
                                     <FiEdit
                                       size={14}
@@ -1039,7 +1042,7 @@ export default function Device(props) {
                               </div>
                               <div className="DAT_DeviceMobile_Content_Bottom_Right">
                                 {ruleInfor.value.setting.device.modify ===
-                                true ? (
+                                  true ? (
                                   <div className="DAT_DeviceMobile_Content_Bottom_Right_Item">
                                     <FiEdit
                                       size={14}
@@ -1051,7 +1054,7 @@ export default function Device(props) {
                                   <div></div>
                                 )}
                                 {ruleInfor.value.setting.device.remove ===
-                                true ? (
+                                  true ? (
                                   <div
                                     className="DAT_DeviceMobile_Content_Bottom_Right_Item"
                                     id={`${item.psn}_${item.pplantid}_remove`}

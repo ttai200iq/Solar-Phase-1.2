@@ -30,7 +30,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit, FiFilter } from "react-icons/fi";
 import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
 import { Menu, MenuItem } from "@mui/material";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 import GraphComponent from "./GraphComponent";
 import { isDesktop } from "../Home/Home";
 
@@ -68,6 +68,7 @@ const viewStateNav = signal([false, false]);
 
 export default function ProjectData(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const lang = useSelector((state) => state.admin.lang);
   const user = useSelector((state) => state.admin.usr);
   const filterchart = useSelector((state) => state.tool.filterchart);
@@ -736,10 +737,10 @@ export default function ProjectData(props) {
 
   const handleWindowResize = () => {
     let home = document.getElementById("dashboard");
-    console.log(home.offsetWidth);
+    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      console.log("max");
+      // console.log("max");
       projectdatasize.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
@@ -750,7 +751,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 150 },
       };
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      console.log("middle");
+      // console.log("middle");
       projectdatasize.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
@@ -761,7 +762,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 140 },
       };
     } else {
-      console.log("small");
+      // console.log("small");
       projectdatasize.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
@@ -793,10 +794,10 @@ export default function ProjectData(props) {
 
   useEffect(function () {
     let home = document.getElementById("dashboard");
-    console.log(home.offsetWidth);
+    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      console.log("max");
+      // console.log("max");
       projectdatasize.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
@@ -807,7 +808,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 150 },
       };
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      console.log("middle");
+      // console.log("middle");
       projectdatasize.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
@@ -818,7 +819,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 140 },
       };
     } else {
-      console.log("small");
+      // console.log("small");
       projectdatasize.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
@@ -1066,7 +1067,9 @@ export default function ProjectData(props) {
 
   return (
     <div ref={box}>
-      <div className="DAT_ProjectData">
+      <div className="DAT_ProjectData"
+        style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+      >
         {isBrowser ? (
           <>
             <div className="DAT_ProjectData_Header">
@@ -1446,7 +1449,7 @@ export default function ProjectData(props) {
                             className="DAT_Toollist_Tab_Mobile_list"
                             style={{
                               top: "50px",
-                              height: tabMobile.value ? "66px" : "0px",
+                              height: tabMobile.value ? "70px" : "0px",
                               transition: "0.5s",
                               boxShadow: tabMobile.value
                                 ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"
@@ -1945,13 +1948,33 @@ export default function ProjectData(props) {
       </div>
 
       {popupAddGateway ? (
-        <div className="DAT_PopupBG">
-          <AddGateway
-            data={temp.value}
-            handleInvt={handleInvt}
-            handleClose={handleClosePopupAddGateway}
-          />
-        </div>
+        isBrowser
+          ?
+          <div className="DAT_PopupBG">
+            <AddGateway
+              data={temp.value}
+              handleInvt={handleInvt}
+              handleClose={handleClosePopupAddGateway}
+            />
+          </div>
+          :
+          isLandscape
+            ?
+            <div className="DAT_ViewPopupMobile">
+              <AddGateway
+                data={temp.value}
+                handleInvt={handleInvt}
+                handleClose={handleClosePopupAddGateway}
+              />
+            </div>
+            :
+            <div className="DAT_PopupBGMobile">
+              <AddGateway
+                data={temp.value}
+                handleInvt={handleInvt}
+                handleClose={handleClosePopupAddGateway}
+              />
+            </div>
       ) : (
         <></>
       )}

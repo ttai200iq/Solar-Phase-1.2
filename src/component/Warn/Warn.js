@@ -609,7 +609,9 @@ export default function Warn(props) {
             </div>
           </div>
 
-          <div className="DAT_WarnMobile">
+          <div className="DAT_WarnMobile"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             <div className="DAT_Toollist_Tab_Mobile">
               <button
                 className="DAT_Toollist_Tab_Mobile_content"
@@ -626,7 +628,7 @@ export default function Warn(props) {
                 className="DAT_Toollist_Tab_Mobile_list"
                 style={{
                   top: "50px",
-                  height: tabMobile.value ? "100px" : "0",
+                  height: tabMobile.value ? "104px" : "0",
                   transition: "0.5s",
                   boxShadow: tabMobile.value
                     ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"

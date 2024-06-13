@@ -82,6 +82,101 @@
     }
 }
 
+.DAT_SidenarMobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    // height: 80px;
+    width: 100%;
+    z-index: 35;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    border-top: solid 1px rgba(198, 197, 197, 0.5);
+    padding-bottom: 16px;
+
+    &_Item {
+        width: 125px;
+        font-size: 14px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &_Icon {
+            font-size: 25px;
+        }
+    }
+}
+
+.DAT_MonitorMenu {
+    position: fixed;
+    z-index: 35;
+    bottom: 90px;
+    left: 90px;
+    width: 100px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow:
+        3px 3px 5px rgba(198, 197, 197, 0.4),
+        -3px -3px 5px rgba(198, 197, 197, 0.4);
+    overflow: hidden;
+    background-color: white;
+
+    &_Item {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+.DAT_AnalyticsMenu {
+    position: fixed;
+    z-index: 35;
+    bottom: 90px;
+    right: 90px;
+    width: 100px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow:
+        3px 3px 5px rgba(198, 197, 197, 0.4),
+        -3px -3px 5px rgba(198, 197, 197, 0.4);
+    overflow: hidden;
+    background-color: white;
+
+    &_Item {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+.DAT_SettingMenu {
+    position: fixed;
+    z-index: 35;
+    bottom: 90px;
+    right: 8px;
+    // width: 160px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow:
+        3px 3px 5px rgba(198, 197, 197, 0.4),
+        -3px -3px 5px rgba(198, 197, 197, 0.4);
+    overflow: hidden;
+    background-color: white;
+
+    &_Item {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
 .DAT_User {
     position: fixed;
     bottom: 0;

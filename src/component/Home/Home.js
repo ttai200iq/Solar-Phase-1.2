@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import moment from "moment-timezone";
 import ProjectData from "../Project/ProjectData";
-import { plantState, projectData, projtab } from "../Project/Project";
+import { Empty, plantState, projectData, projtab } from "../Project/Project";
 import { sidebartab, sidebartabli } from "../Sidenar/Sidenar";
 import { useSelector } from "react-redux";
 import {
@@ -45,7 +45,7 @@ import { useNavigate } from "react-router-dom";
 import { VscDashboard } from "react-icons/vsc";
 import { IoCalendarOutline } from "react-icons/io5";
 import { isMobile } from "../Navigation/Navigation";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 import { size } from "lodash";
 
 const plant = signal([]);
@@ -67,6 +67,7 @@ const sizedesktop = signal({
 export default function Home(props) {
   const usr = useSelector((state) => state.admin.usr);
   const lang = useSelector((state) => state.admin.lang);
+  const { isLandscape } = useMobileOrientation();
   const [total, setTotal] = useState(0);
   const [online, setOnline] = useState(0);
   const [offline, setOffline] = useState(0);
@@ -95,7 +96,7 @@ export default function Home(props) {
   const in_max = 100;
   const in_min = 0;
   const out_max = 0;
-  const out_min = 100;
+  const [out_min, setOut_min] = useState(145);
   const mapValue = (data, in_min, in_max, out_min, out_max) => {
     return (
       ((data - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
@@ -117,10 +118,10 @@ export default function Home(props) {
 
   const handleWindowResize = () => {
     let home = document.getElementById("Home");
-    console.log(home.offsetWidth);
+    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      console.log("max");
+      // console.log("max");
       sizedesktop.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
@@ -130,8 +131,10 @@ export default function Home(props) {
         unitpro: { fontSize: 26 },
         boxpro: { fontSize: 150 },
       };
+      setOut_min(145);
+      setStep(4);
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      console.log("middle");
+      // console.log("middle");
       sizedesktop.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
@@ -141,8 +144,10 @@ export default function Home(props) {
         unitpro: { fontSize: 22 },
         boxpro: { fontSize: 140 },
       };
+      setOut_min(135);
+      setStep(4);
     } else {
-      console.log("small");
+      // console.log("small");
       sizedesktop.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
@@ -152,6 +157,8 @@ export default function Home(props) {
         unitpro: { fontSize: 20 },
         boxpro: { fontSize: 130 },
       };
+      setOut_min(125);
+      setStep(4);
     }
 
     if (home?.offsetWidth > 900) {
@@ -174,10 +181,10 @@ export default function Home(props) {
 
   useEffect(function () {
     let home = document.getElementById("Home");
-    console.log(home.offsetWidth);
+    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      console.log("max");
+      // console.log("max");
       sizedesktop.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
@@ -187,8 +194,9 @@ export default function Home(props) {
         unitpro: { fontSize: 26 },
         boxpro: { fontSize: 150 },
       };
+      setOut_min(145);
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      console.log("middle");
+      // console.log("middle");
       sizedesktop.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
@@ -198,8 +206,9 @@ export default function Home(props) {
         unitpro: { fontSize: 22 },
         boxpro: { fontSize: 140 },
       };
+      setOut_min(135);
     } else {
-      console.log("small");
+      // console.log("small");
       sizedesktop.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
@@ -209,6 +218,7 @@ export default function Home(props) {
         unitpro: { fontSize: 20 },
         boxpro: { fontSize: 130 },
       };
+      setOut_min(125);
     }
 
     if (home?.offsetWidth > 900) {
@@ -565,45 +575,45 @@ export default function Home(props) {
       });
 
       if (chart.status) {
-        if (item_plant.state === 1) {
-          sum_month[i] = chart.data.data
-            .map((item) => item.value)
-            .reduce((a, b) => Number(a) + Number(b), 0);
-          chart.data.data.map((item, j) => {
-            let index = datamonth_.findIndex((d) => d.date == item.date);
-            datamonth_[index][dataLang.formatMessage({ id: "monthOutput" })] =
-              parseFloat(
-                Number(
-                  datamonth_[index][
-                  dataLang.formatMessage({ id: "monthOutput" })
-                  ]
-                ) + Number(item.value)
-              ).toFixed(2);
-          });
-        } else {
-          sum_month[i] = 0;
-        }
+        // if (item_plant.state === 1) {
+        sum_month[i] = chart.data.data
+          .map((item) => item.value)
+          .reduce((a, b) => Number(a) + Number(b), 0);
+        chart.data.data.map((item, j) => {
+          let index = datamonth_.findIndex((d) => d.date == item.date);
+          datamonth_[index][dataLang.formatMessage({ id: "monthOutput" })] =
+            parseFloat(
+              Number(
+                datamonth_[index][
+                dataLang.formatMessage({ id: "monthOutput" })
+                ]
+              ) + Number(item.value)
+            ).toFixed(2);
+        });
+        // } else {
+        //   sum_month[i] = 0;
+        // }
       } else {
         sum_month[i] = 0;
       }
 
       if (chartY.status) {
-        if (item_plant.state === 1) {
-          sum_year[i] = chartY.data.data
-            .map((item) => item.value)
-            .reduce((a, b) => Number(a) + Number(b), 0);
-          chartY.data.data.map((item, j) => {
-            let index = datayear_.findIndex((d) => d.month == item.month);
-            datayear_[index][dataLang.formatMessage({ id: "yearOutput" })] =
-              parseFloat(
-                Number(
-                  datayear_[index][dataLang.formatMessage({ id: "yearOutput" })]
-                ) + Number(item.value)
-              ).toFixed(2);
-          });
-        } else {
-          sum_year[i] = 0;
-        }
+        // if (item_plant.state === 1) {
+        sum_year[i] = chartY.data.data
+          .map((item) => item.value)
+          .reduce((a, b) => Number(a) + Number(b), 0);
+        chartY.data.data.map((item, j) => {
+          let index = datayear_.findIndex((d) => d.month == item.month);
+          datayear_[index][dataLang.formatMessage({ id: "yearOutput" })] =
+            parseFloat(
+              Number(
+                datayear_[index][dataLang.formatMessage({ id: "yearOutput" })]
+              ) + Number(item.value)
+            ).toFixed(2);
+        });
+        // } else {
+        //   sum_year[i] = 0;
+        // }
       } else {
         sum_year[i] = 0;
       }
@@ -880,8 +890,8 @@ export default function Home(props) {
   }, [
     // lang,
     // usr,
-    // partnerInfor.value.partnerid,
-    // userInfor.value.type,
+    partnerInfor.value.partnerid,
+    userInfor.value.type,
     // Token.value.token,
     step,
   ]);
@@ -1671,140 +1681,90 @@ export default function Home(props) {
                         </div>
                       </div>
 
-                      {/* {isMobile.value ? (
-                        <div className="DAT_Home_Row2_Left_Bot_Rank-Container">
-                          {plant.value.map((item, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile"
-                              >
-                                <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top">
-                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Ava">
-                                    <img
-                                      src={
-                                        item.img
-                                          ? item.img
-                                          : "/dat_picture/solar_panel.png"
-                                      }
-                                      alt=""
-                                      id={item.plantid_}
-                                      onClick={(e) => handleInfo(e)}
-                                    />
-                                  </div>
-
-                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Info">
-                                    <div
-                                      className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Info_Name"
-                                      id={item.plantid_}
-                                      onClick={(e) => handleInfo(e)}
-                                    >
-                                      {item.plantname}
-                                    </div>
-                                    <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Top_Info_Sun">
-                                      kWh/kWp(h):{" "}
-                                      {parseFloat(sun[item.plantid_]).toFixed(2) ===
-                                        "NaN"
-                                        ? 0
-                                        : Number(
-                                          parseFloat(
-                                            sun[item.plantid_] / item.capacity
-                                          ).toFixed(2)
-                                        ).toLocaleString("en-US")}
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div className="DAT_Home_Row2_Left_Bot_Rank-Container-ContentMobile_Bottom">
-                                  {item.addr}
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ) : ( */}
-                      <>
+                      <div
+                        className="DAT_Home_Row2_Left_Bot_Rank-Content"
+                        style={{ paddingBottom: "0px" }}
+                      >
                         <div
-                          className="DAT_Home_Row2_Left_Bot_Rank-Content"
-                          style={{ paddingBottom: "0px" }}
+                          className="DAT_Home_Row2_Left_Bot_Rank-Content_Item"
+                          style={{ padding: "0px" }}
                         >
                           <div
-                            className="DAT_Home_Row2_Left_Bot_Rank-Content_Item"
-                            style={{ padding: "0px" }}
+                            className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_No"
+                            style={{ paddingLeft: "10px" }}
                           >
-                            <div
-                              className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_No"
-                              style={{ paddingLeft: "10px" }}
-                            >
-                              {dataLang.formatMessage({ id: "ordinalNumber" })}
-                            </div>
+                            {dataLang.formatMessage({ id: "ordinalNumber" })}
+                          </div>
 
-                            <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info">
-                              {dataLang.formatMessage({ id: "projectInfo" })}
-                            </div>
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info">
+                            {dataLang.formatMessage({ id: "projectInfo" })}
+                          </div>
 
-                            <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Capacity"
-                              style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                            >
-                              {dataLang.formatMessage({ id: "inCapacity" })}
-                            </div>
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Capacity"
+                            style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+                          >
+                            {dataLang.formatMessage({ id: "inCapacity" })}
+                          </div>
 
-                            <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Data">
-                              kWh/kWp
-                            </div>
+                          <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Data">
+                            kWh/kWp
                           </div>
                         </div>
+                      </div>
 
-                        <div className="DAT_Home_Row2_Left_Bot_Rank-Content">
-                          {plant.value.map((item, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="DAT_Home_Row2_Left_Bot_Rank-Content_Item"
-                                style={{
-                                  backgroundColor:
-                                    index % 2 === 0 ? "#f5f5f5" : "white",
-                                }}
-                              >
-                                <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_No">
-                                  {index + 1}
-                                </div>
-
+                      <div className="DAT_Home_Row2_Left_Bot_Rank-Content">
+                        {plant.value.length === 0 ? <Empty />
+                          :
+                          <>
+                            {plant.value.map((item, index) => {
+                              return (
                                 <div
-                                  className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info"
-                                  style={{ textAlign: "left", cursor: "pointer" }}
-                                  id={item.plantid_}
-                                  onClick={(e) => handleInfo(e)}
+                                  key={index}
+                                  className="DAT_Home_Row2_Left_Bot_Rank-Content_Item"
+                                  style={{
+                                    backgroundColor:
+                                      index % 2 === 0 ? "#f5f5f5" : "white",
+                                  }}
                                 >
-                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info_Name">
-                                    {item.plantname}
+                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_No">
+                                    {index + 1}
                                   </div>
-                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info_Addr">
-                                    {item.addr}
+
+                                  <div
+                                    className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info"
+                                    style={{ textAlign: "left", cursor: "pointer" }}
+                                    id={item.plantid_}
+                                    onClick={(e) => handleInfo(e)}
+                                  >
+                                    <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info_Name">
+                                      {item.plantname}
+                                    </div>
+                                    <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Info_Addr">
+                                      {item.addr}
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Capacity">
+                                    {item.capacity} (kWp)
+                                  </div>
+
+                                  <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Data">
+                                    {parseFloat(sun[item.plantid_]).toFixed(2) ===
+                                      "NaN"
+                                      ? 0
+                                      : Number(
+                                        parseFloat(
+                                          sun[item.plantid_] / item.capacity
+                                        ).toFixed(2)
+                                      ).toLocaleString("en-US")}{" "}
+                                    (h)
                                   </div>
                                 </div>
-
-                                <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Capacity">
-                                  {item.capacity} (kWp)
-                                </div>
-
-                                <div className="DAT_Home_Row2_Left_Bot_Rank-Content_Item_Data">
-                                  {parseFloat(sun[item.plantid_]).toFixed(2) ===
-                                    "NaN"
-                                    ? 0
-                                    : Number(
-                                      parseFloat(
-                                        sun[item.plantid_] / item.capacity
-                                      ).toFixed(2)
-                                    ).toLocaleString("en-US")}{" "}
-                                  (h)
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </>
-                      {/* )} */}
+                              );
+                            })}
+                          </>
+                        }
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2111,15 +2071,20 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="DAT_HomeMobile_Overview-Sub">
-                  <div className="DAT_HomeMobile_Overview-Sub-Item">
+              <div className="DAT_HomeMobile_Elec">
+                <div className="DAT_HomeMobile_Elec-Head">
+                  <div className="DAT_HomeMobile_Elec-Head-Title">
+                    {dataLang.formatMessage({ id: "HomeProduction" })}
+                  </div>
+                </div>
+
+                <div className="DAT_HomeMobile_Elec-Sub"
+                  style={{ paddingBottom: "0px" }}
+                >
+                  <div className="DAT_HomeMobile_Elec-Sub-Item">
                     <div>
-                      {/* <img
-                  src="/dat_icon/24h.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                /> */}
                       <img
                         src="/dat_icon/3_Icon_AppEmbody-01.png"
                         style={{ width: "40px", height: "40px" }}
@@ -2127,7 +2092,7 @@ export default function Home(props) {
                       />
                     </div>
                     <div>
-                      <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                      <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                         {dataLang.formatMessage({ id: "today" })}
                       </div>
                       <div>
@@ -2146,13 +2111,8 @@ export default function Home(props) {
                     </div>
                   </div>
 
-                  <div className="DAT_HomeMobile_Overview-Sub-Item">
+                  <div className="DAT_HomeMobile_Elec-Sub-Item">
                     <div>
-                      {/* <img
-                  src="/dat_icon/Thunder.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                /> */}
                       <img
                         src="/dat_icon/3_Icon_AppEmbody-02.png"
                         style={{ width: "40px", height: "40px" }}
@@ -2160,7 +2120,7 @@ export default function Home(props) {
                       />
                     </div>
                     <div>
-                      <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                      <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                         {dataLang.formatMessage({ id: "month" })}
                       </div>
                       <div>
@@ -2180,14 +2140,11 @@ export default function Home(props) {
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="DAT_HomeMobile_Overview-Sub-Item">
+                <div className="DAT_HomeMobile_Elec-Sub">
+                  <div className="DAT_HomeMobile_Elec-Sub-Item">
                     <div>
-                      {/* <img
-                  src="/dat_icon/globe.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                /> */}
                       <img
                         src="/dat_icon/3_Icon_AppEmbody-03.png"
                         style={{ width: "40px", height: "40px" }}
@@ -2195,7 +2152,7 @@ export default function Home(props) {
                       />
                     </div>
                     <div>
-                      <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                      <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                         {dataLang.formatMessage({ id: "year" })}
                       </div>
                       <div>
@@ -2216,13 +2173,8 @@ export default function Home(props) {
                     </div>
                   </div>
 
-                  <div className="DAT_HomeMobile_Overview-Sub-Item">
+                  <div className="DAT_HomeMobile_Elec-Sub-Item">
                     <div>
-                      {/* <img
-                  src="/dat_icon/totalyear.png"
-                  alt=""
-                  style={{ width: "35px", height: "35px" }}
-                /> */}
                       <img
                         src="/dat_icon/3_Icon_AppEmbody-04.png"
                         style={{ width: "40px", height: "40px" }}
@@ -2230,7 +2182,7 @@ export default function Home(props) {
                       />
                     </div>
                     <div>
-                      <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                      <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                         {dataLang.formatMessage({ id: "total" })}
                       </div>
                       <div>
@@ -2331,14 +2283,16 @@ export default function Home(props) {
                   </div>
                 </div>
 
-                <div className="DAT_HomeMobile_Benefit_Content">
+                <div className="DAT_HomeMobile_Benefit_Content"
+                  style={{ paddingBottom: "0px" }}
+                >
                   <div className="DAT_HomeMobile_Benefit_Content_Item">
                     <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                       {/* <img src="/dat_icon/coal.jpg" alt="" /> */}
                       <img src="/dat_icon/3_Icon_AppEmbody-05.png" alt="" />
                     </div>
                     <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                      <div
+                      <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                         style={{ fontSize: "14px", color: COLOR.value.grayText }}
                       >
                         {dataLang.formatMessage({ id: "coalSave" })}
@@ -2367,7 +2321,7 @@ export default function Home(props) {
                       <img src="/dat_icon/3_Icon_AppEmbody-06.png" alt="" />
                     </div>
                     <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                      <div
+                      <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                         style={{ fontSize: "14px", color: COLOR.value.grayText }}
                       >
                         {dataLang.formatMessage({ id: "cropYield" })}
@@ -2389,14 +2343,16 @@ export default function Home(props) {
                       </div>
                     </div>
                   </div>
+                </div>
 
+                <div className="DAT_HomeMobile_Benefit_Content">
                   <div className="DAT_HomeMobile_Benefit_Content_Item">
                     <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                       {/* <img src="/dat_icon/co2.jpg" alt="" /> */}
                       <img src="/dat_icon/3_Icon_AppEmbody-08.png" alt="" />
                     </div>
                     <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                      <div
+                      <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                         style={{ fontSize: "14px", color: COLOR.value.grayText }}
                       >
                         {dataLang.formatMessage({ id: "C02" })}
@@ -2425,7 +2381,7 @@ export default function Home(props) {
                       <img src="/dat_icon/3_Icon_AppEmbody-07.png" alt="" />
                     </div>
                     <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                      <div
+                      <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                         style={{ fontSize: "14px", color: COLOR.value.grayText }}
                       >
                         {dataLang.formatMessage({ id: "totalRevenue" })}
@@ -2839,7 +2795,9 @@ export default function Home(props) {
               </div>
             </div>
         ) : (
-          <div className="DAT_HomeMobile" id="Home">
+          <div className="DAT_HomeMobile" id="Home"
+            style={{ marginBottom: isLandscape ? "30px" : "100px" }}
+          >
             <div className="DAT_HomeMobile_Overview">
               <div className="DAT_HomeMobile_Overview-Head">
                 <div className="DAT_HomeMobile_Overview-Head-Title">
@@ -2853,7 +2811,11 @@ export default function Home(props) {
 
                   <div
                     className="DAT_HomeMobile_Overview-Main-Percent-Item"
-                    style={{ animation: "home 30s linear infinite" }}
+                    style={{
+                      animation: "home 30s linear infinite",
+                      width: sizedesktop.value.boxpro.fontSize,
+                      height: sizedesktop.value.boxpro.fontSize
+                    }}
                   >
                     <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value">
                       <div className="DAT_HomeMobile_Overview-Main-Percent-Item-value_num">
@@ -2987,15 +2949,20 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="DAT_HomeMobile_Overview-Sub">
-                <div className="DAT_HomeMobile_Overview-Sub-Item">
+            <div className="DAT_HomeMobile_Elec">
+              <div className="DAT_HomeMobile_Elec-Head">
+                <div className="DAT_HomeMobile_Elec-Head-Title">
+                  {dataLang.formatMessage({ id: "HomeProduction" })}
+                </div>
+              </div>
+
+              <div className="DAT_HomeMobile_Elec-Sub"
+                style={{ paddingBottom: "0px" }}
+              >
+                <div className="DAT_HomeMobile_Elec-Sub-Item">
                   <div>
-                    {/* <img
-                    src="/dat_icon/24h.png"
-                    alt=""
-                    style={{ width: "35px", height: "35px" }}
-                  /> */}
                     <img
                       src="/dat_icon/3_Icon_AppEmbody-01.png"
                       style={{ width: "40px", height: "40px" }}
@@ -3003,7 +2970,7 @@ export default function Home(props) {
                     />
                   </div>
                   <div>
-                    <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                       {dataLang.formatMessage({ id: "today" })}
                     </div>
                     <div>
@@ -3022,13 +2989,8 @@ export default function Home(props) {
                   </div>
                 </div>
 
-                <div className="DAT_HomeMobile_Overview-Sub-Item">
+                <div className="DAT_HomeMobile_Elec-Sub-Item">
                   <div>
-                    {/* <img
-                    src="/dat_icon/Thunder.png"
-                    alt=""
-                    style={{ width: "35px", height: "35px" }}
-                  /> */}
                     <img
                       src="/dat_icon/3_Icon_AppEmbody-02.png"
                       style={{ width: "40px", height: "40px" }}
@@ -3036,7 +2998,7 @@ export default function Home(props) {
                     />
                   </div>
                   <div>
-                    <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                       {dataLang.formatMessage({ id: "month" })}
                     </div>
                     <div>
@@ -3056,14 +3018,11 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="DAT_HomeMobile_Overview-Sub-Item">
+              <div className="DAT_HomeMobile_Elec-Sub">
+                <div className="DAT_HomeMobile_Elec-Sub-Item">
                   <div>
-                    {/* <img
-                    src="/dat_icon/globe.png"
-                    alt=""
-                    style={{ width: "35px", height: "35px" }}
-                  /> */}
                     <img
                       src="/dat_icon/3_Icon_AppEmbody-03.png"
                       style={{ width: "40px", height: "40px" }}
@@ -3071,7 +3030,7 @@ export default function Home(props) {
                     />
                   </div>
                   <div>
-                    <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                       {dataLang.formatMessage({ id: "year" })}
                     </div>
                     <div>
@@ -3092,13 +3051,8 @@ export default function Home(props) {
                   </div>
                 </div>
 
-                <div className="DAT_HomeMobile_Overview-Sub-Item">
+                <div className="DAT_HomeMobile_Elec-Sub-Item">
                   <div>
-                    {/* <img
-                    src="/dat_icon/totalyear.png"
-                    alt=""
-                    style={{ width: "35px", height: "35px" }}
-                  /> */}
                     <img
                       src="/dat_icon/3_Icon_AppEmbody-04.png"
                       style={{ width: "40px", height: "40px" }}
@@ -3106,7 +3060,7 @@ export default function Home(props) {
                     />
                   </div>
                   <div>
-                    <div className="DAT_HomeMobile_Overview-Sub-Item-Title">
+                    <div className="DAT_HomeMobile_Elec-Sub-Item-Title">
                       {dataLang.formatMessage({ id: "total" })}
                     </div>
                     <div>
@@ -3207,14 +3161,16 @@ export default function Home(props) {
                 </div>
               </div>
 
-              <div className="DAT_HomeMobile_Benefit_Content">
+              <div className="DAT_HomeMobile_Benefit_Content"
+                style={{ paddingBottom: "0px" }}
+              >
                 <div className="DAT_HomeMobile_Benefit_Content_Item">
                   <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                     {/* <img src="/dat_icon/coal.jpg" alt="" /> */}
                     <img src="/dat_icon/3_Icon_AppEmbody-05.png" alt="" />
                   </div>
                   <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                    <div
+                    <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                       style={{ fontSize: "14px", color: COLOR.value.grayText }}
                     >
                       {dataLang.formatMessage({ id: "coalSave" })}
@@ -3243,7 +3199,7 @@ export default function Home(props) {
                     <img src="/dat_icon/3_Icon_AppEmbody-06.png" alt="" />
                   </div>
                   <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                    <div
+                    <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                       style={{ fontSize: "14px", color: COLOR.value.grayText }}
                     >
                       {dataLang.formatMessage({ id: "cropYield" })}
@@ -3265,14 +3221,16 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+              </div>
 
+              <div className="DAT_HomeMobile_Benefit_Content">
                 <div className="DAT_HomeMobile_Benefit_Content_Item">
                   <div className="DAT_HomeMobile_Benefit_Content_Item_Icon">
                     {/* <img src="/dat_icon/co2.jpg" alt="" /> */}
                     <img src="/dat_icon/3_Icon_AppEmbody-08.png" alt="" />
                   </div>
                   <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                    <div
+                    <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                       style={{ fontSize: "14px", color: COLOR.value.grayText }}
                     >
                       {dataLang.formatMessage({ id: "C02" })}
@@ -3301,7 +3259,7 @@ export default function Home(props) {
                     <img src="/dat_icon/3_Icon_AppEmbody-07.png" alt="" />
                   </div>
                   <div className="DAT_HomeMobile_Benefit_Content_Item_Detail">
-                    <div
+                    <div className="DAT_HomeMobile_Benefit_Content_Item_Detail_Tit"
                       style={{ fontSize: "14px", color: COLOR.value.grayText }}
                     >
                       {dataLang.formatMessage({ id: "totalRevenue" })}

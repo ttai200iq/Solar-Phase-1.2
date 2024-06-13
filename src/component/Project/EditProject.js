@@ -17,6 +17,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoClose, IoSaveOutline } from "react-icons/io5";
 import { Loader } from "@googlemaps/js-api-loader";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 const BasicInfo = (props) => {
   const dataLang = useIntl();
@@ -731,6 +732,7 @@ const ImgInfo = (props) => {
 
 export default function EditProject(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
 
   const popup_state = {
     pre: { transform: "rotate(0deg)", transition: "0.5s", color: "white" },
@@ -792,7 +794,9 @@ export default function EditProject(props) {
   };
 
   return (
-    <div className="DAT_EditProject">
+    <div className="DAT_EditProject"
+      style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+    >
       <div className="DAT_EditProject_Header">
         <div className="DAT_EditProject_Header_Left">
           {" "}
