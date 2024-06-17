@@ -839,9 +839,9 @@ export default function Device(props) {
         </div>
       ) : (
         <>
-          <div className="DAT_DeviceHeaderMobile">
-            <div className="DAT_DeviceHeaderMobile_Top">
-              <div className="DAT_DeviceHeaderMobile_Top_Filter">
+          <div className="DAT_HeaderMobile">
+            <div className="DAT_HeaderMobile_Top">
+              <div className="DAT_HeaderMobile_Top_Filter">
                 <input
                   type="text"
                   id="search"
@@ -857,7 +857,7 @@ export default function Device(props) {
               </div>
             </div>
 
-            <div className="DAT_DeviceHeaderMobile_Title">
+            <div className="DAT_HeaderMobile_Title">
               <MdDevices color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "device" })}</span>
             </div>

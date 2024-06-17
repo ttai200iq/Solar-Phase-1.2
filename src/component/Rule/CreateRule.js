@@ -11,6 +11,7 @@ import { host } from "../Lang/Contant";
 import { userInfor } from "../../App";
 
 import { IoClose, IoSaveOutline } from "react-icons/io5";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 const temp = signal({
   ruleid_: 0,
@@ -86,6 +87,7 @@ export const CheckBox = (props) => {
 
 export default function CreateRule(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const [widthCheckBox, setWidwidthCheckBox] = useState("");
   const rulenameRef = useRef("");
 
@@ -171,7 +173,9 @@ export default function CreateRule(props) {
   }, []);
 
   return (
-    <div className="DAT_CreateRule">
+    <div className="DAT_CreateRule"
+      style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+    >
       <div className="DAT_CreateRule_Header">
         <div className="DAT_CreateRule_Header_Left">
           <p>

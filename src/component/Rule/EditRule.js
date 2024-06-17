@@ -10,6 +10,7 @@ import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
 
 import { IoClose, IoSaveOutline } from "react-icons/io5";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 export const editruledata = signal();
 const temp = signal();
@@ -50,6 +51,7 @@ export const CheckBox = (props) => {
 
 export default function EditRule(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const [widthCheckBox, setWidwidthCheckBox] = useState("");
   const rulenameRef = useRef();
 
@@ -135,7 +137,9 @@ export default function EditRule(props) {
   }, []);
 
   return (
-    <div className="DAT_CreateRule">
+    <div className="DAT_CreateRule"
+      style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+    >
       <div className="DAT_CreateRule_Header">
         <div className="DAT_CreateRule_Header_Left">
           <p>

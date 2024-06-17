@@ -148,6 +148,243 @@
       }
     }
   }
+
+  // &_ListMobile {
+  //   width: 95%;
+  //   margin: auto;
+  //   margin-top: 16px;
+  //   display: grid;
+  //   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  //   justify-content: center;
+  //   gap: 10px;
+  //   flex-wrap: wrap;
+
+  //   &_Form {
+  //     background-color: rgb(255, 255, 255, 0.95);
+  //     min-width: 270px;
+  //     //margin-bottom: 20px;
+  //     //height: 120px;
+  //     border: solid 1px rgb(199, 199, 199);
+  //     padding: 10px;
+  //     border-radius: 5px;
+
+  //     &_Title {
+  //       font-size: 18px;
+  //       margin-bottom: 10px;
+  //       color: COLOR.$Primary-color;
+  //       font-family: segoeui-sb;
+  //     }
+
+  //     &_Type {
+  //       font-size: 14px;
+  //       margin-bottom: 5px;
+  //       color: gray;
+  //     }
+
+  //     &_Create {
+  //       font-size: 14px;
+  //       margin-bottom: 5px;
+  //       color: gray;
+  //     }
+
+  //     &_Date {
+  //       font-size: 14px;
+  //       margin-bottom: 5px;
+  //       color: gray;
+  //     }
+
+  //     &_Custom {
+  //       display: flex;
+  //       width: 100%;
+  //       align-items: center;
+  //       gap: 10px;
+  //       justify-content: flex-end;
+
+  //       &_Edit {
+  //         cursor: pointer;
+  //       }
+
+  //       &_Report {
+  //         cursor: pointer;
+  //       }
+
+  //       &_Delete {
+  //         cursor: pointer;
+  //       }
+  //     }
+  //   }
+  // }
+}
+
+.DAT_ReportMobile {
+  // width: 98%;
+  // // height: 82vh;
+  // margin: auto;
+  // margin-top: 15px;
+  // margin-bottom: 100px;
+  // overflow: hidden;
+  // -webkit-box-sizing: border-box;
+  // /* Safari/Chrome, other WebKit */
+  // -moz-box-sizing: border-box;
+  // /* Firefox, other Gecko */
+  // box-sizing: border-box;
+  // border-radius: 5px;
+  // background-color: rgb(255, 255, 255, 0.95);
+  // box-shadow: 2px 2px 5px rgba(198, 197, 197, 0.4),
+  //   -2px -2px 5px rgba(198, 197, 197, 0.4);
+  // overflow-y: scroll;
+  // -ms-overflow-style: none;
+  // scrollbar-width: none;
+
+  // /* Firefox */
+  // &::-webkit-scrollbar {
+  //   display: none;
+  //   /* Safari and Chrome */
+  // }
+
+  // padding: 20px;
+
+  // margin: auto;
+  // width: 98%;
+
+  &_List {
+    margin-top: 16px;
+    margin-bottom: 100px;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    // justify-content: center;
+    // gap: 10px;
+    // flex-wrap: wrap;
+
+    &_Form {
+      // min-width: 270px;
+      // //margin-bottom: 20px;
+      // //height: 120px;
+      // background-color: rgb(255, 255, 255, 0.95);
+      // border: solid 1px rgb(199, 199, 199);
+      padding: 10px;
+      // border-radius: 5px;
+
+      box-sizing: border-box;
+      width: 98%;
+      margin: auto;
+      background-color: white;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: solid 1px rgba(198, 197, 197, 0.5);
+
+      &_Title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: COLOR.$Primary-color;
+        font-family: segoeui-sb;
+      }
+
+      &_Type {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: gray;
+      }
+
+      &_Create {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: gray;
+      }
+
+      &_Date {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: gray;
+      }
+
+      &_Custom {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 10px;
+        justify-content: flex-end;
+
+        &_Edit {
+          cursor: pointer;
+        }
+
+        &_Report {
+          cursor: pointer;
+        }
+
+        &_Delete {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  // &_ListMobile {
+  //   width: 95%;
+  //   margin: auto;
+  //   margin-top: 16px;
+  //   display: grid;
+  //   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  //   justify-content: center;
+  //   gap: 10px;
+  //   flex-wrap: wrap;
+
+  //   &_Form {
+  //     background-color: rgb(255, 255, 255, 0.95);
+  //     min-width: 270px;
+  //     //margin-bottom: 20px;
+  //     //height: 120px;
+  //     border: solid 1px rgb(199, 199, 199);
+  //     padding: 10px;
+  //     border-radius: 5px;
+
+  //     &_Title {
+  //       font-size: 18px;
+  //       margin-bottom: 10px;
+  //       color: COLOR.$Primary-color;
+  //       font-family: segoeui-sb;
+  //     }
+
+  //     &_Type {
+  //       font-size: 14px;
+  //       margin-bottom: 5px;
+  //       color: gray;
+  //     }
+
+  //     &_Create {
+  //       font-size: 14px;
+  //       margin-bottom: 5px;
+  //       color: gray;
+  //     }
+
+  //     &_Date {
+  //       font-size: 14px;
+  //       margin-bottom: 5px;
+  //       color: gray;
+  //     }
+
+  //     &_Custom {
+  //       display: flex;
+  //       width: 100%;
+  //       align-items: center;
+  //       gap: 10px;
+  //       justify-content: flex-end;
+
+  //       &_Edit {
+  //         cursor: pointer;
+  //       }
+
+  //       &_Report {
+  //         cursor: pointer;
+  //       }
+
+  //       &_Delete {
+  //         cursor: pointer;
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 .DAT_Create {
@@ -156,7 +393,7 @@
   margin: auto;
   overflow: hidden;
   margin-top: 80px;
-  margin-bottom: 100px;
+  // margin-bottom: 100px;
   border-radius: 5px;
   box-shadow: 3px 3px 10px rgba(193, 193, 193, 0.5);
 
@@ -513,8 +750,8 @@
   }
 }
 
-@media (max-width: 900px) {
-  .DAT_Report {
-    margin-bottom: 70px;
-  }
-}
+// @media (max-width: 900px) {
+//   .DAT_Report {
+//     margin-bottom: 70px;
+//   }
+// }

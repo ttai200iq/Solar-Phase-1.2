@@ -589,9 +589,9 @@ export default function Warn(props) {
         </div>
       ) : (
         <>
-          <div className="DAT_WarnHeaderMobile">
-            <div className="DAT_WarnHeaderMobile_Top">
-              <div className="DAT_WarnHeaderMobile_Top_Filter">
+          <div className="DAT_HeaderMobile">
+            <div className="DAT_HeaderMobile_Top">
+              <div className="DAT_HeaderMobile_Top_Filter">
                 <input
                   type="text"
                   placeholder={dataLang.formatMessage({ id: "enterWarn" })}
@@ -603,7 +603,7 @@ export default function Warn(props) {
               </div>
             </div>
 
-            <div className="DAT_WarnHeaderMobile_Title">
+            <div className="DAT_HeaderMobile_Title">
               <LuMailWarning color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "warn" })}</span>
             </div>

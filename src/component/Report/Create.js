@@ -13,7 +13,7 @@ import { userInfor } from "../../App";
 import { alertDispatch } from "../Alert/Alert";
 
 import { IoClose, IoSaveOutline } from "react-icons/io5";
-import { isBrowser } from "react-device-detect";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 const newdata = signal({
   id: 1,
@@ -122,6 +122,7 @@ export const CheckBox = (props) => {
 
 export default function Create(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const [widthCheckBox, setWidwidthCheckBox] = useState("");
   const [reportType, setReportType] = useState("dailyReport");
   const reportnameRef = useRef("");
@@ -319,7 +320,7 @@ export default function Create(props) {
 
   return (
     <div className="DAT_Create"
-      style={{ marginBottom: isBrowser ? "30px" : "100px" }}
+      style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
     >
       <div className="DAT_Create_Header">
         <div className="DAT_Create_Header_Left">

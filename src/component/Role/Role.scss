@@ -93,8 +93,7 @@
 }
 
 .DAT_RoleMobile {
-  &_Header {
-  }
+  &_Header {}
 
   &_Content {
     &_Item {
@@ -465,7 +464,7 @@
 
   .DAT_Create {
     &_Body {
-      margin-bottom: 100px;
+      // margin-bottom: 100px;
 
       &_Row1 {
         display: contents;

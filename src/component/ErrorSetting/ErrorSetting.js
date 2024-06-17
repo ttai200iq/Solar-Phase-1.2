@@ -662,9 +662,9 @@ export default function ErrorSetting(props) {
         </div>
       ) : (
         <>
-          <div className="DAT_ErrSettingHeaderMobile">
-            <div className="DAT_ErrSettingHeaderMobile_Top">
-              <div className="DAT_ErrSettingHeaderMobile_Top_Filter">
+          <div className="DAT_HeaderMobile">
+            <div className="DAT_HeaderMobile_Top">
+              <div className="DAT_HeaderMobile_Top_Filter">
                 <CiSearch color="gray" size={20} />
                 <input
                   type="text"
@@ -678,7 +678,7 @@ export default function ErrorSetting(props) {
                 />
               </div>
               <button
-                className="DAT_ErrSettingHeaderMobile_Top_New"
+                className="DAT_HeaderMobile_Top_New"
                 onClick={() => setCreateState(true)}
               >
                 <IoAddOutline color="white" size={20} />
@@ -686,7 +686,7 @@ export default function ErrorSetting(props) {
             </div>
 
             <div
-              className="DAT_ErrSettingHeaderMobile_Title"
+              className="DAT_HeaderMobile_Title"
               style={{ marginBottom: "10px" }}
             >
               <MdOutlineManageHistory color="gray" size={25} />

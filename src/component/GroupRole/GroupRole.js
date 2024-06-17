@@ -920,8 +920,8 @@ export default function GroupRole(props) {
         </div>
       ) : (
         <>
-          <div className="DAT_ProjectHeaderMobile">
-            <div className="DAT_ProjectHeaderMobile_Top">
+          <div className="DAT_HeaderMobile">
+            <div className="DAT_HeaderMobile_Top">
               {userList ? (
                 <IoCaretBackOutline
                   size={30}
@@ -934,7 +934,7 @@ export default function GroupRole(props) {
               ) : (
                 <></>
               )}
-              <div className="DAT_ProjectHeaderMobile_Top_Filter">
+              <div className="DAT_HeaderMobile_Top_Filter">
                 <CiSearch color="gray" size={20} />
                 {filterType ? (
                   <input
@@ -953,14 +953,14 @@ export default function GroupRole(props) {
               </div>
               {userList ? (
                 <button
-                  className="DAT_ProjectHeaderMobile_Top_New"
+                  className="DAT_HeaderMobile_Top_New"
                   onClick={() => handleAddState()}
                 >
                   <IoAddOutline color="white" size={20} />
                 </button>
               ) : (
                 <button
-                  className="DAT_ProjectHeaderMobile_Top_New"
+                  className="DAT_HeaderMobile_Top_New"
                   onClick={() => setCreateState(true)}
                 >
                   <IoAddOutline color="white" size={20} />
@@ -969,7 +969,7 @@ export default function GroupRole(props) {
             </div>
 
             <div
-              className="DAT_ProjectHeaderMobile_Title"
+              className="DAT_HeaderMobile_Title"
               style={{ marginBottom: "10px" }}
             >
               <PiUsersFour color="gray" size={25} />

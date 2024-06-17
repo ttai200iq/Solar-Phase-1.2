@@ -10,6 +10,7 @@ import { host } from "../Lang/Contant";
 import { alertDispatch } from "../Alert/Alert";
 
 import { IoClose, IoSaveOutline } from "react-icons/io5";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 const reportname = signal();
 
@@ -185,6 +186,7 @@ const DataReport = (props) => {
 
 export default function ReportEdit(props) {
   const dataLang = useIntl();
+  const { isLandscape } = useMobileOrientation();
   const [widthCheckBox, setWidwidthCheckBox] = useState("");
 
   const popup_state = {
@@ -249,7 +251,9 @@ export default function ReportEdit(props) {
   }, []);
 
   return (
-    <div className="DAT_EditReport">
+    <div className="DAT_EditReport"
+      style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
+    >
       <div className="DAT_EditReport_Header">
         <div className="DAT_EditReport_Header_Left">
           <p style={{ fontSize: "20px" }}>

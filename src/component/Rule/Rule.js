@@ -385,9 +385,9 @@ export default function Rule() {
         </div>
       ) : (
         <>
-          <div className="DAT_RuleHeaderMobile">
-            <div className="DAT_RuleHeaderMobile_Top">
-              <div className="DAT_RuleHeaderMobile_Top_Filter">
+          <div className="DAT_HeaderMobile">
+            <div className="DAT_HeaderMobile_Top">
+              <div className="DAT_HeaderMobile_Top_Filter">
                 <input
                   type="text"
                   placeholder={dataLang.formatMessage({ id: "enterRight" })}
@@ -397,7 +397,7 @@ export default function Rule() {
               </div>
               {ruleInfor.value.setting.rule.add ? (
                 <button
-                  className="DAT_RuleHeaderMobile_Top_New"
+                  className="DAT_HeaderMobile_Top_New"
                   onClick={() => setViewState("create")}
                 >
                   <IoAddOutline color="white" size={20} />
@@ -407,7 +407,7 @@ export default function Rule() {
               )}
             </div>
 
-            <div className="DAT_RuleHeaderMobile_Title">
+            <div className="DAT_HeaderMobile_Title">
               <MdOutlineAdminPanelSettings color="gray" size={25} />
               <span>{dataLang.formatMessage({ id: "rule" })}</span>
             </div>
