@@ -475,7 +475,7 @@
     margin-top: 16px;
 
     &_Top {
-      margin: 10px;
+      margin: 10px 0px;
 
       &_Left {
         display: flex;
@@ -503,6 +503,10 @@
         }
 
         &_PredictDeg {
+          width: 100%;
+          height: 100%;
+          background-color: white;
+
           &_Weather {
             &_CurDeg {
               background-color: #fff;
@@ -570,7 +574,7 @@
     }
 
     &_Bottom {
-      margin: 0px 10px 10px 10px;
+      // margin: 0px 10px 10px 10px;
     }
 
     &_More {
@@ -1737,7 +1741,7 @@
     &_History {
       position: relative;
       background-color: white;
-      border-radius: 3px;
+      // border-radius: 3px;
       overflow: hidden;
       // margin-right: 10px;
       -webkit-box-sizing: border-box;
@@ -1983,7 +1987,7 @@
     &_Top {
       display: flex;
       gap: 10px;
-      margin: 10px;
+      margin: 10px 0px;
 
       &_Left {
         width: 75%;
@@ -2017,6 +2021,7 @@
           flex: 5;
           width: 100%;
           height: 100%;
+          background-color: white;
           // min-height: 100px;
 
           &_Weather {
@@ -2095,7 +2100,7 @@
     }
 
     &_Bottom {
-      margin: 0px 10px 10px 10px;
+      margin-top: 10px;
       display: flex;
       gap: 10px;
     }
@@ -2164,7 +2169,7 @@
       position: relative;
       width: 85%;
       background-color: white;
-      border-radius: 3px;
+      // border-radius: 3px;
       overflow: hidden;
 
       &_Tit {

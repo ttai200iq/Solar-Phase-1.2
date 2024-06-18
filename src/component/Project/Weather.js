@@ -352,10 +352,10 @@ export default function Weather() {
                               <div
                                 className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg_Weather_Forecast_Box_Text_Weekday"
                                 style={{
-                                  fontFamily: isToday
-                                    ? "segoeuib"
-                                    : "segoeui",
-                                  color: "rgba(11, 25, 103)",
+                                  // fontFamily: isToday
+                                  //   ? "segoeui-sb"
+                                  //   : "segoeui",
+                                  color: isToday ? "rgba(11, 25, 103)" : "grey",
                                 }}
                               >
                                 {weekday}

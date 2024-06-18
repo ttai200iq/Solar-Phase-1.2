@@ -52,6 +52,22 @@ export default function Graph(props) {
         setDataType(type);
     };
 
+    // Handle close when press ESC
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "Escape") {
+                setDataType("default");
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <>
             <div className="DAT_ProjectData_Dashboard_Data_Center_Graph">
@@ -973,6 +989,9 @@ const GraphConsumptionMobile = (props) => {
                 lineC_.value = "Default";
             }
 
+
+
+
             if (parseFloat(props.cal?.con_1).toFixed(2) > 0) {
                 lineD_.value = "moveLtoR";
             } else {
@@ -1257,9 +1276,9 @@ const GraphFull = (props) => {
 
 
             if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) > 0) {
-                lineC_.value = "moveLtoR";
-            } else if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) < 0) {
                 lineC_.value = "moveRtoL";
+            } else if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) < 0) {
+                lineC_.value = "moveLtoR";
             } else {
                 lineC_.value = "Default";
             }
@@ -1628,9 +1647,9 @@ const GraphFullMobile = (props) => {
 
 
             if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) > 0) {
-                lineC_.value = "moveLtoR";
-            } else if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) < 0) {
                 lineC_.value = "moveRtoL";
+            } else if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) < 0) {
+                lineC_.value = "moveLtoR";
             } else {
                 lineC_.value = "Default";
             }
@@ -1807,8 +1826,8 @@ const GraphFullMobile = (props) => {
                 <path
                     id="LineB"
                     d={lineB_.value === "moveLtoR"
-                        ? "M 182.413 166.242 L 166.896 166.127 C 145.616 168.146 143.925 180.793 144.598 198.188 L 144.344 234.52 C 144.005 252.206 140.464 264.949 120.115 264.081 L 103.807 263.983"
-                        : "M 103.98 264.014 L 120.13 264.148 C 143.669 265.59 143.526 247.024 144.372 234.518 L 144.544 198.199 C 143.594 178.352 147.849 168.44 166.922 166.147 L 182.31 166.216"
+                        ? "M 103.98 264.014 L 120.13 264.148 C 143.669 265.59 143.526 247.024 144.372 234.518 L 144.544 198.199 C 143.594 178.352 147.849 168.44 166.922 166.147 L 182.31 166.216"
+                        : "M 182.413 166.242 L 166.896 166.127 C 145.616 168.146 143.925 180.793 144.598 198.188 L 144.344 234.52 C 144.005 252.206 140.464 264.949 120.115 264.081 L 103.807 263.983"
                     }
                     style={{
                         width: "100%",

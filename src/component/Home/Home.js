@@ -676,7 +676,6 @@ export default function Home(props) {
       });
       return markerElement;
     });
-    setStep(4);
   };
 
   const getData = async (data) => {
@@ -789,7 +788,7 @@ export default function Home(props) {
     setTotalProduction(cal?.pro_3 || 0);
     let x = ((cal?.pro_1 / 1000) * 100) / capacity || 0;
     setPer(mapValue(x, in_min, in_max, out_min, out_max));
-    setStep(5);
+    setStep(4);
   };
 
   const getPrice = async (data, logger) => {
@@ -873,11 +872,9 @@ export default function Home(props) {
         break;
       case 3:
         initMap(plant.value);
-        break;
-      case 4:
         getData(logger.value);
         break;
-      case 5:
+      case 4:
         getPrice(plant.value, logger.value);
         coalsave.value = {
           ...coalsave.value,

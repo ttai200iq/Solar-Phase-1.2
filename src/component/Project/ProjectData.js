@@ -1050,10 +1050,11 @@ export default function ProjectData(props) {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        if (popupAddGateway === false) {
-          // plantState.value = "default";
-        }
-        setDropState(false);
+        // if (popupAddGateway === false) {
+        console.log("ESC");
+        // plantState.value = "default";
+        // }
+        // setDropState(false);
       }
     };
 
