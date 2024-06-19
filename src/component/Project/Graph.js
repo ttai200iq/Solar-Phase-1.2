@@ -1263,6 +1263,21 @@ const GraphConsumptionMobile = (props) => {
 const GraphFull = (props) => {
     const dataLang = useIntl();
     const interval = useReducer(null)
+    const [source, setSource] = useState("");
+
+    useEffect(() => {
+        if (parseFloat(props.cal?.bat_2) == 0) {
+            setSource("/dat_icon/battery-0_-removebg-preview.png");
+        } else if (parseFloat(props.cal?.bat_2) <= 25) {
+            setSource("/dat_icon/battery-25_-removebg-preview.png");
+        } else if (parseFloat(props.cal?.bat_2) <= 50) {
+            setSource("/dat_icon/battery-50_-removebg-preview.png");
+        } else if (parseFloat(props.cal?.bat_2) <= 75) {
+            setSource("/dat_icon/battery-75_-removebg-preview.png");
+        } else {
+            setSource("/dat_icon/battery_100.png");
+        }
+    }, [props.cal?.bat_2]);
 
     useEffect(() => {
 
@@ -1590,7 +1605,7 @@ const GraphFull = (props) => {
 
 
                 <foreignObject x="880" y="20" width="220" height="100" style={{ overflow: "hidden", padding: "2px", cursor: "pointer" }} onClick={() => props.setType("grid")}>
-                    <Solar label={dataLang.formatMessage({ id: "gridData" })} color="black" align="flex-end" val={Number(parseFloat(Math.abs(props.cal?.grid_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
+                    <Solar label={dataLang.formatMessage({ id: "gridData" })} color={props.cal?.grid_1 < 0 ? "red" : "black"} align="flex-end" val={Number(parseFloat(Math.abs(props.cal?.grid_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
                 <foreignObject x="860" y="0" width="50" height="70" style={{ overflow: "hidden", padding: "1px", boxSizing: "border-box", }}>
                     <Icon src="/dat_icon/electric-pole.png" width="45" height="65" />
@@ -1601,7 +1616,7 @@ const GraphFull = (props) => {
                     <Solar label={dataLang.formatMessage({ id: "batteryData" })} color={props.cal?.bat_1 < 0 ? "red" : "black"} align="flex-start" val={Number(parseFloat(Math.abs(props.cal?.bat_1) / 1000 || 0).toFixed(2)).toLocaleString("en-US")} unit="kW" />
                 </foreignObject>
                 <foreignObject x="200" y="230" width="45" height="70" style={{ overflow: "hidden", padding: "1px", boxSizing: "border-box", }}>
-                    <Icon src="/dat_icon/battery_100.png" width="40" height="65" />
+                    <Icon src={source} width="40" height="65" />
                 </foreignObject>
 
 
