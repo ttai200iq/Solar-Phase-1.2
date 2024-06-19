@@ -14,6 +14,7 @@ export default function Battery(props) {
   const month = useSelector((state) => state.tool.month);
   const year = useSelector((state) => state.tool.year);
   const total = useSelector((state) => state.tool.total);
+  const [source, setSource] = useState("");
 
   useEffect(() => {
     if (parseFloat(props.cal?.bat_1) > 0) {
@@ -23,6 +24,20 @@ export default function Battery(props) {
     }
   }, [props.cal.bat_1]);
 
+  useEffect(() => {
+    if (parseFloat(props.cal?.bat_2) == 0) {
+      setSource("/dat_icon/battery-0_-removebg-preview.png");
+    } else if (parseFloat(props.cal?.bat_2) <= 25) {
+      setSource("/dat_icon/battery-25_-removebg-preview.png");
+    } else if (parseFloat(props.cal?.bat_2) <= 50) {
+      setSource("/dat_icon/battery-50_-removebg-preview.png");
+    } else if (parseFloat(props.cal?.bat_2) <= 75) {
+      setSource("/dat_icon/battery-75_-removebg-preview.png");
+    } else {
+      setSource("/dat_icon/battery_100.png");
+    }
+  }, [props.cal?.bat_2]);
+
   return (
     <>
       {isBrowser
@@ -31,7 +46,7 @@ export default function Battery(props) {
           <div className="DAT_ProjectData_Dashboard_Data_Center_Battery_Data">
             <div className="DAT_ProjectData_Dashboard_Data_Center_Battery_Data_Img">
               <img
-                src="/dat_icon/full-battery.png"
+                src={source}
                 alt=""
                 style={{ width: "50px", height: "90px" }}
               />
