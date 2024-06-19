@@ -101,9 +101,9 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         dataKey={props.v}
-                        stroke="rgba(11,25,103,0.7)"
+                        stroke="#62CE14"
+                        fill="rgba(98, 206, 20, 0.2)"
                         fillOpacity={1}
-                        fill="rgba(11,25,103, 0.2)"
                       />
                     ) : (
                       <></>
@@ -201,9 +201,9 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         dataKey={props.v}
-                        stroke="rgba(11,25,103,0.7)"
+                        stroke="#62CE14"
+                        fill="rgba(98, 206, 20, 0.2)"
                         fillOpacity={1}
-                        fill="rgba(11,25,103, 0.2)"
                       />
                     ) : (
                       <></>
@@ -214,9 +214,9 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         dataKey={props.v2}
-                        stroke="rgba(247, 148, 29,0.7)"
+                        stroke="#FFD316"
+                        fill="rgb(255, 211, 22, 0.2)"
                         fillOpacity={1}
-                        fill="rgba(247, 148, 29, 0.2)"
                       />
                     ) : (
                       <></>
@@ -227,9 +227,9 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         dataKey={props.v3}
-                        stroke="rgba(0, 163, 0,0.7)"
+                        stroke="#FF5151"
+                        fill="rgb(255, 81, 81, 0.2)"
                         fillOpacity={1}
-                        fill="rgba(0, 163, 0, 0.2)"
                       />
                     ) : (
                       <></>
@@ -239,9 +239,9 @@ export default function Day(props) {
                       <Area
                         type="monotone"
                         dataKey={props.v4}
-                        stroke="rgba(120, 90, 0,0.7)"
+                        stroke="#455CFF"
+                        fill="rgb(69, 92, 255,0.2)"
                         fillOpacity={1}
-                        fill="rgba(196, 147, 2, 0.1)"
                       />
                     ) : (
                       <></>
@@ -306,11 +306,9 @@ export default function Day(props) {
                         type="monotone"
                         strokeWidth={2}
                         dataKey={props.v}
-                        // stroke="rgba(11,25,103,0.7)"
-                        stroke="#FF5151"
+                        stroke="#62CE14"
+                        fill="rgba(98, 206, 20, 0.2)"
                         fillOpacity={1}
-                        // fill="rgba(11,25,103,0.2)"
-                        fill="rgb(255, 81, 81, 0.2)"
                       />
                     ) : (
                       <></>
@@ -322,11 +320,9 @@ export default function Day(props) {
                         type="monotone"
                         strokeWidth={2}
                         dataKey={props.v2}
-                        // stroke="rgba(247, 148, 29,0.7)"
                         stroke="#FFD316"
-                        fillOpacity={1}
-                        // fill="rgba(247, 148, 29,0.2)"
                         fill="rgb(255, 211, 22, 0.2)"
+                        fillOpacity={1}
                       />
                     ) : (
                       <></>
@@ -338,11 +334,9 @@ export default function Day(props) {
                         type="monotone"
                         strokeWidth={2}
                         dataKey={props.v3}
-                        // stroke="rgba(0, 163, 0,0.7)"
-                        stroke="#455CFF"
+                        stroke="#FF5151"
+                        fill="rgb(255, 81, 81, 0.2)"
                         fillOpacity={1}
-                        // fill="rgba(0, 163, 0, 0.2)"
-                        fill="rgb(69, 92, 255,0.2)"
                       />
                     ) : (
                       <></>
@@ -354,10 +348,9 @@ export default function Day(props) {
                         type="monotone"
                         strokeWidth={2}
                         dataKey={props.v4}
-                        stroke="#62CE14"
+                        stroke="#455CFF"
+                        fill="rgb(69, 92, 255,0.2)"
                         fillOpacity={1}
-                        // fill="rgba(196, 147, 2, 0.1)"
-                        fill="rgba(98, 206, 20, 0.2)"
                       />
                     ) : (
                       <></>
