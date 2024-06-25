@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import "./Project.scss";
 
 import { projectData } from './Project';
@@ -6,21 +6,21 @@ import { useIntl } from 'react-intl';
 import Graph from './Graph';
 import { useSelector } from 'react-redux';
 import { signal } from "@preact/signals-react";
+import { FadeLoader } from 'react-spinners';
 const second = signal(0);
 
 export default function GraphComponent(props) {
     const dataLang = useIntl();
     const cal = useSelector((state) => state.tool.cal);
     const intervalIDRef = useReducer(null);
+    const [isLoading, setIsLoading] = useState(true);
     const dashArray = 10 * Math.PI * 2;
     const max = 258
 
     useEffect(function () {
-
-
         second.value = 0
-        const startTimer = () => {
 
+        const startTimer = () => {
             intervalIDRef.current = setInterval(() => {
                 second.value = second.value + 1
 
@@ -39,73 +39,91 @@ export default function GraphComponent(props) {
             startTimer();
         }
 
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+            clearInterval(timer);
+            // timer = null;
+        }, 2000);
 
         return () => {
-
             stopTimer();
-
         }
-
     }, [cal])
 
     return (
-        <div className="DAT_ProjectData_Dashboard_Data_Center">
-            <div className="DAT_ProjectData_Dashboard_Data_Center_Tit">
-                <div className="DAT_ProjectData_Dashboard_Data_Center_Tit_Item">
-                    {(() => {
-                        switch (projectData.value.plantmode) {
-                            case "consumption":
-                                return (
-                                    <>{dataLang.formatMessage({ id: "consumptionType" })}</>
-                                );
-                            case "hybrid":
-                                return (
-                                    <>{dataLang.formatMessage({ id: "hybridType" })}</>
-                                );
-                            case "ESS":
-                                return (
-                                    <>{dataLang.formatMessage({ id: "ESS" })}</>
-                                );
-                            default:
-                                return (
-                                    <>{dataLang.formatMessage({ id: "gridType" })}</>
-                                );
-                        }
-                    })()}
+        <>
+            {isLoading
+                ?
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <FadeLoader color="#0082CA" size={20} />
                 </div>
-                {projectData.value.state
-                    ? <div className="DAT_ProjectData_Dashboard_Data_Center_Tit_Timer" style={{ width: "40px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <svg viewBox='0 0 24 24' xmlns="http://www.w3.org/2000/svg" width={"100%"} height={"100%"}
-                            style={{
-                                rotate: '-90deg',
-                            }}
-                        >
-                            <circle
-                                className="circle" cx="12" cy="12" r="10"
-                                style={{
+                :
+                <div className="DAT_ProjectData_Dashboard_Data_Center">
+                    <div className="DAT_ProjectData_Dashboard_Data_Center_Tit">
+                        <div className="DAT_ProjectData_Dashboard_Data_Center_Tit_Item">
+                            {(() => {
+                                switch (projectData.value.plantmode) {
+                                    case "consumption":
+                                        return (
+                                            <>{dataLang.formatMessage({ id: "consumptionType" })}</>
+                                        );
+                                    case "hybrid":
+                                        return (
+                                            <>{dataLang.formatMessage({ id: "hybridType" })}</>
+                                        );
+                                    case "ESS":
+                                        return (
+                                            <>{dataLang.formatMessage({ id: "ESS" })}</>
+                                        );
+                                    default:
+                                        return (
+                                            <>{dataLang.formatMessage({ id: "gridType" })}</>
+                                        );
+                                }
+                            })()}
+                        </div>
+                        {projectData.value.state
+                            ? <div className="DAT_ProjectData_Dashboard_Data_Center_Tit_Timer" style={{ width: "40px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <svg viewBox='0 0 24 24' xmlns="http://www.w3.org/2000/svg" width={"100%"} height={"100%"}
+                                    style={{
+                                        rotate: '-90deg',
+                                    }}
+                                >
+                                    <circle
+                                        className="circle" cx="12" cy="12" r="10"
+                                        style={{
 
-                                    fill: 'transparent',
-                                    stroke: 'rgba(0, 163, 0,0.7)',
-                                    strokeWidth: '2',
-                                    strokeDashoffset: (dashArray - (dashArray * second.value) / (max)) || (dashArray - (dashArray * 0) / max),
-                                    strokeDasharray: dashArray,
-                                    strokeLinecap: "round",
-                                    strokeLinejoin: "round",
-                                }}
+                                            fill: 'transparent',
+                                            stroke: 'rgba(0, 163, 0,0.7)',
+                                            strokeWidth: '2',
+                                            strokeDashoffset: (dashArray - (dashArray * second.value) / (max)) || (dashArray - (dashArray * 0) / max),
+                                            strokeDasharray: dashArray,
+                                            strokeLinecap: "round",
+                                            strokeLinejoin: "round",
+                                        }}
 
-                            ></circle>
-                            <image href="/dat_icon/clock.png" x="4" y="4" width="16" height="16" />
-                        </svg>
+                                    ></circle>
+                                    <image href="/dat_icon/clock.png" x="4" y="4" width="16" height="16" />
+                                </svg>
+                            </div>
+                            : <></>
+                        }
                     </div>
-                    : <></>
-                }
-            </div>
-            <Graph
-                type={projectData.value.plantmode}
-                state={projectData.value.state}
-                cal={cal}
-            />
-        </div >
+                    <Graph
+                        type={projectData.value.plantmode}
+                        state={projectData.value.state}
+                        cal={cal}
+                    />
+                </div >
+            }
+        </>
     );
 }
-

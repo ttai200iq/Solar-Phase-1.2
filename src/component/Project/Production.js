@@ -66,10 +66,7 @@ export default function Production(props) {
             </div>
 
             <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Chart">
-              <div
-                className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Chart_Data"
-                style={divStyle}
-              >
+              <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Chart_Data" style={divStyle}>
                 <style>{keyframes}</style>
                 <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Chart_Data_value">
                   <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Chart_Data_value_num">
@@ -87,45 +84,22 @@ export default function Production(props) {
                 </div>
               </div>
 
-              <div
-                className="DAT_Home_Overview-Main-Percent-Icon"
-                style={{ cursor: "pointer" }}
-              >
+              <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Chart_Icon">
                 <PopupState variant="popper" popupId="demo-popup-popper">
                   {(popupState) => (
                     <div style={{ cursor: "pointer" }}>
-                      <HelpOutlineIcon
-                        {...bindHover(popupState)}
-                        color="action"
-                        fontSize="9px"
-                      />
+                      <HelpOutlineIcon {...bindHover(popupState)} color="action" fontSize="9px" />
                       <Popper {...bindPopper(popupState)} transition>
                         {({ TransitionProps }) => (
                           <Fade {...TransitionProps} timeout={350}>
-                            <Paper
-                              sx={{ width: "400px", marginLeft: "235px", p: 2 }}
-                            >
-                              <Typography
-                                sx={{
-                                  fontSize: "12px",
-                                  textAlign: "justify",
-                                  marginBottom: 1.7,
-                                }}
-                              >
+                            <Paper sx={{ width: "400px", p: 2 }}>
+                              <Typography sx={{ fontSize: "12px", textAlign: "justify", marginBottom: 1.7, }}>
                                 {dataLang.formatMessage({ id: "overview1" })}
                               </Typography>
-                              <Typography
-                                sx={{
-                                  fontSize: "12px",
-                                  textAlign: "justify",
-                                  marginBottom: 1.7,
-                                }}
-                              >
+                              <Typography sx={{ fontSize: "12px", textAlign: "justify", marginBottom: 1.7, }}>
                                 {dataLang.formatMessage({ id: "overview2" })}
                               </Typography>
-                              <Typography
-                                sx={{ fontSize: "12px", textAlign: "justify" }}
-                              >
+                              <Typography sx={{ fontSize: "12px", textAlign: "justify" }}                              >
                                 {dataLang.formatMessage({ id: "overview3" })}
                               </Typography>
                             </Paper>

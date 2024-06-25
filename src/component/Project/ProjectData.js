@@ -947,7 +947,22 @@ export default function ProjectData(props) {
       pro_2: [],
       pro_3: [],
     };
-    var cal_ = {};
+    var cal_ = {
+      pro_1: 0,
+      pro_2: 0,
+      pro_3: 0,
+      bat_1: 0,
+      bat_2: 0,
+      bat_in_1: 0,
+      bat_out_1: 0,
+      con_1: 0,
+      con_2: 0,
+      grid_1: 0,
+      grid_in_1: 0,
+      grid_in_2: 0,
+      grid_out_1: 0,
+      grid_out_2: 0,
+    };
     temp.value.map(async (item, i) => {
       Object.entries(item.data).map(([key, value]) => {
         switch (value.type) {

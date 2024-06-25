@@ -573,10 +573,6 @@
       }
     }
 
-    &_Bottom {
-      // margin: 0px 10px 10px 10px;
-    }
-
     &_More {
       width: 98%;
       margin: auto;
@@ -1047,7 +1043,8 @@
               flex: 4;
               display: flex;
               justify-content: center;
-              margin-top: 24px;
+              align-items: center;
+              position: relative;
 
               &_Data {
                 border-radius: 50%;
@@ -1091,6 +1088,12 @@
                     color: black;
                   }
                 }
+              }
+
+              &_Icon {
+                position: absolute;
+                top: 30px;
+                right: 50px;
               }
             }
 

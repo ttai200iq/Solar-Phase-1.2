@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Project.scss";
 
 import axios from "axios";
-import { PacmanLoader } from "react-spinners";
+import { FadeLoader, PacmanLoader } from "react-spinners";
 import { projectData } from "./Project";
 import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
@@ -267,7 +267,7 @@ export default function Weather() {
             alignItems: "center",
           }}
         >
-          <PacmanLoader color="#0082CA" size={20} />
+          <FadeLoader color="#0082CA" size={20} />
         </div>
         :
         <>

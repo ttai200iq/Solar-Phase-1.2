@@ -974,7 +974,6 @@ export default function Home(props) {
                                     <Paper
                                       sx={{
                                         width: "400px",
-                                        marginLeft: "200px",
                                         p: 2,
                                       }}
                                     >
@@ -1245,8 +1244,6 @@ export default function Home(props) {
                                   <Paper
                                     sx={{
                                       width: "400px",
-                                      marginTop: "10px",
-                                      marginLeft: "335px",
                                       p: 2,
                                     }}
                                   >

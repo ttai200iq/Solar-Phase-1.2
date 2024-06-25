@@ -26,64 +26,30 @@ export default function Benefit(props) {
                             <PopupState variant="popper" popupId="demo-popup-popper">
                                 {(popupState) => (
                                     <div style={{ cursor: "pointer" }}>
-                                        <HelpOutlineIcon
-                                            {...bindHover(popupState)}
-                                            color="action"
-                                            fontSize="9px"
-                                        />
+                                        <HelpOutlineIcon {...bindHover(popupState)} color="action" fontSize="9px" />
                                         <Popper {...bindPopper(popupState)} transition>
                                             {({ TransitionProps }) => (
                                                 <Fade {...TransitionProps} timeout={350}>
-                                                    <Paper
-                                                        sx={{
-                                                            width: "400px",
-                                                            marginTop: "10px",
-                                                            marginLeft: "335px",
-                                                            p: 2,
-                                                        }}
-                                                    >
-                                                        <Typography
-                                                            sx={{
-                                                                fontSize: "12px",
-                                                                textAlign: "justify",
-                                                                marginBottom: 1.7,
-                                                            }}
-                                                        >
+                                                    <Paper sx={{ width: "400px", p: 2, }}>
+                                                        <Typography sx={{ fontSize: "12px", textAlign: "justify", marginBottom: 1.7, }}>
                                                             1.{" "}
                                                             {dataLang.formatMessage({
                                                                 id: "environment1",
                                                             })}
                                                         </Typography>
-                                                        <Typography
-                                                            sx={{
-                                                                fontSize: "12px",
-                                                                textAlign: "justify",
-                                                                marginBottom: 1.7,
-                                                            }}
-                                                        >
+                                                        <Typography sx={{ fontSize: "12px", textAlign: "justify", marginBottom: 1.7, }}>
                                                             2.{" "}
                                                             {dataLang.formatMessage({
                                                                 id: "environment2",
                                                             })}
                                                         </Typography>
-                                                        <Typography
-                                                            sx={{
-                                                                fontSize: "12px",
-                                                                textAlign: "justify",
-                                                                marginBottom: 1.7,
-                                                            }}
-                                                        >
+                                                        <Typography sx={{ fontSize: "12px", textAlign: "justify", marginBottom: 1.7, }}>
                                                             3.{" "}
                                                             {dataLang.formatMessage({
                                                                 id: "environment3",
                                                             })}
                                                         </Typography>
-                                                        <Typography
-                                                            sx={{
-                                                                fontSize: "12px",
-                                                                textAlign: "justify",
-                                                            }}
-                                                        >
+                                                        <Typography sx={{ fontSize: "12px", textAlign: "justify", }}>
                                                             4.{" "}
                                                             {dataLang.formatMessage({
                                                                 id: "environment4",
