@@ -787,6 +787,8 @@ export default function EditProject(props) {
         if (d.status === true) {
           alertDispatch(dataLang.formatMessage({ id: "alert_30" }));
           plantState.value = "default";
+        } else {
+          alertDispatch(dataLang.formatMessage({ id: "alert_36" }));
         }
       };
       editProject();

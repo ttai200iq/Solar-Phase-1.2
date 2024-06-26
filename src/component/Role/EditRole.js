@@ -52,7 +52,6 @@ export default function EditRole(props) {
         ruleid: parseInt(ruleidRef.current.value),
       }
     );
-
     if (updateRoleUser.status) {
       let newData = Usr_.value;
       let index = Usr_.value.findIndex((d) => d.usr_ == roleData.value.usr_);
@@ -174,11 +173,11 @@ export default function EditRole(props) {
               {dataLang.formatMessage({ id: "rule" })}: &nbsp;
             </span>
           </div>
-          <select defaultValue={roleData.value.rulename_} ref={ruleidRef}>
+          <select defaultValue={roleData.value.ruleid_} ref={ruleidRef}>
             {datarule.value
               .filter((item, key) => item.ruleid_ !== 1)
               .map((item, key) => (
-                <option key={key} value={item.rulename_}>
+                <option key={key} value={item.ruleid_}>
                   {item.rulename_}
                 </option>
               ))}

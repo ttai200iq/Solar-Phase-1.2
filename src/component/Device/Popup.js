@@ -26,71 +26,81 @@ export default function Popup(props) {
   };
 
   const handleDelete = (e) => {
-    const dropLogger = async () => {
-      let d = await callApi("post", host.DATA + "/dropLogger", {
-        plantid: props.plantid,
-        sn: props.sn,
-      });
-      if (d.status === true) {
-        loggerList.value = loggerList.value.filter(
-          (item) => item.psn != props.sn
-        );
-        inverterList.value = inverterList.value.filter(
-          (item) => item.plogger != props.sn
-        );
-        alertDispatch(dataLang.formatMessage({ id: "alert_25" }));
-        props.handleClose();
-      } else if (d.number == 0) {
-        alertDispatch(dataLang.formatMessage({ id: "alert_26" }));
-      } else if (d.number == 1) {
-        alertDispatch(dataLang.formatMessage({ id: "alert_27" }));
-      }
-    };
-    dropLogger();
+    if (props.share === true) {
+      alertDispatch(dataLang.formatMessage({ id: "alert_63" }));
+      props.handleClose();
+    } else {
+      const dropLogger = async () => {
+        let d = await callApi("post", host.DATA + "/dropLogger", {
+          plantid: props.plantid,
+          sn: props.sn,
+        });
+        if (d.status === true) {
+          loggerList.value = loggerList.value.filter(
+            (item) => item.psn != props.sn
+          );
+          inverterList.value = inverterList.value.filter(
+            (item) => item.plogger != props.sn
+          );
+          alertDispatch(dataLang.formatMessage({ id: "alert_25" }));
+          props.handleClose();
+        } else if (d.number == 0) {
+          alertDispatch(dataLang.formatMessage({ id: "alert_26" }));
+        } else if (d.number == 1) {
+          alertDispatch(dataLang.formatMessage({ id: "alert_27" }));
+        }
+      };
+      dropLogger();
+    }
   };
 
   const handleUpdate = (e) => {
-    switch (props.devtype) {
-      case "inverter":
-        const updateInverter = async () => {
-          let d = await callApi("post", host.DATA + "/updateInverter", {
-            sn: props.sn,
-            type: "name",
-            data: name.current.value,
-          });
-          if (name.current.value === "") {
-            alertDispatch(dataLang.formatMessage({ id: "alert_22" }));
-          } else if (d.status === true) {
-            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-            let newData = inverterList.value;
-            let index = newData.findIndex((item) => item.psn == props.sn);
-            newData[index].pname = name.current.value;
-            inverterList.value = [...newData];
-            props.handleClose();
-          }
-        };
-        updateInverter();
-        break;
-      default:
-        const updateLogger = async () => {
-          let d = await callApi("post", host.DATA + "/updateLogger", {
-            sn: props.sn,
-            type: "name",
-            data: name.current.value,
-          });
-          if (name.current.value === "") {
-            alertDispatch(dataLang.formatMessage({ id: "alert_22" }));
-          } else if (d.status === true) {
-            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-            let newData = loggerList.value;
-            let index = newData.findIndex((item) => item.psn == props.sn);
-            newData[index].pname = name.current.value;
-            loggerList.value = [...newData];
-            props.handleClose();
-          }
-        };
-        updateLogger();
-        break;
+    if (props.share === true) {
+      alertDispatch(dataLang.formatMessage({ id: "alert_63" }));
+      props.handleClose();
+    } else {
+      switch (props.devtype) {
+        case "inverter":
+          const updateInverter = async () => {
+            let d = await callApi("post", host.DATA + "/updateInverter", {
+              sn: props.sn,
+              type: "name",
+              data: name.current.value,
+            });
+            if (name.current.value === "") {
+              alertDispatch(dataLang.formatMessage({ id: "alert_22" }));
+            } else if (d.status === true) {
+              alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+              let newData = inverterList.value;
+              let index = newData.findIndex((item) => item.psn == props.sn);
+              newData[index].pname = name.current.value;
+              inverterList.value = [...newData];
+              props.handleClose();
+            }
+          };
+          updateInverter();
+          break;
+        default:
+          const updateLogger = async () => {
+            let d = await callApi("post", host.DATA + "/updateLogger", {
+              sn: props.sn,
+              type: "name",
+              data: name.current.value,
+            });
+            if (name.current.value === "") {
+              alertDispatch(dataLang.formatMessage({ id: "alert_22" }));
+            } else if (d.status === true) {
+              alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+              let newData = loggerList.value;
+              let index = newData.findIndex((item) => item.psn == props.sn);
+              newData[index].pname = name.current.value;
+              loggerList.value = [...newData];
+              props.handleClose();
+            }
+          };
+          updateLogger();
+          break;
+      }
     }
   };
 

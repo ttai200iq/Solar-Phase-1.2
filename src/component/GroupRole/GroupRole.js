@@ -134,9 +134,9 @@ export default function GroupRole(props) {
         name: dataLang.formatMessage({ id: "role" }),
         selector: (user) => (
           <div
-            style={{ cursor: "pointer" }}
-            id={user.id_}
-            onClick={(e) => handleEdit(e)}
+          // style={{ cursor: "pointer" }}
+          // id={user.id_}
+          // onClick={(e) => handleEdit(e)}
           >
             {user.rulename_}
           </div>

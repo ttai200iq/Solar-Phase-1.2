@@ -55,6 +55,8 @@ export default function Device(props) {
   const [infoState, setInfoState] = useState(false);
   const [devname, setDevname] = useState("");
   const [devtype, setDevtype] = useState("");
+  const [plantInfo, setPlantInfo] = useState({});
+  const [share, setShare] = useState();
 
   const listTab = [
     { id: "logger", name: "Logger" },
@@ -228,7 +230,7 @@ export default function Device(props) {
                   <IoMdMore size={20} {...bindToggle(popupState)} />
                   <Menu {...bindMenu(popupState)}>
                     <MenuItem
-                      id={`${row.psn}-${row.pname}-edit`}
+                      id={`${row.psn}-${row.pname}-edit-${row.pplantid}`}
                       onClick={(e) => {
                         handleEdit(e);
                         popupState.close();
@@ -341,7 +343,7 @@ export default function Device(props) {
                   <Menu {...bindMenu(popupState)}>
                     {ruleInfor.value.setting.device.modify === true ? (
                       <MenuItem
-                        id={`${row.psn}-${row.pname}-edit`}
+                        id={`${row.psn}-${row.pname}-edit-${row.pplantid}`}
                         onClick={(e) => {
                           handleEdit(e);
                           popupState.close();
@@ -356,7 +358,7 @@ export default function Device(props) {
                     )}
                     {ruleInfor.value.setting.device.remove === true ? (
                       <MenuItem
-                        id={row.psn + "_" + row.pplantid + "_remove"}
+                        id={`${row.psn}_${row.pplantid}_remove_${row.pplantid}`}
                         onClick={(e) => {
                           handleRemove(e);
                           popupState.close();
@@ -451,6 +453,13 @@ export default function Device(props) {
     setDevname(idArr[1]);
     setType(idArr[2]);
     setDevtype(tab.value);
+
+    const plant = plantInfo.find((item) => item.plantid_ == idArr[3]);
+    if (plant.shared == 1) {
+      setShare(true);
+    } else {
+      setShare(false);
+    }
   };
 
   const handleRemove = (e) => {
@@ -460,6 +469,13 @@ export default function Device(props) {
     setPlantid(idArr[1]);
     setSnlogger(idArr[0]);
     setType(idArr[2]);
+
+    const plant = plantInfo.find((item) => item.plantid_ == idArr[3]);
+    if (plant.shared == 1) {
+      setShare(true);
+    } else {
+      setShare(false);
+    }
 
     // switch (idArr[1]) {
     //   case "inverter":
@@ -654,6 +670,18 @@ export default function Device(props) {
     };
     getAllLogger();
 
+    const getPlant = async () => {
+      let d = await callApi("post", host.DATA + "/getPlant", {
+        usr: user,
+        partnerid: userInfor.value.partnerid,
+        type: userInfor.value.type,
+      });
+      if (d.status === true) {
+        setPlantInfo(d.data);
+      }
+    };
+    getPlant();
+
     return () => {
       tab.value = "logger";
     };
@@ -814,8 +842,7 @@ export default function Device(props) {
             </div>
           </div>
 
-          <div
-            className="DAT_ViewPopup"
+          <div className="DAT_ViewPopup"
             style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
           >
             {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}
@@ -829,6 +856,7 @@ export default function Device(props) {
                 name={devname}
                 type={type}
                 devtype={devtype}
+                share={share}
                 handleClose={handleClosePopup}
                 handleCancel={closeFilter}
               />

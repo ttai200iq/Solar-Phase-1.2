@@ -305,7 +305,7 @@ export default function Popup(props) {
                     {dataLang.formatMessage({ id: 'phone' })}
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder={dataLang.formatMessage({ id: 'phone' })}
                     defaultValue={userInfor.value.phone} ref={phoneRef}
                   />

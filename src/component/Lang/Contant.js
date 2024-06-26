@@ -687,6 +687,7 @@ export const messages = {
     alert_60: "Delete error code successfully!",
     alert_61: "Create new rule successfully!",
     alert_62: "Update rule successfully!",
+    alert_63: "You can not change device in shared project!",
 
     // --------------------------------- //
 
@@ -1591,6 +1592,7 @@ export const messages = {
     alert_60: "Xóa thông tin mã lỗi thành công!",
     alert_61: "Tạo phân quyền thành công!",
     alert_62: "Cập nhật quyền thành công!",
+    alert_63: "Không được thao tác thiết bị được chia sẻ!",
 
     // --------------------------------- //
 

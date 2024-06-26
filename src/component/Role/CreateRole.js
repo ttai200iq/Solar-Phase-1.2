@@ -89,17 +89,17 @@ export default function CreateRole(props) {
   }, []);
 
   return (
-    <form className="DAT_CreateRole" onSubmit={handleSave}>
+    <form className="DAT_CreateRole" onSubmit={(e) => { handleSave(e) }}>
       <div className="DAT_CreateRole_Header">
         <div className="DAT_CreateRole_Header_Left">
           {dataLang.formatMessage({ id: "createAccount" })}
         </div>
 
         <div className="DAT_CreateRole_Header_Right">
-          <div className="DAT_CreateRole_Header_Right_Save">
+          <button className="DAT_CreateRole_Header_Right_Save">
             <IoSaveOutline size={20} color="white" />
             <span>{dataLang.formatMessage({ id: "save" })}</span>
-          </div>
+          </button>
           <div className="DAT_CreateRole_Header_Right_Close"
             id="Popup"
             onMouseEnter={(e) => handlePopup("new")}
