@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Role.scss";
 
-import { roleState } from "./Role";
 import { useIntl } from "react-intl";
 import { alertDispatch } from "../Alert/Alert";
 import { partnerInfor } from "../../App";
