@@ -148,11 +148,12 @@ export default function Device(props) {
       name: dataLang.formatMessage({ id: "status" }),
       selector: (row) => (
         <>
-          {invt[row.plogger]?.[row.pdata.status] == 2 ? (
+          {/* {invt[row.plogger]?.[row.pdata.status] == 2 ? (
             <FaCheckCircle size={20} color="green" />
           ) : (
             <MdOutlineError size={22} color="red" />
-          )}
+          )} */}
+          {invt[row.plogger]?.[row.pdata.status]}
         </>
       ),
       width: "100px",
@@ -652,6 +653,7 @@ export default function Device(props) {
         partnerid: userInfor.value.partnerid,
         type: userInfor.value.type,
       });
+      console.log(d);
       if (d.status === true) {
         loggerList.value = d.data;
 
@@ -695,6 +697,7 @@ export default function Device(props) {
         partnerid: userInfor.value.partnerid,
         type: userInfor.value.type,
       });
+      console.log(d);
       if (d.status === true) {
         inverterList.value = d.data;
         setDatafilterInvert(d.data);

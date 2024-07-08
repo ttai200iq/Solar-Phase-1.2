@@ -55,7 +55,7 @@ export const projectdatasize = signal({
 
 const tabMobile = signal(false);
 const tabLable = signal("");
-const tab_ = signal("logger");
+export const tab_ = signal("logger");
 // const tabMobileAlert = signal(false);
 // const tabLableAlert = signal("");
 // const tabAlert = signal("all");
@@ -76,9 +76,7 @@ export default function ProjectData(props) {
   const [dropState, setDropState] = useState(false);
   const [infoState, setInfoState] = useState(false);
   const [popupAddGateway, setPopupAddGateway] = useState(false);
-  const [snlogger, setSnlogger] = useState(
-    dataLang.formatMessage({ id: "unknown" })
-  );
+  const [snlogger, setSnlogger] = useState(dataLang.formatMessage({ id: "unknown" }));
   const [devname, setDevname] = useState("");
   const [devtype, setDevtype] = useState("");
   const [type, setType] = useState("");
@@ -881,13 +879,8 @@ export default function ProjectData(props) {
           });
           setInvt((pre) => ({ ...pre, [item.sn]: res.data }));
           const decimalArray = JSON.parse(item.setting.sn);
-          const hexString = decimalArray
-            .map((num) => parseInt(res.data[num]).toString(16))
-            .join("");
-          const asciiString = hexString
-            .match(/.{2}/g)
-            .map((byte) => String.fromCharCode(parseInt(byte, 16)))
-            .join("");
+          const hexString = decimalArray.map((num) => parseInt(res.data[num]).toString(16)).join("");
+          const asciiString = hexString.match(/.{2}/g).map((byte) => String.fromCharCode(parseInt(byte, 16))).join("");
         } else {
           setInvt((pre) => ({ ...pre, [item.sn]: {} }));
         }
@@ -919,6 +912,7 @@ export default function ProjectData(props) {
           bat_out_1: 0,
           con_1: 0,
           con_2: 0,
+          con_3: 0,
           grid_1: 0,
           grid_in_1: 0,
           grid_in_2: 0,
@@ -934,10 +928,13 @@ export default function ProjectData(props) {
     var num_ = {
       bat_1: [],
       bat_2: [],
+      bat_3: [],
+      bat_4: [],
       bat_in_1: [],
       bat_out_1: [],
       con_1: [],
       con_2: [],
+      con_3: [],
       grid_1: [],
       grid_in_1: [],
       grid_in_2: [],
@@ -953,6 +950,8 @@ export default function ProjectData(props) {
       pro_3: 0,
       bat_1: 0,
       bat_2: 0,
+      bat_3: 0,
+      bat_4: 0,
       bat_in_1: 0,
       bat_out_1: 0,
       con_1: 0,
@@ -975,13 +974,13 @@ export default function ProjectData(props) {
 
             num_[key][i] = inum.reduce((accumulator, currentValue) => {
               return Number(accumulator) + Number(currentValue);
-            }, 0);
+            }, 0) * parseFloat(value.cal);
 
             if (i == temp.value.length - 1) {
               cal_[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
                   return Number(accumulator) + Number(currentValue);
-                }, 0) * parseFloat(value.cal)
+                }, 0)
               ).toFixed(2);
             }
             break;
@@ -1000,20 +999,19 @@ export default function ProjectData(props) {
                 ? parseFloat(doubleword).toFixed(2)
                 : parseFloat(float_value).toFixed(2) || 0;
             };
-            num_[key][i] = convertToDoublewordAndFloat(e, "int");
+            num_[key][i] = convertToDoublewordAndFloat(e, "int") * parseFloat(value.cal);
 
             if (i == temp.value.length - 1) {
               cal_[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
                   return Number(accumulator) + Number(currentValue);
-                }, 0) * parseFloat(value.cal)
+                }, 0)
               ).toFixed(2);
             }
             break;
-          default:
+          case "real":
             num_[key][i] =
-              parseFloat(invt[item.sn]?.[value.register] || 0) *
-              parseFloat(value.cal);
+              parseFloat(invt[item.sn]?.[value.register] || 0) * parseFloat(value.cal);
             if (i == temp.value.length - 1) {
               cal_[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
@@ -1021,6 +1019,34 @@ export default function ProjectData(props) {
                 })
               ).toFixed(2);
             }
+            break;
+          case "bit":
+            const numberToConvert = invt[item.sn]?.[value.register] || 0;
+            const numberOfBits = 16; // 32-bits binary
+            const arrBitwise = [0]; // save the resulting bitwise
+
+            for (let i = 0; i < numberOfBits; i++) {
+              let mask = 1;
+
+              const bit = numberToConvert & (mask << i); // And bitwise with left shift
+
+              if (bit === 0) {
+                arrBitwise[i] = 0;
+              } else {
+                arrBitwise[i] = 1;
+              }
+            }
+            const binary = arrBitwise.reverse().join("");
+            num_[key][i] = Number(binary[15 - Number(value.cal)])
+            // console.log(key, num_[key])
+            if (i == temp.value.length - 1) {
+              cal_[key] = num_[key].some(element => element === 1) ? 1 : 0;
+              // console.log(key,cal_[key])
+            }
+
+
+            break;
+          default:
             break;
         }
       });
@@ -1062,24 +1088,23 @@ export default function ProjectData(props) {
   }, [temp.value]);
 
   // Handle close when press ESC
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        // if (popupAddGateway === false) {
-        console.log("ESC");
-        // plantState.value = "default";
-        // }
-        // setDropState(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleKeyDown = (event) => {
+  //     if (event.key === "Escape") {
+  //       // if (popupAddGateway === false) {
+  //       // plantState.value = "default";
+  //       // }
+  //       // setDropState(false);
+  //     }
+  //   };
 
-    document.addEventListener("keydown", handleKeyDown);
+  //   document.addEventListener("keydown", handleKeyDown);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <div ref={box}>

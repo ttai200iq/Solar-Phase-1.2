@@ -60,6 +60,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "remove-dev": "ssh tech@118.69.62.190 -p8822 rm -rf /home/tech/*",
+    "get-dev": "scp -r -P 8822 tech@118.69.62.190:/home/tech/* Data",
+    "deloy-dev":"scp -r -P 8822 src/* tech@118.69.62.190:/home/tech",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

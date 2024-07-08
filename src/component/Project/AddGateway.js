@@ -1,22 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Project.scss";
 
 import { projectData, } from "./Project";
 import { useIntl } from "react-intl";
-import { inverterDB, temp } from "./ProjectData";
+import { inverterDB, tab_, temp } from "./ProjectData";
 import { callApi } from "../Api/Api";
-import { host } from "../Lang/Contant";
+import { brands, host } from "../Lang/Contant";
 import { alertDispatch } from "../Alert/Alert";
 import axios from "axios";
 import { Token } from "../../App";
+import { signal } from "@preact/signals-react";
 
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoSyncOutline } from "react-icons/io5";
+
+const inverterinfo = signal('');
+const type_ = signal('');
 
 export default function AddGateway(props) {
   const dataLang = useIntl();
   const sn = useRef();
   const name = useRef();
+  const [brand, setBrand] = useState('INVT');
   const type = useRef();
+  const ogLog = useRef();
 
   const invtCloud = async (data, token) => {
     var reqData = {
@@ -59,9 +65,9 @@ export default function AddGateway(props) {
   };
 
   const handleSave = async (e) => {
-    if (sn.current.value === "" || name.current.value === "" || type.current.value === "") {
+    if (sn.current.value === "" || name.current.value === "") {
       alertDispatch(dataLang.formatMessage({ id: "alert_22" }))
-    } else {
+    } else if (tab_.value === 'logger') {
       const d = await callApi("post", host.DATA + "/addLogger", {
         plantid: projectData.value.plantid_,
         sn: sn.current.value,
@@ -71,29 +77,19 @@ export default function AddGateway(props) {
       if (d.status) {
         temp.value = [...temp.value, d.data];
         props.handleInvt(sn.current.value)
-        const res = await invtCloud(
-          '{"deviceCode":"' + sn.current.value + '"}',
-          Token.value.token
-        );
+        type_.value = type.current.value;
+        const res = await invtCloud('{"deviceCode":"' + sn.current.value + '"}', Token.value.token);
         if (res.ret === 0) {
           const decimalArray = JSON.parse(d.data.setting.sn)
           const hexString = decimalArray.map((num) => parseInt(res.data[num]).toString(16)).join('');
           const invertersn = hexString.match(/.{2}/g).map(byte => String.fromCharCode(parseInt(byte, 16))).join('');
-
-          let async_ = await callApi("post", host.DATA + "/addInverter", {
-            loggersn: sn.current.value,
-            invertersn: invertersn,
-            type: d.data.type,
-            plantid: projectData.value.plantid_,
-          });
-          if (async_.status) {
-            inverterDB.value = [...inverterDB.value, async_.data];
-          }
+          console.log(invertersn);
+          inverterinfo.value = invertersn;
         }
-        props.handleClose();
       }
       if (d.status === true) {
         alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
+        props.handleClose();
       } else if (d.number === 0) {
         alertDispatch(dataLang.formatMessage({ id: "alert_33" }))
       } else if (d.number === 1) {
@@ -105,6 +101,33 @@ export default function AddGateway(props) {
       } else if (d.number === 4) {
         alertDispatch(dataLang.formatMessage({ id: "alert_36" }))
       }
+    } else {
+        let async_ = await callApi("post", host.DATA + "/addInverter", {
+          loggersn: ogLog.current.value,
+          invertersn: sn.current.value,
+          type: type_.value,
+          plantid: projectData.value.plantid_,
+        });
+        console.log(async_);
+        if (async_.status) {
+          inverterDB.value = [...inverterDB.value, async_.data];
+          alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
+          props.handleClose();
+        } else if (async_.number === 1) {
+          alertDispatch(dataLang.formatMessage({ id: "alert_35" }))        
+        }
+    }
+  };
+
+  const handleBrand = (e) => {
+    setBrand(e.target.value);
+  };
+
+  const handleCheck = () => {
+    if (inverterinfo.value === '') {
+      alertDispatch(dataLang.formatMessage({ id: "alert_34" }))
+    } else {
+      document.getElementById('sn').value = inverterinfo.value;
     }
   };
 
@@ -128,7 +151,10 @@ export default function AddGateway(props) {
     <div className="DAT_AddGateway">
       <div className="DAT_AddGateway_Head">
         <div className="DAT_AddGateway_Head_Left">
-          <p>{dataLang.formatMessage({ id: 'ADD' })} Gateway/Logger</p>
+          {tab_.value === 'logger'
+            ? <p>{dataLang.formatMessage({ id: 'ADD' })} Gateway/Logger</p>
+            : <p>{dataLang.formatMessage({ id: 'ADD' })} Inverter</p>
+          }
         </div>
 
         <div className="DAT_AddGateway_Head_Right">
@@ -146,22 +172,66 @@ export default function AddGateway(props) {
         </div>
       </div>
 
-      <div className="DAT_AddGateway_Body">
-        <div className="DAT_AddGateway_Body_Input">
-          <span>SN:</span>
-          <input id="sn" type="text" placeholder={dataLang.formatMessage({ id: 'enterCode' })} ref={sn} />
-        </div>
+      {tab_.value === 'logger'
+        ?
+        <div className="DAT_AddGateway_Body">
+          <div className="DAT_AddGateway_Body_Input">
+            <span>SN:</span>
+            <input id="sn" type="text" placeholder={dataLang.formatMessage({ id: 'enterCode' })} ref={sn} />
+          </div>
 
-        <div className="DAT_AddGateway_Body_Input">
-          <span>{dataLang.formatMessage({ id: 'name' })}:</span>
-          <input id="name" type="text" placeholder={dataLang.formatMessage({ id: 'enterDev' })} ref={name} />
-        </div>
+          <div className="DAT_AddGateway_Body_Input">
+            <span>{dataLang.formatMessage({ id: 'name' })}:</span>
+            <input id="name" type="text" placeholder={dataLang.formatMessage({ id: 'enterDev' })} ref={name} />
+          </div>
 
-        <div className="DAT_AddGateway_Body_Input">
-          <span>{dataLang.formatMessage({ id: 'type' })}:</span>
-          <input id="type" type="text" placeholder={dataLang.formatMessage({ id: 'enterType' })} ref={type} />
+          <div className="DAT_AddGateway_Body_Select">
+            <span>{dataLang.formatMessage({ id: 'brand' })}:</span>
+            <select onChange={(e) => handleBrand(e)}>
+              {Object.entries(brands).map(([key, value]) => {
+                return (
+                  <option key={key} value={key}>
+                    {key}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div className="DAT_AddGateway_Body_Select">
+            <span>{dataLang.formatMessage({ id: 'type' })}:</span>
+            <select ref={type}>
+              {brands[brand].type.map((item, index) => {
+                return (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
-      </div>
+        :
+        <div className="DAT_AddGateway_Body">
+          <div className="DAT_AddGateway_Body_Input">
+            <span>{dataLang.formatMessage({ id: 'ogLog' })}:</span>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <input id="ogLog" type="text" placeholder={dataLang.formatMessage({ id: 'enterLogger' })} ref={ogLog} />
+              <span style={{cursor: 'pointer'}} onClick={() => handleCheck()}><IoSyncOutline size={20} color="blue" /></span>
+            </div>
+          </div>
+
+          <div className="DAT_AddGateway_Body_Input">
+            <span>Inverter SN:</span>
+            <input id="sn" type="text" placeholder={dataLang.formatMessage({ id: 'enterCode' })} ref={sn} />
+          </div>
+
+          <div className="DAT_AddGateway_Body_Input">
+            <span>{dataLang.formatMessage({ id: 'name' })}:</span>
+            <input id="name" type="text" placeholder={dataLang.formatMessage({ id: 'enterDev' })} ref={name} />
+          </div>
+        </div>
+      }
 
       <div className="DAT_AddGateway_Foot">
         <button

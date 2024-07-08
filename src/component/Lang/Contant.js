@@ -8,6 +8,8 @@ export const host = {
 
 export const messages = {
   en: {
+    brand: "Brand",
+    check: "Check",
     description: "Description",
     all: "All",
     account: "Account",
@@ -914,6 +916,8 @@ export const messages = {
     // A_48_17: "Unknown",
   },
   vi: {
+    brand: "Hãng",
+    check: "Kiểm tra",
     description: "Mô tả",
     all: "Tất cả",
     account: "Tài khoản",
@@ -1181,7 +1185,7 @@ export const messages = {
     voltage: "Điện áp",
     current: "Dòng điện",
     powerFactor: "Công suất",
-    frequencyInv: "Tần suất",
+    frequencyInv: "Tần số",
     ElectricityGeneration: "Thông số phát điện",
     initialization: "Khởi tạo",
     wait: "Đang kiểm tra",
@@ -1818,4 +1822,24 @@ export const messages = {
     A_47_2: "Battery can be only charrge",
     // A_48_17: "Unknown",
   },
+};
+
+export const brands = {
+  INVT: {
+    type: [
+      'GRID_1',
+      'GRID_2',
+      'CONSUMPTION_1',
+      'CONSUMPTION_2',
+      'HYBRID_1',
+      'HYBRID_2'
+    ],
+  },
+  SUNGROW: {
+    type: [
+      'GRID_SUNGROW_1',
+      'CONSUMPTION_SUNGROW_1',
+      'HYBRID_SUNGROW_1',
+    ],
+  }
 };
