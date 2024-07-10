@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { info } from './Device';
 
 import { IoIosArrowUp } from 'react-icons/io';
+import { checkBrand } from '../../App';
 
 export default function ElectricityGeneration(props) {
     const dataLang = useIntl()
@@ -82,6 +83,57 @@ export default function ElectricityGeneration(props) {
         // },
     ];
 
+    const dataSUNGROW = [
+        {
+            dc: "PV1",
+            voltage: parseFloat(info.value.invt[info.value.pdata.pv1.voltage.register] * info.value.pdata.pv1.voltage.cal).toFixed(2) + " V",
+            current: parseFloat(info.value.invt[info.value.pdata.pv1.current.register] * info.value.pdata.pv1.current.cal).toFixed(2) + " A",
+            power: parseFloat(((info.value.invt[info.value.pdata.pv1.voltage.register] * info.value.pdata.pv1.voltage.cal) * (info.value.invt[info.value.pdata.pv1.current.register] * info.value.pdata.pv1.current.cal)) / 1000).toFixed(2) + " kW",
+        },
+        {
+            dc: "PV2",
+            voltage: parseFloat(info.value.invt[info.value.pdata.pv2.voltage.register] * info.value.pdata.pv2.voltage.cal).toFixed(2) + " V",
+            current: parseFloat(info.value.invt[info.value.pdata.pv2.current.register] * info.value.pdata.pv2.current.cal).toFixed(2) + " A",
+            power: parseFloat(((info.value.invt[info.value.pdata.pv2.voltage.register] * info.value.pdata.pv2.voltage.cal) * (info.value.invt[info.value.pdata.pv2.current.register] * info.value.pdata.pv2.current.cal)) / 1000).toFixed(2) + " kW",
+        },
+        // {
+        //     dc: "PV3",
+        //     voltage: parseFloat(info.value.invt[info.value.pdata.pv3.voltage.register] * info.value.pdata.pv3.voltage.cal).toFixed(2) + " V",
+        //     current: parseFloat(info.value.invt[info.value.pdata.pv3.current.register] * info.value.pdata.pv3.current.cal).toFixed(2) + " A",
+        //     power: parseFloat(((info.value.invt[info.value.pdata.pv3.voltage.register] * info.value.pdata.pv3.voltage.cal) * (info.value.invt[info.value.pdata.pv3.current.register] * info.value.pdata.pv3.current.cal)) / 1000).toFixed(2) + " kW",
+        // },
+        // {
+        //     dc: "PV4",
+        //     voltage: parseFloat(info.value.invt[info.value.pdata.pv4.voltage.register] * info.value.pdata.pv4.voltage.cal).toFixed(2) + " V",
+        //     current: parseFloat(info.value.invt[info.value.pdata.pv4.current.register] * info.value.pdata.pv4.current.cal).toFixed(2) + " A",
+        //     power: parseFloat(((info.value.invt[info.value.pdata.pv4.voltage.register] * info.value.pdata.pv4.voltage.cal) * (info.value.invt[info.value.pdata.pv4.current.register] * info.value.pdata.pv4.current.cal)) / 1000).toFixed(2) + " kW",
+        // },
+        // {
+        //   dc: "PV5",
+        //   voltage: "0 V",
+        //   current: "0 A",
+        //   power: "1.3763 kW",
+        // },
+        // {
+        //   dc: "PV6",
+        //   voltage: "0 V",
+        //   current: "0 A",
+        //   power: "1.3763 kW",
+        // },
+        // {
+        //   dc: "PV7",
+        //   voltage: "0 V",
+        //   current: "0 A",
+        //   power: "1.3763 kW",
+        // },
+        // {
+        //   dc: "PV8",
+        //   voltage: "0 V",
+        //   current: "0 A",
+        //   power: "1.3763 kW",
+        // },
+    ];
+
     return (
         <div className="DAT_Info_Databox" id="Electricity Generation">
             <div className="DAT_Info_Databox_Title">
@@ -112,16 +164,38 @@ export default function ElectricityGeneration(props) {
                                     <p>{dataLang.formatMessage({ id: 'current' })}</p>
                                     <p>{dataLang.formatMessage({ id: 'powerFactor' })}</p>
                                 </div>
-                                {dataTemp.map((item, index) => {
-                                    return (
-                                        <div key={index} className="DAT_Info_Databox_Content_ColumnElec_Body">
-                                            <p>{item.dc}</p>
-                                            <p>{item.voltage}</p>
-                                            <p>{item.current}</p>
-                                            <p>{item.power}</p>
-                                        </div>
-                                    );
-                                })}
+                                {(() => {
+                                    switch (checkBrand(info.value.type)) {
+                                        case 'SUNGROW':
+                                            return <>
+                                                {dataSUNGROW.map((item, index) => {
+                                                    return (
+                                                        <div key={index} className="DAT_Info_Databox_Content_ColumnElec_Body">
+                                                            <p>{item.dc}</p>
+                                                            <p>{item.voltage}</p>
+                                                            <p>{item.current}</p>
+                                                            <p>{item.power}</p>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </>;
+                                        case 'INVT':
+                                            return <>
+                                                {dataTemp.map((item, index) => {
+                                                    return (
+                                                        <div key={index} className="DAT_Info_Databox_Content_ColumnElec_Body">
+                                                            <p>{item.dc}</p>
+                                                            <p>{item.voltage}</p>
+                                                            <p>{item.current}</p>
+                                                            <p>{item.power}</p>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </>;
+                                        default:
+                                            return <></>;
+                                    }
+                                })()}
                             </div>
                             <div className="DAT_Info_Databox_Content_ColumnElec">
                                 <div className="DAT_Info_Databox_Content_ColumnElec_Art">

@@ -35,6 +35,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { isBrowser, useMobileOrientation } from "react-device-detect";
+import { checkBrand } from "../../App";
 
 const viewNav = signal(false);
 const viewStateNav = signal([false, false]);
@@ -113,7 +114,7 @@ export default function Info(props) {
           <div className="DAT_Info_Header_Left">
             <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "16px" }}>
               {info.value.pname}: {info.value.psn}
-              {tab.value == "logger"
+              {tab.value === "logger"
                 ? <>
                   {info.value.pstate == 1 ? (
                     <FaCheckCircle size={20} color="green" />
@@ -122,11 +123,25 @@ export default function Info(props) {
                   )}
                 </>
                 : <>
-                  {info.value.invt?.[info.value.pdata.status] == 2 ? (
-                    <FaCheckCircle size={20} color="green" />
-                  ) : (
-                    <MdOutlineError size={22} color="red" />
-                  )}
+                  {(() => {
+                    switch (checkBrand(info.value.type)) {
+                      case 'SUNGROW':
+                        return <>
+                          {info.value.invt?.[info.value.pdata.status] == 64 || 1024 || 2048 || 4096 || 16384
+                            ? <FaCheckCircle size={20} color="green" />
+                            : <MdOutlineError size={22} color="red" />
+                          }
+                        </>;
+                      default:
+                        return <>
+                          {info.value.invt?.[info.value.pdata.status] == 2 ? (
+                            <FaCheckCircle size={20} color="green" />
+                          ) : (
+                            <MdOutlineError size={22} color="red" />
+                          )}
+                        </>;
+                    }
+                  })()}
                 </>
               }
             </div>

@@ -9,7 +9,7 @@ import { Empty, connectval } from "../Project/Project";
 import { useSelector } from "react-redux";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
-import { COLOR, Token, convertUnit, ruleInfor, userInfor } from "../../App";
+import { COLOR, Token, checkBrand, convertUnit, ruleInfor, userInfor } from "../../App";
 import { useIntl } from "react-intl";
 import Filter from "../Project/Filter";
 import axios from "axios";
@@ -146,16 +146,28 @@ export default function Device(props) {
     },
     {
       name: dataLang.formatMessage({ id: "status" }),
-      selector: (row) => (
-        <>
-          {/* {invt[row.plogger]?.[row.pdata.status] == 2 ? (
-            <FaCheckCircle size={20} color="green" />
-          ) : (
-            <MdOutlineError size={22} color="red" />
-          )} */}
-          {invt[row.plogger]?.[row.pdata.status]}
-        </>
-      ),
+      selector: (row) => {
+        return <div>
+          {(() => {
+            switch (checkBrand(row.type)) {
+              case 'SUNGROW':
+                return <>
+                  {invt[row.plogger]?.[row.pdata.status] == 64 || 1024 || 2048 || 4096 || 16384
+                    ? <FaCheckCircle size={20} color="green" />
+                    : <MdOutlineError size={22} color="red" />
+                  }
+                </>;
+              default:
+                return <>
+                  {invt[row.plogger]?.[row.pdata.status] == 2
+                    ? <FaCheckCircle size={20} color="green" />
+                    : <MdOutlineError size={22} color="red" />
+                  }
+                </>;
+            }
+          })()}
+        </div>;
+      },
       width: "100px",
     },
     {
@@ -163,23 +175,20 @@ export default function Device(props) {
       selector: (row) => {
         let power = 0;
         let d = JSON.parse(row.pdata.total?.register || "[]");
-        if (row.pdata.mode === "HYBRID") {
-          let num = [];
-          d.map((item, i) => {
-            num[i] = invt[row.plogger]?.[item];
-          });
-          power = parseFloat(
-            num.reduce((a, b) => Number(a) + Number(b), 0) *
-            row.pdata.total?.cal
-          ).toFixed(2);
-        }
-        if (row.pdata.mode === "GRID") {
-          power =
-            convertToDoublewordAndFloat(
-              [invt[row.plogger]?.[d[0]], invt[row.plogger]?.[d[1]]],
-              "int"
-            ) * row.pdata.total?.cal;
-        }
+
+        switch (row.pdata.total?.type) {
+          case "sum":
+            let num = [];
+            d.map((item, i) => { num[i] = invt[row.plogger]?.[item]; });
+            power = parseFloat(num.reduce((a, b) => Number(a) + Number(b), 0) * row.pdata.total?.cal).toFixed(2);
+            break;
+          case "word":
+            power = convertToDoublewordAndFloat([invt[row.plogger]?.[d[0]], invt[row.plogger]?.[d[1]]], "int") * row.pdata.total?.cal;
+            break;
+          default:
+            break;
+        };
+
         return <div>{parseFloat(power / 1000).toFixed(2)} kW</div>;
       },
       sortable: true,
@@ -190,15 +199,9 @@ export default function Device(props) {
       selector: (row) => (
         <>
           {row.pdata.daily?.register
-            ? Number(
-              parseFloat(
-                convertUnit(
-                  invt[row.plogger]?.[row.pdata.daily.register] *
-                  row.pdata.daily?.cal
-                )
-              ).toFixed(2)
-            ).toLocaleString("en-US")
-            : 0}
+            ? Number(parseFloat(convertUnit(invt[row.plogger]?.[row.pdata.daily.register] * row.pdata.daily?.cal)).toFixed(2)).toLocaleString("en-US")
+            : 0
+          }{" "}
           kWh
         </>
       ),
@@ -653,7 +656,6 @@ export default function Device(props) {
         partnerid: userInfor.value.partnerid,
         type: userInfor.value.type,
       });
-      console.log(d);
       if (d.status === true) {
         loggerList.value = d.data;
 
@@ -691,20 +693,22 @@ export default function Device(props) {
 
   //API INVERTER
   useEffect(() => {
-    const getAllInverter = async () => {
-      let d = await callApi("post", host.DATA + "/getallInverter", {
-        usr: user,
-        partnerid: userInfor.value.partnerid,
-        type: userInfor.value.type,
-      });
-      console.log(d);
-      if (d.status === true) {
-        inverterList.value = d.data;
-        setDatafilterInvert(d.data);
+    if (loggerList.value.length > 0) {
+      const getAllInverter = async () => {
+        let d = await callApi("post", host.DATA + "/getallInverter", {
+          usr: user,
+          partnerid: userInfor.value.partnerid,
+          type: userInfor.value.type,
+        });
+        if (d.status === true) {
+          inverterList.value = d.data;
+          setDatafilterInvert(d.data);
+          inverterList.value.map((item) => { return item.type = loggerList.value.find((item_) => item_.psn === item.plogger).ptype });
+        }
+      };
+      if (tab.value == "inverter") {
+        getAllInverter();
       }
-    };
-    if (tab.value == "inverter") {
-      getAllInverter();
     }
   }, [tab.value]);
 

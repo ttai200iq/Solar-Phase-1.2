@@ -12,7 +12,7 @@ import { Empty, plantState, projectData, popupState } from "./Project";
 import { isMobile } from "../Navigation/Navigation";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
-import { COLOR, Token, ruleInfor, socket } from "../../App";
+import { COLOR, Token, checkBrand, ruleInfor, socket } from "../../App";
 import { info, tab } from "../Device/Device";
 import { useDispatch, useSelector } from "react-redux";
 import { signal } from "@preact/signals-react";
@@ -37,7 +37,7 @@ import { isDesktop } from "../Home/Home";
 export const temp = signal([]);
 export const inverterDB = signal([]);
 export const coalsave = signal({
-  value: 1,
+  value: 0,
   ef: 0.7221,
   avr: 0.517,
   tree: 0.054,
@@ -56,22 +56,14 @@ export const projectdatasize = signal({
 const tabMobile = signal(false);
 const tabLable = signal("");
 export const tab_ = signal("logger");
-// const tabMobileAlert = signal(false);
-// const tabLableAlert = signal("");
-// const tabAlert = signal("all");
-// const open = signal([]);
-// const close = signal([]);
 const viewNav = signal(false);
 const viewStateNav = signal([false, false]);
-// const dataMeter = [];
-// const dataAlert = [];
 
 export default function ProjectData(props) {
   const dataLang = useIntl();
   const { isLandscape } = useMobileOrientation();
   const lang = useSelector((state) => state.admin.lang);
   const user = useSelector((state) => state.admin.usr);
-  const filterchart = useSelector((state) => state.tool.filterchart);
   const [view, setView] = useState("dashboard");
   const [dropState, setDropState] = useState(false);
   const [infoState, setInfoState] = useState(false);
@@ -83,14 +75,7 @@ export default function ProjectData(props) {
   const [invt, setInvt] = useState({});
   const [getShared, setgetShared] = useState([]);
   const box = useRef();
-  // const filterchart = useSelector((state) => state.tool.filterchart);
   const rootDispatch = useDispatch();
-
-  // const tit = {
-  //   dashboard: projectData.value.plantname,
-  //   device: dataLang.formatMessage({ id: "device" }),
-  //   alert: "Cảnh báo",
-  // };
 
   const paginationComponentOptions = {
     rowsPerPageText: dataLang.formatMessage({ id: "row" }),
@@ -125,15 +110,28 @@ export default function ProjectData(props) {
     },
     {
       name: dataLang.formatMessage({ id: "status" }),
-      selector: (row) => (
-        <>
-          {invt[row.logger_]?.[row.data.status] == 2 ? (
-            <FaCheckCircle size={20} color="green" />
-          ) : (
-            <MdOutlineError size={22} color="red" />
-          )}
-        </>
-      ),
+      selector: (row) => {
+        return <div>
+          {(() => {
+            switch (checkBrand(row.type)) {
+              case 'SUNGROW':
+                return <>
+                  {invt[row.logger_]?.[row.data.status] == 64 || 1024 || 2048 || 4096 || 16384
+                    ? <FaCheckCircle size={20} color="green" />
+                    : <MdOutlineError size={22} color="red" />
+                  }
+                </>;
+              default:
+                return <>
+                  {invt[row.logger_]?.[row.data.status] == 2
+                    ? <FaCheckCircle size={20} color="green" />
+                    : <MdOutlineError size={22} color="red" />
+                  }
+                </>;
+            }
+          })()}
+        </div>;
+      },
       width: "110px",
     },
     {
@@ -142,22 +140,18 @@ export default function ProjectData(props) {
         let power = 0;
         let d = JSON.parse(row.data.total?.register || "[]");
 
-        if (row.data.mode === "HYBRID") {
-          let num = [];
-          d.map((item, i) => {
-            num[i] = invt[row.logger_]?.[item];
-          });
-          power = parseFloat(
-            num.reduce((a, b) => Number(a) + Number(b), 0) * row.data.total?.cal
-          ).toFixed(2);
-        }
-        if (row.data.mode === "GRID") {
-          power =
-            convertToDoublewordAndFloat(
-              [invt[row.logger_]?.[d[0]], invt[row.logger_]?.[d[1]]],
-              "int"
-            ) * row.data.total?.cal;
-        }
+        switch (row.data.total?.type) {
+          case "sum":
+            let num = [];
+            d.map((item, i) => { return num[i] = parseFloat(invt[row.logger_]?.[item] || 0) });
+            power = parseFloat(num.reduce((a, b) => Number(a) + Number(b), 0) * row.data.total?.cal).toFixed(2);
+            break;
+          case "word":
+            power = convertToDoublewordAndFloat([invt[row.logger_]?.[d[0]], invt[row.logger_]?.[d[1]]], "int") * row.data.total?.cal;
+            break;
+          default:
+            break;
+        };
 
         return <div>{parseFloat(power / 1000).toFixed(2)} kW</div>;
       },
@@ -169,11 +163,9 @@ export default function ProjectData(props) {
       selector: (row) => (
         <>
           {row.data.daily?.register
-            ? parseFloat(
-              invt[row.logger_]?.[row.data.daily.register] *
-              row.data.daily?.cal
-            ).toFixed(2)
-            : 0}{" "}
+            ? parseFloat(invt[row.logger_]?.[row.data.daily.register] * row.data.daily?.cal).toFixed(2)
+            : 0
+          }{" "}
           kWh
         </>
       ),
@@ -254,59 +246,6 @@ export default function ProjectData(props) {
       width: "100px",
     },
   ];
-
-  // const columnMeter = [
-  //   {
-  //     name: "Tên",
-  //     selector: (row) => (
-  //       <div>
-  //         <div>{row.name}</div>
-  //         <div>{row.SN}</div>
-  //       </div>
-  //     ),
-  //     sortable: true,
-  //     // minWidth: "350px",
-  //     style: {
-  //       justifyContent: "left",
-  //     },
-  //   },
-  //   {
-  //     name: "Trạng thái",
-  //     selector: (row) => (
-  //       <>
-  //         {row.status ? (
-  //           <FaCheckCircle size={20} color="green" />
-  //         ) : (
-  //           <MdOutlineError size={22} color="red" />
-  //         )}
-  //       </>
-  //     ),
-  //     // width: "110px",
-  //   },
-  //   {
-  //     name: "Sản lượng(kW)",
-  //     selector: (row) => row.production,
-  //     sortable: true,
-  //     // width: "140px",
-  //   },
-  //   {
-  //     name: "SL tức thời(kWh)",
-  //     selector: (row) => row.dailyproduction,
-  //     sortable: true,
-  //     // width: "150px",
-  //   },
-  //   {
-  //     name: "Hiệu suất",
-  //     selector: (row) => "--",
-  //     sortable: true,
-  //   },
-  //   {
-  //     name: "Lần cập nhật cuối",
-  //     selector: (row) => row.updated,
-  //     sortable: true,
-  //     // width: "180px",
-  //   },
-  // ];
 
   const columnLogger = [
     {
@@ -501,69 +440,6 @@ export default function ProjectData(props) {
     // },
   ];
 
-  // const listAlertTab = [
-  //   { id: "all", name: "Tất cả" },
-  //   { id: "open", name: "Mở" },
-  //   { id: "closed", name: "Đóng" },
-  // ];
-
-  // const columnAlert = [
-  //   {
-  //     name: "Tên",
-  //     selector: (row) => (
-  //       <div>
-  //         <div>{row.name}</div>
-  //       </div>
-  //     ),
-  //     sortable: true,
-  //     // minWidth: "350px",
-  //     style: {
-  //       justifyContent: "left",
-  //     },
-  //   },
-  //   {
-  //     name: "Trạng thái",
-  //     selector: (row) => (
-  //       <>
-  //         {row.status ? (
-  //           <FaCheckCircle size={20} color="green" />
-  //         ) : (
-  //           <MdOutlineError size={22} color="red" />
-  //         )}
-  //       </>
-  //     ),
-  //     // width: "110px",
-  //   },
-  //   {
-  //     name: "Mức quan trọng",
-  //     selector: (row) => row.importance,
-  //     sortable: true,
-  //     // width: "140px",
-  //   },
-  //   {
-  //     name: "Thiết bị",
-  //     selector: (row) => (
-  //       <div>
-  //         <div>{row.device}</div>
-  //         <div>{row.SN}</div>
-  //       </div>
-  //     ),
-  //     sortable: true,
-  //     // width: "150px",
-  //   },
-  //   {
-  //     name: "Giờ mở",
-  //     selector: (row) => row.openedtime,
-  //     sortable: true,
-  //   },
-  //   {
-  //     name: "Giờ đóng",
-  //     selector: (row) => row.closedtime,
-  //     sortable: true,
-  //     // width: "180px",
-  //   },
-  // ];
-
   const popup_state = {
     pre: {
       transform: "rotate(0deg)",
@@ -610,6 +486,7 @@ export default function ProjectData(props) {
       pdata: inverterDB.value[0].data,
       psetting: inverterDB.value[0].setting,
       plogger: inverterDB.value[0].logger_,
+      type: inverterDB.value[0].type,
     };
     info.value.invt = invt[inverterDB.value[0].logger_];
   };
@@ -673,20 +550,6 @@ export default function ProjectData(props) {
     tab_.value = id;
     const newLabel = listDeviceTab.find((item) => item.id == id);
     tabLable.value = newLabel.name;
-  };
-
-  // const handleTabMobileAlert = (e) => {
-  //   const id = e.currentTarget.id;
-  //   tabAlert.value = id;
-  //   const newLabel = listAlertTab.find((item) => item.id == id);
-  //   tabLableAlert.value = newLabel.name;
-  // };
-
-  const handleModify = (e, type) => {
-    const id = e.currentTarget.id;
-    var arr = id.split("_");
-    const mod = document.getElementById(arr[0] + "_Modify");
-    mod.style.display = type;
   };
 
   const handleOutsideUser = (e) => {
@@ -843,10 +706,6 @@ export default function ProjectData(props) {
   }, []);
 
   useEffect(() => {
-    // filter data AlertTable
-    // open.value = dataAlert.filter((item) => item.status == true);
-    // close.value = dataAlert.filter((item) => item.status == false);
-    // tabLableAlert.value = listAlertTab[0].name;
     tabLable.value = listDeviceTab[0].name;
 
     const getShared = async () => {
@@ -867,10 +726,7 @@ export default function ProjectData(props) {
       });
       temp.value = d;
       d.map(async (item) => {
-        const res = await invtCloud(
-          '{"deviceCode":"' + item.sn + '"}',
-          Token.value.token
-        );
+        const res = await invtCloud('{"deviceCode":"' + item.sn + '"}', Token.value.token);
         if (res.ret === 0) {
           let res_ = await callApi("post", host.DATA + "/updateLogger", {
             sn: item.sn,
@@ -889,6 +745,7 @@ export default function ProjectData(props) {
           loggerid: item.sn,
         });
         if (inverter.length > 0) {
+          inverter.map((item) => { return item.type = temp.value.find((i) => i.sn === item.logger_).type });
           inverterDB.value = [...inverter];
         } else {
           inverterDB.value = [];
@@ -1254,25 +1111,6 @@ export default function ProjectData(props) {
           switch (view) {
             case "dashboard":
               return (
-                // <div className="DAT_ProjectData_Dashboard">
-                //   <div className="DAT_ProjectData_Dashboard_Data">
-                //     <Data />
-                //     <GraphComponent />
-                //     <div className="DAT_ProjectData_Dashboard_Data_Right">
-                //       <div className="DAT_ProjectData_Dashboard_Data_Right_Weather">
-                //         <Weather />
-                //       </div>
-                //     </div>
-                //   </div>
-
-                //   <DashboardHistory />
-
-                //   <div className="DAT_ProjectData_Dashboard_More">
-                //     <ProjectInfo />
-                //     <Benefit />
-                //   </div>
-                // </div>
-
                 <>
                   {isBrowser
                     ? (
@@ -1411,20 +1249,6 @@ export default function ProjectData(props) {
                                     noDataComponent={<Empty />}
                                   />
                                 );
-                              // case "meter":
-                              //   return (
-                              //     <DataTable
-                              //       className="DAT_Table_Device"
-                              //       columns={columnMeter}
-                              //       data={dataMeter}
-                              //       pagination
-                              //       paginationComponentOptions={
-                              //         paginationComponentOptions
-                              //       }
-                              //       fixedHeader={true}
-                              //       noDataComponent={<Empty />}
-                              //     />
-                              //   );
                               case "logger":
                                 return (
                                   <DataTable
@@ -1852,136 +1676,6 @@ export default function ProjectData(props) {
                   )}
                 </div>
               );
-            // case "alert":
-            //   return (
-            //     <div className="DAT_ProjectData_Alert">
-            //       <div className="DAT_ProjectData_Alert_Data">
-            //         {isMobile.value ? (
-            //           <div className="DAT_Toollist_Tab_Mobile">
-            //             <button
-            //               className="DAT_Toollist_Tab_Mobile_content"
-            //               onClick={() =>
-            //                 (tabMobileAlert.value = !tabMobileAlert.value)
-            //               }
-            //             >
-            //               <span> {tabLableAlert.value}</span>
-            //               {tabMobileAlert.value ? (
-            //                 <IoIosArrowDown />
-            //               ) : (
-            //                 <IoIosArrowForward />
-            //               )}
-            //             </button>
-            //             <div className="DAT_Toollist_Tab_Mobile_list">
-            //               {listAlertTab.map((item, i) => {
-            //                 return (
-            //                   <div
-            //                     className="DAT_Toollist_Tab_Mobile_list_item"
-            //                     style={{
-            //                       display: tabMobileAlert.value
-            //                         ? "block"
-            //                         : "none",
-            //                     }}
-            //                     key={"tabmobile_" + i}
-            //                     id={item.id}
-            //                     onClick={(e) => handleTabMobileAlert(e)}
-            //                   >
-            //                     {i + 1}: {item.name}
-            //                   </div>
-            //                 );
-            //               })}
-            //             </div>
-            //           </div>
-            //         ) : (
-            //           <div className="DAT_Toollist_Tab">
-            //             {listAlertTab.map((item, i) => {
-            //               return tabAlert.value === item.id ? (
-            //                 <div
-            //                   className="DAT_Toollist_Tab_main"
-            //                   key={"tab_" + i}
-            //                 >
-            //                   <p className="DAT_Toollist_Tab_main_left"></p>
-            //                   <span
-            //                     className="DAT_Toollist_Tab_main_content1"
-            //                     id={item.id}
-            //                     style={{
-            //                       backgroundColor: "White",
-            //                       color: "black",
-            //                       borderRadius: "10px 10px 0 0",
-            //                     }}
-            //                     onClick={(e) => (tabAlert.value = item.id)}
-            //                   >
-            //                     {item.name}
-            //                   </span>
-            //                   <p className="DAT_Toollist_Tab_main_right"></p>
-            //                 </div>
-            //               ) : (
-            //                 <span
-            //                   className="DAT_Toollist_Tab_main_content2"
-            //                   key={"tab_" + i}
-            //                   id={item.id}
-            //                   style={{ backgroundColor: "#dadada" }}
-            //                   onClick={(e) => (tabAlert.value = item.id)}
-            //                 >
-            //                   {item.name}
-            //                 </span>
-            //               );
-            //             })}
-            //           </div>
-            //         )}
-
-            //         <div className="DAT_ProjectData_Alert_Data_Table">
-            //           {(() => {
-            //             switch (tabAlert.value) {
-            //               case "all":
-            //                 return (
-            //                   <DataTable
-            //                     className="DAT_Table_Alert"
-            //                     columns={columnAlert}
-            //                     data={dataAlert}
-            //                     pagination
-            //                     paginationComponentOptions={
-            //                       paginationComponentOptions
-            //                     }
-            //                     fixedHeader={true}
-            //                     noDataComponent={<Empty />}
-            //                   />
-            //                 );
-            //               case "open":
-            //                 return (
-            //                   <DataTable
-            //                     className="DAT_Table_Alert"
-            //                     columns={columnAlert}
-            //                     data={open.value}
-            //                     pagination
-            //                     paginationComponentOptions={
-            //                       paginationComponentOptions
-            //                     }
-            //                     fixedHeader={true}
-            //                     noDataComponent={<Empty />}
-            //                   />
-            //                 );
-            //               case "closed":
-            //                 return (
-            //                   <DataTable
-            //                     className="DAT_Table_Alert"
-            //                     columns={columnAlert}
-            //                     data={close.value}
-            //                     pagination
-            //                     paginationComponentOptions={
-            //                       paginationComponentOptions
-            //                     }
-            //                     fixedHeader={true}
-            //                     noDataComponent={<Empty />}
-            //                   />
-            //                 );
-            //               default:
-            //                 return <></>;
-            //             }
-            //           })()}
-            //         </div>
-            //       </div>
-            //     </div>
-            //   );
             default:
               <></>;
           }
@@ -2194,8 +1888,7 @@ export default function ProjectData(props) {
         </>
       )}
 
-      <div
-        className="DAT_ViewPopup"
+      <div className="DAT_ViewPopup"
         style={{ height: infoState ? "100%" : "0px", transition: "0.5s" }}
       >
         {infoState ? <Info handleClose={handleCloseInfo} /> : <></>}

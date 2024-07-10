@@ -153,7 +153,7 @@ const GraphGrid = (props) => {
                 lineA_.value = "Default";
             }
         }
-        console.log(props.cal.pro_1);
+        // console.log(props.cal.pro_1);
     }, [props.cal.pro_1]);
 
 
@@ -1057,7 +1057,7 @@ const GraphConsumptionMobile = (props) => {
                     // }
 
 
-                    console.log(lineC_.value);
+                    // console.log(lineC_.value);
                 }
             }
 
@@ -1329,7 +1329,7 @@ const GraphFull = (props) => {
                     lineB_.value = "Default";
                 }
             }
-            console.log(inverter, props.cal?.bat_3, props.cal?.bat_4, props.cal?.con_3);
+            // console.log(inverter, props.cal?.bat_3, props.cal?.bat_4, props.cal?.con_3);
             if (inverter === 'HYBRID_SUNGROW_1') {
                 if (props.cal?.bat_3 === 1 && props.cal?.bat_4 === 0) {
                     lineB_.value = "moveRtoL";
@@ -1361,7 +1361,7 @@ const GraphFull = (props) => {
             }
         }
 
-        console.log(props.cal.pro_1);
+        // console.log(props.cal.pro_1);
 
     }, [props.cal.pro_1, props.cal.con_1, props.cal.con_3, props.cal.grid_1, props.cal.bat_1, props.cal.bat_3, props.cal.bat_4]);
 
@@ -1744,7 +1744,7 @@ const GraphFullMobile = (props) => {
                     lineB_.value = "Default";
                 }
             }
-            console.log(inverter, props.cal?.bat_3, props.cal?.bat_4, props.cal?.con_3);
+            // console.log(inverter, props.cal?.bat_3, props.cal?.bat_4, props.cal?.con_3);
             if (inverter === 'HYBRID_SUNGROW_1') {
                 if (props.cal?.bat_3 === 1 && props.cal?.bat_4 === 0) {
                     lineB_.value = "moveRtoL";
@@ -1776,7 +1776,7 @@ const GraphFullMobile = (props) => {
             }
         }
 
-        console.log(props.cal.pro_1);
+        // console.log(props.cal.pro_1);
 
     }, [props.cal.pro_1, props.cal.con_1, props.cal.con_3, props.cal.grid_1, props.cal.bat_1, props.cal.bat_3, props.cal.bat_4]);
 
@@ -1855,7 +1855,7 @@ const GraphFullMobile = (props) => {
                     // }
 
 
-                    console.log(lineC_.value);
+                    // console.log(lineC_.value);
                 }
             }
 

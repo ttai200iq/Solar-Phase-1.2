@@ -14,7 +14,7 @@ import { ClockLoader, PacmanLoader } from "react-spinners";
 import Login from "./component/Login/Login";
 import Verify from "./component/Verify/Verify";
 import { useDispatch, useSelector } from "react-redux";
-import { host } from "./component/Lang/Contant";
+import { brands, host } from "./component/Lang/Contant";
 import adminslice from "./component/Redux/adminslice";
 import { callApi } from "./component/Api/Api";
 import { signal } from "@preact/signals-react";
@@ -130,6 +130,12 @@ export const showUnitk = (value) => {
   } else {
     return "k";
   }
+};
+
+export const checkBrand = (brand) => {
+  if (brands.INVT.type.find((item) => item == brand)) return 'INVT'
+  else if (brands.SUNGROW.type.find((item) => item == brand)) return 'SUNGROW'
+  else return 'UNKNOW'
 };
 
 export default function App() {
