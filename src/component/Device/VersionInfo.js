@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./Device.scss";
 
 import { useIntl } from 'react-intl';
@@ -10,24 +10,6 @@ import { checkBrand } from '../../App';
 export default function VersionInfo(props) {
     const dataLang = useIntl()
     const [display, setDisplay] = useState(true);
-
-    useEffect(() => {
-        // let masterver = JSON.parse(info.value.pdata.masterver.register);
-        // console.log(masterver.map((item, index) => { return info.value.invt[item]; }));
-        // const hexString = masterver.map((item, index) => parseInt(info.value.invt[item]).toString(16)).join("");
-        // const asciiString = hexString.match(/.{2}/g).map((byte) => String.fromCharCode(parseInt(byte, 16))).join("");
-        // console.log(asciiString);
-
-        let vicever = JSON.parse(info.value.pdata.vicever.register);
-        // console.log(vicever.map((item, index) => { return info.value.invt[item]; }));
-        const hexString = vicever.map((item, index) => parseInt(info.value.invt[item]).toString(16)).join("");
-        const asciiString = hexString.match(/.{2}/g).map((byte) => String.fromCharCode(parseInt(byte, 16))).join("");
-        console.log(asciiString);
-
-        // const decimalArray = JSON.parse(item.setting.sn);
-        //   const hexString = decimalArray.map((num) => parseInt(res.data[num]).toString(16)).join("");
-        //   const asciiString = hexString.match(/.{2}/g).map((byte) => String.fromCharCode(parseInt(byte, 16))).join("");
-    }, []);
 
     return (
         <div className="DAT_Info_Databox" id="Version Information">
