@@ -13,7 +13,6 @@ import { signal } from "@preact/signals-react";
 
 import { IoClose, IoSyncOutline } from "react-icons/io5";
 
-const inverterinfo = signal('');
 const type_ = signal('');
 
 export default function AddGateway(props) {
@@ -78,14 +77,6 @@ export default function AddGateway(props) {
         temp.value = [...temp.value, d.data];
         props.handleInvt(sn.current.value)
         type_.value = type.current.value;
-        const res = await invtCloud('{"deviceCode":"' + sn.current.value + '"}', Token.value.token);
-        if (res.ret === 0) {
-          const decimalArray = JSON.parse(d.data.setting.sn)
-          const hexString = decimalArray.map((num) => parseInt(res.data[num]).toString(16)).join('');
-          const invertersn = hexString.match(/.{2}/g).map(byte => String.fromCharCode(parseInt(byte, 16))).join('');
-          console.log(invertersn);
-          inverterinfo.value = invertersn;
-        }
       }
       if (d.status === true) {
         alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
@@ -102,20 +93,20 @@ export default function AddGateway(props) {
         alertDispatch(dataLang.formatMessage({ id: "alert_36" }))
       }
     } else {
-        let async_ = await callApi("post", host.DATA + "/addInverter", {
-          loggersn: ogLog.current.value,
-          invertersn: sn.current.value,
-          type: type_.value,
-          plantid: projectData.value.plantid_,
-        });
-        console.log(async_);
-        if (async_.status) {
-          inverterDB.value = [...inverterDB.value, async_.data];
-          alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
-          props.handleClose();
-        } else if (async_.number === 1) {
-          alertDispatch(dataLang.formatMessage({ id: "alert_35" }))        
-        }
+      let async_ = await callApi("post", host.DATA + "/addInverter", {
+        loggersn: ogLog.current.value,
+        invertersn: sn.current.value,
+        type: type_.value,
+        plantid: projectData.value.plantid_,
+      });
+      console.log(async_);
+      if (async_.status) {
+        inverterDB.value = [...inverterDB.value, async_.data];
+        alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
+        props.handleClose();
+      } else if (async_.number === 1) {
+        alertDispatch(dataLang.formatMessage({ id: "alert_35" }))
+      }
     }
   };
 
@@ -123,11 +114,21 @@ export default function AddGateway(props) {
     setBrand(e.target.value);
   };
 
-  const handleCheck = () => {
-    if (inverterinfo.value === '') {
-      alertDispatch(dataLang.formatMessage({ id: "alert_34" }))
+  const handleCheck = async () => {
+    if (ogLog.current.value === '') {
+      alertDispatch(dataLang.formatMessage({ id: "alert_22" }))
     } else {
-      document.getElementById('sn').value = inverterinfo.value;
+      const res = await invtCloud('{"deviceCode":"' + ogLog.current.value + '"}', Token.value.token);
+      if (res.ret === 0) {
+        const decimalArray = JSON.parse(temp.value[0].setting.sn)
+        const hexString = decimalArray.map((num) => parseInt(res.data[num]).toString(16)).join('');
+        const invertersn = hexString.match(/.{2}/g).map(byte => String.fromCharCode(parseInt(byte, 16))).join('');
+        if (invertersn === '') {
+          alertDispatch(dataLang.formatMessage({ id: "alert_34" }))
+        } else {
+          document.getElementById('sn').value = invertersn;
+        }
+      }
     }
   };
 
@@ -217,7 +218,7 @@ export default function AddGateway(props) {
             <span>{dataLang.formatMessage({ id: 'ogLog' })}:</span>
             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
               <input id="ogLog" type="text" placeholder={dataLang.formatMessage({ id: 'enterLogger' })} ref={ogLog} />
-              <span style={{cursor: 'pointer'}} onClick={() => handleCheck()}><IoSyncOutline size={20} color="blue" /></span>
+              <span style={{ cursor: 'pointer' }} onClick={() => handleCheck()}><IoSyncOutline size={20} color="blue" /></span>
             </div>
           </div>
 
