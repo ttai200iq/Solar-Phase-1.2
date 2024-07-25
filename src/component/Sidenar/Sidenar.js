@@ -73,6 +73,7 @@ export default function Sidenar(props) {
             { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
             { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
             { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
+            { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
             { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
           ]
           : userInfor.value.type === "mainadmin"
@@ -82,6 +83,7 @@ export default function Sidenar(props) {
               { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
               { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
               { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
+              { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
               { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
             ]
             : userInfor.value.type === "admin"

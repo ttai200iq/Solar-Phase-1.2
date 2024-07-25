@@ -9,6 +9,7 @@ export const host = {
 export const messages = {
   en: {
     brand: "Brand",
+    createBrand: "Add Brand",
     check: "Check",
     description: "Description",
     all: "All",
@@ -599,6 +600,7 @@ export const messages = {
     enterRight: "Enter right...",
     enterDev: " Enter device info...",
     enterError: " Enter error information...",
+    enterRegister: "Enter register info",
     enterLogger: " Enter logger info...",
     enterInverter: " Enter inverter info...",
     enterType: "Enter device type...",
@@ -634,6 +636,9 @@ export const messages = {
     remindAlert: "Please check this error!",
     accountLockAlert:
       "Your account is currently locked. Please contact the administrator to reactivate it!",
+    delBrandmess: 'Are you sure want to delete this brand?',
+    delTemplatemess: 'Are you sure want to delete this template?',
+    delTypemess: 'Are you sure want to delete this type?',
 
     //ALERT DISPATCH
     alert_0: "Username or password is incorrect!",
@@ -701,6 +706,7 @@ export const messages = {
     alert_61: "Create new rule successfully!",
     alert_62: "Update rule successfully!",
     alert_63: "You can not change device in shared project!",
+    alert_64: 'Already exist!',
 
     // --------------------------------- //
 
@@ -721,6 +727,7 @@ export const messages = {
     kWhonkWp: "kWh/kWp",
     totalall: "Total Production",
     errorsetting: "Error setting",
+    registersetting: "Register setting",
     timeoutInfo:
       "System will automatically consider it as a failure if no command feedback is received after timeout. Please try again.",
     environment1:
@@ -928,6 +935,7 @@ export const messages = {
   },
   vi: {
     brand: "Hãng",
+    createBrand: 'Thêm hãng',
     check: "Kiểm tra",
     description: "Mô tả",
     all: "Tất cả",
@@ -1518,6 +1526,7 @@ export const messages = {
     enterRight: "Nhập tên quyền...",
     enterDev: " Nhập thông tin thiết bị...",
     enterError: " Nhập thông tin lỗi",
+    enterRegister: " Nhập thông tin thanh ghi",
     enterLogger: " Nhập thông tin logger...",
     enterInverter: " Nhập thông tin inverter...",
     enterType: "Nhập loại thiết bị...",
@@ -1553,6 +1562,9 @@ export const messages = {
     remindAlert: "Vui lòng kiểm tra!",
     accountLockAlert:
       "Tài khoản của bạn hiện đang bị khoá vui lòng liên hệ quản trị viên để kích hoạt lại!",
+    delBrandmess: 'Bạn có chắc muốn xóa hãng này không?',
+    delTemplatemess: 'Bạn có chắc muốn xóa mẫu này không?',
+    delTypemess: 'Bạn có chắc muốn xóa loại này không?',
 
     //ALERT DISPATCH
     alert_0: "Tài khoản hoặc mật khẩu không đúng!",
@@ -1619,6 +1631,7 @@ export const messages = {
     alert_61: "Tạo phân quyền thành công!",
     alert_62: "Cập nhật quyền thành công!",
     alert_63: "Không được thao tác thiết bị được chia sẻ!",
+    alert_64: 'Đã tồn tại!',
 
     // --------------------------------- //
 
@@ -1639,6 +1652,7 @@ export const messages = {
     kWhonkWp: "kWh/kWp",
     totalall: "Tổng sản lượng điện",
     errorsetting: "Cài đặt lỗi",
+    registersetting: "Cài đặt thanh ghi",
     timeoutInfo:
       "Hệ thống sẽ tự động coi nó là một sự cố nếu không nhận được phản hồi lệnh sau khi thời gian chờ kết thúc. Vui lòng thử lại sau.",
     environment1:

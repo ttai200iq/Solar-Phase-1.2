@@ -1,0 +1,331 @@
+@use "../../index.scss" as COLOR;
+
+.DAT_RS {
+    width: 98%;
+    margin: auto;
+    margin-top: 15px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.95);
+    box-shadow: 2px 2px 5px rgba(198, 197, 197, 0.4),
+        -2px -2px 5px rgba(198, 197, 197, 0.4);
+
+    &_Header {
+        color: COLOR.$Primary-color;
+        font-family: segoeui-sb;
+        font-size: 16px;
+        padding: 16px;
+        background-color: rgba(233, 233, 233, 0.5);
+    }
+
+    &_Content {
+        height: calc(100vh - 130px);
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        // background-color: rgb(207, 207, 207, 0.3);
+        width: 100%;
+
+        &_Table {
+            width: 100%;
+            display: flex;
+
+            &_Left {
+                width: 200px;
+                border-right: solid 1px rgba(198, 197, 197, 0.5);
+
+                &_Head {
+                    height: 45px;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: COLOR.$Primary-color;
+                    color: white;
+                    font-family: segoeui-sb;
+                }
+
+                &_ItemList {
+                    width: 100%;
+                    height: calc(100vh - 175px);
+                    overflow-y: scroll;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                        /* Safari and Chrome */
+                    }
+
+                    &_Item {
+                        height: 60px;
+                        padding: 8px;
+                        box-sizing: border-box;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border-bottom: solid 1px rgba(198, 198, 198, 0.5);
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: rgba(198, 198, 198, 0.5);
+                        }
+
+                        &_Name {
+                            font-size: 15px;
+                            max-width: 150px;
+                            white-space: nowrap; // ngan xuong dong
+                            overflow: hidden; // an noi dung vuot ra ngoai
+                            text-overflow: ellipsis; // hien thi 3 cham khi vuot ra ngoai
+                        }
+
+                        &_Shortcut {
+                            & :hover {
+                                color: white;
+                            }
+                        }
+
+                        &_More {
+                            background-color: #e1e1e1;
+                            padding: 5px;
+                            box-sizing: border-box;
+                            border-radius: 5px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 5px;
+                            box-shadow: 3px 3px 5px rgba(226, 226, 226, 0.5);
+                        }
+                    }
+                }
+            }
+
+            &_Right {
+                width: 100%;
+                height: 100%;
+
+                &_Content {
+                    width: 100%;
+                    height: calc(100vh - 175px);
+                    overflow-y: scroll;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                        /* Safari and Chrome */
+                    }
+
+                    &_Row {
+                        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+                        padding: 16px;
+                        padding-left: 0px;
+                        display: flex;
+                        gap: 10px;
+
+                        &_Left {
+                            position: relative;
+                            width: 350px;
+                            display: flex;
+                            // align-items: center;
+                            justify-content: center;
+                            border-right: solid 1px rgba(198, 197, 197, 0.5);
+                            font-family: segoeuib;
+
+                            &_More {
+                                position: absolute;
+                                top: 2px;
+                                right: 0;
+                                height: 20px;
+                                cursor: pointer;
+                            }
+                        }
+
+                        &_Right {
+                            width: 100%;
+
+                            &_Tit {
+                                position: relative;
+                                text-align: center;
+                                background-color: rgba(198, 198, 198, 0.5);
+                                font-size: 16px;
+                                font-family: segoeuib;
+                                padding: 8px;
+
+                                &_Add {
+                                    position: absolute;
+                                    top: 8px;
+                                    right: 0px;
+                                    cursor: pointer;
+                                }
+                            }
+
+                            &_Item {
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                gap: 20px;
+                                margin-top: 8px;
+
+                                &_Key {
+                                    flex: 3;
+                                }
+
+                                &_Register {
+                                    flex: 3;
+                                    max-width: 450px;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                }
+
+                                &_Scale {
+                                    flex: 1;
+                                }
+
+                                &_Type {
+                                    flex: 1;
+                                }
+
+                                &_Note {
+                                    flex: 2;
+                                    max-width: 450px;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.DAT_RSPopup {
+    position: relative;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgb(73, 73, 73, 0.2),
+        -2px -2px 5px rgb(67, 67, 67, 0.2);
+
+    &_Head {
+        display: flex;
+        background-color: COLOR.$Primary-color !important; //rgba(182, 182, 182, 0.4)
+        padding: 16px;
+        color: white;
+        font-family: segoeui-sb;
+
+        &_Left {
+            flex: 9;
+        }
+
+        &_Right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+
+            &_Icon {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &_Body {
+        font-size: 13px;
+        padding: 16px;
+        color: COLOR.$Gray-color;
+        border-bottom: solid 1px rgba(198, 197, 197, 0.5);
+        max-height: 320px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 7px;
+            height: 10px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 2px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        &_Info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            margin: auto;
+            gap: 5px;
+
+            & input {
+                width: 100%;
+                height: 30px;
+                border-radius: 5px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                padding: 8px;
+                outline: none;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                font-family: segoeui;
+            }
+
+            & input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            & textarea {
+                max-width: 100%;
+                min-height: 60px;
+                padding: 4px;
+                border-radius: 5px;
+                outline: none;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                font-family: segoeui;
+            }
+        }
+    }
+
+    &_Foot {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+
+        & button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: segoeui-sb;
+        }
+    }
+}

@@ -23,6 +23,7 @@ import { useIntl } from "react-intl";
 import ErrorSetting from "./component/ErrorSetting/ErrorSetting";
 import { io } from "socket.io-client";
 import NotfoundErr from "./NotfoundErr";
+import RegisterSetting from "./component/RegisterSetting/RegisterSetting";
 
 const Home = React.lazy(() => import("./component/Home/Home"));
 const Project = React.lazy(() => import("./component/Project/Project"));
@@ -317,6 +318,7 @@ export default function App() {
                       <Route path="/User" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><User /></Suspense>} />
                       <Route path="/Contact" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Contact /></Suspense>} />
                       <Route path="/ErrorSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><ErrorSetting /></Suspense>} />
+                      <Route path="/RegisterSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><RegisterSetting /></Suspense>} />
                       <Route path="/Rule" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Rule /></Suspense>} />
                     </>
                   ) : (<></>)}
@@ -328,6 +330,7 @@ export default function App() {
                       <Route path="/User" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><User /></Suspense>} />
                       <Route path="/Contact" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Contact /></Suspense>} />
                       <Route path="/ErrorSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><ErrorSetting /></Suspense>} />
+                      <Route path="/RegisterSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><RegisterSetting /></Suspense>} />
                       <Route path="/Rule" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Rule /></Suspense>} />
                     </>
                   ) : (<></>)}
