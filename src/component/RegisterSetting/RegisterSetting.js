@@ -89,19 +89,6 @@ export default function RegisterSetting(props) {
                                             style={{ display: "none" }}
                                             onMouseLeave={(e) => handleShowFunction(e)}
                                         >
-                                            <div className='DAT_RS_Content_Table_Left_ItemList_Item_More_Delete'
-                                                style={{ cursor: "pointer" }}
-                                                onClick={() => handleDeleteBrand()}
-                                            >
-                                                <IoTrashOutline size={18} />
-                                            </div>
-                                            <div className='DAT_RS_Content_Table_Left_ItemList_Item_More_Edit'
-                                                style={{ cursor: "pointer" }}
-                                                id={key}
-                                                onClick={(e) => handleEditBrand(e)}
-                                            >
-                                                <FiEdit size={18} />
-                                            </div>
                                             <div className='DAT_RS_Content_Table_Left_ItemList_Item_More_Add'
                                                 style={{ cursor: "pointer" }}
                                                 onClick={() => handleAddType()}
@@ -209,7 +196,11 @@ export default function RegisterSetting(props) {
 
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit'>
                                                                 Data
-                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add' onClick={() => handleAddTemplate()}><IoMdAddCircleOutline size={20} /></div>
+                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
+                                                                    id='data'
+                                                                    onClick={(e) => handleAddTemplate(e)}>
+                                                                    <IoMdAddCircleOutline size={20} />
+                                                                </div>
                                                             </div>
 
                                                             {Object.entries(item.data_).map(([key, value]) => {
@@ -242,7 +233,7 @@ export default function RegisterSetting(props) {
                                                                                         <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
                                                                                         <Menu {...bindMenu(popupState)}>
                                                                                             <MenuItem
-                                                                                                id={`${key}+${item.data_[key].register}+${item.data_[key].cal}+${item.data_[key].type}`}
+                                                                                                id={`${key}+${item.data_[key].register}+${item.data_[key].cal}+${item.data_[key].type}+${item.type_}+${'data'}`}
                                                                                                 onClick={(e) => {
                                                                                                     handleEditTemplate(e);
                                                                                                     popupState.close();
@@ -254,7 +245,7 @@ export default function RegisterSetting(props) {
                                                                                             </MenuItem>
 
                                                                                             <MenuItem
-                                                                                                id={key}
+                                                                                                id={`${key}+${item.type_}+${'data'}`}
                                                                                                 onClick={(e) => {
                                                                                                     handleDeleteTemplate(e);
                                                                                                     popupState.close();
@@ -275,7 +266,12 @@ export default function RegisterSetting(props) {
 
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit' style={{ marginTop: "8px" }}>
                                                                 Setting
-                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add' onClick={() => handleAddTemplate()}><IoMdAddCircleOutline size={20} /></div>
+                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
+                                                                    id='setting'
+                                                                    onClick={(e) => handleAddTemplate(e)}
+                                                                >
+                                                                    <IoMdAddCircleOutline size={20} />
+                                                                </div>
                                                             </div>
 
                                                             {Object.entries(item.setting).map(([key, value]) => {
@@ -288,7 +284,7 @@ export default function RegisterSetting(props) {
                                                                                 : Object.entries(item.setting[key]).map(([k, v]) => {
                                                                                     return (
                                                                                         <div key={k} style={{ marginTop: k === 'main' ? "8px" : "0px" }}>
-                                                                                            {key} {'('} {k} {')'}
+                                                                                            {key}{'_'}{k}
                                                                                         </div>
                                                                                     )
                                                                                 })
@@ -346,7 +342,7 @@ export default function RegisterSetting(props) {
                                                                                                 </MenuItem>
 
                                                                                                 <MenuItem
-                                                                                                    id={key}
+                                                                                                    id={`${key}+${item.type_}+${'setting'}`}
                                                                                                     onClick={(e) => {
                                                                                                         handleDeleteTemplate(e);
                                                                                                         popupState.close();
@@ -382,7 +378,7 @@ export default function RegisterSetting(props) {
                                                                                                             </MenuItem>
 
                                                                                                             <MenuItem
-                                                                                                                id={key + "(" + k + ")"}
+                                                                                                                id={`${key + "_" + k}+${item.type_}+${'setting_'}`}
                                                                                                                 onClick={(e) => {
                                                                                                                     handleDeleteTemplate(e);
                                                                                                                     popupState.close();
@@ -466,7 +462,11 @@ export default function RegisterSetting(props) {
 
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit'>
                                                                 Data
-                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add' onClick={() => handleAddTemplate()}><IoMdAddCircleOutline size={20} /></div>
+                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
+                                                                    id='data'
+                                                                    onClick={(e) => handleAddTemplate(e)}>
+                                                                    <IoMdAddCircleOutline size={20} />
+                                                                </div>
                                                             </div>
 
                                                             {Object.entries(item.data_).map(([key, value]) => {
@@ -514,7 +514,7 @@ export default function RegisterSetting(props) {
                                                                                                                 </MenuItem>
 
                                                                                                                 <MenuItem
-                                                                                                                    id={key}
+                                                                                                                    id={`${key}+${item.type_}+${'data'}`}
                                                                                                                     onClick={(e) => {
                                                                                                                         handleDeleteTemplate(e);
                                                                                                                         popupState.close();
@@ -542,7 +542,7 @@ export default function RegisterSetting(props) {
                                                                                                 {Object.entries(item.data_[key]).map(([k, v]) => {
                                                                                                     return (
                                                                                                         <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px" }}>
-                                                                                                            {key} {'('} {k} {')'}
+                                                                                                            {key}{'_'}{k}
                                                                                                         </div>
                                                                                                     )
                                                                                                 })}
@@ -610,7 +610,7 @@ export default function RegisterSetting(props) {
                                                                                                                             </MenuItem>
 
                                                                                                                             <MenuItem
-                                                                                                                                id={key + "(" + k + ")"}
+                                                                                                                                id={`${key + "_" + k}+${item.type_}+${'data_'}`}
                                                                                                                                 onClick={(e) => {
                                                                                                                                     handleDeleteTemplate(e);
                                                                                                                                     popupState.close();
@@ -672,7 +672,7 @@ export default function RegisterSetting(props) {
                                                                                                                 </MenuItem>
 
                                                                                                                 <MenuItem
-                                                                                                                    id={key}
+                                                                                                                    id={`${key}+${item.type_}+${'data'}`}
                                                                                                                     onClick={(e) => {
                                                                                                                         handleDeleteTemplate(e);
                                                                                                                         popupState.close();
@@ -697,7 +697,11 @@ export default function RegisterSetting(props) {
 
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit' style={{ marginTop: "8px" }}>
                                                                 Setting
-                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add' onClick={() => handleAddTemplate()}><IoMdAddCircleOutline size={20} /></div>
+                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
+                                                                    id='setting'
+                                                                    onClick={(e) => handleAddTemplate(e)}>
+                                                                    <IoMdAddCircleOutline size={20} />
+                                                                </div>
                                                             </div>
 
                                                             {Object.entries(item.setting).map(([key, value]) => {
@@ -742,7 +746,7 @@ export default function RegisterSetting(props) {
                                                                                             </MenuItem>
 
                                                                                             <MenuItem
-                                                                                                id={key}
+                                                                                                id={`${key}+${item.type_}+${'setting'}`}
                                                                                                 onClick={(e) => {
                                                                                                     handleDeleteTemplate(e);
                                                                                                     popupState.close();
@@ -781,16 +785,6 @@ export default function RegisterSetting(props) {
         setPopupState(false);
     };
 
-    const handleEditBrand = (e) => {
-        setPopupState(true);
-        setPopupType("editBrand");
-    };
-
-    const handleDeleteBrand = () => {
-        setPopupState(true);
-        setPopupType("deleteBrand");
-    };
-
     const handleAddType = () => {
         setPopupState(true);
         setPopupType("addType");
@@ -808,7 +802,8 @@ export default function RegisterSetting(props) {
         setPopupType("deleteType");
     };
 
-    const handleAddTemplate = () => {
+    const handleAddTemplate = (e) => {
+        setPopupInfo({ ...popupInfo, templatetype: e.currentTarget.id });
         setPopupState(true);
         setPopupType("addTemplate");
     };
@@ -816,13 +811,15 @@ export default function RegisterSetting(props) {
     const handleEditTemplate = (e) => {
         const id = e.currentTarget.id;
         const idArr = id.split("+");
-        setPopupInfo({ ...popupInfo, key: idArr[0], register: idArr[1], scale: idArr[2], type: idArr[3] });
+        setPopupInfo({ ...popupInfo, key: idArr[0], register: idArr[1], scale: idArr[2], type: idArr[3], type_: idArr[4], templateType: idArr[5] });
         setPopupState(true);
         setPopupType("editTemplate");
     };
 
     const handleDeleteTemplate = (e) => {
-        setPopupInfo({ ...popupInfo, key: e.currentTarget.id });
+        const id = e.currentTarget.id;
+        const idArr = id.split("+");
+        setPopupInfo({ ...popupInfo, key: idArr[0], type_: idArr[1], templateType: idArr[2] });
         setPopupState(true);
         setPopupType("deleteTemplate");
     }

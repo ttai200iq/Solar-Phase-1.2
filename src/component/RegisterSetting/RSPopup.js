@@ -4,12 +4,11 @@ import './RegisterSetting.scss';
 import { useIntl } from 'react-intl';
 import { IoClose } from 'react-icons/io5';
 import { COLOR } from '../../App';
-import { inverterListRS, loggerListRS, registerID, tabRS } from './RegisterSetting';
+import { inverterListRS, loggerListRS, tabRS } from './RegisterSetting';
 import { alertDispatch } from '../Alert/Alert';
 
 export default function RSPopup(props) {
     const dataLang = useIntl();
-    const brandName = useRef();
     const typeName = useRef();
     const key = useRef();
     const register = useRef();
@@ -32,11 +31,6 @@ export default function RSPopup(props) {
     const handleConfirm = (e) => {
         e.preventDefault();
         switch (props.type) {
-            case 'editBrand':
-                console.log(brandName.current.value);
-                break;
-            case 'deleteBrand':
-                break;
             case 'addType':
                 console.log(typeName.current.value);
                 // if (tabRS.value === 'logger') {
@@ -78,11 +72,17 @@ export default function RSPopup(props) {
                 }
                 break;
             case 'addTemplate':
+                console.log(props.info.templatetype);
                 console.log(key.current.value);
                 console.log(register.current.value);
                 console.log(scale.current.value);
                 console.log(type.current.value);
                 console.log(note.current.value);
+                // if (props.info.templatetype === 'data') {
+                //     console.log(loggerListRS.value);
+                // } else {
+
+                // }
                 break;
             case 'editTemplate':
                 console.log(key.current.value);
@@ -90,8 +90,76 @@ export default function RSPopup(props) {
                 console.log(scale.current.value);
                 console.log(type.current.value);
                 console.log(note.current.value);
+
+                // let temp = loggerListRS.value.find(item => item.type_ === props.info.type_);
+                // console.log(temp);
+                // if (props.info.templateType === 'data') {
+                //     // console.log(temp.data_[props.info.key]);
+                //     let data = Object.entries(temp.data_).find(([key, value]) => key === props.info.key);
+                //     data[0] = key.current.value;
+                //     data[1].register = register.current.value;
+                //     data[1].cal = scale.current.value;
+                //     data[1].type = type.current.value;
+                //     console.log(data);
+                //     // temp.data_[props.info.key] = data;
+                //     // console.log(temp.data_[props.info.key]);
+
+                //     // temp.data_[props.info.key].register = register.current.value;
+                //     // temp.data_[props.info.key].cal = scale.current.value;
+                //     // temp.data_[props.info.key].type = type.current.value;
+                //     // console.log(temp.data_[props.info.key]);
+                //     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                //     props.handleClose();
+                // } else {
+
+                // }
                 break;
             case 'deleteTemplate':
+                if (tabRS.value === 'logger') {
+                    let temp = loggerListRS.value.find(item => item.type_ === props.info.type_);
+                    switch (props.info.templateType) {
+                        case 'data':
+                            temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
+                            break;
+                        case 'setting':
+                            temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
+                            break;
+                        case 'setting_':
+                            let id = props.info.key.split('_');
+                            temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    let temp = inverterListRS.value.find(item => item.type_ === props.info.type_);
+                    switch (props.info.templateType) {
+                        case 'data':
+                            temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
+                            break;
+                        case 'data_':
+                            let id = props.info.key.split('_');
+                            temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
+                            break;
+                        case 'setting':
+                            temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 break;
             default:
                 break;
@@ -120,10 +188,6 @@ export default function RSPopup(props) {
                 <div className="DAT_RSPopup_Head_Left">
                     {(() => {
                         switch (props.type) {
-                            case 'editBrand':
-                                return <span>{dataLang.formatMessage({ id: "edit" })}</span>;
-                            case 'deleteBrand':
-                                return <span>{dataLang.formatMessage({ id: "delete" })}</span>;
                             case 'addType':
                                 return <span>{dataLang.formatMessage({ id: "add" })}</span>;
                             case 'changeName':
@@ -157,15 +221,6 @@ export default function RSPopup(props) {
             <div className="DAT_RSPopup_Body">
                 {(() => {
                     switch (props.type) {
-                        case 'editBrand':
-                            return <div className='DAT_RSPopup_Body_Info'>
-                                <label>{dataLang.formatMessage({ id: 'name' })}</label>
-                                <input type="text" defaultValue={registerID.value} ref={brandName} />
-                            </div>;
-                        case 'deleteBrand':
-                            return <span>{dataLang.formatMessage({ id: 'delBrandmess' })} &nbsp;
-                                <span style={{ fontFamily: 'segoeuib' }}>{registerID.value}</span>
-                            </span>;
                         case 'addType':
                             return <div className='DAT_RSPopup_Body_Info'>
                                 <label>{dataLang.formatMessage({ id: 'name' })}</label>
