@@ -1877,5 +1877,6 @@ export const brands = {
       'CONSUMPTION_SUNGROW_1',
       'HYBRID_SUNGROW_1',
     ],
-  }
+  },
+  SOLARLIGHT: {},
 };

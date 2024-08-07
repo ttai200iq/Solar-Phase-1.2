@@ -3,7 +3,6 @@ import "./RegisterSetting.scss";
 
 import { signal } from "@preact/signals-react";
 import { isBrowser } from 'react-device-detect';
-import { CiSearch } from 'react-icons/ci';
 import { useIntl } from 'react-intl';
 import { MdOutlineManageHistory } from 'react-icons/md';
 import { brands, host } from '../Lang/Contant';
@@ -197,7 +196,7 @@ export default function RegisterSetting(props) {
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit'>
                                                                 Data
                                                                 <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
-                                                                    id='data'
+                                                                    id={`${'data'}+${item.type_}`}
                                                                     onClick={(e) => handleAddTemplate(e)}>
                                                                     <IoMdAddCircleOutline size={20} />
                                                                 </div>
@@ -205,61 +204,161 @@ export default function RegisterSetting(props) {
 
                                                             {Object.entries(item.data_).map(([key, value]) => {
                                                                 return (
-                                                                    <div key={key} className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
-                                                                            {key}
-                                                                        </div>
+                                                                    <div key={key}>
+                                                                        {typeof (Object.values(item.data_[key])[0]) === 'object'
+                                                                            ?
+                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'
+                                                                                style={{ marginTop: "0px" }}
+                                                                            >
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {key} {'('}{k}{')'}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
-                                                                            {item.data_[key].register}
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.data_[key][k].register}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
-                                                                            {item.data_[key].cal}
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.data_[key][k].cal}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
-                                                                            {item.data_[key].type}
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.data_[key][k].type}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
-                                                                            note
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                note
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div style={{ cursor: "pointer" }}>
-                                                                            <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                {(popupState) => (
-                                                                                    <div className="DAT_TableEdit">
-                                                                                        <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                        <Menu {...bindMenu(popupState)}>
-                                                                                            <MenuItem
-                                                                                                id={`${key}+${item.data_[key].register}+${item.data_[key].cal}+${item.data_[key].type}+${item.type_}+${'data'}`}
-                                                                                                onClick={(e) => {
-                                                                                                    handleEditTemplate(e);
-                                                                                                    popupState.close();
-                                                                                                }}
-                                                                                            >
-                                                                                                <FiEdit size={14} />
-                                                                                                &nbsp;
-                                                                                                {dataLang.formatMessage({ id: "change" })}
-                                                                                            </MenuItem>
+                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px", cursor: "pointer" }}>
+                                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                                    {(popupState) => (
+                                                                                                        <div className="DAT_TableEdit">
+                                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                            <Menu {...bindMenu(popupState)}>
+                                                                                                                <MenuItem
+                                                                                                                    id={`${key + '(' + k + ')'}+${item.data_[key][k].register}+${item.data_[key][k].cal}+${item.data_[key][k].type}+${item.type_}+${'data'}`}
+                                                                                                                    onClick={(e) => {
+                                                                                                                        handleEditTemplate(e);
+                                                                                                                        popupState.close();
+                                                                                                                    }}
+                                                                                                                >
+                                                                                                                    <FiEdit size={14} />
+                                                                                                                    &nbsp;
+                                                                                                                    {dataLang.formatMessage({ id: "change" })}
+                                                                                                                </MenuItem>
 
-                                                                                            <MenuItem
-                                                                                                id={`${key}+${item.type_}+${'data'}`}
-                                                                                                onClick={(e) => {
-                                                                                                    handleDeleteTemplate(e);
-                                                                                                    popupState.close();
-                                                                                                }}
-                                                                                            >
-                                                                                                <IoTrashOutline size={16} />
-                                                                                                &nbsp;
-                                                                                                {dataLang.formatMessage({ id: "delete" })}
-                                                                                            </MenuItem>
-                                                                                        </Menu>
-                                                                                    </div>
-                                                                                )}
-                                                                            </PopupState>
-                                                                        </div>
+                                                                                                                <MenuItem
+                                                                                                                    id={`${key + '(' + k + ')'}+${item.type_}+${'data'}`}
+                                                                                                                    onClick={(e) => {
+                                                                                                                        handleDeleteTemplate(e);
+                                                                                                                        popupState.close();
+                                                                                                                    }}
+                                                                                                                >
+                                                                                                                    <IoTrashOutline size={16} />
+                                                                                                                    &nbsp;
+                                                                                                                    {dataLang.formatMessage({ id: "delete" })}
+                                                                                                                </MenuItem>
+                                                                                                            </Menu>
+                                                                                                        </div>
+                                                                                                    )}
+                                                                                                </PopupState>
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
+                                                                            </div>
+                                                                            :
+                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                    {key}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                    {item.data_[key].register}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                    {item.data_[key].cal}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                    {item.data_[key].type}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                    note
+                                                                                </div>
+
+                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                    <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                        {(popupState) => (
+                                                                                            <div className="DAT_TableEdit">
+                                                                                                <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                <Menu {...bindMenu(popupState)}>
+                                                                                                    <MenuItem
+                                                                                                        id={`${key}+${item.data_[key].register}+${item.data_[key].cal}+${item.data_[key].type}+${item.type_}+${'data'}`}
+                                                                                                        onClick={(e) => {
+                                                                                                            handleEditTemplate(e);
+                                                                                                            popupState.close();
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <FiEdit size={14} />
+                                                                                                        &nbsp;
+                                                                                                        {dataLang.formatMessage({ id: "change" })}
+                                                                                                    </MenuItem>
+
+                                                                                                    <MenuItem
+                                                                                                        id={`${key}+${item.type_}+${'data'}`}
+                                                                                                        onClick={(e) => {
+                                                                                                            handleDeleteTemplate(e);
+                                                                                                            popupState.close();
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <IoTrashOutline size={16} />
+                                                                                                        &nbsp;
+                                                                                                        {dataLang.formatMessage({ id: "delete" })}
+                                                                                                    </MenuItem>
+                                                                                                </Menu>
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </PopupState>
+                                                                                </div>
+                                                                            </div>
+                                                                        }
                                                                     </div>
                                                                 );
                                                             })}
@@ -267,7 +366,7 @@ export default function RegisterSetting(props) {
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit' style={{ marginTop: "8px" }}>
                                                                 Setting
                                                                 <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
-                                                                    id='setting'
+                                                                    id={`${'setting'}+${item.type_}`}
                                                                     onClick={(e) => handleAddTemplate(e)}
                                                                 >
                                                                     <IoMdAddCircleOutline size={20} />
@@ -276,128 +375,145 @@ export default function RegisterSetting(props) {
 
                                                             {Object.entries(item.setting).map(([key, value]) => {
                                                                 return (
-                                                                    <div key={key} className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'
-                                                                        style={{ marginTop: key === 'sn' ? '8px' : '4px' }}
-                                                                    >
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
-                                                                            {key === 'sn' ? key
-                                                                                : Object.entries(item.setting[key]).map(([k, v]) => {
-                                                                                    return (
-                                                                                        <div key={k} style={{ marginTop: k === 'main' ? "8px" : "0px" }}>
-                                                                                            {key}{'_'}{k}
-                                                                                        </div>
-                                                                                    )
-                                                                                })
-                                                                            }
-                                                                        </div>
+                                                                    <div key={key}>
+                                                                        {typeof (value) === 'object'
+                                                                            ?
+                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'
+                                                                                style={{ marginTop: "0px" }}
+                                                                            >
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {key} {'('}{k}{')'}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
-                                                                            {key === 'sn' ? item.setting[key]
-                                                                                : Object.entries(item.setting[key]).map(([k, v]) => {
-                                                                                    return (
-                                                                                        <div key={k} style={{ marginTop: k === 'main' ? "8px" : "0px" }}>
-                                                                                            {item.setting[key][k]}
-                                                                                        </div>
-                                                                                    )
-                                                                                })
-                                                                            }
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.setting[key][k]}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
-                                                                            {key === 'sn' ? 'note'
-                                                                                : Object.entries(item.setting[key]).map(([k, v]) => {
-                                                                                    return (
-                                                                                        <div key={k} style={{ marginTop: k === 'main' ? "8px" : "0px" }}>
-                                                                                            note
-                                                                                        </div>
-                                                                                    )
-                                                                                })
-                                                                            }
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                note
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div style={{ cursor: "pointer" }}>
-                                                                            {key === 'sn'
-                                                                                ?
-                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                    {(popupState) => (
-                                                                                        <div className="DAT_TableEdit">
-                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                            <Menu {...bindMenu(popupState)}>
-                                                                                                <MenuItem
-                                                                                                    id={`${key}+${item.setting[key]}`}
-                                                                                                    onClick={(e) => {
-                                                                                                        handleEditTemplate(e);
-                                                                                                        popupState.close();
-                                                                                                    }}
-                                                                                                >
-                                                                                                    <FiEdit size={14} />
-                                                                                                    &nbsp;
-                                                                                                    {dataLang.formatMessage({ id: "change" })}
-                                                                                                </MenuItem>
+                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px", cursor: "pointer" }}>
+                                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                                    {(popupState) => (
+                                                                                                        <div className="DAT_TableEdit">
+                                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                            <Menu {...bindMenu(popupState)}>
+                                                                                                                <MenuItem
+                                                                                                                    id={`${key + '(' + k + ')'}+${item.setting[key][k]}+${''}+${''}+${item.type_}+${'setting'}`}
+                                                                                                                    onClick={(e) => {
+                                                                                                                        handleEditTemplate(e);
+                                                                                                                        popupState.close();
+                                                                                                                    }}
+                                                                                                                >
+                                                                                                                    <FiEdit size={14} />
+                                                                                                                    &nbsp;
+                                                                                                                    {dataLang.formatMessage({ id: "change" })}
+                                                                                                                </MenuItem>
 
-                                                                                                <MenuItem
-                                                                                                    id={`${key}+${item.type_}+${'setting'}`}
-                                                                                                    onClick={(e) => {
-                                                                                                        handleDeleteTemplate(e);
-                                                                                                        popupState.close();
-                                                                                                    }}
-                                                                                                >
-                                                                                                    <IoTrashOutline size={16} />
-                                                                                                    &nbsp;
-                                                                                                    {dataLang.formatMessage({ id: "delete" })}
-                                                                                                </MenuItem>
-                                                                                            </Menu>
-                                                                                        </div>
-                                                                                    )}
-                                                                                </PopupState>
-                                                                                :
-                                                                                Object.entries(item.setting[key]).map(([k, v]) => {
-                                                                                    return (
-                                                                                        <div key={k} style={{ marginTop: k === 'main' ? "8px" : "0px", cursor: "pointer" }}>
-                                                                                            <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                                {(popupState) => (
-                                                                                                    <div className="DAT_TableEdit">
-                                                                                                        <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                                        <Menu {...bindMenu(popupState)}>
-                                                                                                            <MenuItem
-                                                                                                                id={`${key + "(" + k + ")"}+${item.setting[key][k]}`}
-                                                                                                                onClick={(e) => {
-                                                                                                                    handleEditTemplate(e);
-                                                                                                                    popupState.close();
-                                                                                                                }}
-                                                                                                            >
-                                                                                                                <FiEdit size={14} />
-                                                                                                                &nbsp;
-                                                                                                                {dataLang.formatMessage({ id: "change" })}
-                                                                                                            </MenuItem>
+                                                                                                                <MenuItem
+                                                                                                                    id={`${key + '(' + k + ')'}+${item.type_}+${'setting'}`}
+                                                                                                                    onClick={(e) => {
+                                                                                                                        handleDeleteTemplate(e);
+                                                                                                                        popupState.close();
+                                                                                                                    }}
+                                                                                                                >
+                                                                                                                    <IoTrashOutline size={16} />
+                                                                                                                    &nbsp;
+                                                                                                                    {dataLang.formatMessage({ id: "delete" })}
+                                                                                                                </MenuItem>
+                                                                                                            </Menu>
+                                                                                                        </div>
+                                                                                                    )}
+                                                                                                </PopupState>
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
+                                                                            </div>
+                                                                            :
+                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                    {key}
+                                                                                </div>
 
-                                                                                                            <MenuItem
-                                                                                                                id={`${key + "_" + k}+${item.type_}+${'setting_'}`}
-                                                                                                                onClick={(e) => {
-                                                                                                                    handleDeleteTemplate(e);
-                                                                                                                    popupState.close();
-                                                                                                                }}
-                                                                                                            >
-                                                                                                                <IoTrashOutline size={16} />
-                                                                                                                &nbsp;
-                                                                                                                {dataLang.formatMessage({ id: "delete" })}
-                                                                                                            </MenuItem>
-                                                                                                        </Menu>
-                                                                                                    </div>
-                                                                                                )}
-                                                                                            </PopupState>
-                                                                                        </div>
-                                                                                    )
-                                                                                })
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                    {item.setting[key]}
+                                                                                </div>
 
-                                                                            }
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                    note
+                                                                                </div>
+
+                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                    <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                        {(popupState) => (
+                                                                                            <div className="DAT_TableEdit">
+                                                                                                <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                <Menu {...bindMenu(popupState)}>
+                                                                                                    <MenuItem
+                                                                                                        id={`${key}+${item.setting[key]}+${''}+${''}+${item.type_}+${'setting'}`}
+                                                                                                        onClick={(e) => {
+                                                                                                            handleEditTemplate(e);
+                                                                                                            popupState.close();
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <FiEdit size={14} />
+                                                                                                        &nbsp;
+                                                                                                        {dataLang.formatMessage({ id: "change" })}
+                                                                                                    </MenuItem>
+
+                                                                                                    <MenuItem
+                                                                                                        id={`${key}+${item.type_}+${'setting'}`}
+                                                                                                        onClick={(e) => {
+                                                                                                            handleDeleteTemplate(e);
+                                                                                                            popupState.close();
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <IoTrashOutline size={16} />
+                                                                                                        &nbsp;
+                                                                                                        {dataLang.formatMessage({ id: "delete" })}
+                                                                                                    </MenuItem>
+                                                                                                </Menu>
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </PopupState>
+                                                                                </div>
+                                                                            </div>
+                                                                        }
                                                                     </div>
                                                                 );
                                                             })}
@@ -463,7 +579,7 @@ export default function RegisterSetting(props) {
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit'>
                                                                 Data
                                                                 <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
-                                                                    id='data'
+                                                                    id={`${'data'}+${item.type_}`}
                                                                     onClick={(e) => handleAddTemplate(e)}>
                                                                     <IoMdAddCircleOutline size={20} />
                                                                 </div>
@@ -472,225 +588,233 @@ export default function RegisterSetting(props) {
                                                             {Object.entries(item.data_).map(([key, value]) => {
                                                                 return (
                                                                     <div key={key}>
-                                                                        {(() => {
-                                                                            switch (key) {
-                                                                                case 'status':
-                                                                                    return (
-                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
-                                                                                                {key}
-                                                                                            </div>
+                                                                        {typeof (value) === 'object'
+                                                                            ?
+                                                                            <>
+                                                                                {key === 'sn'
+                                                                                    ? <></>
+                                                                                    :
+                                                                                    <>
+                                                                                        {typeof (Object.values(item.data_[key])[0]) === 'object'
+                                                                                            ?
+                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'
+                                                                                                style={{ marginTop: "0px" }}
+                                                                                            >
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                                        return (
+                                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                                {key} {'('}{k}{')'}
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    })}
+                                                                                                </div>
 
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
-                                                                                                {item.data_[key]}
-                                                                                            </div>
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                                        return (
+                                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                                {item.data_[key][k].register}
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    })}
+                                                                                                </div>
 
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
-                                                                                            </div>
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                                        return (
+                                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                                {item.data_[key][k].cal}
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    })}
+                                                                                                </div>
 
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
-                                                                                            </div>
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                                        return (
+                                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                                {item.data_[key][k].type}
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    })}
+                                                                                                </div>
 
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
-                                                                                                note
-                                                                                            </div>
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                                        return (
+                                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                                note
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    })}
+                                                                                                </div>
 
-                                                                                            <div style={{ cursor: "pointer" }}>
-                                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                                    {(popupState) => (
-                                                                                                        <div className="DAT_TableEdit">
-                                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                                            <Menu {...bindMenu(popupState)}>
-                                                                                                                <MenuItem
-                                                                                                                    id={`${key}+${item.data_[key]}`}
-                                                                                                                    onClick={(e) => {
-                                                                                                                        handleEditTemplate(e);
-                                                                                                                        popupState.close();
-                                                                                                                    }}
-                                                                                                                >
-                                                                                                                    <FiEdit size={14} />
-                                                                                                                    &nbsp;
-                                                                                                                    {dataLang.formatMessage({ id: "change" })}
-                                                                                                                </MenuItem>
+                                                                                                <div>
+                                                                                                    {Object.entries(item.data_[key]).map(([k, v]) => {
+                                                                                                        return (
+                                                                                                            <div key={k} style={{ marginTop: "8px", cursor: "pointer" }}>
+                                                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                                                    {(popupState) => (
+                                                                                                                        <div className="DAT_TableEdit">
+                                                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                                            <Menu {...bindMenu(popupState)}>
+                                                                                                                                <MenuItem
+                                                                                                                                    id={`${key + "(" + k + ")"}+${item.data_[key][k].register}+${item.data_[key][k].cal}+${item.data_[key][k].type}+${item.type_}+${'data'}`}
+                                                                                                                                    onClick={(e) => {
+                                                                                                                                        handleEditTemplate(e);
+                                                                                                                                        popupState.close();
+                                                                                                                                    }}
+                                                                                                                                >
+                                                                                                                                    <FiEdit size={14} />
+                                                                                                                                    &nbsp;
+                                                                                                                                    {dataLang.formatMessage({ id: "change" })}
+                                                                                                                                </MenuItem>
 
-                                                                                                                <MenuItem
-                                                                                                                    id={`${key}+${item.type_}+${'data'}`}
-                                                                                                                    onClick={(e) => {
-                                                                                                                        handleDeleteTemplate(e);
-                                                                                                                        popupState.close();
-                                                                                                                    }}
-                                                                                                                >
-                                                                                                                    <IoTrashOutline size={16} />
-                                                                                                                    &nbsp;
-                                                                                                                    {dataLang.formatMessage({ id: "delete" })}
-                                                                                                                </MenuItem>
-                                                                                                            </Menu>
-                                                                                                        </div>
-                                                                                                    )}
-                                                                                                </PopupState>
+                                                                                                                                <MenuItem
+                                                                                                                                    id={`${key + "(" + k + ')'}+${item.type_}+${'data'}`}
+                                                                                                                                    onClick={(e) => {
+                                                                                                                                        handleDeleteTemplate(e);
+                                                                                                                                        popupState.close();
+                                                                                                                                    }}
+                                                                                                                                >
+                                                                                                                                    <IoTrashOutline size={16} />
+                                                                                                                                    &nbsp;
+                                                                                                                                    {dataLang.formatMessage({ id: "delete" })}
+                                                                                                                                </MenuItem>
+                                                                                                                            </Menu>
+                                                                                                                        </div>
+                                                                                                                    )}
+                                                                                                                </PopupState>
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    })}
+                                                                                                </div>
                                                                                             </div>
+                                                                                            :
+                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                                    {key}
+                                                                                                </div>
+
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                                    {item.data_[key].register}
+                                                                                                </div>
+
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                                    {item.data_[key].cal}
+                                                                                                </div>
+
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                                    {item.data_[key].type}
+                                                                                                </div>
+
+                                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                                    note
+                                                                                                </div>
+
+                                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                                    <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                                        {(popupState) => (
+                                                                                                            <div className="DAT_TableEdit">
+                                                                                                                <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                                <Menu {...bindMenu(popupState)}>
+                                                                                                                    <MenuItem
+                                                                                                                        id={`${key}+${item.data_[key].register}+${item.data_[key].cal}+${item.data_[key].type}+${item.type_}+${'data'}`}
+                                                                                                                        onClick={(e) => {
+                                                                                                                            handleEditTemplate(e);
+                                                                                                                            popupState.close();
+                                                                                                                        }}
+                                                                                                                    >
+                                                                                                                        <FiEdit size={14} />
+                                                                                                                        &nbsp;
+                                                                                                                        {dataLang.formatMessage({ id: "change" })}
+                                                                                                                    </MenuItem>
+
+                                                                                                                    <MenuItem
+                                                                                                                        id={`${key}+${item.type_}+${'data'}`}
+                                                                                                                        onClick={(e) => {
+                                                                                                                            handleDeleteTemplate(e);
+                                                                                                                            popupState.close();
+                                                                                                                        }}
+                                                                                                                    >
+                                                                                                                        <IoTrashOutline size={16} />
+                                                                                                                        &nbsp;
+                                                                                                                        {dataLang.formatMessage({ id: "delete" })}
+                                                                                                                    </MenuItem>
+                                                                                                                </Menu>
+                                                                                                            </div>
+                                                                                                        )}
+                                                                                                    </PopupState>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        }
+                                                                                    </>
+                                                                                }
+                                                                            </>
+                                                                            :
+                                                                            <>
+                                                                                {key === 'mode'
+                                                                                    ?
+                                                                                    <></>
+                                                                                    :
+                                                                                    <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
+                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                            {key}
                                                                                         </div>
-                                                                                    );
-                                                                                case 'mode': case 'sn':
-                                                                                    return (<></>);
-                                                                                case 'pha': case 'phb': case 'phc': case 'pv1': case 'pv2': case 'pv3': case 'pv4': case 'pv5': case 'pv6': case 'pv7': case 'pv8': case 'pv9': case 'pv10': case 'pv11': case 'pv12':
-                                                                                    return (
-                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'
-                                                                                            style={{ marginTop: "4px" }}
-                                                                                        >
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
-                                                                                                {Object.entries(item.data_[key]).map(([k, v]) => {
-                                                                                                    return (
-                                                                                                        <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px" }}>
-                                                                                                            {key}{'_'}{k}
-                                                                                                        </div>
-                                                                                                    )
-                                                                                                })}
-                                                                                            </div>
 
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
-                                                                                                {Object.entries(item.data_[key]).map(([k, v]) => {
-                                                                                                    return (
-                                                                                                        <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px" }}>
-                                                                                                            {item.data_[key][k].register}
-                                                                                                        </div>
-                                                                                                    )
-                                                                                                })}
-                                                                                            </div>
-
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
-                                                                                                {Object.entries(item.data_[key]).map(([k, v]) => {
-                                                                                                    return (
-                                                                                                        <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px" }}>
-                                                                                                            {item.data_[key][k].cal}
-                                                                                                        </div>
-                                                                                                    )
-                                                                                                })}
-                                                                                            </div>
-
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
-                                                                                                {Object.entries(item.data_[key]).map(([k, v]) => {
-                                                                                                    return (
-                                                                                                        <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px" }}>
-                                                                                                            {item.data_[key][k].type}
-                                                                                                        </div>
-                                                                                                    )
-                                                                                                })}
-                                                                                            </div>
-
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
-                                                                                                {Object.entries(item.data_[key]).map(([k, v]) => {
-                                                                                                    return (
-                                                                                                        <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px" }}>
-                                                                                                            note
-                                                                                                        </div>
-                                                                                                    )
-                                                                                                })}
-                                                                                            </div>
-
-                                                                                            <div>
-                                                                                                {Object.entries(item.data_[key]).map(([k, v]) => {
-                                                                                                    return (
-                                                                                                        <div key={k} style={{ marginTop: k === 'voltage' ? "8px" : "0px", cursor: "pointer" }}>
-                                                                                                            <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                                                {(popupState) => (
-                                                                                                                    <div className="DAT_TableEdit">
-                                                                                                                        <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                                                        <Menu {...bindMenu(popupState)}>
-                                                                                                                            <MenuItem
-                                                                                                                                id={`${key + "(" + k + ")"}+${item.data_[key][k].register}+${item.data_[key][k].cal}+${item.data_[key][k].type}`}
-                                                                                                                                onClick={(e) => {
-                                                                                                                                    handleEditTemplate(e);
-                                                                                                                                    popupState.close();
-                                                                                                                                }}
-                                                                                                                            >
-                                                                                                                                <FiEdit size={14} />
-                                                                                                                                &nbsp;
-                                                                                                                                {dataLang.formatMessage({ id: "change" })}
-                                                                                                                            </MenuItem>
-
-                                                                                                                            <MenuItem
-                                                                                                                                id={`${key + "_" + k}+${item.type_}+${'data_'}`}
-                                                                                                                                onClick={(e) => {
-                                                                                                                                    handleDeleteTemplate(e);
-                                                                                                                                    popupState.close();
-                                                                                                                                }}
-                                                                                                                            >
-                                                                                                                                <IoTrashOutline size={16} />
-                                                                                                                                &nbsp;
-                                                                                                                                {dataLang.formatMessage({ id: "delete" })}
-                                                                                                                            </MenuItem>
-                                                                                                                        </Menu>
-                                                                                                                    </div>
-                                                                                                                )}
-                                                                                                            </PopupState>
-                                                                                                        </div>
-                                                                                                    )
-                                                                                                })}
-                                                                                            </div>
+                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                            {item.data_[key]}
                                                                                         </div>
-                                                                                    );
-                                                                                default:
-                                                                                    return (
-                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
-                                                                                                {key}
-                                                                                            </div>
 
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
-                                                                                                {item.data_[key].register}
-                                                                                            </div>
-
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
-                                                                                                {item.data_[key].cal}
-                                                                                            </div>
-
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
-                                                                                                {item.data_[key].type}
-                                                                                            </div>
-
-                                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
-                                                                                                note
-                                                                                            </div>
-
-                                                                                            <div style={{ cursor: "pointer" }}>
-                                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                                    {(popupState) => (
-                                                                                                        <div className="DAT_TableEdit">
-                                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                                            <Menu {...bindMenu(popupState)}>
-                                                                                                                <MenuItem
-                                                                                                                    id={`${key}+${item.data_[key].register}+${item.data_[key].cal}+${item.data_[key].type}`}
-                                                                                                                    onClick={(e) => {
-                                                                                                                        handleEditTemplate(e);
-                                                                                                                        popupState.close();
-                                                                                                                    }}
-                                                                                                                >
-                                                                                                                    <FiEdit size={14} />
-                                                                                                                    &nbsp;
-                                                                                                                    {dataLang.formatMessage({ id: "change" })}
-                                                                                                                </MenuItem>
-
-                                                                                                                <MenuItem
-                                                                                                                    id={`${key}+${item.type_}+${'data'}`}
-                                                                                                                    onClick={(e) => {
-                                                                                                                        handleDeleteTemplate(e);
-                                                                                                                        popupState.close();
-                                                                                                                    }}
-                                                                                                                >
-                                                                                                                    <IoTrashOutline size={16} />
-                                                                                                                    &nbsp;
-                                                                                                                    {dataLang.formatMessage({ id: "delete" })}
-                                                                                                                </MenuItem>
-                                                                                                            </Menu>
-                                                                                                        </div>
-                                                                                                    )}
-                                                                                                </PopupState>
-                                                                                            </div>
+                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
                                                                                         </div>
-                                                                                    );
-                                                                            }
-                                                                        })()}
+
+                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                        </div>
+
+                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                            note
+                                                                                        </div>
+
+                                                                                        <div style={{ cursor: "pointer" }}>
+                                                                                            <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                                {(popupState) => (
+                                                                                                    <div className="DAT_TableEdit">
+                                                                                                        <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                        <Menu {...bindMenu(popupState)}>
+                                                                                                            <MenuItem
+                                                                                                                id={`${key}+${item.data_[key]}+${''}+${''}+${item.type_}+${'data'}`}
+                                                                                                                onClick={(e) => {
+                                                                                                                    handleEditTemplate(e);
+                                                                                                                    popupState.close();
+                                                                                                                }}
+                                                                                                            >
+                                                                                                                <FiEdit size={14} />
+                                                                                                                &nbsp;
+                                                                                                                {dataLang.formatMessage({ id: "change" })}
+                                                                                                            </MenuItem>
+
+                                                                                                            <MenuItem
+                                                                                                                id={`${key}+${item.type_}+${'data'}`}
+                                                                                                                onClick={(e) => {
+                                                                                                                    handleDeleteTemplate(e);
+                                                                                                                    popupState.close();
+                                                                                                                }}
+                                                                                                            >
+                                                                                                                <IoTrashOutline size={16} />
+                                                                                                                &nbsp;
+                                                                                                                {dataLang.formatMessage({ id: "delete" })}
+                                                                                                            </MenuItem>
+                                                                                                        </Menu>
+                                                                                                    </div>
+                                                                                                )}
+                                                                                            </PopupState>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                }
+                                                                            </>
+                                                                        }
                                                                     </div>
                                                                 );
                                                             })}
@@ -698,7 +822,7 @@ export default function RegisterSetting(props) {
                                                             <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit' style={{ marginTop: "8px" }}>
                                                                 Setting
                                                                 <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Tit_Add'
-                                                                    id='setting'
+                                                                    id={`${'setting'}+${item.type_}`}
                                                                     onClick={(e) => handleAddTemplate(e)}>
                                                                     <IoMdAddCircleOutline size={20} />
                                                                 </div>
@@ -706,61 +830,161 @@ export default function RegisterSetting(props) {
 
                                                             {Object.entries(item.setting).map(([key, value]) => {
                                                                 return (
-                                                                    <div key={key} className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
-                                                                            {key}
-                                                                        </div>
+                                                                    <div key={key}>
+                                                                        {typeof (Object.values(item.setting[key])[0]) === 'object'
+                                                                            ?
+                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'
+                                                                                style={{ marginTop: "0px" }}
+                                                                            >
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {key} {'('}{k}{')'}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
-                                                                            {item.setting[key].register}
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.setting[key][k].register}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
-                                                                            {item.setting[key].cal}
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.setting[key][k].cal}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
-                                                                            {item.setting[key].type}
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                {item.setting[key][k].type}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
-                                                                            note
-                                                                        </div>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px" }}>
+                                                                                                note
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
 
-                                                                        <div style={{ cursor: "pointer" }}>
-                                                                            <PopupState variant="popper" popupId="demo-popup-popper">
-                                                                                {(popupState) => (
-                                                                                    <div className="DAT_TableEdit">
-                                                                                        <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
-                                                                                        <Menu {...bindMenu(popupState)}>
-                                                                                            <MenuItem
-                                                                                                id={`${key}+${item.setting[key].register}+${item.setting[key].cal}+${item.setting[key].type}`}
-                                                                                                onClick={(e) => {
-                                                                                                    handleEditTemplate(e);
-                                                                                                    popupState.close();
-                                                                                                }}
-                                                                                            >
-                                                                                                <FiEdit size={14} />
-                                                                                                &nbsp;
-                                                                                                {dataLang.formatMessage({ id: "change" })}
-                                                                                            </MenuItem>
+                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                    {Object.entries(item.setting[key]).map(([k, v]) => {
+                                                                                        return (
+                                                                                            <div key={k} style={{ marginTop: "8px", cursor: "pointer" }}>
+                                                                                                <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                                    {(popupState) => (
+                                                                                                        <div className="DAT_TableEdit">
+                                                                                                            <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                            <Menu {...bindMenu(popupState)}>
+                                                                                                                <MenuItem
+                                                                                                                    id={`${key + '(' + k + ')'}+${item.setting[key][k].register}+${item.setting[key][k].cal}+${item.setting[key][k].type}+${item.type_}+${'setting'}`}
+                                                                                                                    onClick={(e) => {
+                                                                                                                        handleEditTemplate(e);
+                                                                                                                        popupState.close();
+                                                                                                                    }}
+                                                                                                                >
+                                                                                                                    <FiEdit size={14} />
+                                                                                                                    &nbsp;
+                                                                                                                    {dataLang.formatMessage({ id: "change" })}
+                                                                                                                </MenuItem>
 
-                                                                                            <MenuItem
-                                                                                                id={`${key}+${item.type_}+${'setting'}`}
-                                                                                                onClick={(e) => {
-                                                                                                    handleDeleteTemplate(e);
-                                                                                                    popupState.close();
-                                                                                                }}
-                                                                                            >
-                                                                                                <IoTrashOutline size={16} />
-                                                                                                &nbsp;
-                                                                                                {dataLang.formatMessage({ id: "delete" })}
-                                                                                            </MenuItem>
-                                                                                        </Menu>
-                                                                                    </div>
-                                                                                )}
-                                                                            </PopupState>
-                                                                        </div>
+                                                                                                                <MenuItem
+                                                                                                                    id={`${key + '(' + k + ')'}+${item.type_}+${'setting'}`}
+                                                                                                                    onClick={(e) => {
+                                                                                                                        handleDeleteTemplate(e);
+                                                                                                                        popupState.close();
+                                                                                                                    }}
+                                                                                                                >
+                                                                                                                    <IoTrashOutline size={16} />
+                                                                                                                    &nbsp;
+                                                                                                                    {dataLang.formatMessage({ id: "delete" })}
+                                                                                                                </MenuItem>
+                                                                                                            </Menu>
+                                                                                                        </div>
+                                                                                                    )}
+                                                                                                </PopupState>
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
+                                                                            </div>
+                                                                            :
+                                                                            <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item'>
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Key'>
+                                                                                    {key}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>
+                                                                                    {item.setting[key].register}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>
+                                                                                    {item.setting[key].cal}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
+                                                                                    {item.setting[key].type}
+                                                                                </div>
+
+                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                    note
+                                                                                </div>
+
+                                                                                <div style={{ cursor: "pointer" }}>
+                                                                                    <PopupState variant="popper" popupId="demo-popup-popper">
+                                                                                        {(popupState) => (
+                                                                                            <div className="DAT_TableEdit">
+                                                                                                <IoMdMore size={20} color="grey" {...bindToggle(popupState)} />
+                                                                                                <Menu {...bindMenu(popupState)}>
+                                                                                                    <MenuItem
+                                                                                                        id={`${key}+${item.setting[key].register}+${item.setting[key].cal}+${item.setting[key].type}+${item.type_}+${'setting'}`}
+                                                                                                        onClick={(e) => {
+                                                                                                            handleEditTemplate(e);
+                                                                                                            popupState.close();
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <FiEdit size={14} />
+                                                                                                        &nbsp;
+                                                                                                        {dataLang.formatMessage({ id: "change" })}
+                                                                                                    </MenuItem>
+
+                                                                                                    <MenuItem
+                                                                                                        id={`${key}+${item.type_}+${'setting'}`}
+                                                                                                        onClick={(e) => {
+                                                                                                            handleDeleteTemplate(e);
+                                                                                                            popupState.close();
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <IoTrashOutline size={16} />
+                                                                                                        &nbsp;
+                                                                                                        {dataLang.formatMessage({ id: "delete" })}
+                                                                                                    </MenuItem>
+                                                                                                </Menu>
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </PopupState>
+                                                                                </div>
+                                                                            </div>
+                                                                        }
                                                                     </div>
                                                                 );
                                                             })}
@@ -803,7 +1027,9 @@ export default function RegisterSetting(props) {
     };
 
     const handleAddTemplate = (e) => {
-        setPopupInfo({ ...popupInfo, templatetype: e.currentTarget.id });
+        const id = e.currentTarget.id;
+        const idArr = id.split("+");
+        setPopupInfo({ ...popupInfo, templateType: idArr[0], type_: idArr[1] });
         setPopupState(true);
         setPopupType("addTemplate");
     };
@@ -849,8 +1075,10 @@ export default function RegisterSetting(props) {
     useEffect(() => {
         if (registerID.value !== '') {
             let data = loggerListRS.value.filter((item) => item.brand_ === registerID.value);
+            console.log('logger', data);
             setDataLogger(data);
             let data_ = inverterListRS.value.filter((item) => item.brand_ === registerID.value);
+            console.log('inverter', data_);
             setDataInverter(data_);
         }
         // eslint-disable-next-line
@@ -867,7 +1095,7 @@ export default function RegisterSetting(props) {
                             <span>{dataLang.formatMessage({ id: "registersetting" })}</span>
                         </div>
 
-                        <div className="DAT_Header_Filter">
+                        {/* <div className="DAT_Header_Filter">
                             <input
                                 type="text"
                                 placeholder={dataLang.formatMessage({ id: "enterRegister" }) + "..."}
@@ -879,7 +1107,7 @@ export default function RegisterSetting(props) {
                             <CiSearch color="gray" size={20} />
                         </div>
 
-                        <div></div>
+                        <div></div> */}
                     </div>
 
                     <div className='DAT_RS'>
