@@ -6,10 +6,13 @@ export default createSlice({
     cal: {
       bat_1: 0,
       bat_2: 0,
+      bat_3: 0,
+      bat_4: 0,
       bat_in_1: 0,
       bat_out_1: 0,
       con_1: 0,
       con_2: 0,
+      con_3: 0,
       grid_1: 0,
       grid_in_1: 0,
       grid_in_2: 0,

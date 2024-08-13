@@ -151,7 +151,7 @@ export default function DashboardHistory(props) {
               },
             ];
           });
-          for (let i = x.length; i < 287; i++) {
+          for (let i = x.length; i < 1000; i++) {
             if (
               moment(x[x.length - 1].time, "HH:mm") < moment("23:55", "HH:mm")
             ) {
@@ -589,7 +589,7 @@ export default function DashboardHistory(props) {
           ];
         });
 
-        for (let i = x.length; i < 287; i++) {
+        for (let i = x.length; i < 1000; i++) {
           if (
             moment(x[x.length - 1].time, "HH:mm") < moment("23:55", "HH:mm")
           ) {

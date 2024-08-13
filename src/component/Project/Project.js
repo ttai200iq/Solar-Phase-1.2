@@ -65,7 +65,7 @@ export const deviceData = signal([]);
 export const inverterData = signal([]);
 export const projectwarnfilter = signal(0);
 export const dataproject = signal([]);
-const logger = signal([]);
+export const logger = signal([]);
 
 export const Empty = (props) => {
   const dataLang = useIntl();
@@ -682,7 +682,7 @@ export default function Project(props) {
 
             num_[key][i] = inum.reduce((accumulator, currentValue) => {
               return Number(accumulator) + Number(currentValue);
-            }, 0);
+            }, 0) * parseFloat(value.cal);
 
             if (key == "pro_1") {
               if (invt[item.psn]?.enabled == "1") {
@@ -699,7 +699,7 @@ export default function Project(props) {
               cal[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
                   return Number(accumulator) + Number(currentValue);
-                }, 0) * parseFloat(value.cal)
+                }, 0)
               ).toFixed(2);
             }
             break;
@@ -720,7 +720,7 @@ export default function Project(props) {
                 : parseFloat(float_value).toFixed(2) || 0;
             };
 
-            num_[key][i] = convertToDoublewordAndFloat(e, "int");
+            num_[key][i] = convertToDoublewordAndFloat(e, "int") * parseFloat(value.cal);
 
             if (key == "pro_1") {
               if (invt[item.psn]?.enabled == "1") {
@@ -735,18 +735,16 @@ export default function Project(props) {
               cal[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
                   return Number(accumulator) + Number(currentValue);
-                }, 0) * parseFloat(value.cal)
+                }, 0)
               ).toFixed(2);
             }
             break;
-          default:
+          case "real":
             num_[key][i] =
-              parseFloat(invt[item.psn]?.[value.register] || 0) *
-              parseFloat(value.cal);
+              parseFloat(invt[item.psn]?.[value.register] || 0) * parseFloat(value.cal);
             if (key == "pro_2") {
               daily_[item.pplantid] =
-                parseFloat(invt[item.psn]?.[value.register]) *
-                parseFloat(value.cal);
+                parseFloat(invt[item.psn]?.[value.register]) * parseFloat(value.cal);
             }
             if (i == logger.value.length - 1) {
               cal[key] = parseFloat(
@@ -755,6 +753,8 @@ export default function Project(props) {
                 })
               ).toFixed(2);
             }
+            break;
+          default:
             break;
         }
       });

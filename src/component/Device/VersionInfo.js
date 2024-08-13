@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { info, tab } from './Device';
 
 import { IoIosArrowUp } from 'react-icons/io';
+import { checkBrand } from '../../App';
 
 export default function VersionInfo(props) {
     const dataLang = useIntl()
@@ -43,21 +44,43 @@ export default function VersionInfo(props) {
                                 case 'inverter':
                                     return (
                                         <>
-                                            <div className="DAT_Info_Databox_Content_Column">
-                                                <p>
-                                                    {dataLang.formatMessage({ id: 'masterVersion' })}: {`${info.value.invt[info.value.pdata.masterver.register]?.[0] || 0}.${info.value.invt[info.value.pdata.masterver.register]?.[1] || 0}.${info.value.invt[info.value.pdata.masterver.register]?.[2] || 0}`}
-                                                </p>
-                                            </div>
-                                            <div className="DAT_Info_Databox_Content_Column">
-                                                <p>
-                                                    {dataLang.formatMessage({ id: 'viceVersion' })}: {`${info.value.invt[info.value.pdata.vicever.register]?.[0] || 0}.${info.value.invt[info.value.pdata.vicever.register]?.[1] || 0}.${info.value.invt[info.value.pdata.vicever.register]?.[2] || 0}`}
-                                                </p>
-                                            </div>
-                                            <div className="DAT_Info_Databox_Content_Column">
-                                                <p>
-                                                    {dataLang.formatMessage({ id: 'hmiVersion' })}: {`${info.value.invt[info.value.pdata.hmiver.register]?.[0] || 0}.${info.value.invt[info.value.pdata.hmiver.register]?.[1] || 0}.${info.value.invt[info.value.pdata.hmiver.register]?.[2] || 0}`}
-                                                </p>
-                                            </div>
+                                            {(() => {
+                                                switch (checkBrand(info.value.type)) {
+                                                    case 'SUNGROW':
+                                                        return (<>
+                                                            <div className="DAT_Info_Databox_Content_Column">
+                                                                <p>
+                                                                    {dataLang.formatMessage({ id: 'masterVersion' })}: {`${info.value.invt[info.value.pdata.masterver.register]?.[0] || 0}.${info.value.invt[info.value.pdata.masterver.register]?.[1] || 0}.${info.value.invt[info.value.pdata.masterver.register]?.[2] || 0}`}
+                                                                </p>
+                                                            </div>
+                                                            <div className="DAT_Info_Databox_Content_Column">
+                                                                <p>
+                                                                    {dataLang.formatMessage({ id: 'viceVersion' })}: {`${info.value.invt[info.value.pdata.vicever.register]?.[0] || 0}.${info.value.invt[info.value.pdata.vicever.register]?.[1] || 0}.${info.value.invt[info.value.pdata.vicever.register]?.[2] || 0}`}
+                                                                </p>
+                                                            </div>
+                                                        </>);
+                                                    case 'INVT':
+                                                        return (<>
+                                                            <div className="DAT_Info_Databox_Content_Column">
+                                                                <p>
+                                                                    {dataLang.formatMessage({ id: 'masterVersion' })}: {`${info.value.invt[info.value.pdata.masterver.register]?.[0] || 0}.${info.value.invt[info.value.pdata.masterver.register]?.[1] || 0}.${info.value.invt[info.value.pdata.masterver.register]?.[2] || 0}`}
+                                                                </p>
+                                                            </div>
+                                                            <div className="DAT_Info_Databox_Content_Column">
+                                                                <p>
+                                                                    {dataLang.formatMessage({ id: 'viceVersion' })}: {`${info.value.invt[info.value.pdata.vicever.register]?.[0] || 0}.${info.value.invt[info.value.pdata.vicever.register]?.[1] || 0}.${info.value.invt[info.value.pdata.vicever.register]?.[2] || 0}`}
+                                                                </p>
+                                                            </div>
+                                                            <div className="DAT_Info_Databox_Content_Column">
+                                                                <p>
+                                                                    {dataLang.formatMessage({ id: 'hmiVersion' })}: {`${info.value.invt[info.value.pdata.hmiver.register]?.[0] || 0}.${info.value.invt[info.value.pdata.hmiver.register]?.[1] || 0}.${info.value.invt[info.value.pdata.hmiver.register]?.[2] || 0}`}
+                                                                </p>
+                                                            </div>
+                                                        </>);
+                                                    default:
+                                                        return (<></>);
+                                                }
+                                            })()}
                                         </>
                                     )
                                 default:

@@ -14,7 +14,7 @@ import { ClockLoader, PacmanLoader } from "react-spinners";
 import Login from "./component/Login/Login";
 import Verify from "./component/Verify/Verify";
 import { useDispatch, useSelector } from "react-redux";
-import { host } from "./component/Lang/Contant";
+import { brands, host } from "./component/Lang/Contant";
 import adminslice from "./component/Redux/adminslice";
 import { callApi } from "./component/Api/Api";
 import { signal } from "@preact/signals-react";
@@ -23,6 +23,7 @@ import { useIntl } from "react-intl";
 import ErrorSetting from "./component/ErrorSetting/ErrorSetting";
 import { io } from "socket.io-client";
 import NotfoundErr from "./NotfoundErr";
+import RegisterSetting from "./component/RegisterSetting/RegisterSetting";
 
 const Home = React.lazy(() => import("./component/Home/Home"));
 const Project = React.lazy(() => import("./component/Project/Project"));
@@ -130,6 +131,12 @@ export const showUnitk = (value) => {
   } else {
     return "k";
   }
+};
+
+export const checkBrand = (brand) => {
+  if (brands.INVT.type.find((item) => item == brand)) return 'INVT'
+  else if (brands.SUNGROW.type.find((item) => item == brand)) return 'SUNGROW'
+  else return 'UNKNOW'
 };
 
 export default function App() {
@@ -311,6 +318,7 @@ export default function App() {
                       <Route path="/User" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><User /></Suspense>} />
                       <Route path="/Contact" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Contact /></Suspense>} />
                       <Route path="/ErrorSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><ErrorSetting /></Suspense>} />
+                      <Route path="/RegisterSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><RegisterSetting /></Suspense>} />
                       <Route path="/Rule" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Rule /></Suspense>} />
                     </>
                   ) : (<></>)}
@@ -322,6 +330,7 @@ export default function App() {
                       <Route path="/User" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><User /></Suspense>} />
                       <Route path="/Contact" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Contact /></Suspense>} />
                       <Route path="/ErrorSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><ErrorSetting /></Suspense>} />
+                      <Route path="/RegisterSetting" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><RegisterSetting /></Suspense>} />
                       <Route path="/Rule" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Rule /></Suspense>} />
                     </>
                   ) : (<></>)}

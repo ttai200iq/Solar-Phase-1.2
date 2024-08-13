@@ -4,6 +4,8 @@ import { signal } from "@preact/signals-react";
 import { useIntl } from 'react-intl';
 import Data from "./Data.js";
 import { isBrowser, useMobileOrientation } from 'react-device-detect';
+import { projectData } from './Project.js';
+import { temp } from './ProjectData.js';
 
 const move = signal({
     moveLtoR: 0,
@@ -151,6 +153,7 @@ const GraphGrid = (props) => {
                 lineA_.value = "Default";
             }
         }
+        // console.log(props.cal.pro_1);
     }, [props.cal.pro_1]);
 
 
@@ -1054,7 +1057,7 @@ const GraphConsumptionMobile = (props) => {
                     // }
 
 
-                    console.log(lineC_.value);
+                    // console.log(lineC_.value);
                 }
             }
 
@@ -1280,6 +1283,11 @@ const GraphFull = (props) => {
     }, [props.cal?.bat_2]);
 
     useEffect(() => {
+        // console.log(temp.value);
+        let inverter = 'undefined';
+        if (temp.value.length !== 0) {
+            inverter = temp.value[0].type
+        }
 
         if (props.state) {
             if (parseFloat(props.cal?.pro_1 / 1000).toFixed(2) > 0) {
@@ -1291,32 +1299,71 @@ const GraphFull = (props) => {
 
 
             if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) > 0) {
-                lineC_.value = "moveRtoL";
+                if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+                    lineC_.value = "moveRtoL";
+                }
+
+                if (inverter === 'HYBRID_SUNGROW_1') {
+                    lineC_.value = "moveLtoR";
+                }
+
+
             } else if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) < 0) {
-                lineC_.value = "moveLtoR";
+                if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+                    lineC_.value = "moveLtoR";
+                }
+
+                if (inverter === 'HYBRID_SUNGROW_1') {
+                    lineC_.value = "moveRtoL";
+                }
             } else {
                 lineC_.value = "Default";
             }
 
-            if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) > 0) {
-                lineB_.value = "moveRtoL";
-            } else if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) < 0) {
-                lineB_.value = "moveLtoR";
-            } else {
-                lineB_.value = "Default";
+            if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+                if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) > 0) {
+                    lineB_.value = "moveRtoL";
+                } else if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) < 0) {
+                    lineB_.value = "moveLtoR";
+                } else {
+                    lineB_.value = "Default";
+                }
+            }
+            // console.log(inverter, props.cal?.bat_3, props.cal?.bat_4, props.cal?.con_3);
+            if (inverter === 'HYBRID_SUNGROW_1') {
+                if (props.cal?.bat_3 === 1 && props.cal?.bat_4 === 0) {
+                    lineB_.value = "moveRtoL";
+                } else if (props.cal?.bat_3 === 0 && props.cal?.bat_4 === 1) {
+                    lineB_.value = "moveLtoR";
+                } else {
+                    lineB_.value = "Default";
+                }
+
+
             }
 
 
+            if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
 
+                if (parseFloat(props.cal?.con_1).toFixed(2) > 0) {
+                    lineD_.value = "moveLtoR";
+                } else {
+                    lineD_.value = "Default";
+                }
+            }
 
-            if (parseFloat(props.cal?.con_1).toFixed(2) > 0) {
-                lineD_.value = "moveLtoR";
-            } else {
-                lineD_.value = "Default";
+            if (inverter === 'HYBRID_SUNGROW_1') {
+                if (props.cal?.con_3) {
+                    lineD_.value = "moveLtoR";
+                } else {
+                    lineD_.value = "Default";
+                }
             }
         }
 
-    }, [props.cal.pro_1, props.cal.con_1, props.cal.grid_1, props.cal.bat_1]);
+        // console.log(props.cal.pro_1);
+
+    }, [props.cal.pro_1, props.cal.con_1, props.cal.con_3, props.cal.grid_1, props.cal.bat_1, props.cal.bat_3, props.cal.bat_4]);
 
     useEffect(() => {
 
@@ -1651,6 +1698,11 @@ const GraphFullMobile = (props) => {
 
 
     useEffect(() => {
+        // console.log(temp.value);
+        let inverter = 'undefined';
+        if (temp.value.length !== 0) {
+            inverter = temp.value[0].type
+        }
 
         if (props.state) {
             if (parseFloat(props.cal?.pro_1 / 1000).toFixed(2) > 0) {
@@ -1662,32 +1714,71 @@ const GraphFullMobile = (props) => {
 
 
             if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) > 0) {
-                lineC_.value = "moveRtoL";
+                if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+                    lineC_.value = "moveRtoL";
+                }
+
+                if (inverter === 'HYBRID_SUNGROW_1') {
+                    lineC_.value = "moveLtoR";
+                }
+
+
             } else if (parseFloat(props.cal?.grid_1 / 1000).toFixed(2) < 0) {
-                lineC_.value = "moveLtoR";
+                if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+                    lineC_.value = "moveLtoR";
+                }
+
+                if (inverter === 'HYBRID_SUNGROW_1') {
+                    lineC_.value = "moveRtoL";
+                }
             } else {
                 lineC_.value = "Default";
             }
 
-            if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) > 0) {
-                lineB_.value = "moveRtoL";
-            } else if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) < 0) {
-                lineB_.value = "moveLtoR";
-            } else {
-                lineB_.value = "Default";
+            if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+                if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) > 0) {
+                    lineB_.value = "moveRtoL";
+                } else if (parseFloat(props.cal?.bat_1 / 1000).toFixed(2) < 0) {
+                    lineB_.value = "moveLtoR";
+                } else {
+                    lineB_.value = "Default";
+                }
+            }
+            // console.log(inverter, props.cal?.bat_3, props.cal?.bat_4, props.cal?.con_3);
+            if (inverter === 'HYBRID_SUNGROW_1') {
+                if (props.cal?.bat_3 === 1 && props.cal?.bat_4 === 0) {
+                    lineB_.value = "moveRtoL";
+                } else if (props.cal?.bat_3 === 0 && props.cal?.bat_4 === 1) {
+                    lineB_.value = "moveLtoR";
+                } else {
+                    lineB_.value = "Default";
+                }
+
+
             }
 
 
+            if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
 
+                if (parseFloat(props.cal?.con_1).toFixed(2) > 0) {
+                    lineD_.value = "moveLtoR";
+                } else {
+                    lineD_.value = "Default";
+                }
+            }
 
-            if (parseFloat(props.cal?.con_1).toFixed(2) > 0) {
-                lineD_.value = "moveLtoR";
-            } else {
-                lineD_.value = "Default";
+            if (inverter === 'HYBRID_SUNGROW_1') {
+                if (props.cal?.con_3) {
+                    lineD_.value = "moveLtoR";
+                } else {
+                    lineD_.value = "Default";
+                }
             }
         }
 
-    }, [props.cal.pro_1, props.cal.con_1, props.cal.grid_1, props.cal.bat_1]);
+        // console.log(props.cal.pro_1);
+
+    }, [props.cal.pro_1, props.cal.con_1, props.cal.con_3, props.cal.grid_1, props.cal.bat_1, props.cal.bat_3, props.cal.bat_4]);
 
     useEffect(() => {
 
@@ -1764,7 +1855,7 @@ const GraphFullMobile = (props) => {
                     // }
 
 
-                    console.log(lineC_.value);
+                    // console.log(lineC_.value);
                 }
             }
 

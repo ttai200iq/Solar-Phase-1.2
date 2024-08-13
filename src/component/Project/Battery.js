@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { isBrowser } from "react-device-detect";
+import { temp } from "./ProjectData";
 
 export default function Battery(props) {
   const dataLang = useIntl();
@@ -17,12 +18,29 @@ export default function Battery(props) {
   const [source, setSource] = useState("");
 
   useEffect(() => {
-    if (parseFloat(props.cal?.bat_1) > 0) {
-      setState(true);
-    } else {
-      setState(false);
+
+    let inverter = 'undefined';
+    if (temp.value.length !== 0) {
+      inverter = temp.value[0].type
     }
-  }, [props.cal.bat_1]);
+
+    if (inverter === 'HYBRID_1' || inverter === 'HYBRID_2') {
+      if (parseFloat(props.cal?.bat_1) > 0) {
+        setState(true);
+      } else {
+        setState(false);
+      }
+    }
+
+    if (inverter === 'HYBRID_SUNGROW_1') {
+      if(props.cal?.bat_3 ===1 && props.cal?.bat_4 ===0){
+        setState(true);
+      }else{
+        setState(false);
+      }
+    }
+
+  }, [props.cal.bat_1, props.cal.bat_3, props.cal.bat_4]);
 
   useEffect(() => {
     if (parseFloat(props.cal?.bat_2) == 0) {
