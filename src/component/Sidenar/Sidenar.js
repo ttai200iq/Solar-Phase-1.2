@@ -67,25 +67,49 @@ export default function Sidenar(props) {
       link: "none",
       li:
         userInfor.value.type === "master"
-          ? [
-            { link: "/Role", name: dataLang.formatMessage({ id: "role" }) },
-            { link: "/GroupRole", name: dataLang.formatMessage({ id: "grouprole" }) },
-            { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
-            { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
-            { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
-            { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
-            { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
-          ]
-          : userInfor.value.type === "mainadmin"
+          ?
+          isBrowser
             ? [
               { link: "/Role", name: dataLang.formatMessage({ id: "role" }) },
-              // { link: "/GroupRole", name: dataLang.formatMessage({ id: 'grouprole' }) },
+              { link: "/GroupRole", name: dataLang.formatMessage({ id: "grouprole" }) },
               { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
               { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
               { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
               { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
               { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
             ]
+            : [
+              { link: "/Role", name: dataLang.formatMessage({ id: "role" }) },
+              { link: "/GroupRole", name: dataLang.formatMessage({ id: "grouprole" }) },
+              { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
+              { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
+              { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
+              // { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
+              { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
+            ]
+          : userInfor.value.type === "mainadmin"
+            ?
+            isBrowser
+              ?
+              [
+                { link: "/Role", name: dataLang.formatMessage({ id: "role" }) },
+                // { link: "/GroupRole", name: dataLang.formatMessage({ id: 'grouprole' }) },
+                { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
+                { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
+                { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
+                { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
+                { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
+              ]
+              :
+              [
+                { link: "/Role", name: dataLang.formatMessage({ id: "role" }) },
+                // { link: "/GroupRole", name: dataLang.formatMessage({ id: 'grouprole' }) },
+                { link: "/User", name: dataLang.formatMessage({ id: "account" }) },
+                { link: "/Contact", name: dataLang.formatMessage({ id: "contact" }) },
+                { link: "/ErrorSetting", name: dataLang.formatMessage({ id: "errorsetting" }) },
+                // { link: "/RegisterSetting", name: dataLang.formatMessage({ id: "registersetting" }) },
+                { link: "/Rule", name: dataLang.formatMessage({ id: "rule" }) },
+              ]
             : userInfor.value.type === "admin"
               ? [
                 { link: "/Role", name: dataLang.formatMessage({ id: "role" }) },

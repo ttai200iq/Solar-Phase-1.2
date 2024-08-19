@@ -248,7 +248,7 @@
         padding: 16px;
         color: COLOR.$Gray-color;
         border-bottom: solid 1px rgba(198, 197, 197, 0.5);
-        max-height: 320px;
+        max-height: 450px;
         overflow-y: scroll;
 
         &::-webkit-scrollbar {
@@ -280,6 +280,18 @@
             width: 100%;
             margin: auto;
             gap: 5px;
+
+            & select {
+                width: 100%;
+                height: 30px;
+                border-radius: 5px;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                outline: none;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                font-family: segoeui;
+            }
 
             & input {
                 width: 100%;

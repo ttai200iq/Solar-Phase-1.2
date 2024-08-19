@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './RegisterSetting.scss';
 
 import { useIntl } from 'react-intl';
@@ -11,10 +11,14 @@ export default function RSPopup(props) {
     const dataLang = useIntl();
     const typeName = useRef();
     const key = useRef();
+    const child_key = useRef();
     const register = useRef();
     const scale = useRef();
     const type = useRef();
     const note = useRef();
+    const [dataType, setDataType] = useState('normal');
+    const [key_, setKey_] = useState('');
+    const [child_key_, setChild_key_] = useState('');
 
     const popup_state = {
         pre: { transform: "rotate(0deg)", transition: "0.5s", color: "white" },
@@ -112,62 +116,64 @@ export default function RSPopup(props) {
                     if (props.info.templateType === 'data') {
                         // data
                         let keyList = Object.entries(temp.data_).map(([key, value]) => key);
-                        if (keyList.includes(key.current.value)) {
-                            alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                        } else if (key.current.value.includes('(', ')')) {
-                            let id = key.current.value.split(/[()]/);
-                            if (keyList.includes(id[0])) {
-                                let keyList_ = Object.entries(temp.data_[id[0]]).map(([key, value]) => key);
-                                if (keyList_.includes(id[1])) {
+                        if (dataType === 'object') {
+                            if (keyList.includes(key.current.value)) {
+                                let keyList_ = Object.entries(temp.data_[key.current.value]).map(([key, value]) => key);
+                                if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    const newData_ = { ...temp.data_, [id[0]]: data };
+                                    const data = { ...temp.data_[key.current.value], [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                                    const newData_ = { ...temp.data_, [key.current.value]: data };
                                     temp.data_ = newData_;
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.data_, [id[0]]: { [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } } };
+                                const newData = { ...temp.data_, [key.current.value]: { [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } } };
                                 temp.data_ = newData;
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
                         } else {
-                            const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
-                            temp.data_ = newData;
-                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                            props.handleClose();
+                            if (keyList.includes(key.current.value)) {
+                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
+                            } else {
+                                const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
+                                temp.data_ = newData;
+                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                                props.handleClose();
+                            }
                         }
                     } else {
                         // setting
                         let keyList = Object.entries(temp.setting).map(([key, value]) => key);
-                        if (keyList.includes(key.current.value)) {
-                            alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                        } else if (key.current.value.includes('(', ')')) {
-                            let id = key.current.value.split(/[()]/);
-                            if (keyList.includes(id[0])) {
-                                let keyList_ = Object.entries(temp.setting[id[0]]).map(([key, value]) => key);
-                                if (keyList_.includes(id[1])) {
+                        if (dataType === 'object') {
+                            if (keyList.includes(key.current.value)) {
+                                let keyList_ = Object.entries(temp.setting[key.current.value]).map(([key, value]) => key);
+                                if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.setting[id[0]], [id[1]]: register.current.value };
-                                    const newData_ = { ...temp.setting, [id[0]]: data };
+                                    const data = { ...temp.setting[key.current.value], [child_key.current.value]: register.current.value };
+                                    const newData_ = { ...temp.setting, [key.current.value]: data };
                                     temp.setting = newData_;
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.setting, [id[0]]: { [id[1]]: register.current.value } };
+                                const newData = { ...temp.setting, [key.current.value]: { [child_key.current.value]: register.current.value } };
                                 temp.setting = newData;
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
                         } else {
-                            const newData = { ...temp.setting, [key.current.value]: register.current.value };
-                            temp.setting = newData;
-                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                            props.handleClose();
+                            if (keyList.includes(key.current.value)) {
+                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
+                            } else {
+                                const newData = { ...temp.setting, [key.current.value]: register.current.value };
+                                temp.setting = newData;
+                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                                props.handleClose();
+                            }
                         }
                     }
                 } else {
@@ -176,62 +182,64 @@ export default function RSPopup(props) {
                     if (props.info.templateType === 'data') {
                         // data
                         let keyList = Object.entries(temp.data_).map(([key, value]) => key);
-                        if (keyList.includes(key.current.value)) {
-                            alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                        } else if (key.current.value.includes('(', ')')) {
-                            let id = key.current.value.split(/[()]/);
-                            if (keyList.includes(id[0])) {
-                                let keyList_ = Object.entries(temp.data_[id[0]]).map(([key, value]) => key);
-                                if (keyList_.includes(id[1])) {
+                        if (dataType === 'object') {
+                            if (keyList.includes(key.current.value)) {
+                                let keyList_ = Object.entries(temp.data_[key.current.value]).map(([key, value]) => key);
+                                if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    const newData_ = { ...temp.data_, [id[0]]: data };
+                                    const data = { ...temp.data_[key.current.value], [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                                    const newData_ = { ...temp.data_, [key.current.value]: data };
                                     temp.data_ = newData_;
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.data_, [id[0]]: { [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } } };
+                                const newData = { ...temp.data_, [key.current.value]: { [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } } };
                                 temp.data_ = newData;
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
                         } else {
-                            const newData = { ...temp.data_, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                            temp.data_ = newData;
-                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                            props.handleClose();
+                            if (keyList.includes(key.current.value)) {
+                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
+                            } else {
+                                const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
+                                temp.data_ = newData;
+                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                                props.handleClose();
+                            }
                         }
                     } else {
                         // setting
                         let keyList = Object.entries(temp.setting).map(([key, value]) => key);
-                        if (keyList.includes(key.current.value)) {
-                            alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                        } else if (key.current.value.includes('(', ')')) {
-                            let id = key.current.value.split(/[()]/);
-                            if (keyList.includes(id[0])) {
-                                let keyList_ = Object.entries(temp.setting[id[0]]).map(([key, value]) => key);
-                                if (keyList_.includes(id[1])) {
+                        if (dataType === 'object') {
+                            if (keyList.includes(key.current.value)) {
+                                let keyList_ = Object.entries(temp.setting[key.current.value]).map(([key, value]) => key);
+                                if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.setting[id[0]], [id[1]]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
-                                    const newData_ = { ...temp.setting, [id[0]]: data };
+                                    const data = { ...temp.setting[key.current.value], [child_key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value } };
+                                    const newData_ = { ...temp.setting, [key.current.value]: data };
                                     temp.setting = newData_;
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.setting, [id[0]]: { [id[1]]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } } };
+                                const newData = { ...temp.setting, [key.current.value]: { [child_key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value } } };
                                 temp.setting = newData;
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
                         } else {
-                            const newData = { ...temp.setting, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
-                            temp.setting = newData;
-                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                            props.handleClose();
+                            if (keyList.includes(key.current.value)) {
+                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
+                            } else {
+                                const newData = { ...temp.setting, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value } };
+                                temp.setting = newData;
+                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                                props.handleClose();
+                            }
                         }
                     }
                 }
@@ -244,123 +252,37 @@ export default function RSPopup(props) {
                         // data
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
-                            let keyList = (Object.entries(temp.data_).map(([key, value]) => key)).filter(item => item !== id[0]);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else {
-                                if (key.current.value.includes('(', ')')) {
-                                    let id_ = key.current.value.split(/[()]/);
-                                    let keyListObj = (Object.entries(temp.data_[id_[0]]).map(([key, value]) => key)).filter(item => item !== id[1]);
-                                    if (keyListObj.includes(id_[1])) {
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                    } else {
-                                        temp.data_[id_[0]] = Object.fromEntries(Object.entries(temp.data_[id_[0]]).filter(([key, value]) => key !== id[1]));
-                                        const newData = { ...temp.data_[id_[0]], [id_[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                        temp.data_[id_[0]] = newData;
+                            temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
+                            const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            temp.data_[id[0]] = newData;
 
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                        props.handleClose();
-                                    }
-                                } else {
-                                    temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
-                                    const newData = { ...temp.data_, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    temp.data_ = newData;
-                                    temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    if (Object.entries(temp.data_[id[0]]).length === 0) {
-                                        temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== id[0]));
-                                    }
-
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         } else {
-                            let keyList = (Object.entries(temp.data_).map(([key, value]) => key)).filter(item => item !== props.info.key);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else if (key.current.value.includes('(', ')')) {
-                                let id = key.current.value.split(/[()]/);
-                                let keyListObj = (Object.entries(temp.data_[id[0]]).map(([key, value]) => key));
-                                if (keyListObj.includes(id[1])) {
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                } else {
-                                    temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    temp.data_[id[0]] = newData;
-                                    temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            const newData = { ...temp.data_, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            temp.data_ = newData;
 
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            } else {
-                                temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
-                                const newData = { ...temp.data_, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                temp.data_ = newData;
-
-                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                props.handleClose();
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         }
                     } else {
                         //setting
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
-                            let keyList = (Object.entries(temp.setting).map(([key, value]) => key)).filter(item => item !== id[0]);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else {
-                                if (key.current.value.includes('(', ')')) {
-                                    let id_ = key.current.value.split(/[()]/);
-                                    let keyListObj = (Object.entries(temp.setting[id_[0]]).map(([key, value]) => key)).filter(item => item !== id[1]);
-                                    if (keyListObj.includes(id_[1])) {
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                    } else {
-                                        temp.setting[id_[0]] = Object.fromEntries(Object.entries(temp.setting[id_[0]]).filter(([key, value]) => key !== id[1]));
-                                        const newData = { ...temp.setting[id_[0]], [id_[1]]: register.current.value };
-                                        temp.setting[id_[0]] = newData;
+                            temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
+                            const newData = { ...temp.setting[id[0]], [id[1]]: register.current.value };
+                            temp.setting[id[0]] = newData;
 
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                        props.handleClose();
-                                    }
-                                } else {
-                                    temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
-                                    const newData = { ...temp.setting, [key.current.value]: register.current.value };
-                                    temp.setting = newData;
-                                    temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    if (Object.entries(temp.setting[id[0]]).length === 0) {
-                                        temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== id[0]));
-                                    }
-
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         } else {
-                            let keyList = Object.entries(temp.setting).map(([key, value]) => key).filter(item => item !== props.info.key);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else if (key.current.value.includes('(', ')')) {
-                                let id = key.current.value.split(/[()]/);
-                                let keyListObj = Object.entries(temp.setting[id[0]]).map(([key, value]) => key);
-                                if (keyListObj.includes(id[1])) {
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                } else {
-                                    temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    const newData__ = { ...temp.setting[id[0]], [id[1]]: register.current.value };
-                                    temp.setting[id[0]] = newData__;
-                                    temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            const newData_ = { ...temp.setting, [props.info.key]: register.current.value };
+                            temp.setting = newData_;
 
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            } else {
-                                temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
-                                const newData_ = { ...temp.setting, [key.current.value]: register.current.value };
-                                temp.setting = newData_;
-
-                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                props.handleClose();
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         }
                     }
                 } else {
@@ -370,123 +292,37 @@ export default function RSPopup(props) {
                         // data
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
-                            let keyList = (Object.entries(temp.data_).map(([key, value]) => key)).filter(item => item !== id[0]);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else {
-                                if (key.current.value.includes('(', ')')) {
-                                    let id_ = key.current.value.split(/[()]/);
-                                    let keyListObj = (Object.entries(temp.data_[id_[0]]).map(([key, value]) => key)).filter(item => item !== id[1]);
-                                    if (keyListObj.includes(id_[1])) {
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                    } else {
-                                        temp.data_[id_[0]] = Object.fromEntries(Object.entries(temp.data_[id_[0]]).filter(([key, value]) => key !== id[1]));
-                                        const newData = { ...temp.data_[id_[0]], [id_[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                        temp.data_[id_[0]] = newData;
+                            temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
+                            const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            temp.data_[id[0]] = newData;
 
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                        props.handleClose();
-                                    }
-                                } else {
-                                    temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
-                                    const newData = { ...temp.data_, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    temp.data_ = newData;
-                                    temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    if (Object.entries(temp.data_[id[0]]).length === 0) {
-                                        temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== id[0]));
-                                    }
-
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         } else {
-                            let keyList = (Object.entries(temp.data_).map(([key, value]) => key)).filter(item => item !== props.info.key);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else if (key.current.value.includes('(', ')')) {
-                                let id = key.current.value.split(/[()]/);
-                                let keyListObj = (Object.entries(temp.data_[id[0]]).map(([key, value]) => key));
-                                if (keyListObj.includes(id[1])) {
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                } else {
-                                    temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    temp.data_[id[0]] = newData;
-                                    temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            const newData = { ...temp.data_, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            temp.data_ = newData;
 
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            } else {
-                                temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
-                                const newData = { ...temp.data_, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                temp.data_ = newData;
-
-                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                props.handleClose();
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         }
                     } else {
                         //setting
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
-                            let keyList = (Object.entries(temp.setting).map(([key, value]) => key)).filter(item => item !== id[0]);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else {
-                                if (key.current.value.includes('(', ')')) {
-                                    let id_ = key.current.value.split(/[()]/);
-                                    let keyListObj = (Object.entries(temp.setting[id_[0]]).map(([key, value]) => key)).filter(item => item !== id[1]);
-                                    if (keyListObj.includes(id_[1])) {
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                    } else {
-                                        temp.setting[id_[0]] = Object.fromEntries(Object.entries(temp.setting[id_[0]]).filter(([key, value]) => key !== id[1]));
-                                        const newData = { ...temp.setting[id_[0]], [id_[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                        temp.setting[id_[0]] = newData;
+                            temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
+                            const newData = { ...temp.setting[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            temp.setting[id[0]] = newData;
 
-                                        alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                        props.handleClose();
-                                    }
-                                } else {
-                                    temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
-                                    const newData = { ...temp.setting, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    temp.setting = newData;
-                                    temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    if (Object.entries(temp.setting[id[0]]).length === 0) {
-                                        temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== id[0]));
-                                    }
-
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         } else {
-                            let keyList = Object.entries(temp.setting).map(([key, value]) => key).filter(item => item !== props.info.key);
-                            if (keyList.includes(key.current.value)) {
-                                alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                            } else if (key.current.value.includes('(', ')')) {
-                                let id = key.current.value.split(/[()]/);
-                                let keyListObj = Object.entries(temp.setting[id[0]]).map(([key, value]) => key);
-                                if (keyListObj.includes(id[1])) {
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
-                                } else {
-                                    temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
-                                    const newData__ = { ...temp.setting[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                    temp.setting[id[0]] = newData__;
-                                    temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            const newData_ = { ...temp.setting, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            temp.setting = newData_;
 
-                                    alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                    props.handleClose();
-                                }
-                            } else {
-                                temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
-                                const newData_ = { ...temp.setting, [key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
-                                temp.setting = newData_;
-
-                                alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
-                                props.handleClose();
-                            }
+                            alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
+                            props.handleClose();
                         }
                     }
                 }
@@ -567,6 +403,20 @@ export default function RSPopup(props) {
         }
     };
 
+    useEffect(() => {
+        if (props.type === 'editTemplate') {
+            if (props.info.key.includes('(', ')')) {
+                setDataType('object');
+                let id = props.info.key.split(/[()]/);
+                setKey_(id[0]);
+                setChild_key_(id[1]);
+            } else {
+                setDataType('normal');
+                setKey_(props.info.key);
+            }
+        }
+    }, [props]);
+
     // Handle close when press ESC
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -638,8 +488,29 @@ export default function RSPopup(props) {
                             </span>;
                         case 'addTemplate':
                             return <div className='DAT_RSPopup_Body_Info'>
-                                <label>key</label>
-                                <input type="text" ref={key} />
+                                <label>data type</label>
+                                <select onChange={(e) => setDataType(e.target.value)}>
+                                    <option value='normal'>single</option>
+                                    <option value='object'>multiple</option>
+                                </select>
+
+                                {(() => {
+                                    switch (dataType) {
+                                        case 'object':
+                                            return <>
+                                                <label>key</label>
+                                                <input type="text" ref={key} />
+
+                                                <label>child key</label>
+                                                <input type="text" ref={child_key} />
+                                            </>;
+                                        default:
+                                            return <>
+                                                <label>key</label>
+                                                <input type="text" ref={key} />
+                                            </>;
+                                    }
+                                })()}
 
                                 <label>register</label>
                                 <textarea type="text" ref={register} />
@@ -655,8 +526,23 @@ export default function RSPopup(props) {
                             </div>;
                         case 'editTemplate':
                             return <div className='DAT_RSPopup_Body_Info'>
-                                <label>key</label>
-                                <input type="text" defaultValue={props.info.key === 'undefined' ? '' : props.info.key} ref={key} />
+                                {(() => {
+                                    switch (dataType) {
+                                        case 'object':
+                                            return <>
+                                                <label>key</label>
+                                                <input type="text" defaultValue={key_} disabled />
+
+                                                <label>child key</label>
+                                                <input type="text" defaultValue={child_key_} disabled />
+                                            </>;
+                                        default:
+                                            return <>
+                                                <label>key</label>
+                                                <input type="text" defaultValue={key_} disabled />
+                                            </>;
+                                    }
+                                })()}
 
                                 <label>register</label>
                                 <textarea type="text" defaultValue={props.info.register === 'undefined' ? '' : props.info.register} ref={register} />

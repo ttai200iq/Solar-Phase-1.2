@@ -1075,10 +1075,8 @@ export default function RegisterSetting(props) {
     useEffect(() => {
         if (registerID.value !== '') {
             let data = loggerListRS.value.filter((item) => item.brand_ === registerID.value);
-            console.log('logger', data);
             setDataLogger(data);
             let data_ = inverterListRS.value.filter((item) => item.brand_ === registerID.value);
-            console.log('inverter', data_);
             setDataInverter(data_);
         }
         // eslint-disable-next-line
