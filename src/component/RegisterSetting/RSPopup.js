@@ -6,6 +6,8 @@ import { IoClose } from 'react-icons/io5';
 import { COLOR } from '../../App';
 import { inverterListRS, loggerListRS, registerID, tabRS } from './RegisterSetting';
 import { alertDispatch } from '../Alert/Alert';
+import { callApi } from '../Api/Api';
+import { host } from '../Lang/Contant';
 
 export default function RSPopup(props) {
     const dataLang = useIntl();
@@ -14,9 +16,9 @@ export default function RSPopup(props) {
     const child_key = useRef();
     const register = useRef();
     const scale = useRef();
-    const type = useRef();
     const note = useRef();
     const [dataType, setDataType] = useState('normal');
+    const [type_, setType_] = useState('real');
     const [key_, setKey_] = useState('');
     const [child_key_, setChild_key_] = useState('');
 
@@ -32,23 +34,31 @@ export default function RSPopup(props) {
         popup.style.color = popup_state[state].color;
     };
 
-    const handleConfirm = (e) => {
+    const handleConfirm = async (e) => {
         e.preventDefault();
         switch (props.type) {
             case 'addType':
                 if (tabRS.value === 'logger') {
                     let temp = loggerListRS.value.find(item => item.type_ === typeName.current.value);
                     if (temp === undefined) {
-                        const data = {
-                            id_: loggerListRS.value.length + 1,
-                            data_: {},
+                        const d = await callApi("post", host.DATA + "/addLoggertemplateType", {
+                            data: {},
                             setting: {},
-                            type_: typeName.current.value,
-                            brand_: registerID.value,
+                            type: typeName.current.value,
+                            brand: registerID.value,
                             version_: '0.1',
-                        };
-                        const newData = [...loggerListRS.value, data];
-                        loggerListRS.value = newData;
+                        });
+                        console.log(d);
+                        // const data = {
+                        //     id_: loggerListRS.value.length + 1,
+                        //     data_: {},
+                        //     setting: {},
+                        //     type_: typeName.current.value,
+                        //     brand_: registerID.value,
+                        //     version_: '0.1',
+                        // };
+                        // const newData = [...loggerListRS.value, data];
+                        // loggerListRS.value = newData;
                         alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                         props.handleClose();
                     } else {
@@ -57,15 +67,22 @@ export default function RSPopup(props) {
                 } else {
                     let temp = inverterListRS.value.find(item => item.type_ === typeName.current.value);
                     if (temp === undefined) {
-                        const data = {
-                            id_: inverterListRS.value.length + 1,
-                            data_: {},
+                        const d = await callApi("post", host.DATA + "/addInvertertemplateType", {
+                            data: {},
                             setting: {},
-                            type_: typeName.current.value,
-                            brand_: registerID.value,
-                        };
-                        const newData = [...inverterListRS.value, data];
-                        inverterListRS.value = newData;
+                            type: typeName.current.value,
+                            brand: registerID.value,
+                        });
+                        console.log(d);
+                        // const data = {
+                        //     id_: inverterListRS.value.length + 1,
+                        //     data_: {},
+                        //     setting: {},
+                        //     type_: typeName.current.value,
+                        //     brand_: registerID.value,
+                        // };
+                        // const newData = [...inverterListRS.value, data];
+                        // inverterListRS.value = newData;
                         alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                         props.handleClose();
                     } else {
@@ -78,7 +95,12 @@ export default function RSPopup(props) {
                     let temp = loggerListRS.value.find(item => item.type_ === props.info.type);
                     let temp_ = loggerListRS.value.find(item => item.type_ === typeName.current.value);
                     if (temp_ === undefined) {
-                        temp.type_ = typeName.current.value;
+                        const d = await callApi("post", host.DATA + "/updateLoggertemplateType", {
+                            type: temp.type_,
+                            newtype: typeName.current.value,
+                        });
+                        console.log(d);
+                        // temp.type_ = typeName.current.value;
                         alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                         props.handleClose();
                     } else {
@@ -88,7 +110,12 @@ export default function RSPopup(props) {
                     let temp = inverterListRS.value.find(item => item.type_ === props.info.type);
                     let temp_ = inverterListRS.value.find(item => item.type_ === typeName.current.value);
                     if (temp_ === undefined) {
-                        temp.type_ = typeName.current.value;
+                        const d = await callApi("post", host.DATA + "/updateInvertertemplateType", {
+                            type: temp.type_,
+                            newtype: typeName.current.value,
+                        });
+                        console.log(d);
+                        // temp.type_ = typeName.current.value;
                         alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                         props.handleClose();
                     } else {
@@ -98,13 +125,21 @@ export default function RSPopup(props) {
                 break;
             case 'deleteType':
                 if (tabRS.value === 'logger') {
-                    let temp = loggerListRS.value.filter(item => item.type_ !== props.info.type);
-                    loggerListRS.value = temp;
+                    const d = await callApi("post", host.DATA + "/removeLoggertemplateType", {
+                        type: props.info.type,
+                    });
+                    console.log(d);
+                    // let temp = loggerListRS.value.filter(item => item.type_ !== props.info.type);
+                    // loggerListRS.value = temp;
                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                     props.handleClose();
                 } else {
-                    let temp = inverterListRS.value.filter(item => item.type_ !== props.info.type);
-                    inverterListRS.value = temp;
+                    const d = await callApi("post", host.DATA + "/removeInvertertemplateType", {
+                        type: props.info.type,
+                    });
+                    console.log(d);
+                    // let temp = inverterListRS.value.filter(item => item.type_ !== props.info.type);
+                    // inverterListRS.value = temp;
                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                     props.handleClose();
                 }
@@ -122,15 +157,25 @@ export default function RSPopup(props) {
                                 if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.data_[key.current.value], [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                                    const data = { ...temp.data_[key.current.value], [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                                     const newData_ = { ...temp.data_, [key.current.value]: data };
-                                    temp.data_ = newData_;
+                                    // temp.data_ = newData_;
+                                    const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                        type: props.info.type_,
+                                        data: newData_,
+                                    });
+                                    console.log(d);
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.data_, [key.current.value]: { [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } } };
-                                temp.data_ = newData;
+                                const newData = { ...temp.data_, [key.current.value]: { [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type_ } } };
+                                // temp.data_ = newData;
+                                const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                    type: props.info.type_,
+                                    data: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -138,8 +183,13 @@ export default function RSPopup(props) {
                             if (keyList.includes(key.current.value)) {
                                 alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                             } else {
-                                const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
-                                temp.data_ = newData;
+                                const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type_, register: register.current.value, } };
+                                // temp.data_ = newData;
+                                const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                    type: props.info.type_,
+                                    data: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -155,13 +205,23 @@ export default function RSPopup(props) {
                                 } else {
                                     const data = { ...temp.setting[key.current.value], [child_key.current.value]: register.current.value };
                                     const newData_ = { ...temp.setting, [key.current.value]: data };
-                                    temp.setting = newData_;
+                                    // temp.setting = newData_;
+                                    const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                        type: props.info.type_,
+                                        setting: newData_,
+                                    });
+                                    console.log(d);
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
                                 const newData = { ...temp.setting, [key.current.value]: { [child_key.current.value]: register.current.value } };
-                                temp.setting = newData;
+                                // temp.setting = newData;
+                                const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                    type: props.info.type_,
+                                    setting: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -170,7 +230,12 @@ export default function RSPopup(props) {
                                 alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                             } else {
                                 const newData = { ...temp.setting, [key.current.value]: register.current.value };
-                                temp.setting = newData;
+                                // temp.setting = newData;
+                                const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                    type: props.info.type_,
+                                    setting: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -188,15 +253,25 @@ export default function RSPopup(props) {
                                 if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.data_[key.current.value], [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                                    const data = { ...temp.data_[key.current.value], [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                                     const newData_ = { ...temp.data_, [key.current.value]: data };
-                                    temp.data_ = newData_;
+                                    // temp.data_ = newData_;
+                                    const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                        type: props.info.type_,
+                                        data: newData_,
+                                    });
+                                    console.log(d);
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.data_, [key.current.value]: { [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type.current.value } } };
-                                temp.data_ = newData;
+                                const newData = { ...temp.data_, [key.current.value]: { [child_key.current.value]: { register: register.current.value, cal: scale.current.value, type: type_ } } };
+                                // temp.data_ = newData;
+                                const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                    type: props.info.type_,
+                                    data: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -204,8 +279,13 @@ export default function RSPopup(props) {
                             if (keyList.includes(key.current.value)) {
                                 alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                             } else {
-                                const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value, } };
-                                temp.data_ = newData;
+                                const newData = { ...temp.data_, [key.current.value]: { cal: scale.current.value, type: type_, register: register.current.value, } };
+                                // temp.data_ = newData;
+                                const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                    type: props.info.type_,
+                                    data: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -219,15 +299,25 @@ export default function RSPopup(props) {
                                 if (keyList_.includes(child_key.current.value)) {
                                     alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                                 } else {
-                                    const data = { ...temp.setting[key.current.value], [child_key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value } };
+                                    const data = { ...temp.setting[key.current.value], [child_key.current.value]: { cal: scale.current.value, type: type_, register: register.current.value } };
                                     const newData_ = { ...temp.setting, [key.current.value]: data };
-                                    temp.setting = newData_;
+                                    // temp.setting = newData_;
+                                    const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                        type: props.info.type_,
+                                        setting: newData_,
+                                    });
+                                    console.log(d);
                                     alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                     props.handleClose();
                                 }
                             } else {
-                                const newData = { ...temp.setting, [key.current.value]: { [child_key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value } } };
-                                temp.setting = newData;
+                                const newData = { ...temp.setting, [key.current.value]: { [child_key.current.value]: { cal: scale.current.value, type: type_, register: register.current.value } } };
+                                // temp.setting = newData;
+                                const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                    type: props.info.type_,
+                                    setting: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -235,8 +325,13 @@ export default function RSPopup(props) {
                             if (keyList.includes(key.current.value)) {
                                 alertDispatch(dataLang.formatMessage({ id: "alert_64" }));
                             } else {
-                                const newData = { ...temp.setting, [key.current.value]: { cal: scale.current.value, type: type.current.value, register: register.current.value } };
-                                temp.setting = newData;
+                                const newData = { ...temp.setting, [key.current.value]: { cal: scale.current.value, type: type_, register: register.current.value } };
+                                // temp.setting = newData;
+                                const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                    type: props.info.type_,
+                                    setting: newData,
+                                });
+                                console.log(d);
                                 alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                                 props.handleClose();
                             }
@@ -253,15 +348,25 @@ export default function RSPopup(props) {
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
                             temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
-                            const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                             temp.data_[id[0]] = newData;
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
-                            const newData = { ...temp.data_, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            const newData = { ...temp.data_, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                             temp.data_ = newData;
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
@@ -273,6 +378,11 @@ export default function RSPopup(props) {
                             temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
                             const newData = { ...temp.setting[id[0]], [id[1]]: register.current.value };
                             temp.setting[id[0]] = newData;
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
@@ -280,6 +390,11 @@ export default function RSPopup(props) {
                             temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
                             const newData_ = { ...temp.setting, [props.info.key]: register.current.value };
                             temp.setting = newData_;
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
@@ -293,15 +408,25 @@ export default function RSPopup(props) {
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
                             temp.data_[id[0]] = Object.fromEntries(Object.entries(temp.data_[id[0]]).filter(([key, value]) => key !== id[1]));
-                            const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            const newData = { ...temp.data_[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                             temp.data_[id[0]] = newData;
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
-                            const newData = { ...temp.data_, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            const newData = { ...temp.data_, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                             temp.data_ = newData;
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
@@ -311,15 +436,25 @@ export default function RSPopup(props) {
                         if (props.info.key.includes('(', ')')) {
                             let id = props.info.key.split(/[()]/);
                             temp.setting[id[0]] = Object.fromEntries(Object.entries(temp.setting[id[0]]).filter(([key, value]) => key !== id[1]));
-                            const newData = { ...temp.setting[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            const newData = { ...temp.setting[id[0]], [id[1]]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                             temp.setting[id[0]] = newData;
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
-                            const newData_ = { ...temp.setting, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type.current.value } };
+                            const newData_ = { ...temp.setting, [props.info.key]: { register: register.current.value, cal: scale.current.value, type: type_ } };
                             temp.setting = newData_;
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
 
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
@@ -339,10 +474,20 @@ export default function RSPopup(props) {
                             if (Object.entries(temp.data_[id[0]]).length === 0) {
                                 temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== id[0]));
                             }
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         }
@@ -354,10 +499,20 @@ export default function RSPopup(props) {
                             if (Object.entries(temp.setting[id[0]]).length === 0) {
                                 temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== id[0]));
                             }
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            const d = await callApi("post", host.DATA + "/addLoggertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         }
@@ -373,10 +528,20 @@ export default function RSPopup(props) {
                             if (Object.entries(temp.data_[id[0]]).length === 0) {
                                 temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== id[0]));
                             }
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.data_ = Object.fromEntries(Object.entries(temp.data_).filter(([key, value]) => key !== props.info.key));
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateData", {
+                                type: props.info.type_,
+                                data: temp.data_,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         }
@@ -388,10 +553,20 @@ export default function RSPopup(props) {
                             if (Object.entries(temp.setting[id[0]]).length === 0) {
                                 temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== id[0]));
                             }
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         } else {
                             temp.setting = Object.fromEntries(Object.entries(temp.setting).filter(([key, value]) => key !== props.info.key));
+                            const d = await callApi("post", host.DATA + "/addInvertertemplateSetting", {
+                                type: props.info.type_,
+                                setting: temp.setting,
+                            });
+                            console.log(d);
                             alertDispatch(dataLang.formatMessage({ id: "alert_6" }));
                             props.handleClose();
                         }
@@ -519,7 +694,12 @@ export default function RSPopup(props) {
                                 <input type="text" ref={scale} />
 
                                 <label>type</label>
-                                <input type="text" ref={type} />
+                                {/* <input type="text" ref={type} /> */}
+                                <select onChange={(e) => setType_(e.target.value)}>
+                                    <option value='real'>real</option>
+                                    <option value='word'>word</option>
+                                    <option value='bit'>bit</option>
+                                </select>
 
                                 <label>note</label>
                                 <input type="text" ref={note} />
@@ -551,7 +731,12 @@ export default function RSPopup(props) {
                                 <input type="text" defaultValue={props.info.scale === 'undefined' ? '' : props.info.scale} ref={scale} />
 
                                 <label>type</label>
-                                <input type="text" defaultValue={props.info.type === 'undefined' ? '' : props.info.type} ref={type} />
+                                {/* <input type="text" defaultValue={props.info.type === 'undefined' ? '' : props.info.type} ref={type} /> */}
+                                <select defaultValue={props.info.type} onChange={(e) => setType_(e.target.value)}>
+                                    <option value='real'>real</option>
+                                    <option value='word'>word</option>
+                                    <option value='bit'>bit</option>
+                                </select>
 
                                 <label>note</label>
                                 <input type="text" ref={note} />
