@@ -23,6 +23,7 @@ import { IoLogInOutline } from "react-icons/io5";
 import { PiUserCircle } from "react-icons/pi";
 import { BiMessageAltX, BiMessageCheck } from "react-icons/bi";
 import { isBrowser, useMobileOrientation } from "react-device-detect";
+import { slPlantState } from "../Solarlight/SLProjectlist";
 
 const userNav = signal(false);
 const langNav = signal(false);
@@ -169,7 +170,7 @@ export default function Navigation(props) {
   return (
     <>
       <div className="DAT_Navigation"
-        onClick={() => (plantState.value = "default")}
+        onClick={() => { (plantState.value = "default"); slPlantState.value = "default"; }}
       >
         {isBrowser || isLandscape
           ?

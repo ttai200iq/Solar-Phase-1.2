@@ -156,6 +156,17 @@ const DataReport = (props) => {
                   </p>
                 </>
               );
+            case "solarLight":
+              return (
+                <>
+                  <label style={{ fontWeight: "700", margin: "0" }}>
+                    Solar light
+                  </label>
+                  <p style={{ color: "grey", margin: "0" }}>
+                    {dataLang.formatMessage({ id: "dailyReportDesc" })}
+                  </p>
+                </>
+              );
             default:
               return (
                 <>
@@ -316,18 +327,36 @@ export default function ReportEdit(props) {
               <p style={{ color: "grey" }}>
                 {dataLang.formatMessage({ id: "projData" })}
               </p>
-              {Object.entries(editData.value.customdata).map(([key, value]) => (
-                <CheckBox
-                  key={key}
-                  num={String(key)}
-                  tab={"customdata_content"}
-                  status={editData.value.customdata[key].status}
-                  id={dataLang.formatMessage({
-                    id: editData.value.customdata[key].id,
-                  })}
-                  width={widthCheckBox}
-                />
-              ))}
+              {editData.value.type === "solarLight"
+                ?
+                <>
+                  {Object.entries(editData.value.customdata).map(([key, value]) => (
+                    <CheckBox
+                      key={key}
+                      num={String(key)}
+                      tab={"customdata_content"}
+                      status={editData.value.customdata[key].status}
+                      id={editData.value.customdata[key].id}
+                      width={widthCheckBox}
+                    />
+                  ))}
+                </>
+                :
+                <>
+                  {Object.entries(editData.value.customdata).map(([key, value]) => (
+                    <CheckBox
+                      key={key}
+                      num={String(key)}
+                      tab={"customdata_content"}
+                      status={editData.value.customdata[key].status}
+                      id={dataLang.formatMessage({
+                        id: editData.value.customdata[key].id,
+                      })}
+                      width={widthCheckBox}
+                    />
+                  ))}
+                </>
+              }
             </div>
           </div>
         </div>

@@ -107,7 +107,7 @@ export default function Report(props) {
                     <div className="DAT_Report_List_Form_Title">{item.name}</div>
                     <div className="DAT_Report_List_Form_Type">
                       {dataLang.formatMessage({ id: "type" })}:{" "}
-                      {dataLang.formatMessage({ id: item.type })}
+                      {item.type === 'solarLight' ? 'Solar light' : dataLang.formatMessage({ id: item.type })}
                     </div>
                     <div className="DAT_Report_List_Form_Create">
                       {dataLang.formatMessage({ id: "createBy" })}: {item.createby}
@@ -213,7 +213,7 @@ export default function Report(props) {
                     <div className="DAT_ReportMobile_List_Form_Title">{item.name}</div>
                     <div className="DAT_ReportMobile_List_Form_Type">
                       {dataLang.formatMessage({ id: "type" })}:{" "}
-                      {dataLang.formatMessage({ id: item.type })}
+                      {item.type === 'solarLight' ? 'Solar light' : dataLang.formatMessage({ id: item.type })}
                     </div>
                     <div className="DAT_ReportMobile_List_Form_Create">
                       {dataLang.formatMessage({ id: "createBy" })}: {item.createby}

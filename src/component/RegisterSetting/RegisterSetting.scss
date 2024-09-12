@@ -179,7 +179,7 @@
                                 }
 
                                 &_Register {
-                                    flex: 3;
+                                    flex: 5;
                                     max-width: 450px;
                                     overflow: hidden;
                                     white-space: nowrap;
@@ -194,13 +194,13 @@
                                     flex: 1;
                                 }
 
-                                &_Note {
-                                    flex: 2;
-                                    max-width: 450px;
-                                    overflow: hidden;
-                                    white-space: nowrap;
-                                    text-overflow: ellipsis;
-                                }
+                                // &_Note {
+                                //     flex: 2;
+                                //     max-width: 450px;
+                                //     overflow: hidden;
+                                //     white-space: nowrap;
+                                //     text-overflow: ellipsis;
+                                // }
                             }
                         }
                     }

@@ -1,19 +1,21 @@
-import React, { useEffect, useState, useRef } from "react";
-import "./Project.scss";
+import React, { useEffect, useState } from "react";
 
-import AddGateway from "./AddGateway";
-import Weather from "./Weather";
-import Popup from "./Popup";
 import Info from "../Device/Info";
-import DashboardHistory from "./DashboardHistory";
-import ProjectInfo from "./ProjectInfo";
-import Benefit from "./Benefit";
-import { Empty, plantState, projectData, popupState } from "./Project";
-import { isMobile } from "../Navigation/Navigation";
+import SLAddGateway from "./SLAddGateway";
+import SLPopup from "./SLPopup";
+import SolarLight from "./SolarLight";
+import SLProjectInfo from "./SLProjectInfo";
+import SLWeather from "./SLWeather";
+import SLBenefit from "./SLBenefit";
+import SLHistory from "./SLHistory";
+import { slPlantState, slPopupState, slProjectData } from "./SLProjectlist";
+import { Empty } from "../Project/Project";
 import { callApi } from "../Api/Api";
 import { host } from "../Lang/Contant";
 import { COLOR, Token, checkBrand, ruleInfor, socket } from "../../App";
 import { info, tab } from "../Device/Device";
+import { isDesktop } from "../Home/Home";
+
 import { useDispatch, useSelector } from "react-redux";
 import { signal } from "@preact/signals-react";
 import DataTable from "react-data-table-component";
@@ -21,6 +23,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { useIntl } from "react-intl";
 import toolslice from "../Redux/toolslice";
+import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
+import { Menu, MenuItem } from "@mui/material";
+import { isBrowser, useMobileOrientation } from "react-device-detect";
 
 import { IoIosArrowDown, IoIosArrowForward, IoMdMore } from "react-icons/io";
 import { IoAddOutline, IoClose, IoTrashOutline } from "react-icons/io5";
@@ -28,22 +33,18 @@ import { MdOutlineError } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit, FiFilter } from "react-icons/fi";
-import PopupState, { bindMenu, bindToggle } from "material-ui-popup-state";
-import { Menu, MenuItem } from "@mui/material";
-import { isBrowser, useMobileOrientation } from "react-device-detect";
-import GraphComponent from "./GraphComponent";
-import { isDesktop } from "../Home/Home";
 
-export const temp = signal([]);
-export const inverterDB = signal([]);
-export const coalsave = signal({
+export const slloggerDB = signal([]);
+export const slinverterDB = signal([]);
+export const sltab_ = signal("logger");
+export const slcoalsave = signal({
   value: 0,
   ef: 0.7221,
   avr: 0.517,
   tree: 0.054,
 });
 
-export const projectdatasize = signal({
+export const slprojectdatasize = signal({
   icon: { fontSize: 35 },
   label: { fontSize: 15 },
   value: { fontSize: 26 },
@@ -55,11 +56,10 @@ export const projectdatasize = signal({
 
 const tabMobile = signal(false);
 const tabLable = signal("");
-export const tab_ = signal("logger");
 const viewNav = signal(false);
 const viewStateNav = signal([false, false]);
 
-export default function ProjectData(props) {
+export default function SLProjectData(props) {
   const dataLang = useIntl();
   const { isLandscape } = useMobileOrientation();
   const lang = useSelector((state) => state.admin.lang);
@@ -74,7 +74,7 @@ export default function ProjectData(props) {
   const [type, setType] = useState("");
   const [invt, setInvt] = useState({});
   const [getShared, setgetShared] = useState([]);
-  const box = useRef();
+  // const box = useRef();
   const rootDispatch = useDispatch();
 
   const paginationComponentOptions = {
@@ -134,44 +134,44 @@ export default function ProjectData(props) {
       },
       width: "110px",
     },
-    {
-      name: dataLang.formatMessage({ id: "production" }),
-      selector: (row) => {
-        let power = 0;
-        let d = JSON.parse(row.data.total?.register || "[]");
+    // {
+    //   name: dataLang.formatMessage({ id: "production" }),
+    //   selector: (row) => {
+    //     let power = 0;
+    //     let d = JSON.parse(row.data.total?.register || "[]");
 
-        switch (row.data.total?.type) {
-          case "sum":
-            let num = [];
-            d.map((item, i) => { return num[i] = parseFloat(invt[row.logger_]?.[item] || 0) });
-            power = parseFloat(num.reduce((a, b) => Number(a) + Number(b), 0) * row.data.total?.cal).toFixed(2);
-            break;
-          case "word":
-            power = convertToDoublewordAndFloat([invt[row.logger_]?.[d[0]], invt[row.logger_]?.[d[1]]], "int") * row.data.total?.cal;
-            break;
-          default:
-            break;
-        };
+    //     switch (row.data.total?.type) {
+    //       case "sum":
+    //         let num = [];
+    //         d.map((item, i) => { return num[i] = parseFloat(invt[row.logger_]?.[item] || 0) });
+    //         power = parseFloat(num.reduce((a, b) => Number(a) + Number(b), 0) * row.data.total?.cal).toFixed(2);
+    //         break;
+    //       case "word":
+    //         power = convertToDoublewordAndFloat([invt[row.logger_]?.[d[0]], invt[row.logger_]?.[d[1]]], "int") * row.data.total?.cal;
+    //         break;
+    //       default:
+    //         break;
+    //     };
 
-        return <div>{parseFloat(power / 1000).toFixed(2)} kW</div>;
-      },
-      sortable: true,
-      width: "200px",
-    },
-    {
-      name: dataLang.formatMessage({ id: "daily" }),
-      selector: (row) => (
-        <>
-          {row.data.daily?.register
-            ? parseFloat(invt[row.logger_]?.[row.data.daily.register] * row.data.daily?.cal).toFixed(2)
-            : 0
-          }{" "}
-          kWh
-        </>
-      ),
-      sortable: true,
-      width: "200px",
-    },
+    //     return <div>{parseFloat(power / 1000).toFixed(2)} kW</div>;
+    //   },
+    //   sortable: true,
+    //   width: "200px",
+    // },
+    // {
+    //   name: dataLang.formatMessage({ id: "daily" }),
+    //   selector: (row) => (
+    //     <>
+    //       {row.data.daily?.register
+    //         ? parseFloat(invt[row.logger_]?.[row.data.daily.register] * row.data.daily?.cal).toFixed(2)
+    //         : 0
+    //       }{" "}
+    //       kWh
+    //     </>
+    //   ),
+    //   sortable: true,
+    //   width: "200px",
+    // },
     {
       name: dataLang.formatMessage({ id: "ogLog" }),
       selector: (row) => row.logger_,
@@ -184,7 +184,7 @@ export default function ProjectData(props) {
         <>
           {ruleInfor.value.setting.project.modify === true ||
             ruleInfor.value.setting.project.delete === true ? (
-            projectData.value.shared == 1 ? (
+            slProjectData.value.shared == 1 ? (
               <></>
             ) : (
               // <div className="DAT_TableEdit">
@@ -239,7 +239,7 @@ export default function ProjectData(props) {
               &nbsp;
               {dataLang.formatMessage({ id: "change" })}
             </div>
-           
+
           </div> */}
         </>
       ),
@@ -287,7 +287,7 @@ export default function ProjectData(props) {
         <>
           {ruleInfor.value.setting.project.modify === true ||
             ruleInfor.value.setting.project.delete === true ? (
-            projectData.value.shared == 1 ? (
+            slProjectData.value.shared == 1 ? (
               <></>
             ) : (
               // <div className="DAT_TableEdit">
@@ -405,52 +405,11 @@ export default function ProjectData(props) {
         justifyContent: "left !important",
       },
     },
-    // {
-    //   name: dataLang.formatMessage({ id: "edits" }),
-    //   selector: (row) => (
-    //     <>
-    //       <div className="DAT_TableEdit">
-    //         <span
-    //           id={row.mail_ + "_MORE"}
-    //           onClick={(e) => handleModify(e, "block")}
-    //         >
-    //           <IoMdMore size={20} />
-    //         </span>
-    //       </div>
-
-    //       <div
-    //         className="DAT_ModifyBox"
-    //         id={row.mail_ + "_Modify"}
-    //         style={{ display: "none" }}
-    //         onMouseLeave={(e) => handleModify(e, "none")}
-    //       >
-    //         <div
-    //           className="DAT_ModifyBox_Remove"
-    //           id={row.mail_}
-    //           onClick={(e) => handleDeleteMem(e)}
-    //         >
-    //           <IoTrashOutline size={16} />
-    //           &nbsp;
-    //           {dataLang.formatMessage({ id: "remove" })}
-    //         </div>
-    //       </div>
-    //     </>
-    //   ),
-    //   width: "100px",
-    // },
   ];
 
   const popup_state = {
-    pre: {
-      transform: "rotate(0deg)",
-      transition: "0.5s",
-      color: "rgba(11, 25, 103)",
-    },
-    new: {
-      transform: "rotate(90deg)",
-      transition: "0.5s",
-      color: "rgba(11, 25, 103)",
-    },
+    pre: { transform: "rotate(0deg)", transition: "0.5s", color: "rgba(11, 25, 103)", },
+    new: { transform: "rotate(90deg)", transition: "0.5s", color: "rgba(11, 25, 103)", },
   };
 
   const handlePopup = (state) => {
@@ -460,43 +419,27 @@ export default function ProjectData(props) {
     popup.style.color = popup_state[state].color;
   };
 
-  const handleInfoLogger = (e) => {
+  const handleView = (e) => {
+    var id = e.currentTarget.id;
+    setView(id);
     setDropState(false);
-    setInfoState(true);
-    tab.value = "logger";
-    let plantname = projectData.value.plantname;
-    info.value = {
-      psn: temp.value[0].sn,
-      pname: temp.value[0].name,
-      pplantname: plantname,
-      pstate: temp.value[0].state,
-      pversion: temp.value[0].version,
-    };
   };
 
-  const handleInfoInverter = (e) => {
-    setDropState(false);
-    setInfoState(true);
-    tab.value = "inverter";
-    let plantname = projectData.value.plantname;
-    info.value = {
-      psn: inverterDB.value[0].sn,
-      pname: inverterDB.value[0].name,
-      pplantname: plantname,
-      pdata: inverterDB.value[0].data,
-      psetting: inverterDB.value[0].setting,
-      plogger: inverterDB.value[0].logger_,
-      type: inverterDB.value[0].type,
-    };
-    info.value.invt = invt[inverterDB.value[0].logger_];
+  const handleOutsideView = (e) => {
+    setTimeout(() => {
+      if (viewStateNav.value[1] === false) {
+        viewNav.value = false;
+        viewStateNav.value = [false, false];
+      }
+      clearTimeout();
+    }, 250);
   };
 
-  const handleCloseInfo = () => {
-    setInfoState(false);
-  };
-
-  const handleClosePopupAddGateway = () => {
-    setPopupAddGateway(false);
+  const handleTabMobileDevice = (e) => {
+    const id = e.currentTarget.id;
+    sltab_.value = id;
+    const newLabel = listDeviceTab.find((item) => item.id === id);
+    tabLable.value = newLabel.name;
   };
 
   const invtCloud = async (data, token) => {
@@ -527,55 +470,6 @@ export default function ProjectData(props) {
     }
   };
 
-  const convertToDoublewordAndFloat = (word, type) => {
-    var doubleword = (word[1] << 16) | word[0];
-    var buffer = new ArrayBuffer(4);
-    var intView = new Int32Array(buffer);
-    var floatView = new Float32Array(buffer);
-    intView[0] = doubleword;
-    var float_value = floatView[0];
-    return type === "int"
-      ? parseFloat(doubleword).toFixed(2)
-      : parseFloat(float_value).toFixed(2) || 0;
-  };
-
-  const handleView = (e) => {
-    var id = e.currentTarget.id;
-    setView(id);
-    setDropState(false);
-  };
-
-  const handleTabMobileDevice = (e) => {
-    const id = e.currentTarget.id;
-    tab_.value = id;
-    const newLabel = listDeviceTab.find((item) => item.id == id);
-    tabLable.value = newLabel.name;
-  };
-
-  const handleOutsideUser = (e) => {
-    if (!box.current.contains(e.target)) {
-      // plantState.value = "default";
-    }
-  };
-
-  const handleEdit = (e) => {
-    popupState.value = true;
-    const id = e.currentTarget.id;
-    const idArr = id.split("_");
-    setSnlogger(idArr[0]);
-    setDevname(idArr[1]);
-    setType(idArr[2]);
-    setDevtype(tab_.value);
-  };
-
-  const handleDelete = (e) => {
-    popupState.value = true;
-    const id = e.currentTarget.id;
-    const idArr = id.split("_");
-    setSnlogger(idArr[0]);
-    setType(idArr[1]);
-  };
-
   const handleInvt = async (sn) => {
     const res = await invtCloud(
       '{"deviceCode":"' + sn + '"}',
@@ -586,23 +480,86 @@ export default function ProjectData(props) {
     }
   };
 
-  const handleOutsideView = (e) => {
-    setTimeout(() => {
-      if (viewStateNav.value[1] == false) {
-        viewNav.value = false;
-        viewStateNav.value = [false, false];
-      }
-      clearTimeout();
-    }, 250);
+  const handleInfoLogger = (e) => {
+    setDropState(false);
+    setInfoState(true);
+    tab.value = "logger";
+    let plantname = slProjectData.value.plantname;
+    info.value = {
+      psn: slloggerDB.value[0].sn,
+      pname: slloggerDB.value[0].name,
+      pplantname: plantname,
+      pstate: slloggerDB.value[0].state,
+      pversion: slloggerDB.value[0].version,
+    };
   };
+
+  const handleInfoInverter = (e) => {
+    setDropState(false);
+    setInfoState(true);
+    tab.value = "inverter";
+    let plantname = slProjectData.value.plantname;
+    info.value = {
+      psn: slinverterDB.value[0].sn,
+      pname: slinverterDB.value[0].name,
+      pplantname: plantname,
+      pdata: slinverterDB.value[0].data,
+      psetting: slinverterDB.value[0].setting,
+      plogger: slinverterDB.value[0].logger_,
+      type: slinverterDB.value[0].type,
+    };
+    info.value.invt = invt[slinverterDB.value[0].logger_];
+  };
+
+  const handleEdit = (e) => {
+    slPopupState.value = true;
+    const id = e.currentTarget.id;
+    const idArr = id.split("_");
+    setSnlogger(idArr[0]);
+    setDevname(idArr[1]);
+    setType(idArr[2]);
+    setDevtype(sltab_.value);
+  };
+
+  const handleDelete = (e) => {
+    slPopupState.value = true;
+    const id = e.currentTarget.id;
+    const idArr = id.split("_");
+    setSnlogger(idArr[0]);
+    setType(idArr[1]);
+  };
+
+  const handleCloseInfo = () => {
+    setInfoState(false);
+  };
+
+  const handleClosePopupAddGateway = () => {
+    setPopupAddGateway(false);
+  };
+
+  // const convertToDoublewordAndFloat = (word, type) => {
+  //   var doubleword = (word[1] << 16) | word[0];
+  //   var buffer = new ArrayBuffer(4);
+  //   var intView = new Int32Array(buffer);
+  //   var floatView = new Float32Array(buffer);
+  //   intView[0] = doubleword;
+  //   var float_value = floatView[0];
+  //   return type === "int"
+  //     ? parseFloat(doubleword).toFixed(2)
+  //     : parseFloat(float_value).toFixed(2) || 0;
+  // };    
+
+  // const handleOutsideUser = (e) => {
+  //   if (!box.current.contains(e.target)) {
+  //     // plantState.value = "default";
+  //   }
+  // };  
 
   const handleWindowResize = () => {
     let home = document.getElementById("dashboard");
-    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      // console.log("max");
-      projectdatasize.value = {
+      slprojectdatasize.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
         value: { fontSize: 26 },
@@ -612,8 +569,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 150 },
       };
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      // console.log("middle");
-      projectdatasize.value = {
+      slprojectdatasize.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
         value: { fontSize: 22 },
@@ -623,8 +579,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 140 },
       };
     } else {
-      // console.log("small");
-      projectdatasize.value = {
+      slprojectdatasize.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
         value: { fontSize: 20 },
@@ -639,27 +594,14 @@ export default function ProjectData(props) {
       isDesktop.value = true;
     } else {
       isDesktop.value = false;
-      // initMap(plant.value);
     }
-
-    // else {
-    //   console.log("min");
-    //   sizedesktop.value = {
-    //     icon: { fontSize: 25 },
-    //     label: { fontSize: 11 },
-    //     value: { fontSize: 20 },
-    //     unit: { fontSize: 12 },
-    //   };
-    // }
   };
 
   useEffect(function () {
     let home = document.getElementById("dashboard");
-    // console.log(home.offsetWidth);
 
     if (home?.offsetWidth >= 1300) {
-      // console.log("max");
-      projectdatasize.value = {
+      slprojectdatasize.value = {
         icon: { fontSize: 35 },
         label: { fontSize: 15 },
         value: { fontSize: 26 },
@@ -669,8 +611,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 150 },
       };
     } else if (home?.offsetWidth >= 1200 && home?.offsetWidth < 1300) {
-      // console.log("middle");
-      projectdatasize.value = {
+      slprojectdatasize.value = {
         icon: { fontSize: 30 },
         label: { fontSize: 12 },
         value: { fontSize: 22 },
@@ -680,8 +621,7 @@ export default function ProjectData(props) {
         boxpro: { fontSize: 140 },
       };
     } else {
-      // console.log("small");
-      projectdatasize.value = {
+      slprojectdatasize.value = {
         icon: { fontSize: 25 },
         label: { fontSize: 11 },
         value: { fontSize: 20 },
@@ -696,7 +636,6 @@ export default function ProjectData(props) {
       isDesktop.value = true;
     } else {
       isDesktop.value = false;
-      // initMap(plant.value);
     }
 
     window.addEventListener("resize", handleWindowResize);
@@ -710,7 +649,7 @@ export default function ProjectData(props) {
 
     const getShared = async () => {
       let req = await callApi("post", host.DATA + "/getmailPlantmem", {
-        plantid: projectData.value.plantid_,
+        plantid: slProjectData.value.plantid_,
         usr: user,
       });
       if (req.status) {
@@ -722,9 +661,9 @@ export default function ProjectData(props) {
     //data Logger
     const getLogger = async () => {
       let d = await callApi("post", host.DATA + "/getLogger", {
-        plantid: projectData.value.plantid_,
+        plantid: slProjectData.value.plantid_,
       });
-      temp.value = d;
+      slloggerDB.value = d;
       d.map(async (item) => {
         const res = await invtCloud('{"deviceCode":"' + item.sn + '"}', Token.value.token);
         if (res.ret === 0) {
@@ -741,85 +680,131 @@ export default function ProjectData(props) {
           setInvt((pre) => ({ ...pre, [item.sn]: {} }));
         }
 
+        //data Inverter
         let inverter = await callApi("post", host.DATA + "/getInverter", {
           loggerid: item.sn,
         });
         if (inverter.length > 0) {
-          inverter.map((item) => { return item.type = temp.value.find((i) => i.sn === item.logger_).type });
-          inverterDB.value = [...inverter];
+          inverter.map((item) => { return item.type = slloggerDB.value.find((i) => i.sn === item.logger_).type });
+          slinverterDB.value = [...inverter];
         } else {
-          inverterDB.value = [];
+          slinverterDB.value = [];
         }
       });
     };
     getLogger();
 
     return () => {
-      tab_.value = "logger";
-      inverterDB.value = [];
-      temp.value = [];
-      rootDispatch(
-        toolslice.actions.setcal({
-          pro_1: 0,
-          pro_2: 0,
-          pro_3: 0,
-          bat_1: 0,
-          bat_2: 0,
-          bat_in_1: 0,
-          bat_out_1: 0,
-          con_1: 0,
-          con_2: 0,
-          con_3: 0,
-          grid_1: 0,
-          grid_in_1: 0,
-          grid_in_2: 0,
-          grid_out_1: 0,
-          grid_out_2: 0,
-        })
-      );
+      sltab_.value = "logger";
+      slinverterDB.value = [];
+      slloggerDB.value = [];
+      //   rootDispatch(
+      //     toolslice.actions.setcal({
+      //       pro_1: 0,
+      //       pro_2: 0,
+      //       pro_3: 0,
+      //       bat_1: 0,
+      //       bat_2: 0,
+      //       bat_in_1: 0,
+      //       bat_out_1: 0,
+      //       con_1: 0,
+      //       con_2: 0,
+      //       con_3: 0,
+      //       grid_1: 0,
+      //       grid_in_1: 0,
+      //       grid_in_2: 0,
+      //       grid_out_1: 0,
+      //       grid_out_2: 0,
+      //     })
+      //   );
     };
+
     // eslint-disable-next-line
   }, [lang]);
 
   useEffect(() => {
     var num_ = {
-      bat_1: [],
-      bat_2: [],
-      bat_3: [],
-      bat_4: [],
-      bat_in_1: [],
-      bat_out_1: [],
-      con_1: [],
-      con_2: [],
-      con_3: [],
-      grid_1: [],
-      grid_in_1: [],
-      grid_in_2: [],
-      grid_out_1: [],
-      grid_out_2: [],
-      pro_1: [],
-      pro_2: [],
-      pro_3: [],
+      bat_volt: [],
+      device_status: [],
+      mode_operating: [],
+      priority_given: [],
+      power_supply_status: [],
+      cost_saving: [],
+      ambient_temp: [],
+      charging_current: [],
+      charging_power: [],
+      pv_volt: [],
+      pv_current: [],
+      led_volt: [],
+      led_current: [],
+      led_power: [],
+      level_light_1: [],
+      timing_light_1: [],
+      level_light_2: [],
+      timing_light_2: [],
+      level_light_3: [],
+      timing_light_3: [],
+      level_light_4: [],
+      timing_light_4: [],
+      level_light_5: [],
+      timing_light_5: [],
+      led_lighting_function: [],
+      led_lighting_method: [],
+      switch_volt: [],
+      dc_bat_over_dsch_volt: [],
+      bat_over_dsch_volt: [],
+      bat_dsch_volt_return: [],
+      grid_dsch_energy: [],
+      bat_dsch_energy: [],
+      dsch_time: [],
+      charging_energy: [],
+      charging_capacity: [],
+      charging_time: [],
+      operation_time_with_grid: [],
+      operation_time_with_bat: [],
+      total_energy_from_grid: [],
+      total_energy_charge: [],
+      total_capacity_grid_dsch: [],
+      number_cell_battery: [],
+      over_dsch_return_volt: [],
+      max_current_pv_charge: [],
+      stop_charge_current: [],
+      volt_overcharge: [],
+      over_dsch_delay: [],
+      undervolt_warn: [],
+      volt_overcharge_return: [],
+      led_manual_control: [],
+      sleep_control: [],
     };
     var cal_ = {
-      pro_1: 0,
-      pro_2: 0,
-      pro_3: 0,
-      bat_1: 0,
-      bat_2: 0,
-      bat_3: 0,
-      bat_4: 0,
-      bat_in_1: 0,
-      bat_out_1: 0,
-      con_1: 0,
-      con_2: 0,
-      grid_1: 0,
-      grid_in_1: 0,
-      grid_in_2: 0,
-      grid_out_1: 0,
-      grid_out_2: 0,
+      // bat_volt: 0,
+      // device_status: 0,
+      // mode_operating: 0,
+      // priority_given: 0,
+      // power_supply_status: 0,
+      // cost_saving: 0,
+      // ambient_temp: 0,
+      // charging_current: 0,
+      // charging_power: 0,
+      // pv_volt: 0,
+      // pv_current: 0,
+      // led_volt: 0,
+      // led_current: 0,
+      // led_power: 0,
+      // level_light_1: 0,
+      // timing_light_1: 0,
+      // level_light_2: 0,
+      // timing_light_2: 0,
+      // level_light_3: 0,
+      // timing_light_3: 0,
+      // level_light_4: 0,
+      // timing_light_4: 0,
+      // level_light_5: 0,
+      // timing_light_5: 0,
+      // led_lighting_function: 0,
+      // led_lighting_method: 0,
     };
-    temp.value.map(async (item, i) => {
+    slloggerDB.value.map(async (item, i) => {
       Object.entries(item.data).map(([key, value]) => {
         switch (value.type) {
           case "sum":
@@ -833,7 +818,7 @@ export default function ProjectData(props) {
               return Number(accumulator) + Number(currentValue);
             }, 0) * parseFloat(value.cal);
 
-            if (i == temp.value.length - 1) {
+            if (i == slloggerDB.value.length - 1) {
               cal_[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
                   return Number(accumulator) + Number(currentValue);
@@ -843,7 +828,8 @@ export default function ProjectData(props) {
             break;
           case "word":
             let d = JSON.parse(value.register);
-            let e = [invt[item.sn]?.[d[0]] || 0, invt[item.sn]?.[d[1]] || 0];
+            // let e = [invt[item.sn]?.[d[0]] || 0, invt[item.sn]?.[d[1]] || 0];
+            let e = [invt[item.sn]?.[d[0]], invt[item.sn]?.[d[1]]];
 
             const convertToDoublewordAndFloat = (word, type) => {
               var doubleword = (word[1] << 16) | word[0];
@@ -858,23 +844,19 @@ export default function ProjectData(props) {
             };
             num_[key][i] = convertToDoublewordAndFloat(e, "int") * parseFloat(value.cal);
 
-            if (i == temp.value.length - 1) {
-              cal_[key] = parseFloat(
-                num_[key].reduce((accumulator, currentValue) => {
-                  return Number(accumulator) + Number(currentValue);
-                }, 0)
-              ).toFixed(2);
+            if (i == slloggerDB.value.length - 1) {
+              cal_[key] = parseFloat(num_[key].reduce((accumulator, currentValue) => {
+                return Number(accumulator) + Number(currentValue);
+              }, 0)).toFixed(2);
             }
             break;
           case "real":
-            num_[key][i] =
-              parseFloat(invt[item.sn]?.[value.register] || 0) * parseFloat(value.cal);
-            if (i == temp.value.length - 1) {
-              cal_[key] = parseFloat(
-                num_[key].reduce((accumulator, currentValue) => {
-                  return accumulator + currentValue;
-                })
-              ).toFixed(2);
+            // num_[key][i] = parseFloat(invt[item.sn]?.[value.register] || 0) * parseFloat(value.cal);
+            num_[key][i] = parseFloat(invt[item.sn]?.[value.register]) * parseFloat(value.cal);
+            if (i == slloggerDB.value.length - 1) {
+              cal_[key] = parseFloat(num_[key].reduce((accumulator, currentValue) => {
+                return accumulator + currentValue;
+              })).toFixed(2);
             }
             break;
           case "bit":
@@ -896,12 +878,10 @@ export default function ProjectData(props) {
             const binary = arrBitwise.reverse().join("");
             num_[key][i] = Number(binary[15 - Number(value.cal)])
             // console.log(key, num_[key])
-            if (i == temp.value.length - 1) {
+            if (i == slloggerDB.value.length - 1) {
               cal_[key] = num_[key].some(element => element === 1) ? 1 : 0;
               // console.log(key,cal_[key])
             }
-
-
             break;
           default:
             break;
@@ -909,24 +889,24 @@ export default function ProjectData(props) {
       });
     });
 
-    coalsave.value = {
-      ...coalsave.value,
-      value: cal_.pro_3,
-    };
+    // slcoalsave.value = {
+    //   ...slcoalsave.value,
+    //   value: cal_.pro_3,
+    // };
 
     rootDispatch(toolslice.actions.setcal(cal_));
 
-    document.addEventListener("mousedown", handleOutsideUser);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideUser);
-    };
+    // document.addEventListener("mousedown", handleOutsideUser);
+    // return () => {
+    //   document.removeEventListener("mousedown", handleOutsideUser);
+    // };
 
     // eslint-disable-next-line
   }, [invt]);
 
   useEffect(() => {
-    if (temp.value.length > 0) {
-      temp.value.map((item) => {
+    if (slloggerDB.value.length > 0) {
+      slloggerDB.value.map((item) => {
         socket.value.on("Server/" + item.sn, function (data) {
           Object.keys(data.data).map((keyName, i) => {
             setInvt((pre) => ({
@@ -942,7 +922,7 @@ export default function ProjectData(props) {
     }
 
     // eslint-disable-next-line
-  }, [temp.value]);
+  }, [slloggerDB.value]);
 
   // Handle close when press ESC
   // useEffect(() => {
@@ -964,7 +944,7 @@ export default function ProjectData(props) {
   // }, []);
 
   return (
-    <div ref={box}>
+    <div>
       <div className="DAT_ProjectData"
         style={{ marginBottom: isBrowser || isLandscape ? "30px" : "100px" }}
       >
@@ -972,11 +952,11 @@ export default function ProjectData(props) {
           <>
             <div className="DAT_ProjectData_Header">
               <div className="DAT_ProjectData_Header_Left">
-                <img src={projectData.value.img
-                  ? projectData.value.img
+                <img src={slProjectData.value.img
+                  ? slProjectData.value.img
                   : "/dat_picture/solar_panel.png"} alt="" />
-                {projectData.value.plantname}
-                {projectData.value.state === 1 ? (
+                {slProjectData.value.plantname}
+                {slProjectData.value.state === 1 ? (
                   <FaCheckCircle size={20} color="green" />
                 ) : (
                   <MdOutlineError size={20} color="red" />
@@ -998,7 +978,7 @@ export default function ProjectData(props) {
                 </div>
 
                 {ruleInfor.value.setting.device.add ? (
-                  projectData.value.shared === 1 ? (
+                  slProjectData.value.shared === 1 ? (
                     <></>
                   ) : (
                     <div
@@ -1020,10 +1000,9 @@ export default function ProjectData(props) {
                   <></>
                 )}
 
-                <div
-                  className="DAT_ProjectData_Header_Right_Close"
+                <div className="DAT_ProjectData_Header_Right_Close"
                   onClick={() => {
-                    plantState.value = "default";
+                    slPlantState.value = "default";
                     setDropState(false);
                   }}
                 >
@@ -1044,8 +1023,8 @@ export default function ProjectData(props) {
               <div className="DAT_ProjectData_Header_Left"
                 style={{ fontSize: "14px" }}
               >
-                {projectData.value.plantname}
-                {projectData.value.state === 1 ? (
+                {slProjectData.value.plantname}
+                {slProjectData.value.state === 1 ? (
                   <FaCheckCircle size={20} color="green" />
                 ) : (
                   <MdOutlineError size={20} color="red" />
@@ -1066,33 +1045,9 @@ export default function ProjectData(props) {
                   />
                 </div>
 
-                {/* {ruleInfor.value.setting.device.add ? (
-                  projectData.value.shared === 1 ? (
-                    <></>
-                  ) : (
-                    <div
-                      className="DAT_ProjectData_Header_Right_Add"
-                      style={{ display: view === "device" ? "block" : "none" }}
-                    >
-                      <button
-                        id="add"
-                        onClick={() => {
-                          setPopupAddGateway(true);
-                          setDropState(false);
-                        }}
-                      >
-                        <IoAddOutline size={25} color="white" />
-                      </button>
-                    </div>
-                  )
-                ) : (
-                  <></>
-                )} */}
-
-                <div
-                  className="DAT_ProjectData_Header_Right_Close"
+                <div className="DAT_ProjectData_Header_Right_Close"
                   onClick={() => {
-                    plantState.value = "default";
+                    slPlantState.value = "default";
                     setDropState(false);
                   }}
                 >
@@ -1122,23 +1077,23 @@ export default function ProjectData(props) {
                           <div className="DAT_ProjectData_NewDashboard_Top">
                             <div className="DAT_ProjectData_NewDashboard_Top_Left">
                               <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
-                                <GraphComponent />
+                                <SolarLight />
                               </div>
                               <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
-                                <Benefit />
+                                <SLBenefit />
                               </div>
                             </div>
                             <div className="DAT_ProjectData_NewDashboard_Top_Right">
                               <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
-                                <ProjectInfo />
+                                <SLProjectInfo />
                               </div>
                               <div className="DAT_ProjectData_NewDashboard_Top_Right_PredictDeg">
-                                <Weather />
+                                <SLWeather />
                               </div>
                             </div>
                           </div>
                           <div className="DAT_ProjectData_NewDashboard_Bottom">
-                            <DashboardHistory />
+                            <SLHistory />
                           </div>
                         </div>
                         :
@@ -1146,23 +1101,23 @@ export default function ProjectData(props) {
                           <div className="DAT_ProjectData_Dashboard_Top">
                             <div className="DAT_ProjectData_Dashboard_Top_Left">
                               <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
-                                <GraphComponent />
+                                <SolarLight />
                               </div>
                               <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
-                                <Benefit />
+                                <SLBenefit />
                               </div>
                             </div>
                             <div className="DAT_ProjectData_Dashboard_Top_Right">
                               <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
-                                <ProjectInfo />
+                                <SLProjectInfo />
                               </div>
                               <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
-                                <Weather />
+                                <SLWeather />
                               </div>
                             </div>
                           </div>
                           <div className="DAT_ProjectData_Dashboard_Bottom">
-                            <DashboardHistory />
+                            <SLHistory />
                           </div>
                         </div>
                     ) : (
@@ -1170,23 +1125,23 @@ export default function ProjectData(props) {
                         <div className="DAT_ProjectData_Dashboard_Top">
                           <div className="DAT_ProjectData_Dashboard_Top_Left">
                             <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
-                              <GraphComponent />
+                              <SolarLight />
                             </div>
                             <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
-                              <Benefit />
+                              <SLBenefit />
                             </div>
                           </div>
                           <div className="DAT_ProjectData_Dashboard_Top_Right">
                             <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
-                              <ProjectInfo />
+                              <SLProjectInfo />
                             </div>
                             <div className="DAT_ProjectData_Dashboard_Top_Right_PredictDeg">
-                              <Weather />
+                              <SLWeather />
                             </div>
                           </div>
                         </div>
                         <div className="DAT_ProjectData_Dashboard_Bottom">
-                          <DashboardHistory />
+                          <SLHistory />
                         </div>
                       </div>
                     )}
@@ -1200,33 +1155,30 @@ export default function ProjectData(props) {
                       <div className="DAT_ProjectData_Device_Table">
                         <div className="DAT_Toollist_Tab">
                           {listDeviceTab.map((item, i) => {
-                            return tab_.value === item.id ? (
-                              <div
-                                className="DAT_Toollist_Tab_main"
+                            return sltab_.value === item.id ? (
+                              <div className="DAT_Toollist_Tab_main"
                                 key={"tab_" + i}
                               >
                                 <p className="DAT_Toollist_Tab_main_left"></p>
-                                <span
-                                  className="DAT_Toollist_Tab_main_content1"
+                                <span className="DAT_Toollist_Tab_main_content1"
                                   id={item.id}
                                   style={{
                                     backgroundColor: "White",
                                     color: "black",
                                     borderRadius: "10px 10px 0 0",
                                   }}
-                                  onClick={(e) => (tab_.value = item.id)}
+                                  onClick={(e) => (sltab_.value = item.id)}
                                 >
                                   {item.name}
                                 </span>
                                 <p className="DAT_Toollist_Tab_main_right"></p>
                               </div>
                             ) : (
-                              <span
-                                className="DAT_Toollist_Tab_main_content2"
+                              <span className="DAT_Toollist_Tab_main_content2"
                                 key={"tab_" + i}
                                 id={item.id}
                                 style={{ backgroundColor: "#dadada" }}
-                                onClick={(e) => (tab_.value = item.id)}
+                                onClick={(e) => (sltab_.value = item.id)}
                               >
                                 {item.name}
                               </span>
@@ -1236,17 +1188,15 @@ export default function ProjectData(props) {
 
                         <div className="DAT_ProjectData_Device_Table_Content">
                           {(() => {
-                            switch (tab_.value) {
+                            switch (sltab_.value) {
                               case "inverter":
                                 return (
                                   <DataTable
                                     className="DAT_Table_Device"
                                     columns={columnInverter}
-                                    data={inverterDB.value}
+                                    data={slinverterDB.value}
                                     pagination
-                                    paginationComponentOptions={
-                                      paginationComponentOptions
-                                    }
+                                    paginationComponentOptions={paginationComponentOptions}
                                     // fixedHeader={true}
                                     noDataComponent={<Empty />}
                                   />
@@ -1256,11 +1206,9 @@ export default function ProjectData(props) {
                                   <DataTable
                                     className="DAT_Table_Device"
                                     columns={columnLogger}
-                                    data={temp.value}
+                                    data={slloggerDB.value}
                                     pagination
-                                    paginationComponentOptions={
-                                      paginationComponentOptions
-                                    }
+                                    paginationComponentOptions={paginationComponentOptions}
                                     // fixedHeader={true}
                                     noDataComponent={<Empty />}
                                   />
@@ -1276,8 +1224,7 @@ export default function ProjectData(props) {
                     <>
                       <div className="DAT_ProjectData_Device_TableMobile">
                         <div className="DAT_Toollist_Tab_Mobile">
-                          <button
-                            className="DAT_Toollist_Tab_Mobile_content"
+                          <button className="DAT_Toollist_Tab_Mobile_content"
                             onClick={() => (tabMobile.value = !tabMobile.value)}
                           >
                             <span> {tabLable.value}</span>
@@ -1289,11 +1236,10 @@ export default function ProjectData(props) {
                             )}
                           </button>
                           {ruleInfor.value.setting.device.add ? (
-                            projectData.value.shared == 1 ? (
+                            slProjectData.value.shared === 1 ? (
                               <></>
                             ) : (
-                              <div
-                                className="DAT_ProjectData_Device_Add"
+                              <div className="DAT_ProjectData_Device_Add"
                                 style={{
                                   display: view === "device" ? "block" : "none",
                                 }}
@@ -1312,8 +1258,7 @@ export default function ProjectData(props) {
                           ) : (
                             <div></div>
                           )}
-                          <div
-                            className="DAT_Toollist_Tab_Mobile_list"
+                          <div className="DAT_Toollist_Tab_Mobile_list"
                             style={{
                               top: "50px",
                               height: tabMobile.value ? "70px" : "0px",
@@ -1325,8 +1270,7 @@ export default function ProjectData(props) {
                           >
                             {listDeviceTab.map((item, i) => {
                               return (
-                                <div
-                                  className="DAT_Toollist_Tab_Mobile_list_item"
+                                <div className="DAT_Toollist_Tab_Mobile_list_item"
                                   key={"tabmobile_" + i}
                                   id={item.id}
                                   onClick={(e) => {
@@ -1342,14 +1286,13 @@ export default function ProjectData(props) {
                         </div>
 
                         {(() => {
-                          switch (tab_.value) {
+                          switch (sltab_.value) {
                             case "logger":
                               return (
                                 <>
-                                  {temp.value?.map((item, i) => {
+                                  {slloggerDB.value?.map((item, i) => {
                                     return (
-                                      <div
-                                        className="DAT_ProjectData_Device_TableMobile_Content"
+                                      <div className="DAT_ProjectData_Device_TableMobile_Content"
                                         key={i}
                                       >
                                         <div className="DAT_ProjectData_Device_TableMobile_Content_Top">
@@ -1357,8 +1300,7 @@ export default function ProjectData(props) {
                                             {item.type}
                                           </div>
                                           <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info">
-                                            <div
-                                              className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
+                                            <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
                                               onClick={(e) =>
                                                 handleInfoLogger(e)
                                               }
@@ -1403,8 +1345,7 @@ export default function ProjectData(props) {
                                           <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right">
                                             {ruleInfor.value.setting.device
                                               .modify === true ? (
-                                              <div
-                                                className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right_Item"
+                                              <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right_Item"
                                                 id={`${item.sn}_${item.name}_edit`}
                                                 onClick={(e) => handleEdit(e)}
                                               >
@@ -1415,8 +1356,7 @@ export default function ProjectData(props) {
                                             )}
                                             {ruleInfor.value.setting.device
                                               .remove === true ? (
-                                              <div
-                                                className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right_Item"
+                                              <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right_Item"
                                                 id={`${item.sn}_remove`}
                                                 onClick={(e) => handleDelete(e)}
                                               >
@@ -1435,15 +1375,13 @@ export default function ProjectData(props) {
                             case "inverter":
                               return (
                                 <>
-                                  {inverterDB.value?.map((item, i) => {
+                                  {slinverterDB.value?.map((item, i) => {
                                     return (
-                                      <div
+                                      <div className="DAT_ProjectData_Device_TableMobile_Content"
                                         key={i}
-                                        className="DAT_ProjectData_Device_TableMobile_Content"
                                       >
                                         <div className="DAT_ProjectData_Device_TableMobile_Content_Top">
-                                          <div
-                                            className="DAT_ProjectData_Device_TableMobile_Content_Top_Type"
+                                          <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Type"
                                             style={{
                                               backgroundColor:
                                                 COLOR.value.DarkGreenColor,
@@ -1452,8 +1390,7 @@ export default function ProjectData(props) {
                                             {item.data.mode}
                                           </div>
                                           <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info">
-                                            <div
-                                              className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
+                                            <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Info_Name"
                                               onClick={(e) =>
                                                 handleInfoInverter(e)
                                               }
@@ -1506,8 +1443,7 @@ export default function ProjectData(props) {
                                           <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right">
                                             {ruleInfor.value.setting.device
                                               .modify === true ? (
-                                              <div
-                                                className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right_Item"
+                                              <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Right_Item"
                                                 id={`${item.sn}_${item.name}_edit`}
                                                 onClick={(e) => handleEdit(e)}
                                               >
@@ -1523,97 +1459,6 @@ export default function ProjectData(props) {
                                   })}
                                 </>
                               );
-                            case "meter":
-                              return (
-                                <>
-                                  {/* {tempInverter.value?.map((item, i) => {
-                                  return (
-                                    <div
-                                      key={i}
-                                      className="DAT_ProjectData_Device_TableMobile_Content"
-                                    >
-                                      <div className="DAT_ProjectData_Device_TableMobile_Content_Top">
-                                        <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Left">
-                                          <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Left_Name">
-                                            {dataLang.formatMessage({
-                                              id: "name",
-                                            })}
-                                            : {item.name}
-                                          </div>
-
-                                          <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Left_Sn">
-                                            SN: {item.sn}
-                                          </div>
-                                        </div>
-
-                                        <div className="DAT_ProjectData_Device_TableMobile_Content_Top_Right">
-                                          {ruleInfor.value.setting.device
-                                            .modify === true ? (
-                                            <div
-                                              className="DAT_ProjectData_Device_TableMobile_Content_Top_Right_Item"
-                                              onClick={(e) => handleEdit(e)}
-                                            >
-                                              <MdEdit size={20} color="#216990" />
-                                            </div>
-                                          ) : (
-                                            <div></div>
-                                          )}
-                                          {ruleInfor.value.setting.device
-                                            .remove === true ? (
-                                            <div
-                                              className="DAT_ProjectData_Device_TableMobile_Content_Top_Right_Item"
-                                              id={item.sn}
-                                              onClick={(e) => handleDelete(e)}
-                                            >
-                                              <MdDelete size={20} color="red" />
-                                            </div>
-                                          ) : (
-                                            <div></div>
-                                          )}
-                                        </div>
-                                      </div>
-
-                                      <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom">
-                                        <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_State">
-                                          {item.state ? (
-                                            <>
-                                              <FaCheckCircle
-                                                size={20}
-                                                color="green"
-                                              />
-                                              <span>
-                                                {dataLang.formatMessage({
-                                                  id: "online",
-                                                })}
-                                              </span>
-                                            </>
-                                          ) : (
-                                            <>
-                                              <MdOutlineError
-                                                size={22}
-                                                color="red"
-                                              />
-                                              <span>
-                                                {dataLang.formatMessage({
-                                                  id: "offline",
-                                                })}
-                                              </span>
-                                            </>
-                                          )}
-                                        </div>
-
-                                        <div className="DAT_ProjectData_Device_TableMobile_Content_Bottom_Type">
-                                          {dataLang.formatMessage({
-                                            id: "type",
-                                          })}
-                                          : {item.type}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                })} */}
-                                </>
-                              );
                             default:
                               return <></>;
                           }
@@ -1626,8 +1471,7 @@ export default function ProjectData(props) {
             case "share":
               return (
                 <div className="DAT_ProjectData_Share">
-                  <div
-                    className="DAT_ProjectData_Share_Header"
+                  <div className="DAT_ProjectData_Share_Header"
                     style={{
                       padding: "15px",
                       backgroundColor: "rgba(233, 233, 233, 0.5)",
@@ -1652,9 +1496,8 @@ export default function ProjectData(props) {
                     <div className="DAT_ProjectData_Share_ContentMobile">
                       {getShared.map((item, i) => {
                         return (
-                          <div
+                          <div className="DAT_ProjectData_Share_ContentMobile_Item"
                             key={i}
-                            className="DAT_ProjectData_Share_ContentMobile_Item"
                           >
                             <div className="DAT_ProjectData_Share_ContentMobile_Item_Left">
                               {i + 1}
@@ -1688,8 +1531,8 @@ export default function ProjectData(props) {
         isBrowser
           ?
           <div className="DAT_PopupBG">
-            <AddGateway
-              data={temp.value}
+            <SLAddGateway
+              data={slloggerDB.value}
               handleInvt={handleInvt}
               handleClose={handleClosePopupAddGateway}
             />
@@ -1698,29 +1541,29 @@ export default function ProjectData(props) {
           isLandscape
             ?
             <div className="DAT_ViewPopupMobile">
-              <AddGateway
-                data={temp.value}
+              <SLAddGateway
+                data={slloggerDB.value}
                 handleInvt={handleInvt}
                 handleClose={handleClosePopupAddGateway}
               />
             </div>
             :
             <div className="DAT_PopupBGMobile">
-              <AddGateway
-                data={temp.value}
+              <SLAddGateway
+                data={slloggerDB.value}
                 handleInvt={handleInvt}
                 handleClose={handleClosePopupAddGateway}
               />
             </div>
       ) : <></>}
 
-      {popupState.value ? (
+      {slPopupState.value ? (
         <div className="DAT_PopupBG">
-          <Popup
-            plantid={projectData.value.plantid_}
+          <SLPopup
+            plantid={slProjectData.value.plantid_}
             type="logger"
             sn={snlogger}
-            data={temp.value}
+            data={slloggerDB.value}
             func={type}
             name={devname}
             devtype={devtype}
@@ -1728,84 +1571,10 @@ export default function ProjectData(props) {
         </div>
       ) : <> </>}
 
-      {isMobile.value ? (
+      {isBrowser ? (
         <>
           {dropState ? (
-            <div className="DAT_ProjectDataDrop">
-              {(() => {
-                switch (view) {
-                  case "device":
-                    return (
-                      <>
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
-                          id="dashboard"
-                          onClick={(e) => handleView(e)}
-                        >
-                          {dataLang.formatMessage({ id: "monitor" })}
-                        </div>
-
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
-                          id="share"
-                          onClick={(e) => handleView(e)}
-                        >
-                          {dataLang.formatMessage({ id: "share" })}
-                        </div>
-                      </>
-                    );
-                  case "share":
-                    return (
-                      <>
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
-                          id="dashboard"
-                          onClick={(e) => handleView(e)}
-                        >
-                          {dataLang.formatMessage({ id: "monitor" })}
-                        </div>
-
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
-                          id="device"
-                          onClick={(e) => handleView(e)}
-                        >
-                          {dataLang.formatMessage({ id: "device" })}
-                        </div>
-                      </>
-                    );
-                  default:
-                    return (
-                      <>
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
-                          id="device"
-                          onClick={(e) => handleView(e)}
-                        >
-                          {dataLang.formatMessage({ id: "device" })}
-                        </div>
-
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
-                          id="share"
-                          onClick={(e) => handleView(e)}
-                        >
-                          {dataLang.formatMessage({ id: "share" })}
-                        </div>
-                      </>
-                    );
-                }
-              })()}
-            </div>
-          ) : (
-            <></>
-          )}
-        </>
-      ) : (
-        <>
-          {dropState ? (
-            <div
-              className="DAT_ProjectDataDrop"
+            <div className="DAT_ProjectDataDrop"
               style={{ display: viewNav.value ? "block" : "none" }}
               onMouseEnter={() => {
                 viewStateNav.value = [true, true];
@@ -1820,16 +1589,14 @@ export default function ProjectData(props) {
                   case "device":
                     return (
                       <>
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
+                        <div className="DAT_ProjectDataDrop_Item"
                           id="dashboard"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "monitor" })}
                         </div>
 
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
+                        <div className="DAT_ProjectDataDrop_Item"
                           id="share"
                           onClick={(e) => handleView(e)}
                         >
@@ -1840,16 +1607,14 @@ export default function ProjectData(props) {
                   case "share":
                     return (
                       <>
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
+                        <div className="DAT_ProjectDataDrop_Item"
                           id="dashboard"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "monitor" })}
                         </div>
 
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
+                        <div className="DAT_ProjectDataDrop_Item"
                           id="device"
                           onClick={(e) => handleView(e)}
                         >
@@ -1860,16 +1625,14 @@ export default function ProjectData(props) {
                   default:
                     return (
                       <>
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
+                        <div className="DAT_ProjectDataDrop_Item"
                           id="device"
                           onClick={(e) => handleView(e)}
                         >
                           {dataLang.formatMessage({ id: "device" })}
                         </div>
 
-                        <div
-                          className="DAT_ProjectDataDrop_Item"
+                        <div className="DAT_ProjectDataDrop_Item"
                           id="share"
                           onClick={(e) => handleView(e)}
                         >
@@ -1880,9 +1643,72 @@ export default function ProjectData(props) {
                 }
               })()}
             </div>
-          ) : (
-            <></>
-          )}
+          ) : (<></>)}
+        </>
+      ) : (
+        <>
+          {dropState ? (
+            <div className="DAT_ProjectDataDrop">
+              {(() => {
+                switch (view) {
+                  case "device":
+                    return (
+                      <>
+                        <div className="DAT_ProjectDataDrop_Item"
+                          id="dashboard"
+                          onClick={(e) => handleView(e)}
+                        >
+                          {dataLang.formatMessage({ id: "monitor" })}
+                        </div>
+
+                        <div className="DAT_ProjectDataDrop_Item"
+                          id="share"
+                          onClick={(e) => handleView(e)}
+                        >
+                          {dataLang.formatMessage({ id: "share" })}
+                        </div>
+                      </>
+                    );
+                  case "share":
+                    return (
+                      <>
+                        <div className="DAT_ProjectDataDrop_Item"
+                          id="dashboard"
+                          onClick={(e) => handleView(e)}
+                        >
+                          {dataLang.formatMessage({ id: "monitor" })}
+                        </div>
+
+                        <div className="DAT_ProjectDataDrop_Item"
+                          id="device"
+                          onClick={(e) => handleView(e)}
+                        >
+                          {dataLang.formatMessage({ id: "device" })}
+                        </div>
+                      </>
+                    );
+                  default:
+                    return (
+                      <>
+                        <div className="DAT_ProjectDataDrop_Item"
+                          id="device"
+                          onClick={(e) => handleView(e)}
+                        >
+                          {dataLang.formatMessage({ id: "device" })}
+                        </div>
+
+                        <div className="DAT_ProjectDataDrop_Item"
+                          id="share"
+                          onClick={(e) => handleView(e)}
+                        >
+                          {dataLang.formatMessage({ id: "share" })}
+                        </div>
+                      </>
+                    );
+                }
+              })()}
+            </div>
+          ) : (<></>)}
         </>
       )}
 

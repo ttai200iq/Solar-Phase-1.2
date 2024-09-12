@@ -45,6 +45,7 @@ export default function Sidenar(props) {
       link: "none",
       li: [
         { link: "/Project", name: dataLang.formatMessage({ id: "project" }) },
+        { link: "/Solarlight", name: 'Solar light' },
         { link: "/Device", name: dataLang.formatMessage({ id: "device" }) },
         { link: "/Warn", name: dataLang.formatMessage({ id: "warn" }) },
       ],

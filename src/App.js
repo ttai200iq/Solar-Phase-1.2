@@ -24,6 +24,7 @@ import ErrorSetting from "./component/ErrorSetting/ErrorSetting";
 import { io } from "socket.io-client";
 import NotfoundErr from "./NotfoundErr";
 import RegisterSetting from "./component/RegisterSetting/RegisterSetting";
+import Solarlight from './component/Solarlight/SLProjectlist'
 
 const Home = React.lazy(() => import("./component/Home/Home"));
 const Project = React.lazy(() => import("./component/Project/Project"));
@@ -264,6 +265,7 @@ export default function App() {
       getwarn(usr, partnerInfor.value.partnerid, userInfor.value.type);
     }
   }, [userInfor.value.type, partnerInfor.value.partnerid, usr]);
+
   const handleOut = () => {
     localStorage.clear();
     sessionStorage.clear();
@@ -349,6 +351,7 @@ export default function App() {
 
                   <Route exact path="/" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Home /></Suspense>} />
                   <Route path="/Project" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Project /></Suspense>} />
+                  <Route path="/Solarlight" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Solarlight /></Suspense>} />
                   <Route path="/Device" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Device /></Suspense>} />
                   <Route path="/Warn" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Warn /></Suspense>} />
                   <Route path="/Report" element={<Suspense fallback={<div className="DAT_Loading"><ClockLoader color="#007bff" size={50} loading={loading} /></div>}><Report /></Suspense>} />
