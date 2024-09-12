@@ -16,7 +16,7 @@ export default function RSPopup(props) {
     const child_key = useRef();
     const register = useRef();
     const scale = useRef();
-    const note = useRef();
+    // const note = useRef();
     const [dataType, setDataType] = useState('normal');
     const [type_, setType_] = useState('real');
     const [key_, setKey_] = useState('');
@@ -698,11 +698,13 @@ export default function RSPopup(props) {
                                 <select onChange={(e) => setType_(e.target.value)}>
                                     <option value='real'>real</option>
                                     <option value='word'>word</option>
+                                    <option value='sum'>sum</option>
                                     <option value='bit'>bit</option>
+                                    <option value='concat'>concat</option>
                                 </select>
 
-                                <label>note</label>
-                                <input type="text" ref={note} />
+                                {/* <label>note</label>
+                                <input type="text" ref={note} /> */}
                             </div>;
                         case 'editTemplate':
                             return <div className='DAT_RSPopup_Body_Info'>
@@ -735,11 +737,13 @@ export default function RSPopup(props) {
                                 <select defaultValue={props.info.type} onChange={(e) => setType_(e.target.value)}>
                                     <option value='real'>real</option>
                                     <option value='word'>word</option>
+                                    <option value='sum'>sum</option>
                                     <option value='bit'>bit</option>
+                                    <option value='concat'>concat</option>
                                 </select>
 
-                                <label>note</label>
-                                <input type="text" ref={note} />
+                                {/* <label>note</label>
+                                <input type="text" ref={note} /> */}
                             </div>;
                         case 'deleteTemplate':
                             return <span>{dataLang.formatMessage({ id: 'delTemplatemess' })} &nbsp;

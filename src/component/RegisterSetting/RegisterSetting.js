@@ -185,7 +185,7 @@ export default function RegisterSetting(props) {
                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>register</div>
                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>scale</div>
                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>type</div>
-                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>note</div>
+                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>note</div> */}
                                                         <div style={{ width: '20px' }}></div>
                                                     </div>
 
@@ -246,7 +246,7 @@ export default function RegisterSetting(props) {
                                                                             })}
                                                                         </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                             {Object.entries(item.data_[key]).map(([k, v]) => {
                                                                                 return (
                                                                                     <div key={k} style={{ marginTop: "8px" }}>
@@ -254,7 +254,7 @@ export default function RegisterSetting(props) {
                                                                                     </div>
                                                                                 )
                                                                             })}
-                                                                        </div>
+                                                                        </div> */}
 
                                                                         <div style={{ cursor: "pointer" }}>
                                                                             {Object.entries(item.data_[key]).map(([k, v]) => {
@@ -315,9 +315,9 @@ export default function RegisterSetting(props) {
                                                                             {item.data_[key].type}
                                                                         </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                             note
-                                                                        </div>
+                                                                        </div> */}
 
                                                                         <div style={{ cursor: "pointer" }}>
                                                                             <PopupState variant="popper" popupId="demo-popup-popper">
@@ -403,7 +403,7 @@ export default function RegisterSetting(props) {
                                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
                                                                         </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                             {Object.entries(item.setting[key]).map(([k, v]) => {
                                                                                 return (
                                                                                     <div key={k} style={{ marginTop: "8px" }}>
@@ -411,7 +411,7 @@ export default function RegisterSetting(props) {
                                                                                     </div>
                                                                                 )
                                                                             })}
-                                                                        </div>
+                                                                        </div> */}
 
                                                                         <div style={{ cursor: "pointer" }}>
                                                                             {Object.entries(item.setting[key]).map(([k, v]) => {
@@ -470,9 +470,9 @@ export default function RegisterSetting(props) {
                                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
                                                                         </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                             note
-                                                                        </div>
+                                                                        </div> */}
 
                                                                         <div style={{ cursor: "pointer" }}>
                                                                             <PopupState variant="popper" popupId="demo-popup-popper">
@@ -568,7 +568,7 @@ export default function RegisterSetting(props) {
                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Register'>register</div>
                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Scale'>scale</div>
                                                         <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>type</div>
-                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>note</div>
+                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>note</div> */}
                                                         <div style={{ width: '20px' }}></div>
                                                     </div>
 
@@ -636,7 +636,7 @@ export default function RegisterSetting(props) {
                                                                                             })}
                                                                                         </div>
 
-                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                                             {Object.entries(item.data_[key]).map(([k, v]) => {
                                                                                                 return (
                                                                                                     <div key={k} style={{ marginTop: "8px" }}>
@@ -644,7 +644,7 @@ export default function RegisterSetting(props) {
                                                                                                     </div>
                                                                                                 )
                                                                                             })}
-                                                                                        </div>
+                                                                                        </div> */}
 
                                                                                         <div>
                                                                                             {Object.entries(item.data_[key]).map(([k, v]) => {
@@ -705,9 +705,9 @@ export default function RegisterSetting(props) {
                                                                                             {item.data_[key].type}
                                                                                         </div>
 
-                                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                                             note
-                                                                                        </div>
+                                                                                        </div> */}
 
                                                                                         <div style={{ cursor: "pointer" }}>
                                                                                             <PopupState variant="popper" popupId="demo-popup-popper">
@@ -769,9 +769,9 @@ export default function RegisterSetting(props) {
                                                                                 <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Type'>
                                                                                 </div>
 
-                                                                                <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                                {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                                     note
-                                                                                </div>
+                                                                                </div> */}
 
                                                                                 <div style={{ cursor: "pointer" }}>
                                                                                     <PopupState variant="popper" popupId="demo-popup-popper">
@@ -872,7 +872,7 @@ export default function RegisterSetting(props) {
                                                                             })}
                                                                         </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                             {Object.entries(item.setting[key]).map(([k, v]) => {
                                                                                 return (
                                                                                     <div key={k} style={{ marginTop: "8px" }}>
@@ -880,7 +880,7 @@ export default function RegisterSetting(props) {
                                                                                     </div>
                                                                                 )
                                                                             })}
-                                                                        </div>
+                                                                        </div> */}
 
                                                                         <div style={{ cursor: "pointer" }}>
                                                                             {Object.entries(item.setting[key]).map(([k, v]) => {
@@ -941,9 +941,9 @@ export default function RegisterSetting(props) {
                                                                             {item.setting[key].type}
                                                                         </div>
 
-                                                                        <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
+                                                                        {/* <div className='DAT_RS_Content_Table_Right_Content_Row_Right_Item_Note'>
                                                                             note
-                                                                        </div>
+                                                                        </div> */}
 
                                                                         <div style={{ cursor: "pointer" }}>
                                                                             <PopupState variant="popper" popupId="demo-popup-popper">

@@ -118,6 +118,14 @@ export default createSlice({
           discharge: true,
         },
       },
+      solar_light: {
+        date: {
+          batteryVoltage: true,
+          ledLighting: true,
+          pvVoltage: true,
+          ledPower: true,
+        }
+      }
     },
   },
   reducers: {

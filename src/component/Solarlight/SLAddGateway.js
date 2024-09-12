@@ -1,21 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Project.scss";
 
-import { projectData, } from "./Project";
-import { useIntl } from "react-intl";
-import { inverterDB, tab_, temp } from "./ProjectData";
+import { slinverterDB, slloggerDB, sltab_ } from "./SLProjectData";
+import { slProjectData } from "./SLProjectlist";
 import { callApi } from "../Api/Api";
 import { brands, host } from "../Lang/Contant";
 import { alertDispatch } from "../Alert/Alert";
-import axios from "axios";
 import { Token } from "../../App";
+
+import { useIntl } from "react-intl";
 import { signal } from "@preact/signals-react";
+import axios from "axios";
 
 import { IoClose, IoSyncOutline } from "react-icons/io5";
 
 const type_ = signal('');
 
-export default function AddGateway(props) {
+export default function SLAddGateway(props) {
   const dataLang = useIntl();
   const sn = useRef();
   const name = useRef();
@@ -24,6 +24,18 @@ export default function AddGateway(props) {
   const type = useRef();
   const ogLog = useRef();
   const brand_ = useRef();
+
+  const popup_state = {
+    pre: { transform: "rotate(0deg)", transition: "0.5s", color: "white" },
+    new: { transform: "rotate(90deg)", transition: "0.5s", color: "white" },
+  };
+
+  const handlePopup = (state) => {
+    const popup = document.getElementById("Popup");
+    popup.style.transform = popup_state[state].transform;
+    popup.style.transition = popup_state[state].transition;
+    popup.style.color = popup_state[state].color;
+  };
 
   const invtCloud = async (data, token) => {
     var reqData = {
@@ -53,30 +65,19 @@ export default function AddGateway(props) {
     }
   };
 
-  const popup_state = {
-    pre: { transform: "rotate(0deg)", transition: "0.5s", color: "white" },
-    new: { transform: "rotate(90deg)", transition: "0.5s", color: "white" },
-  };
-
-  const handlePopup = (state) => {
-    const popup = document.getElementById("Popup");
-    popup.style.transform = popup_state[state].transform;
-    popup.style.transition = popup_state[state].transition;
-    popup.style.color = popup_state[state].color;
-  };
-
   const handleSave = async (e) => {
     if (sn.current.value === "" || name.current.value === "") {
       alertDispatch(dataLang.formatMessage({ id: "alert_22" }))
-    } else if (tab_.value === 'logger') {
+    } else if (sltab_.value === 'logger') {
       const d = await callApi("post", host.DATA + "/addLogger", {
-        plantid: projectData.value.plantid_,
+        plantid: slProjectData.value.plantid_,
         sn: sn.current.value,
         name: name.current.value,
         type: type.current.value,
+        mode: 'solarlight',
       });
       if (d.status) {
-        temp.value = [...temp.value, d.data];
+        slloggerDB.value = [...slloggerDB.value, d.data];
         props.handleInvt(sn.current.value)
         type_.value = type.current.value;
       }
@@ -99,11 +100,11 @@ export default function AddGateway(props) {
         loggersn: ogLog.current.value,
         invertersn: sn.current.value,
         type: type_.value,
-        plantid: projectData.value.plantid_,
+        plantid: slProjectData.value.plantid_,
       });
       console.log(async_);
       if (async_.status) {
-        inverterDB.value = [...inverterDB.value, async_.data];
+        slinverterDB.value = [...slinverterDB.value, async_.data];
         alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
         props.handleClose();
       } else if (async_.number === 1) {
@@ -122,7 +123,7 @@ export default function AddGateway(props) {
     } else {
       const res = await invtCloud('{"deviceCode":"' + ogLog.current.value + '"}', Token.value.token);
       if (res.ret === 0) {
-        const decimalArray = JSON.parse(temp.value[0].setting.sn)
+        const decimalArray = JSON.parse(slloggerDB.value[0].setting.sn)
         const hexString = decimalArray.map((num) => parseInt(res.data[num]).toString(16)).join('');
         const invertersn = hexString.match(/.{2}/g).map(byte => String.fromCharCode(parseInt(byte, 16))).join('');
         if (invertersn === '') {
@@ -145,7 +146,7 @@ export default function AddGateway(props) {
   }, []);
 
   useEffect(() => {
-    if (tab_.value === 'logger') {
+    if (sltab_.value === 'logger') {
       if (loggerType !== undefined) {
         setBrand(loggerType.filter((item) => item.brand_ === brand_.current.value));
       }
@@ -172,7 +173,7 @@ export default function AddGateway(props) {
     <div className="DAT_AddGateway">
       <div className="DAT_AddGateway_Head">
         <div className="DAT_AddGateway_Head_Left">
-          {tab_.value === 'logger'
+          {sltab_.value === 'logger'
             ? <p>{dataLang.formatMessage({ id: 'ADD' })} Gateway/Logger</p>
             : <p>{dataLang.formatMessage({ id: 'ADD' })} Inverter</p>
           }
@@ -193,7 +194,7 @@ export default function AddGateway(props) {
         </div>
       </div>
 
-      {tab_.value === 'logger'
+      {sltab_.value === 'logger'
         ?
         <div className="DAT_AddGateway_Body">
           <div className="DAT_AddGateway_Body_Input">

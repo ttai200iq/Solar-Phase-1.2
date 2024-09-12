@@ -186,6 +186,17 @@ export default function Create(props) {
                     </p>
                   </>
                 );
+              case "solarLight":
+                return (
+                  <>
+                    <label style={{ fontWeight: "700", margin: "0" }}>
+                      Solar light
+                    </label>
+                    <p style={{ color: "grey", margin: "0" }}>
+                      {dataLang.formatMessage({ id: "dailyReportDesc" })}
+                    </p>
+                  </>
+                );
               default:
                 return (
                   <>
@@ -278,7 +289,16 @@ export default function Create(props) {
           // 7: { id: "kWhonkWp", status: false },
         },
       }
-
+    } else if (e.currentTarget.value === "solarLight") {
+      newdata.value = {
+        ...newdata.value,
+        customdata: {
+          value: { id: "Battery Voltage", status: false },
+          value2: { id: "PV Voltage", status: false },
+          value3: { id: "LED Lighting", status: false },
+          value4: { id: "LED Power", status: false },
+        },
+      }
     } else {
       newdata.value = {
         ...newdata.value,
@@ -370,6 +390,9 @@ export default function Create(props) {
               </option>
               <option value={"totalReport"}>
                 {dataLang.formatMessage({ id: "totalReport" })}
+              </option>
+              <option value={"solarLight"}>
+                Solar light
               </option>
             </select>
           </div>
@@ -487,20 +510,38 @@ export default function Create(props) {
               <p style={{ color: "grey" }}>
                 {dataLang.formatMessage({ id: "projData" })}
               </p>
-              {Object.entries(newdata.value.customdata).map(
-                ([key, value]) => (
-                  <CheckBox
-                    key={key}
-                    num={String(key)}
-                    tab="customdata_content"
-                    status={newdata.value.customdata[key].status}
-                    id={dataLang.formatMessage({
-                      id: newdata.value.customdata[key].id,
-                    })}
-                    width={widthCheckBox}
-                  />
-                )
-              )}
+              {reportType === 'solarLight'
+                ?
+                <>
+                  {Object.entries(newdata.value.customdata).map(
+                    ([key, value]) => (
+                      <CheckBox
+                        key={key}
+                        num={String(key)}
+                        tab="customdata_content"
+                        status={newdata.value.customdata[key].status}
+                        id={newdata.value.customdata[key].id}
+                        width={widthCheckBox}
+                      />
+                    )
+                  )}
+                </>
+                :
+                <>
+                  {Object.entries(newdata.value.customdata).map(
+                    ([key, value]) => (
+                      <CheckBox
+                        key={key}
+                        num={String(key)}
+                        tab="customdata_content"
+                        status={newdata.value.customdata[key].status}
+                        id={dataLang.formatMessage({ id: newdata.value.customdata[key].id })}
+                        width={widthCheckBox}
+                      />
+                    )
+                  )}
+                </>
+              }
             </div>
           </div>
         </div>

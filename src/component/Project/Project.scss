@@ -2821,6 +2821,579 @@
       }
     }
   }
+
+  &_SolarLight {
+    position: relative;
+    background-color: white;
+
+    &_Light {
+      display: flex;
+      padding: 32px 0px;
+
+      &_Left {
+        flex: 1;
+
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+
+        &_Img {
+          position: absolute;
+          top: 20px;
+          left: 140px;
+
+          & img {
+            width: 250px;
+            height: 250px;
+          }
+        }
+
+        &_Data {
+          position: absolute;
+          top: 80px;
+          left: 250px;
+
+          width: 180px;
+          // height: 100px;
+          padding: 8px;
+          background-color: white;
+          border-radius: 5px;
+
+          &_Tit {
+            text-align: center;
+          }
+
+          &_Row {
+            display: flex;
+            justify-content: space-between;
+
+            & span {
+              font-size: 14px;
+              margin-top: 6px;
+            }
+          }
+        }
+      }
+
+      &_Right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
+        &_Row {
+          display: flex;
+          gap: 16px;
+
+          &_Item {
+            border-radius: 7px;
+            min-width: 180px;
+            // flex: 1;
+            padding: 8px;
+            // border-left: solid 1px rgba(198, 197, 197, 0.5);
+            box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+            background-color: rgb(248, 249, 250);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            & span {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    &_Nav {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: solid 1px rgba(198, 197, 197, 0.5);
+      box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+      border-radius: 7px;
+      padding: 6px;
+      display: flex;
+      gap: 8px;
+      background-color: white;
+
+      & span {
+        cursor: pointer;
+      }
+    }
+
+    &_Func {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 8px;
+
+      & button {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+        box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+        border-radius: 7px;
+        padding: 6px;
+        width: 50px;
+        cursor: pointer;
+      }
+    }
+
+    &_Dashboard {
+      padding: 16px 10px 20px 10px;
+      height: calc(100vh - 400px);
+      overflow: hidden;
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
+
+      &_Title {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        // margin-top: 16px;
+        padding: 8px;
+        border-radius: 7px;
+        font-size: 20px;
+        margin: auto;
+        margin-bottom: 16px;
+        text-align: center;
+        width: 50%;
+      }
+
+      &_Row {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+
+        &_Item {
+          flex: 1;
+          box-shadow: 3px 5px 5px rgba(193, 193, 193, 0.5);
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          border-radius: 7px;
+          background-color: rgb(248, 249, 250);
+
+          &_Title {
+            // background-color: COLOR.$Primary-color;
+            // color: white;
+            // margin-bottom: 8px;
+            // border-radius: 7px 7px 0px 0px;
+            font-size: 20px;
+            text-align: center;
+          }
+
+          &_Row {
+            display: flex;
+            // border-radius: 0px 0px 7px 7px;
+            // border: solid 1px rgba(198, 197, 197, 0.5);
+
+            &_Item {
+              flex: 1;
+              padding: 8px 0px;
+              // border-left: solid 1px rgba(198, 197, 197, 0.5);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              font-size: 14px;
+              color: grey;
+
+              & span {
+                font-size: 28px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &_Setting {
+      padding: 16px 10px 20px 10px;
+      height: calc(100vh - 400px);
+      overflow: hidden;
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
+
+      &_Title {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        // margin-top: 16px;
+        padding: 8px;
+        border-radius: 7px;
+        font-size: 20px;
+        margin: auto;
+        margin-bottom: 16px;
+        text-align: center;
+        width: 50%;
+      }
+
+      &_Row {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+
+        &_Item {
+          flex: 1;
+          box-shadow: 3px 5px 5px rgba(193, 193, 193, 0.5);
+          border-radius: 7px;
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          background-color: rgb(248, 249, 250);
+
+          &_Title {
+            // background-color: COLOR.$Primary-color;
+            // color: white;
+            // margin-bottom: 8px;
+            // border-radius: 7px 7px 0px 0px;
+            font-size: 20px;
+            text-align: center;
+          }
+
+          &_Row {
+            display: flex;
+            // border-radius: 0px 0px 7px 7px;
+
+            &_Item {
+              flex: 1;
+              padding: 8px 0px;
+              // border-left: solid 1px rgba(198, 197, 197, 0.5);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              font-size: 14px;
+              color: grey;
+
+              &_Button {
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                border-radius: 7px;
+                display: flex;
+                // gap: 10px;
+
+                &_Item {
+                  padding: 8px;
+                  width: 50px;
+                  text-align: center;
+                  cursor: pointer;
+                }
+              }
+
+              & input {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                border-radius: 5px;
+                margin-top: 8px;
+                padding: 6px;
+
+                &:focus {
+                  outline: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &_SolarLightMobile {
+    position: relative;
+    background-color: white;
+
+    &_Nav {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: solid 1px rgba(198, 197, 197, 0.5);
+      box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+      border-radius: 7px;
+      padding: 6px;
+      display: flex;
+      gap: 8px;
+      background-color: white;
+    }
+
+    &_Func {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 8px;
+
+      & button {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+        box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+        border-radius: 7px;
+        padding: 6px;
+        width: 50px;
+      }
+    }
+
+    &_Light {
+      &_Left {
+        & img {
+          width: 100%;
+          height: 100%;
+          margin-left: -12px;
+        }
+
+        &_Img {
+          position: absolute;
+          top: 0px;
+          left: 50px;
+
+          & img {
+            width: 100px;
+            height: 100px;
+          }
+        }
+
+        &_Data {
+          position: absolute;
+          top: 30px;
+          left: 80px;
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          width: 180px;
+          padding: 6px;
+          background-color: white;
+          border-radius: 5px;
+
+          &_Tit {
+            text-align: center;
+          }
+
+          &_Row {
+            display: flex;
+            justify-content: space-between;
+
+            & span {
+              font-size: 14px;
+              margin-top: 6px;
+            }
+          }
+        }
+      }
+
+      &_Right {
+        // flex: 1;
+        margin: 8px 0px 16px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
+        &_Row {
+          display: flex;
+          gap: 10px;
+
+          &_Item {
+            border-radius: 7px;
+            min-width: 180px;
+            padding: 8px 4px;
+            // border: solid 1px rgba(198, 197, 197, 0.5);
+            box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+            background-color: rgb(248, 249, 250);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            & span {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    &_Dashboard {
+      padding: 60px 10px 20px 10px;
+      height: calc(100vh - 400px);
+      overflow: hidden;
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
+
+      &_Title {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        // margin-top: 16px;
+        padding: 8px;
+        border-radius: 7px;
+        font-size: 20px;
+        margin: auto;
+        // margin-bottom: 16px;
+        text-align: center;
+        // width: 50%;
+      }
+
+      &_Row {
+        // display: flex;
+        // gap: 10px;
+        margin-top: 16px;
+
+        &_Item {
+          // flex: 1;
+          margin-top: 16px;
+          box-shadow: 3px 5px 5px rgba(193, 193, 193, 0.5);
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          border-radius: 7px;
+          background-color: rgb(248, 249, 250);
+
+          &_Title {
+            // background-color: COLOR.$Primary-color;
+            // color: white;
+            // margin-bottom: 8px;
+            // border-radius: 7px 7px 0px 0px;
+            font-size: 20px;
+            text-align: center;
+          }
+
+          &_Row {
+            display: flex;
+            // border-radius: 0px 0px 7px 7px;
+            // border: solid 1px rgba(198, 197, 197, 0.5);
+
+            &_Item {
+              flex: 1;
+              padding: 8px 0px;
+              // border-left: solid 1px rgba(198, 197, 197, 0.5);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              font-size: 14px;
+              color: grey;
+
+              & span {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &_Setting {
+      padding: 60px 10px 20px 10px;
+      height: calc(100vh - 400px);
+      overflow: hidden;
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
+
+      &_Title {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        // margin-top: 16px;
+        padding: 8px;
+        border-radius: 7px;
+        font-size: 20px;
+        margin: auto;
+        // margin-bottom: 16px;
+        text-align: center;
+        // width: 50%;
+      }
+
+      &_Row {
+        // display: flex;
+        // gap: 10px;
+        margin-top: 16px;
+
+        &_Item {
+          // flex: 1;
+          box-shadow: 3px 5px 5px rgba(193, 193, 193, 0.5);
+          border-radius: 7px;
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          background-color: rgb(248, 249, 250);
+
+          &_Title {
+            // background-color: COLOR.$Primary-color;
+            // color: white;
+            // margin-bottom: 8px;
+            // border-radius: 7px 7px 0px 0px;
+            font-size: 20px;
+            text-align: center;
+          }
+
+          &_Row {
+            display: flex;
+            // border-radius: 0px 0px 7px 7px;
+
+            &_Item {
+              flex: 1;
+              padding: 8px 0px;
+              // border-left: solid 1px rgba(198, 197, 197, 0.5);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              font-size: 14px;
+              color: grey;
+
+              &_Button {
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                border-radius: 7px;
+                display: flex;
+                // gap: 10px;
+
+                &_Item {
+                  padding: 8px;
+                  width: 50px;
+                  text-align: center;
+                  cursor: pointer;
+                }
+              }
+
+              & input {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                border: solid 1px rgba(198, 197, 197, 0.5);
+                border-radius: 5px;
+                margin-top: 8px;
+                padding: 6px;
+
+                &:focus {
+                  outline: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .DAT_AddNav {

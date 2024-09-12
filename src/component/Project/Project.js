@@ -1066,7 +1066,7 @@ export default function Project(props) {
                 className="DAT_Toollist_Tab_Mobile_list"
                 style={{
                   top: "50px",
-                  height: tabMobile.value ? "220px" : "0",
+                  height: tabMobile.value ? "210px" : "0",
                   transition: "0.5s",
                   boxShadow: tabMobile.value
                     ? "0 0 4px 4px rgba(193, 193, 193, 0.5)"
@@ -1420,35 +1420,80 @@ export default function Project(props) {
                                 <div className="DAT_ProjectMobile_Content_Top_Info_Data">
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({
+                                        id: "inCapacity",
+                                      })}
+                                    </div>
+                                    <div>
+                                      {Number(
+                                        parseFloat(
+                                          convertUnit(item.capacity)
+                                        ).toFixed(2)
+                                      ).toLocaleString("en-US")}
+                                      &nbsp;
+                                      {showUnitk(item.capacity)}Wp
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({ id: "daily" })}
+                                    </div>
+                                    <div>
+                                      {parseFloat(
+                                        dailyProduction[item.plantid_]
+                                      ).toFixed(2) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                dailyProduction[item.plantid_]
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
                                       {dataLang.formatMessage({ id: "power" })}
                                     </div>
                                     <div>
-                                      {item.power}
-                                      <span>%</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "capacity",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.capacity}
-                                      <span>kWp</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.production}
-                                      <span>kWh</span>
+                                      {parseFloat(power[item.plantid_]).toFixed(
+                                        2
+                                      ) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(power[item.plantid_])}W
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                power[item.plantid_] / 1000
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnit(power[item.plantid_])}W
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -1603,35 +1648,80 @@ export default function Project(props) {
                                 <div className="DAT_ProjectMobile_Content_Top_Info_Data">
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({
+                                        id: "inCapacity",
+                                      })}
+                                    </div>
+                                    <div>
+                                      {Number(
+                                        parseFloat(
+                                          convertUnit(item.capacity)
+                                        ).toFixed(2)
+                                      ).toLocaleString("en-US")}
+                                      &nbsp;
+                                      {showUnitk(item.capacity)}Wp
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({ id: "daily" })}
+                                    </div>
+                                    <div>
+                                      {parseFloat(
+                                        dailyProduction[item.plantid_]
+                                      ).toFixed(2) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                dailyProduction[item.plantid_]
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
                                       {dataLang.formatMessage({ id: "power" })}
                                     </div>
                                     <div>
-                                      {item.power}
-                                      <span>%</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "capacity",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.capacity}
-                                      <span>kWp</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.production}
-                                      <span>kWh</span>
+                                      {parseFloat(power[item.plantid_]).toFixed(
+                                        2
+                                      ) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(power[item.plantid_])}W
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                power[item.plantid_] / 1000
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnit(power[item.plantid_])}W
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -1786,35 +1876,80 @@ export default function Project(props) {
                                 <div className="DAT_ProjectMobile_Content_Top_Info_Data">
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({
+                                        id: "inCapacity",
+                                      })}
+                                    </div>
+                                    <div>
+                                      {Number(
+                                        parseFloat(
+                                          convertUnit(item.capacity)
+                                        ).toFixed(2)
+                                      ).toLocaleString("en-US")}
+                                      &nbsp;
+                                      {showUnitk(item.capacity)}Wp
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({ id: "daily" })}
+                                    </div>
+                                    <div>
+                                      {parseFloat(
+                                        dailyProduction[item.plantid_]
+                                      ).toFixed(2) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                dailyProduction[item.plantid_]
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
                                       {dataLang.formatMessage({ id: "power" })}
                                     </div>
                                     <div>
-                                      {item.power}
-                                      <span>%</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "capacity",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.capacity}
-                                      <span>kWp</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.production}
-                                      <span>kWh</span>
+                                      {parseFloat(power[item.plantid_]).toFixed(
+                                        2
+                                      ) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(power[item.plantid_])}W
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                power[item.plantid_] / 1000
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnit(power[item.plantid_])}W
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -1969,35 +2104,80 @@ export default function Project(props) {
                                 <div className="DAT_ProjectMobile_Content_Top_Info_Data">
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({
+                                        id: "inCapacity",
+                                      })}
+                                    </div>
+                                    <div>
+                                      {Number(
+                                        parseFloat(
+                                          convertUnit(item.capacity)
+                                        ).toFixed(2)
+                                      ).toLocaleString("en-US")}
+                                      &nbsp;
+                                      {showUnitk(item.capacity)}Wp
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({ id: "daily" })}
+                                    </div>
+                                    <div>
+                                      {parseFloat(
+                                        dailyProduction[item.plantid_]
+                                      ).toFixed(2) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                dailyProduction[item.plantid_]
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
                                       {dataLang.formatMessage({ id: "power" })}
                                     </div>
                                     <div>
-                                      {item.power}
-                                      <span>%</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "capacity",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.capacity}
-                                      <span>kWp</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.production}
-                                      <span>kWh</span>
+                                      {parseFloat(power[item.plantid_]).toFixed(
+                                        2
+                                      ) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(power[item.plantid_])}W
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                power[item.plantid_] / 1000
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnit(power[item.plantid_])}W
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -2152,35 +2332,80 @@ export default function Project(props) {
                                 <div className="DAT_ProjectMobile_Content_Top_Info_Data">
                                   <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
                                     <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({
+                                        id: "inCapacity",
+                                      })}
+                                    </div>
+                                    <div>
+                                      {Number(
+                                        parseFloat(
+                                          convertUnit(item.capacity)
+                                        ).toFixed(2)
+                                      ).toLocaleString("en-US")}
+                                      &nbsp;
+                                      {showUnitk(item.capacity)}Wp
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
+                                      {dataLang.formatMessage({ id: "daily" })}
+                                    </div>
+                                    <div>
+                                      {parseFloat(
+                                        dailyProduction[item.plantid_]
+                                      ).toFixed(2) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                dailyProduction[item.plantid_]
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnitk(
+                                            dailyProduction[item.plantid_]
+                                          )}
+                                          Wh
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
+                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
                                       {dataLang.formatMessage({ id: "power" })}
                                     </div>
                                     <div>
-                                      {item.power}
-                                      <span>%</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "capacity",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.capacity}
-                                      <span>kWp</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item">
-                                    <div className="DAT_ProjectMobile_Content_Top_Info_Data_Item_Name">
-                                      {dataLang.formatMessage({
-                                        id: "production",
-                                      })}
-                                    </div>
-                                    <div>
-                                      {item.production}
-                                      <span>kWh</span>
+                                      {parseFloat(power[item.plantid_]).toFixed(
+                                        2
+                                      ) === "NaN" ? (
+                                        <>
+                                          0 &nbsp;
+                                          {showUnitk(power[item.plantid_])}W
+                                        </>
+                                      ) : (
+                                        <>
+                                          {Number(
+                                            parseFloat(
+                                              convertUnit(
+                                                power[item.plantid_] / 1000
+                                              )
+                                            ).toFixed(2)
+                                          ).toLocaleString("en-US")}
+                                          &nbsp;
+                                          {showUnit(power[item.plantid_])}W
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
