@@ -47,6 +47,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { isMobile } from "../Navigation/Navigation";
 import { isBrowser, useMobileOrientation } from "react-device-detect";
 import { size } from "lodash";
+import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
 const plant = signal([]);
 const logger = signal([]);
@@ -644,9 +645,9 @@ export default function Home(props) {
     const { AdvancedMarkerElement } = await loader.importLibrary("marker");
     const { Map } = await loader.importLibrary("maps");
 
-    let map = new Map(document.getElementById("map"), defaultProps);
+    const map = new Map(document.getElementById("map"), defaultProps);
 
-    data.map((item) => {
+    const markerList = data.map((item) => {
       // const marker = { lat: parseFloat(item.lat), lng: parseFloat(item.long) };
       // const markerElement = new AdvancedMarkerElement({
       //   position: marker,
@@ -667,7 +668,6 @@ export default function Home(props) {
         content: priceTag,
       });
 
-
       markerElement.addListener("click", () => {
         plantState.value = "info";
         projectData.value = item;
@@ -676,6 +676,8 @@ export default function Home(props) {
       });
       return markerElement;
     });
+
+    new MarkerClusterer({ markers: markerList, map: map });
   };
 
   const getData = async (data) => {
@@ -711,7 +713,7 @@ export default function Home(props) {
             // if (item.pstate) {
             num_[key][i] = inum.reduce((accumulator, currentValue) => {
               return Number(accumulator) + Number(currentValue);
-            }, 0)* parseFloat(value.cal);
+            }, 0) * parseFloat(value.cal);
             // console.log(key,num_[key]);
             // } else {
             //   num_[key][i] = 0;
@@ -721,7 +723,7 @@ export default function Home(props) {
               cal[key] = parseFloat(
                 num_[key].reduce((accumulator, currentValue) => {
                   return Number(accumulator) + Number(currentValue);
-                }, 0) 
+                }, 0)
               ).toFixed(2);
             }
             break;
@@ -743,8 +745,8 @@ export default function Home(props) {
             };
 
             // if (item.pstate) {
-            num_[key][i] = convertToDoublewordAndFloat(e, "int")*parseFloat(value.cal);
-            
+            num_[key][i] = convertToDoublewordAndFloat(e, "int") * parseFloat(value.cal);
+
             // } else {
             //   num_[key][i] = 0;
             // }
@@ -756,16 +758,16 @@ export default function Home(props) {
                 }, 0)
               ).toFixed(2);
 
-        
+
             }
             break;
           case "real":
             // if (item.pstate) {
             num_[key][i] =
-              parseFloat(invt[item.psn]?.[value.register] || 0) *parseFloat(value.cal);
+              parseFloat(invt[item.psn]?.[value.register] || 0) * parseFloat(value.cal);
             if (key == "pro_2") {
               sun_[item.pplantid] =
-                parseFloat(invt[item.psn]?.[value.register]) *parseFloat(value.cal);
+                parseFloat(invt[item.psn]?.[value.register]) * parseFloat(value.cal);
             }
             // } else {
             //   num_[key][i] = 0;

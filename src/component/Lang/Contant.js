@@ -304,7 +304,10 @@ export const messages = {
     sendOTP: "Send OTP",
     causeViEn: "Cause (Vietnamese - English)",
     solutionViEn: "Solution (Vietnamese - English)",
+    map: 'Map',
+    diagram: 'Diagram',
     //-----DATA PLATFORM-----
+
     //TAB Settings
     BatchCommand: "Batch Command",
     SingleCommand: "Single Command",
@@ -1233,7 +1236,10 @@ export const messages = {
     sendOTP: "Gửi mã OTP",
     causeViEn: "Nguyên nhân (Tiếng Việt - Tiếng Anh)",
     solutionViEn: "Biện pháp (Tiếng Việt - Tiếng Anh)",
+    map: "Bản đồ",
+    diagram: "Sơ đồ",
     // DATA PLATFORM
+
     //TAB Settings
     BatchCommand: "Cài đặt nhiều lệnh",
     SingleCommand: "Cài đặt lệnh đơn",

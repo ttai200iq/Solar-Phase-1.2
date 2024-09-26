@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Info from "../Device/Info";
 import SLAddGateway from "./SLAddGateway";
 import SLPopup from "./SLPopup";
-import SolarLight from "./SolarLight";
+import SolarLight, { SLloggerSn } from "./SolarLight";
 import SLProjectInfo from "./SLProjectInfo";
 import SLWeather from "./SLWeather";
 import SLBenefit from "./SLBenefit";
@@ -86,7 +86,7 @@ export default function SLProjectData(props) {
 
   const listDeviceTab = [
     { id: "logger", name: "Logger" },
-    { id: "inverter", name: "Inverter" },
+    // { id: "inverter", name: "Inverter" },
     // { id: "meter", name: "Meter" },
   ];
 
@@ -663,7 +663,8 @@ export default function SLProjectData(props) {
       let d = await callApi("post", host.DATA + "/getLogger", {
         plantid: slProjectData.value.plantid_,
       });
-      slloggerDB.value = d;
+      let newDB = d.sort((a, b) => a.name.localeCompare(b.name));
+      slloggerDB.value = newDB;
       d.map(async (item) => {
         const res = await invtCloud('{"deviceCode":"' + item.sn + '"}', Token.value.token);
         if (res.ret === 0) {
@@ -680,131 +681,89 @@ export default function SLProjectData(props) {
           setInvt((pre) => ({ ...pre, [item.sn]: {} }));
         }
 
-        //data Inverter
-        let inverter = await callApi("post", host.DATA + "/getInverter", {
-          loggerid: item.sn,
-        });
-        if (inverter.length > 0) {
-          inverter.map((item) => { return item.type = slloggerDB.value.find((i) => i.sn === item.logger_).type });
-          slinverterDB.value = [...inverter];
-        } else {
-          slinverterDB.value = [];
-        }
+        // //data Inverter
+        // let inverter = await callApi("post", host.DATA + "/getInverter", {
+        //   loggerid: item.sn,
+        // });
+        // if (inverter.length > 0) {
+        //   inverter.map((item) => { return item.type = slloggerDB.value.find((i) => i.sn === item.logger_).type });
+        //   slinverterDB.value = [...inverter];
+        // } else {
+        //   slinverterDB.value = [];
+        // }
       });
     };
     getLogger();
 
     return () => {
       sltab_.value = "logger";
-      slinverterDB.value = [];
-      slloggerDB.value = [];
-      //   rootDispatch(
-      //     toolslice.actions.setcal({
-      //       pro_1: 0,
-      //       pro_2: 0,
-      //       pro_3: 0,
-      //       bat_1: 0,
-      //       bat_2: 0,
-      //       bat_in_1: 0,
-      //       bat_out_1: 0,
-      //       con_1: 0,
-      //       con_2: 0,
-      //       con_3: 0,
-      //       grid_1: 0,
-      //       grid_in_1: 0,
-      //       grid_in_2: 0,
-      //       grid_out_1: 0,
-      //       grid_out_2: 0,
-      //     })
-      //   );
+      // slinverterDB.value = [];
+      // slloggerDB.value = [];
     };
 
     // eslint-disable-next-line
   }, [lang]);
 
   useEffect(() => {
-    var num_ = {
-      bat_volt: [],
-      device_status: [],
-      mode_operating: [],
-      priority_given: [],
-      power_supply_status: [],
-      cost_saving: [],
-      ambient_temp: [],
-      charging_current: [],
-      charging_power: [],
-      pv_volt: [],
-      pv_current: [],
-      led_volt: [],
-      led_current: [],
-      led_power: [],
-      level_light_1: [],
-      timing_light_1: [],
-      level_light_2: [],
-      timing_light_2: [],
-      level_light_3: [],
-      timing_light_3: [],
-      level_light_4: [],
-      timing_light_4: [],
-      level_light_5: [],
-      timing_light_5: [],
-      led_lighting_function: [],
-      led_lighting_method: [],
-      switch_volt: [],
-      dc_bat_over_dsch_volt: [],
-      bat_over_dsch_volt: [],
-      bat_dsch_volt_return: [],
-      grid_dsch_energy: [],
-      bat_dsch_energy: [],
-      dsch_time: [],
-      charging_energy: [],
-      charging_capacity: [],
-      charging_time: [],
-      operation_time_with_grid: [],
-      operation_time_with_bat: [],
-      total_energy_from_grid: [],
-      total_energy_charge: [],
-      total_capacity_grid_dsch: [],
-      number_cell_battery: [],
-      over_dsch_return_volt: [],
-      max_current_pv_charge: [],
-      stop_charge_current: [],
-      volt_overcharge: [],
-      over_dsch_delay: [],
-      undervolt_warn: [],
-      volt_overcharge_return: [],
-      led_manual_control: [],
-      sleep_control: [],
-    };
+    let item = slloggerDB.value.filter((item) => item.sn === SLloggerSn.value);
+    // console.log(item);
+    if (item.length === 0) return;
+
     var cal_ = {
-      // bat_volt: 0,
-      // device_status: 0,
-      // mode_operating: 0,
-      // priority_given: 0,
-      // power_supply_status: 0,
-      // cost_saving: 0,
-      // ambient_temp: 0,
-      // charging_current: 0,
-      // charging_power: 0,
-      // pv_volt: 0,
-      // pv_current: 0,
-      // led_volt: 0,
-      // led_current: 0,
-      // led_power: 0,
-      // level_light_1: 0,
-      // timing_light_1: 0,
-      // level_light_2: 0,
-      // timing_light_2: 0,
-      // level_light_3: 0,
-      // timing_light_3: 0,
-      // level_light_4: 0,
-      // timing_light_4: 0,
-      // level_light_5: 0,
-      // timing_light_5: 0,
-      // led_lighting_function: 0,
-      // led_lighting_method: 0,
+      bat_volt: 0,
+      device_status: 0,
+      mode_operating: 0,
+      priority_given: 0,
+      power_supply_status: 0,
+      cost_saving: 0,
+      ambient_temp: 0,
+      charging_current: 0,
+      charging_power: 0,
+      pv_volt: 0,
+      pv_current: 0,
+      led_volt: 0,
+      led_current: 0,
+      led_power: 0,
+      level_light_1: 0,
+      timing_light_1: 0,
+      level_light_2: 0,
+      timing_light_2: 0,
+      level_light_3: 0,
+      timing_light_3: 0,
+      level_light_4: 0,
+      timing_light_4: 0,
+      level_light_5: 0,
+      timing_light_5: 0,
+      led_lighting_function: 0,
+      led_lighting_method: 0,
+      switch_volt: 0,
+      dc_bat_over_dsch_volt: 0,
+      bat_over_dsch_volt: 0,
+      bat_dsch_volt_return: 0,
+      grid_dsch_energy: 0,
+      bat_dsch_energy: 0,
+      dsch_time: 0,
+      charging_energy: 0,
+      charging_capacity: 0,
+      charging_time: 0,
+      operation_time_with_grid: 0,
+      operation_time_with_bat: 0,
+      total_energy_from_grid: 0,
+      total_energy_charge: 0,
+      total_capacity_grid_dsch: 0,
+      number_cell_battery: 0,
+      over_dsch_return_volt: 0,
+      max_current_pv_charge: 0,
+      stop_charge_current: 0,
+      volt_overcharge: 0,
+      over_dsch_delay: 0,
+      undervolt_warn: 0,
+      volt_overcharge_return: 0,
+      led_manual_control: 0,
+      sleep_control: 0,
     };
-    slloggerDB.value.map(async (item, i) => {
+
+    item.map(async (item, i) => {
       Object.entries(item.data).map(([key, value]) => {
         switch (value.type) {
           case "sum":
@@ -814,17 +773,17 @@ export default function SLProjectData(props) {
               inum[j] = parseFloat(invt[item.sn]?.[reg] || 0);
             });
 
-            num_[key][i] = inum.reduce((accumulator, currentValue) => {
+            cal_[key] = inum.reduce((accumulator, currentValue) => {
               return Number(accumulator) + Number(currentValue);
-            }, 0) * parseFloat(value.cal);
+            }, 0) * parseFloat(value.cal) || 0;
 
-            if (i == slloggerDB.value.length - 1) {
-              cal_[key] = parseFloat(
-                num_[key].reduce((accumulator, currentValue) => {
-                  return Number(accumulator) + Number(currentValue);
-                }, 0)
-              ).toFixed(2);
-            }
+            // if (i == item.length - 1) {
+            //   cal_[key] = parseFloat(
+            //     num_[key].reduce((accumulator, currentValue) => {
+            //       return Number(accumulator) + Number(currentValue);
+            //     }, 0)
+            //   ).toFixed(2);
+            // }
             break;
           case "word":
             let d = JSON.parse(value.register);
@@ -842,22 +801,24 @@ export default function SLProjectData(props) {
                 ? parseFloat(doubleword).toFixed(2)
                 : parseFloat(float_value).toFixed(2) || 0;
             };
-            num_[key][i] = convertToDoublewordAndFloat(e, "int") * parseFloat(value.cal);
+            cal_[key] = convertToDoublewordAndFloat(e, "int") * parseFloat(value.cal) || 0;
 
-            if (i == slloggerDB.value.length - 1) {
-              cal_[key] = parseFloat(num_[key].reduce((accumulator, currentValue) => {
-                return Number(accumulator) + Number(currentValue);
-              }, 0)).toFixed(2);
-            }
+            // if (i == item.length - 1) {
+            //   cal_[key] = parseFloat(num_[key].reduce((accumulator, currentValue) => {
+            //     return Number(accumulator) + Number(currentValue);
+            //   }, 0)).toFixed(2);
+            // }
             break;
           case "real":
             // num_[key][i] = parseFloat(invt[item.sn]?.[value.register] || 0) * parseFloat(value.cal);
-            num_[key][i] = parseFloat(invt[item.sn]?.[value.register]) * parseFloat(value.cal);
-            if (i == slloggerDB.value.length - 1) {
-              cal_[key] = parseFloat(num_[key].reduce((accumulator, currentValue) => {
-                return accumulator + currentValue;
-              })).toFixed(2);
-            }
+
+            cal_[key] = parseFloat(invt[item.sn]?.[value.register]) * parseFloat(value.cal) || 0;
+            // if (i == item.length - 1) {
+            //   cal_[key] = parseFloat(num_[key].reduce((accumulator, currentValue) => {
+            //     return accumulator + currentValue;
+            //   })).toFixed(2);
+            //   console.log(key, cal_[key])
+            // }
             break;
           case "bit":
             const numberToConvert = invt[item.sn]?.[value.register] || 0;
@@ -876,12 +837,12 @@ export default function SLProjectData(props) {
               }
             }
             const binary = arrBitwise.reverse().join("");
-            num_[key][i] = Number(binary[15 - Number(value.cal)])
+            cal_[key] = Number(binary[15 - Number(value.cal)]) || 0;
             // console.log(key, num_[key])
-            if (i == slloggerDB.value.length - 1) {
-              cal_[key] = num_[key].some(element => element === 1) ? 1 : 0;
-              // console.log(key,cal_[key])
-            }
+            // if (i == item.length - 1) {
+            //   cal_[key] = num_[key].some(element => element === 1) ? 1 : 0;
+            //   // console.log(key,cal_[key])
+            // }
             break;
           default:
             break;
@@ -889,20 +850,10 @@ export default function SLProjectData(props) {
       });
     });
 
-    // slcoalsave.value = {
-    //   ...slcoalsave.value,
-    //   value: cal_.pro_3,
-    // };
-
+    // console.log(cal_);
     rootDispatch(toolslice.actions.setcal(cal_));
 
-    // document.addEventListener("mousedown", handleOutsideUser);
-    // return () => {
-    //   document.removeEventListener("mousedown", handleOutsideUser);
-    // };
-
-    // eslint-disable-next-line
-  }, [invt]);
+  }, [invt, SLloggerSn.value])
 
   useEffect(() => {
     if (slloggerDB.value.length > 0) {
@@ -1076,12 +1027,7 @@ export default function SLProjectData(props) {
                         <div id="dashboard">
                           <div className="DAT_ProjectData_NewDashboard_Top">
                             <div className="DAT_ProjectData_NewDashboard_Top_Left">
-                              <div className="DAT_ProjectData_NewDashboard_Top_Left_Graph">
-                                <SolarLight />
-                              </div>
-                              <div className="DAT_ProjectData_NewDashboard_Top_Left_Impact">
-                                <SLBenefit />
-                              </div>
+                              <SolarLight />
                             </div>
                             <div className="DAT_ProjectData_NewDashboard_Top_Right">
                               <div className="DAT_ProjectData_NewDashboard_Top_Right_Information">
@@ -1124,12 +1070,12 @@ export default function SLProjectData(props) {
                       <div id="dashboard">
                         <div className="DAT_ProjectData_Dashboard_Top">
                           <div className="DAT_ProjectData_Dashboard_Top_Left">
-                            <div className="DAT_ProjectData_Dashboard_Top_Left_Graph">
-                              <SolarLight />
-                            </div>
+                            {/* <div className="DAT_ProjectData_Dashboard_Top_Left_Graph"> */}
+                            <SolarLight />
+                            {/* </div>
                             <div className="DAT_ProjectData_Dashboard_Top_Left_Impact">
                               <SLBenefit />
-                            </div>
+                            </div> */}
                           </div>
                           <div className="DAT_ProjectData_Dashboard_Top_Right">
                             <div className="DAT_ProjectData_Dashboard_Top_Right_Information">
