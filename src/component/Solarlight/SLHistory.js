@@ -17,6 +17,7 @@ import toolslice from "../Redux/toolslice";
 import { isBrowser } from "react-device-detect";
 
 import { IoCalendarOutline } from "react-icons/io5";
+import { SLloggerSn } from "./SolarLight";
 
 export default function SLHistory(props) {
   const dataLang = useIntl();
@@ -527,7 +528,7 @@ export default function SLHistory(props) {
         plantid: slProjectData.value.plantid_,
         date: moment(new Date()).format("MM/DD/YYYY"),
       });
-      console.log(d);
+      // console.log(d);
       setDataDay([]);
       let x = [];
       if (d.status) {
@@ -875,93 +876,93 @@ export default function SLHistory(props) {
     //     })
     //   );
     // };
+
     // eslint-disable-next-line
   }, [lang]);
 
   return (
     <>
-      {isBrowser ? (
+      {isBrowser ?
         isDesktop.value
           ?
-          <>
-            <div style={{ display: "flex", gap: "10px", width: "100%" }}>
-              <div className="DAT_ProjectData_NewDashboard_Filterlist">
-                <div className="DAT_ProjectData_NewDashboard_Filterlist_Head">
-                  {dataLang.formatMessage({ id: "choosePara" })}
+          <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+            <div className="DAT_ProjectData_NewDashboard_Filterlist">
+              <div className="DAT_ProjectData_NewDashboard_Filterlist_Head">
+                {dataLang.formatMessage({ id: "choosePara" })}
+              </div>
+              <div className="DAT_ProjectData_NewDashboard_Filterlist_Body">
+                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
+                  <input
+                    id={"batteryVoltage+" + slProjectData.value.plantmode}
+                    type="checkbox"
+                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].batteryVoltage}
+                    onChange={(e) => { handlefilterchart(e); }}
+                  />
+                  <label
+                    htmlFor={"batteryVoltage+" + slProjectData.value.plantmode}
+                  >
+                    Battery Voltage
+                  </label>
                 </div>
-                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body">
-                  <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
-                    <input
-                      id={"batteryVoltage+" + slProjectData.value.plantmode}
-                      type="checkbox"
-                      defaultChecked={filterchart[slProjectData.value.plantmode][dateType].batteryVoltage}
-                      onChange={(e) => { handlefilterchart(e); }}
-                    />
-                    <label
-                      htmlFor={"batteryVoltage+" + slProjectData.value.plantmode}
-                    >
-                      Battery Voltage
-                    </label>
-                  </div>
 
-                  <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
-                    <input
-                      id={"pvVoltage+" + slProjectData.value.plantmode}
-                      type="checkbox"
-                      defaultChecked={filterchart[slProjectData.value.plantmode][dateType].pvVoltage}
-                      onChange={(e) => { handlefilterchart(e); }}
-                    />
-                    <label
-                      htmlFor={"pvVoltage+" + slProjectData.value.plantmode}
-                    >
-                      PV Voltage
-                    </label>
-                  </div>
+                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
+                  <input
+                    id={"pvVoltage+" + slProjectData.value.plantmode}
+                    type="checkbox"
+                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].pvVoltage}
+                    onChange={(e) => { handlefilterchart(e); }}
+                  />
+                  <label
+                    htmlFor={"pvVoltage+" + slProjectData.value.plantmode}
+                  >
+                    PV Voltage
+                  </label>
+                </div>
 
-                  <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
-                    <input
-                      id={"ledLighting+" + slProjectData.value.plantmode}
-                      type="checkbox"
-                      defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledLighting}
-                      onChange={(e) => { handlefilterchart(e); }}
-                    />
-                    <label
-                      htmlFor={"ledLighting+" + slProjectData.value.plantmode}
-                    >
-                      LED Lighting
-                    </label>
-                  </div>
+                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
+                  <input
+                    id={"ledLighting+" + slProjectData.value.plantmode}
+                    type="checkbox"
+                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledLighting}
+                    onChange={(e) => { handlefilterchart(e); }}
+                  />
+                  <label
+                    htmlFor={"ledLighting+" + slProjectData.value.plantmode}
+                  >
+                    LED Lighting
+                  </label>
+                </div>
 
-                  <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
-                    <input
-                      id={"ledPower+" + slProjectData.value.plantmode}
-                      type="checkbox"
-                      defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledPower}
-                      onChange={(e) => { handlefilterchart(e); }}
-                    />
-                    <label
-                      htmlFor={"ledPower+" + slProjectData.value.plantmode}
-                    >
-                      LED Power
-                    </label>
-                  </div>
+                <div className="DAT_ProjectData_NewDashboard_Filterlist_Body_Checkbox">
+                  <input
+                    id={"ledPower+" + slProjectData.value.plantmode}
+                    type="checkbox"
+                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledPower}
+                    onChange={(e) => { handlefilterchart(e); }}
+                  />
+                  <label
+                    htmlFor={"ledPower+" + slProjectData.value.plantmode}
+                  >
+                    LED Power
+                  </label>
                 </div>
               </div>
+            </div>
 
-              <div className="DAT_ProjectData_NewDashboard_History">
-                <div className="DAT_ProjectData_NewDashboard_History_Tit">
-                  <div className="DAT_ProjectData_NewDashboard_History_Tit_Left">
-                    {dataLang.formatMessage({ id: "history" })}
+            <div className="DAT_ProjectData_NewDashboard_History">
+              <div className="DAT_ProjectData_NewDashboard_History_Tit">
+                <div className="DAT_ProjectData_NewDashboard_History_Tit_Left">
+                  {dataLang.formatMessage({ id: "history" })}
+                </div>
+
+                <div className="DAT_ProjectData_NewDashboard_History_Tit_Right">
+                  <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Export">
+                    <button onClick={(e) => handleExport(e)}>
+                      {dataLang.formatMessage({ id: "export" })}
+                    </button>
                   </div>
 
-                  <div className="DAT_ProjectData_NewDashboard_History_Tit_Right">
-                    <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Export">
-                      <button onClick={(e) => handleExport(e)}>
-                        {dataLang.formatMessage({ id: "export" })}
-                      </button>
-                    </div>
-
-                    {/* <DatePicker
+                  {/* <DatePicker
                       id="datepicker"
                       onChange={(date) => handleChart(date)}
                       // showMonthYearPicker={dateType === "date" ? false : true}
@@ -977,7 +978,7 @@ export default function SLHistory(props) {
                       }
                     /> */}
 
-                    {/* <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date">
+                  {/* <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date">
                           <div
                             className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
                             id="date"
@@ -1044,297 +1045,28 @@ export default function SLHistory(props) {
                             </button>
                           }
                         /> */}
-                  </div>
                 </div>
-
-                <SLDay
-                  data={dataDay}
-                  dateType={dateType}
-                  v={vDay}
-                  v2={vDay2}
-                  v3={vDay3}
-                  v4={vDay4}
-                />
               </div>
+
+              <SLDay
+                data={dataDay}
+                dateType={dateType}
+                v={vDay}
+                v2={vDay2}
+                v3={vDay3}
+                v4={vDay4}
+              />
             </div>
-          </>
+          </div>
           :
-          <>
-            <div style={{ width: "100%" }}>
-              <div className="DAT_ProjectData_Dashboard_History">
-                <div className="DAT_ProjectData_Dashboard_History_Tit"
-                  style={{ padding: '15px 15px 0px' }}
-                >
-                  <div className="DAT_ProjectData_Dashboard_History_Tit_Left"
-                    style={{ width: '50%', fontSize: '20px' }}
-                  >
-                    {dataLang.formatMessage({ id: "history" })}
-                  </div>
-
-                  <div className="DAT_ProjectData_Dashboard_History_Tit_Right"
-                    style={{ width: '50%', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}
-                  >
-                    {/* <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Date">
-                    <div
-                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
-                      id="date"
-                      style={{
-                        borderRight: "solid 1px rgb(199, 199, 199)",
-                        color: dateType === "date" ? color.cur : color.pre,
-                      }}
-                      onClick={(e) => handleDate(e)}
-                    >
-                      {dataLang.formatMessage({ id: "day" })}
-                    </div>
-                    <div
-                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
-                      id="month"
-                      style={{
-                        borderRight: "solid 1px rgb(199, 199, 199)",
-                        color: dateType === "month" ? color.cur : color.pre,
-                      }}
-                      onClick={(e) => handleDate(e)}
-                    >
-                      {dataLang.formatMessage({ id: "month" })}
-                    </div>
-                    <div
-                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
-                      id="year"
-                      style={{
-                        borderRight: "solid 1px rgb(199, 199, 199)",
-                        color: dateType === "year" ? color.cur : color.pre,
-                      }}
-                      onClick={(e) => handleDate(e)}
-                    >
-                      {dataLang.formatMessage({ id: "year" })}
-                    </div>
-                    <div
-                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
-                      id="total"
-                      style={{
-                        color: dateType === "total" ? color.cur : color.pre,
-                      }}
-                      onClick={(e) => handleDate(e)}
-                    >
-                      {dataLang.formatMessage({ id: "total" })}
-                    </div>
-                  </div> */}
-
-                    <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Below">
-                      <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Below_Export">
-                        <button
-                          style={{
-                            backgroundColor: COLOR.value.PrimaryColor,
-                            color: "white",
-                            // margin: "0px 10px 0px 0px",
-                          }}
-                          onClick={(e) => handleExport(e)}
-                        >
-                          {dataLang.formatMessage({ id: "export" })}
-                        </button>
-                        {/* <DatePicker
-                        id="datepicker"
-                        onChange={(date) => handleChart(date)}
-                        // showMonthYearPicker={dateType === "date" ? false : true}
-                        // showYearPicker={
-                        //   dateType === "date" || dateType === "month"
-                        //     ? false
-                        //     : true
-                        // }
-                        // disabled={dateType === "total" ? true : false}
-                        customInput={
-                          <button className="DAT_CustomPicker">
-                            <span>{d[dateType]}</span>
-                            <IoCalendarOutline />
-                          </button>
-                        }
-                      /> */}
-                        <div />
-                      </div>
-                    </div>
-                    <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Config">
-                      <button
-                        onClick={(e) => {
-                          handleShowConfig(e);
-                          setDropConfig(!dropConfig);
-                        }}
-                      >
-                        {configname}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <SLDay
-                  data={dataDay}
-                  dateType={dateType}
-                  v={vDay}
-                  v2={vDay2}
-                  v3={vDay3}
-                  v4={vDay4}
-                />
-
-                <div className="DAT_ProjectData_Dashboard_History_SubConfig"
-                  style={{
-                    height: dropConfig ? "calc(100vh)" : "0px",
-                    transition: "0.5s",
-                  }}
-                >
-                  {dropConfig ? (
-                    <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown"
-                      style={{
-                        height: dropConfig ? "auto" : "0px",
-                        transition: "0.5s",
-                      }}
-                    >
-                      <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item">
-                        <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
-                          <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                Battery Voltage
-                              </th>
-                              <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                  <input
-                                    id={"batteryVoltage+" + slProjectData.value.plantmode}
-                                    type="checkbox"
-                                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].batteryVoltage}
-                                    onChange={(e) => { handlefilterchart(e); }}
-                                  />
-                                  <label
-                                    htmlFor={"batteryVoltage+" + slProjectData.value.plantmode}
-                                  >
-                                    Battery Voltage
-                                  </label>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-
-                          <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                PV Voltage
-                              </th>
-                              <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                  <input
-                                    id={"pvVoltage+" + slProjectData.value.plantmode}
-                                    type="checkbox"
-                                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].pvVoltage}
-                                    onChange={(e) => { handlefilterchart(e); }}
-                                  />
-                                  <label
-                                    htmlFor={"pvVoltage+" + slProjectData.value.plantmode}
-                                  >
-                                    PV Voltage
-                                  </label>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-
-                          <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                LED Lighting
-                              </th>
-                              <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                  <input
-                                    id={"ledLighting+" + slProjectData.value.plantmode}
-                                    type="checkbox"
-                                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledLighting}
-                                    onChange={(e) => { handlefilterchart(e); }}
-                                  />
-                                  <label
-                                    htmlFor={"ledLighting+" + slProjectData.value.plantmode}
-                                  >
-                                    LED Lighting
-                                  </label>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-
-                          <tbody>
-                            <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
-                              <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
-                                LED Power
-                              </th>
-                              <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
-                                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
-                                  <input
-                                    id={"ledPower+" + slProjectData.value.plantmode}
-                                    type="checkbox"
-                                    defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledPower}
-                                    onChange={(e) => { handlefilterchart(e); }}
-                                  />
-                                  <label
-                                    htmlFor={"ledPower+" + slProjectData.value.plantmode}
-                                  >
-                                    LED Power
-                                  </label>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-
-                      <div className="DAT_Filter_Dropdown_Bot">
-                        <button
-                          style={{
-                            backgroundColor: "white",
-                            color: "black",
-                          }}
-                          onClick={(e) => {
-                            handleShowConfig(e);
-                            setDropConfig(!dropConfig);
-                            filterchartTemp.value = filterchart;
-                          }}
-                        >
-                          {dataLang.formatMessage({ id: "cancel" })}
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            handleShowConfig(e);
-                            setDropConfig(!dropConfig);
-                            handleConfirmChart(e);
-                          }}
-                          style={{
-                            backgroundColor: COLOR.value.PrimaryColor,
-                            color: "white",
-                          }}
-                        >
-                          {dataLang.formatMessage({ id: "confirm" })}
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
-            </div>
-          </>
-      ) : (
-        <>
           <div style={{ width: "100%" }}>
             <div className="DAT_ProjectData_Dashboard_History">
-              <div className="DAT_ProjectData_Dashboard_History_Tit"
-                style={{ padding: '15px 15px 0px' }}
-              >
-                <div className="DAT_ProjectData_Dashboard_History_Tit_Left"
-                  style={{ width: '50%', fontSize: '20px' }}
-                >
+              <div className="DAT_ProjectData_Dashboard_History_Tit" style={{ padding: '15px 15px 0px' }}>
+                <div className="DAT_ProjectData_Dashboard_History_Tit_Left" style={{ width: '50%', fontSize: '20px' }}>
                   {dataLang.formatMessage({ id: "history" })}
                 </div>
 
-                <div className="DAT_ProjectData_Dashboard_History_Tit_Right"
-                  style={{ width: '50%', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}
-                >
+                <div className="DAT_ProjectData_Dashboard_History_Tit_Right" style={{ width: '50%', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
                   {/* <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Date">
                     <div
                       className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
@@ -1383,12 +1115,7 @@ export default function SLHistory(props) {
 
                   <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Below">
                     <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Below_Export">
-                      <button
-                        style={{
-                          backgroundColor: COLOR.value.PrimaryColor,
-                          color: "white",
-                          // margin: "0px 10px 0px 0px",
-                        }}
+                      <button style={{ backgroundColor: COLOR.value.PrimaryColor, color: "white" }}
                         onClick={(e) => handleExport(e)}
                       >
                         {dataLang.formatMessage({ id: "export" })}
@@ -1435,19 +1162,9 @@ export default function SLHistory(props) {
                 v4={vDay4}
               />
 
-              <div className="DAT_ProjectData_Dashboard_History_SubConfig"
-                style={{
-                  height: dropConfig ? "calc(100vh)" : "0px",
-                  transition: "0.5s",
-                }}
-              >
-                {dropConfig ? (
-                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown"
-                    style={{
-                      height: dropConfig ? "auto" : "0px",
-                      transition: "0.5s",
-                    }}
-                  >
+              <div className="DAT_ProjectData_Dashboard_History_SubConfig" style={{ height: dropConfig ? "calc(100vh)" : "0px", transition: "0.5s" }}>
+                {dropConfig ?
+                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown" style={{ height: dropConfig ? "auto" : "0px", transition: "0.5s" }}>
                     <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item">
                       <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
                         <tbody>
@@ -1463,9 +1180,7 @@ export default function SLHistory(props) {
                                   defaultChecked={filterchart[slProjectData.value.plantmode][dateType].batteryVoltage}
                                   onChange={(e) => { handlefilterchart(e); }}
                                 />
-                                <label
-                                  htmlFor={"batteryVoltage+" + slProjectData.value.plantmode}
-                                >
+                                <label htmlFor={"batteryVoltage+" + slProjectData.value.plantmode}>
                                   Battery Voltage
                                 </label>
                               </div>
@@ -1486,9 +1201,7 @@ export default function SLHistory(props) {
                                   defaultChecked={filterchart[slProjectData.value.plantmode][dateType].pvVoltage}
                                   onChange={(e) => { handlefilterchart(e); }}
                                 />
-                                <label
-                                  htmlFor={"pvVoltage+" + slProjectData.value.plantmode}
-                                >
+                                <label htmlFor={"pvVoltage+" + slProjectData.value.plantmode}>
                                   PV Voltage
                                 </label>
                               </div>
@@ -1509,9 +1222,7 @@ export default function SLHistory(props) {
                                   defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledLighting}
                                   onChange={(e) => { handlefilterchart(e); }}
                                 />
-                                <label
-                                  htmlFor={"ledLighting+" + slProjectData.value.plantmode}
-                                >
+                                <label htmlFor={"ledLighting+" + slProjectData.value.plantmode}>
                                   LED Lighting
                                 </label>
                               </div>
@@ -1532,9 +1243,7 @@ export default function SLHistory(props) {
                                   defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledPower}
                                   onChange={(e) => { handlefilterchart(e); }}
                                 />
-                                <label
-                                  htmlFor={"ledPower+" + slProjectData.value.plantmode}
-                                >
+                                <label htmlFor={"ledPower+" + slProjectData.value.plantmode}>
                                   LED Power
                                 </label>
                               </div>
@@ -1545,11 +1254,7 @@ export default function SLHistory(props) {
                     </div>
 
                     <div className="DAT_Filter_Dropdown_Bot">
-                      <button
-                        style={{
-                          backgroundColor: "white",
-                          color: "black",
-                        }}
+                      <button style={{ backgroundColor: "white", color: "black" }}
                         onClick={(e) => {
                           handleShowConfig(e);
                           setDropConfig(!dropConfig);
@@ -1558,31 +1263,254 @@ export default function SLHistory(props) {
                       >
                         {dataLang.formatMessage({ id: "cancel" })}
                       </button>
-                      <button
+                      <button style={{ backgroundColor: COLOR.value.PrimaryColor, color: "white" }}
                         onClick={(e) => {
                           handleShowConfig(e);
                           setDropConfig(!dropConfig);
                           handleConfirmChart(e);
-                        }}
-                        style={{
-                          backgroundColor: COLOR.value.PrimaryColor,
-                          color: "white",
                         }}
                       >
                         {dataLang.formatMessage({ id: "confirm" })}
                       </button>
                     </div>
                   </div>
-                ) : (
-                  <></>
-                )}
+                  : <></>
+                }
               </div>
             </div>
           </div>
-        </>
-      )}
+        :
+        <div style={{ width: "100%" }}>
+          <div className="DAT_ProjectData_Dashboard_History">
+            <div className="DAT_ProjectData_Dashboard_History_Tit" style={{ padding: '15px 15px 0px' }}>
+              <div className="DAT_ProjectData_Dashboard_History_Tit_Left" style={{ width: '50%', fontSize: '20px' }}>
+                {dataLang.formatMessage({ id: "history" })}
+              </div>
 
-      {exportReport ? (
+              <div className="DAT_ProjectData_Dashboard_History_Tit_Right" style={{ width: '50%', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+                {/* <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Date">
+                    <div
+                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                      id="date"
+                      style={{
+                        borderRight: "solid 1px rgb(199, 199, 199)",
+                        color: dateType === "date" ? color.cur : color.pre,
+                      }}
+                      onClick={(e) => handleDate(e)}
+                    >
+                      {dataLang.formatMessage({ id: "day" })}
+                    </div>
+                    <div
+                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                      id="month"
+                      style={{
+                        borderRight: "solid 1px rgb(199, 199, 199)",
+                        color: dateType === "month" ? color.cur : color.pre,
+                      }}
+                      onClick={(e) => handleDate(e)}
+                    >
+                      {dataLang.formatMessage({ id: "month" })}
+                    </div>
+                    <div
+                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                      id="year"
+                      style={{
+                        borderRight: "solid 1px rgb(199, 199, 199)",
+                        color: dateType === "year" ? color.cur : color.pre,
+                      }}
+                      onClick={(e) => handleDate(e)}
+                    >
+                      {dataLang.formatMessage({ id: "year" })}
+                    </div>
+                    <div
+                      className="DAT_ProjectData_Dashboard_History_Tit_Right_Date_Item"
+                      id="total"
+                      style={{
+                        color: dateType === "total" ? color.cur : color.pre,
+                      }}
+                      onClick={(e) => handleDate(e)}
+                    >
+                      {dataLang.formatMessage({ id: "total" })}
+                    </div>
+                  </div> */}
+
+                <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Below">
+                  <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Below_Export">
+                    <button
+                      style={{
+                        backgroundColor: COLOR.value.PrimaryColor,
+                        color: "white",
+                        // margin: "0px 10px 0px 0px",
+                      }}
+                      onClick={(e) => handleExport(e)}
+                    >
+                      {dataLang.formatMessage({ id: "export" })}
+                    </button>
+                    {/* <DatePicker
+                        id="datepicker"
+                        onChange={(date) => handleChart(date)}
+                        // showMonthYearPicker={dateType === "date" ? false : true}
+                        // showYearPicker={
+                        //   dateType === "date" || dateType === "month"
+                        //     ? false
+                        //     : true
+                        // }
+                        // disabled={dateType === "total" ? true : false}
+                        customInput={
+                          <button className="DAT_CustomPicker">
+                            <span>{d[dateType]}</span>
+                            <IoCalendarOutline />
+                          </button>
+                        }
+                      /> */}
+                    <div />
+                  </div>
+                </div>
+
+                <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Config">
+                  <button
+                    onClick={(e) => {
+                      handleShowConfig(e);
+                      setDropConfig(!dropConfig);
+                    }}
+                  >
+                    {configname}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <SLDay
+              data={dataDay}
+              dateType={dateType}
+              v={vDay}
+              v2={vDay2}
+              v3={vDay3}
+              v4={vDay4}
+            />
+
+            <div className="DAT_ProjectData_Dashboard_History_SubConfig" style={{ height: dropConfig ? "calc(100vh)" : "0px", transition: "0.5s" }} >
+              {dropConfig ?
+                <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown" style={{ height: dropConfig ? "auto" : "0px", transition: "0.5s" }} >
+                  <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item">
+                    <table className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table">
+                      <tbody>
+                        <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                          <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
+                            Battery Voltage
+                          </th>
+                          <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                            <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                              <input
+                                id={"batteryVoltage+" + slProjectData.value.plantmode}
+                                type="checkbox"
+                                defaultChecked={filterchart[slProjectData.value.plantmode][dateType].batteryVoltage}
+                                onChange={(e) => { handlefilterchart(e); }}
+                              />
+                              <label htmlFor={"batteryVoltage+" + slProjectData.value.plantmode} >
+                                Battery Voltage
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+
+                      <tbody>
+                        <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                          <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
+                            PV Voltage
+                          </th>
+                          <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                            <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                              <input
+                                id={"pvVoltage+" + slProjectData.value.plantmode}
+                                type="checkbox"
+                                defaultChecked={filterchart[slProjectData.value.plantmode][dateType].pvVoltage}
+                                onChange={(e) => { handlefilterchart(e); }}
+                              />
+                              <label htmlFor={"pvVoltage+" + slProjectData.value.plantmode} >
+                                PV Voltage
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+
+                      <tbody>
+                        <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                          <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
+                            LED Lighting
+                          </th>
+                          <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                            <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                              <input
+                                id={"ledLighting+" + slProjectData.value.plantmode}
+                                type="checkbox"
+                                defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledLighting}
+                                onChange={(e) => { handlefilterchart(e); }}
+                              />
+                              <label htmlFor={"ledLighting+" + slProjectData.value.plantmode}>
+                                LED Lighting
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+
+                      <tbody>
+                        <tr className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr">
+                          <th className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Th">
+                            LED Power
+                          </th>
+                          <td className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td">
+                            <div className="DAT_ProjectData_Dashboard_History_SubConfig_Dropdown_Item_Table_Tr_Td_Checkbox">
+                              <input
+                                id={"ledPower+" + slProjectData.value.plantmode}
+                                type="checkbox"
+                                defaultChecked={filterchart[slProjectData.value.plantmode][dateType].ledPower}
+                                onChange={(e) => { handlefilterchart(e); }}
+                              />
+                              <label htmlFor={"ledPower+" + slProjectData.value.plantmode}>
+                                LED Power
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="DAT_Filter_Dropdown_Bot">
+                    <button
+                      style={{ backgroundColor: "white", color: "black" }}
+                      onClick={(e) => {
+                        handleShowConfig(e);
+                        setDropConfig(!dropConfig);
+                        filterchartTemp.value = filterchart;
+                      }}
+                    >
+                      {dataLang.formatMessage({ id: "cancel" })}
+                    </button>
+                    <button
+                      style={{ backgroundColor: COLOR.value.PrimaryColor, color: "white" }}
+                      onClick={(e) => {
+                        handleShowConfig(e);
+                        setDropConfig(!dropConfig);
+                        handleConfirmChart(e);
+                      }}
+                    >
+                      {dataLang.formatMessage({ id: "confirm" })}
+                    </button>
+                  </div>
+                </div>
+                : <></>
+              }
+            </div>
+          </div>
+        </div>
+      }
+
+      {exportReport ?
         <div className="DAT_ExportBG">
           <SLExportData
             handleClose={handleClose}
@@ -1591,9 +1519,8 @@ export default function SLHistory(props) {
             datetime={datetime_}
           />
         </div>
-      ) : (
-        <> </>
-      )}
+        : <></>
+      }
     </>
   );
 }

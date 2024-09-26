@@ -82,6 +82,13 @@ export default function SLAddGateway(props) {
         type_.value = type.current.value;
       }
       if (d.status === true) {
+        let res_ = await callApi("post", host.DATA + "/updateLogger", {
+          sn: sn.current.value,
+          type: "setting",
+          data: JSON.stringify({ lat: slProjectData.value.lat, long: slProjectData.value.long }),
+        });
+        console.log(res_);
+
         alertDispatch(dataLang.formatMessage({ id: "alert_32" }))
         props.handleClose();
       } else if (d.number === 0) {
