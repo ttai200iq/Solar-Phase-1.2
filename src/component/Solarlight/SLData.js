@@ -351,7 +351,7 @@ const LEDLight = (props) => {
                     <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data">
                         <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Icon">
                             <img
-                                src="/dat_icon/smart-house.png"
+                                src="/dat_icon/lamppost.png"
                                 alt=""
                                 style={{ width: "120px", height: "100px" }}
                             />
@@ -409,7 +409,7 @@ const LEDLight = (props) => {
                     <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data">
                         <div className="DAT_ProjectData_Dashboard_Data_Center_Production_Data_Icon">
                             <img
-                                src="/dat_icon/smart-house.png"
+                                src="/dat_icon/lamppost.png"
                                 alt=""
                                 style={{ width: "120px", height: "100px" }}
                             />
@@ -669,7 +669,7 @@ const Battery = (props) => {
                     <div className="DAT_ProjectData_Dashboard_Data_Center_Battery_Data">
                         <div className="DAT_ProjectData_Dashboard_Data_Center_Battery_Data_Img">
                             <img
-                                src={parseFloat(props.cal?.device_status).toFixed(0) === '11' || '21' ? "/dat_icon/battery-50_-removebg-preview.png" : "/dat_icon/battery_100.png"}
+                                src={parseFloat(props.cal?.device_status).toFixed(0) === '13' ? "/dat_icon/battery_100.png" : "/dat_icon/battery-50_-removebg-preview.png"}
                                 alt=""
                                 style={{ width: "50px", height: "90px" }}
                             />
@@ -687,16 +687,21 @@ const Battery = (props) => {
                                 &nbsp;
                                 <span style={{ fontSize: "18px", color: "grey" }}>%</span>
                             </div> */}
-                            {parseFloat(props.cal?.device_status).toFixed(0) === '11' ? (
-                                <FaArrowLeftLong color="green" size={30} />
-                            ) : (
-                                <FaArrowRightLong color="red" size={25} />
-                            )}
-                            <span style={{ fontSize: "16px" }}>
-                                {parseFloat(props.cal?.device_status).toFixed(0) === '11'
-                                    ? dataLang.formatMessage({ id: "charge" })
-                                    : dataLang.formatMessage({ id: "discharge" })}
-                            </span>
+                            {parseFloat(props.cal?.device_status).toFixed(0) === '13'
+                                ? <></>
+                                : <>
+                                    {parseFloat(props.cal?.device_status).toFixed(0) === '11' ? (
+                                        <FaArrowLeftLong color="green" size={30} />
+                                    ) : (
+                                        <FaArrowRightLong color="red" size={25} />
+                                    )}
+                                    <span style={{ fontSize: "16px" }}>
+                                        {parseFloat(props.cal?.device_status).toFixed(0) === '11'
+                                            ? dataLang.formatMessage({ id: "charge" })
+                                            : dataLang.formatMessage({ id: "discharge" })}
+                                    </span>
+                                </>
+                            }
                         </div>
 
                         <div className="DAT_ProjectData_Dashboard_Data_Center_Battery_Data_Data" style={{ flexDirection: 'row', alignItems: 'center', gap: '24px' }}>

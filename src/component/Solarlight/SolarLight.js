@@ -16,42 +16,44 @@ import { slProjectData } from './SLProjectlist';
 import { Loader } from '@googlemaps/js-api-loader';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { callApi } from '../Api/Api';
-import SLEditImage, { SLDiagramImg } from './SLEditImage';
+import SLEditImage from './SLEditImage';
 import SemiCircleProgressBar from "react-progressbar-semicircle";
 import SLGraph from './SLGraph';
+import Draggable from 'react-draggable';
 
 export const viewSL = signal("dashboard");
 export const SLloggerSn = signal('');
 
 export default function SolarLight(props) {
-    const device_status = {
-        0: 'Processing',
-        1: 'Sleep',
-        10: 'Charge prepro',
-        11: 'Charge',
-        12: 'Charge idle',
-        13: 'Full',
-        16: 'Charge OC',
-        21: 'Discharge',
-        22: 'Discharge idle',
-    };
+    // const device_status = {
+    //     0: 'Processing',
+    //     1: 'Sleep',
+    //     10: 'Charge prepro',
+    //     11: 'Charge',
+    //     12: 'Charge idle',
+    //     13: 'Full',
+    //     16: 'Charge OC',
+    //     21: 'Discharge',
+    //     22: 'Discharge idle',
+    // };
 
-    const operation_mode = {
-        0: 'Model 1',
-        1: 'Model 2',
-        2: 'Model 3',
-        3: 'Model 4',
-        4: 'Model 5',
-        5: 'Discharge idle',
-        6: 'Discharge Morning',
-        7: 'Stop',
-    };
+    // const operation_mode = {
+    //     0: 'Model 1',
+    //     1: 'Model 2',
+    //     2: 'Model 3',
+    //     3: 'Model 4',
+    //     4: 'Model 5',
+    //     5: 'Discharge idle',
+    //     6: 'Discharge Morning',
+    //     7: 'Stop',
+    // };
 
     const dataLang = useIntl();
     const cal = useSelector((state) => state.tool.cal);
     const [addLightState, setAddLightState] = useState(false);
     const [dashboardMode, setDashboardMode] = useState('map');
     const [editDiagram, setEditDiagram] = useState(false);
+    const [editLightState, setEditLightState] = useState(false);
     const [level_light_1, setLevelLight1] = useState(0);
     const [level_light_2, setLevelLight2] = useState(0);
     const [level_light_3, setLevelLight3] = useState(0);
@@ -275,11 +277,23 @@ export default function SolarLight(props) {
         libraries: ["places"],
     });
 
-    const handleUpdateLoggerPosition = async (sn, newdata) => {
+    const handleUpdateLoggerLatLng = async (sn, lat, lng) => {
+        let data = slloggerDB.value.find((item) => item.sn === sn);
+        let newData = { ...data.setting, lat: lat, lng: lng };
+
         let res_ = await callApi("post", host.DATA + "/updateLogger", {
             sn: sn,
             type: "setting",
-            data: newdata,
+            data: JSON.stringify(newData),
+        });
+        console.log(res_);
+    };
+
+    const handleUpdateLoggerPosition = async (sn, newPosition) => {
+        let res_ = await callApi("post", host.DATA + "/updateLogger", {
+            sn: sn,
+            type: "setting",
+            data: newPosition,
         });
         console.log(res_);
     };
@@ -306,7 +320,7 @@ export default function SolarLight(props) {
                 lightImg.className = "light-tag";
                 lightImg.innerHTML = `<img src='${src}'></img>`
 
-                const marker = { lat: parseFloat(item.setting.lat), lng: parseFloat(item.setting.long) };
+                const marker = { lat: parseFloat(item.setting.lat), lng: parseFloat(item.setting.lng) };
                 const markerElement = new AdvancedMarkerElement({
                     position: marker,
                     map: map,
@@ -319,12 +333,12 @@ export default function SolarLight(props) {
                     slloggerDB.value.map(item_ => {
                         if (item_.sn === item.sn) {
                             item_.setting.lat = mapsMouseEvent.latLng.toJSON().lat;
-                            item_.setting.long = mapsMouseEvent.latLng.toJSON().lng;
+                            item_.setting.lng = mapsMouseEvent.latLng.toJSON().lng;
                         }
                         return item;
                     });
 
-                    handleUpdateLoggerPosition(item.sn, JSON.stringify({ lat: String(mapsMouseEvent.latLng.toJSON().lat), long: String(mapsMouseEvent.latLng.toJSON().lng) }));
+                    handleUpdateLoggerLatLng(item.sn, String(mapsMouseEvent.latLng.toJSON().lat), String(mapsMouseEvent.latLng.toJSON().lng));
                 });
 
                 return markerElement;
@@ -334,13 +348,12 @@ export default function SolarLight(props) {
         })
     };
 
-    const initMap = async (name, lat, long) => {
-
+    const initMap = async () => {
         loader.load().then(async (google) => {
             const defaultProps = {
                 center: {
-                    lat: lat,
-                    lng: long,
+                    lat: parseFloat(slProjectData.value.lat),
+                    lng: parseFloat(slProjectData.value.long),
                 },
                 zoom: 19.0,
                 mapId: "DEMO_MAP_ID",
@@ -352,21 +365,21 @@ export default function SolarLight(props) {
             let map = new Map(document.getElementById("map"), defaultProps);
 
             const markerList = slloggerDB.value.map((item, index) => {
-                const myLatlng = { lat: lat, lng: long };
+                // const myLatlng = { lat: parseFloat(slProjectData.value.lat), lng: parseFloat(slProjectData.value.long) };
 
-                let infoWindow = new google.maps.InfoWindow({
-                    content: 'Your position',
-                    position: myLatlng,
-                });
+                // let infoWindow = new google.maps.InfoWindow({
+                //     content: 'Your position',
+                //     position: myLatlng,
+                // });
 
-                map.addListener("click", () => { infoWindow.close() });
+                // map.addListener("click", () => { infoWindow.close() });
 
                 const lightImg = document.createElement("div");
                 const src = `/dat_picture/solar_light.png`
                 lightImg.className = "light-tag";
                 lightImg.innerHTML = `<img src='${src}'></img>`
 
-                const marker = { lat: parseFloat(item.setting.lat), lng: parseFloat(item.setting.long) };
+                const marker = { lat: parseFloat(item.setting.lat), lng: parseFloat(item.setting.lng) };
                 const markerElement = new AdvancedMarkerElement({
                     position: marker,
                     map: map,
@@ -374,38 +387,38 @@ export default function SolarLight(props) {
                     content: lightImg,
                 });
 
-                markerElement.addListener("click", () => {
-                    SLloggerSn.value = item.sn;
+                // markerElement.addListener("click", () => {
+                //     SLloggerSn.value = item.sn;
 
-                    // Close the current InfoWindow.
-                    infoWindow.close();
-                    // Create a new InfoWindow.
-                    infoWindow = new google.maps.InfoWindow({
-                        anchor: markerElement,
-                        map: map,
-                        shouldFocus: false,
-                    });
+                //     // Close the current InfoWindow.
+                //     infoWindow.close();
+                //     // Create a new InfoWindow.
+                //     infoWindow = new google.maps.InfoWindow({
+                //         anchor: markerElement,
+                //         map: map,
+                //         shouldFocus: false,
+                //     });
 
-                    infoWindow.setContent(`
-                            <div class="InfoWindowCustom">
-                                <div class="InfoWindowCustom_Title">${item.name}</div>
-                                <div class="InfoWindowCustom_Row">
-                                    <span>Status</span>
-                                    <span>${device_status[parseFloat(cal?.device_status).toFixed(0)]}</span>
-                                </div>
-                                <div class="InfoWindowCustom_Row">
-                                    <span>Battery Voltage (V)</span>
-                                    <span>${parseFloat(cal?.bat_volt).toFixed(1)}</span>
-                                </div>
-                                <div class="InfoWindowCustom_Row">
-                                    <span>Operation Mode</span>
-                                    <span>${operation_mode[parseFloat(cal?.mode_operating).toFixed(0)]}</span>
-                                </div>
-                            </div>
-                            `);
+                //     infoWindow.setContent(`
+                //             <div class="InfoWindowCustom">
+                //                 <div class="InfoWindowCustom_Title">${item.name}</div>
+                //                 <div class="InfoWindowCustom_Row">
+                //                     <span>Status</span>
+                //                     <span>${device_status[parseFloat(cal?.device_status).toFixed(0)]}</span>
+                //                 </div>
+                //                 <div class="InfoWindowCustom_Row">
+                //                     <span>Battery Voltage (V)</span>
+                //                     <span>${parseFloat(cal?.bat_volt).toFixed(1)}</span>
+                //                 </div>
+                //                 <div class="InfoWindowCustom_Row">
+                //                     <span>Operation Mode</span>
+                //                     <span>${operation_mode[parseFloat(cal?.mode_operating).toFixed(0)]}</span>
+                //                 </div>
+                //             </div>
+                //             `);
 
-                    infoWindow.open(map, markerElement);
-                });
+                //     infoWindow.open(map, markerElement);
+                // });
 
                 return markerElement;
             });
@@ -414,13 +427,26 @@ export default function SolarLight(props) {
         })
     };
 
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const trackPos = (e, data) => {
+        setPosition({ x: data.x, y: data.y });
+    };
+
+    const handleLightClick = (e) => {
+        if (editLightState) {
+            let data = slloggerDB.value.find((item) => item.sn === e.currentTarget.id);
+            let newData = { ...data.setting, x: position.x.toFixed(0), y: position.y.toFixed(0) };
+            handleUpdateLoggerPosition(data.sn, JSON.stringify(newData));
+        }
+    };
+
+    const handleSaveLightPosition = () => {
+        setEditLightState(false)
+    };
+
     useEffect(() => {
         if (viewSL.value === 'dashboard') {
-            initMap(
-                slProjectData.value.plantname,
-                parseFloat(slProjectData.value.lat),
-                parseFloat(slProjectData.value.long)
-            );
+            initMap();
         } else {
             SLloggerSn.value = document.getElementById('select_sn').value;
         }
@@ -450,10 +476,6 @@ export default function SolarLight(props) {
                                                 return <option key={index} value={item.sn}>{item.name}</option>
                                             })}
                                         </select>
-
-                                        {/* <div className="DAT_ProjectData_SolarLight_Dashboard_Title">
-                                            GENERAL PARAMETER MONITORING
-                                        </div> */}
 
                                         <div className="DAT_ProjectData_SolarLight_Dashboard_Row">
                                             <div className="DAT_ProjectData_SolarLight_Dashboard_Row_Item">
@@ -796,11 +818,11 @@ export default function SolarLight(props) {
                                                                     {(() => {
                                                                         switch (parseFloat(cal?.led_lighting_function).toFixed(0)) {
                                                                             case '0':
-                                                                                return <img alt='' src='/dat_icon/light_off.png' />
+                                                                                return <img alt='' src='/dat_icon/light-bulb-off.png' />
                                                                             case '1':
-                                                                                return <img alt='' src='/dat_icon/light_off.png' />
+                                                                                return <img alt='' src='/dat_icon/light-bulb-on.png' />
                                                                             default:
-                                                                                return <img alt='' src='/dat_icon/light_off.png' />
+                                                                                return <img alt='' src='/dat_icon/light-bulb-off.png' />
                                                                         }
                                                                     })()}
                                                                 </div>
@@ -861,10 +883,6 @@ export default function SolarLight(props) {
                                                 return <option key={index} value={item.sn}>{item.name}</option>
                                             })}
                                         </select>
-
-                                        {/* <div className="DAT_ProjectData_SolarLight_Setting_Title">
-                                            SETTING PANEL
-                                        </div> */}
 
                                         <div className="DAT_ProjectData_SolarLight_Setting_Row">
                                             <div className="DAT_ProjectData_SolarLight_Setting_Row_Item">
@@ -1166,12 +1184,37 @@ export default function SolarLight(props) {
                                 )
                             default:
                                 return (
-                                    <div className="DAT_ProjectData_SolarLight_Light">
+                                    <>
                                         {dashboardMode === 'map'
-                                            ? <div id="map" style={{ width: "100%", height: "100%" }}></div>
-                                            : <img alt='' src={SLDiagramImg.value} />
+                                            ?
+                                            <div className="DAT_ProjectData_SolarLight_Light">
+                                                <div id="map" style={{ width: "100%", height: "100%" }}></div>
+                                            </div>
+                                            :
+                                            <div className="DAT_ProjectData_SolarLight_Diagram"
+                                                style={{ backgroundImage: `url('${slProjectData.value.solar?.data || ''}')` }}
+                                            >
+                                                {slloggerDB.value.map((item, index) =>
+                                                    <Draggable
+                                                        key={index}
+                                                        onDrag={(e, data) => trackPos(e, data)}
+                                                        onStart={() => editLightState === true ? true : false}
+                                                        handle=".solarlight"
+                                                        bounds='parent'
+                                                        defaultPosition={{ x: Number(item.setting.x), y: Number(item.setting.y) }}
+                                                    >
+                                                        <div className='solarlight'
+                                                            id={item.sn}
+                                                            onClick={(e) => handleLightClick(e)}
+                                                        >
+                                                            <img alt='' src='/dat_picture/solar_light.png' />
+                                                            <span>{item.name}</span>
+                                                        </div>
+                                                    </Draggable>
+                                                )}
+                                            </div>
                                         }
-                                    </div>
+                                    </>
                                 )
                         }
                     })()}
@@ -1197,7 +1240,7 @@ export default function SolarLight(props) {
                             <div className='DAT_ProjectData_SolarLight_DashboardMode'>
                                 {dashboardMode === 'map'
                                     ? <button onClick={() => setDashboardMode('diagram')}>{dataLang.formatMessage({ id: 'diagram' })}</button>
-                                    : <button onClick={() => { setDashboardMode('map'); initMap(slProjectData.value.plantname, parseFloat(slProjectData.value.lat), parseFloat(slProjectData.value.long)) }}>{dataLang.formatMessage({ id: 'map' })}</button>
+                                    : <button onClick={() => { setDashboardMode('map'); initMap() }}>{dataLang.formatMessage({ id: 'map' })}</button>
                                 }
                             </div>
 
@@ -1205,14 +1248,26 @@ export default function SolarLight(props) {
                                 ?
                                 <div className='DAT_ProjectData_SolarLight_EditMap'>
                                     {addLightState === true
-                                        ? <button onClick={() => { initMap(slProjectData.value.plantname, parseFloat(slProjectData.value.lat), parseFloat(slProjectData.value.long)); setAddLightState(false) }}>{dataLang.formatMessage({ id: 'quit' })}</button>
+                                        ? <button onClick={() => { initMap(); setAddLightState(false) }}>{dataLang.formatMessage({ id: 'save' })}</button>
                                         : <button onClick={() => { handleEditMap(); setAddLightState(true) }}>{dataLang.formatMessage({ id: 'edit' })}</button>
                                     }
                                 </div>
                                 :
-                                <div className='DAT_ProjectData_SolarLight_EditMap'>
-                                    <button onClick={() => setEditDiagram(true)}>{dataLang.formatMessage({ id: 'edit' })}</button>
-                                </div>
+                                <>
+                                    <div className='DAT_ProjectData_SolarLight_EditMap'>
+                                        <button onClick={() => setEditDiagram(true)}>{dataLang.formatMessage({ id: 'edit' })}</button>
+                                    </div>
+                                    {editLightState === true
+                                        ?
+                                        <div className='DAT_ProjectData_SolarLight_AddLight'>
+                                            <button onClick={() => handleSaveLightPosition()}>{dataLang.formatMessage({ id: 'save' })}</button>
+                                        </div>
+                                        :
+                                        <div className='DAT_ProjectData_SolarLight_AddLight'>
+                                            <button onClick={() => setEditLightState(true)}>Chỉnh đèn</button>
+                                        </div>
+                                    }
+                                </>
                             }
                         </>
                         : <></>
@@ -1224,7 +1279,7 @@ export default function SolarLight(props) {
                         </div>
                         : <></>
                     }
-                </div>
+                </div >
                 :
                 <div className='DAT_ProjectData_SolarLightMobile'>
                     {(() => {
@@ -1237,10 +1292,6 @@ export default function SolarLight(props) {
                                                 return <option key={index} value={item.sn}>{item.name}</option>
                                             })}
                                         </select>
-
-                                        {/* <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Title">
-                                            GENERAL PARAMETER MONITORING
-                                        </div> */}
 
                                         <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row">
                                             <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row_Item">
@@ -1349,15 +1400,11 @@ export default function SolarLight(props) {
 
                                         <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row">
                                             <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row_Item">
-                                                {/* <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row_Item_Title">
-                                                    Light mode and Operation time
-                                                </div> */}
                                                 <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row_Item_Row">
                                                     <div className="DAT_ProjectData_SolarLightMobile_Dashboard_Row_Item_Row_Item">
                                                         Mode 1
                                                         <div style={{ display: 'flex', gap: '8px' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                                {/* <span style={{ color: 'blue' }}>{parseFloat(cal?.level_light_1).toFixed(1) === 'NaN' ? '--' : parseFloat((cal?.level_light_1 / 90) * 100).toFixed(1)}</span> */}
                                                                 <SemiCircleProgressBar
                                                                     percentage={Number(parseFloat((cal?.level_light_1 / 90) * 100).toFixed(0)) || 0}
                                                                     showPercentValue
@@ -1377,7 +1424,6 @@ export default function SolarLight(props) {
                                                         Mode 2
                                                         <div style={{ display: 'flex', gap: '8px' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                                {/* <span style={{ color: 'blue' }}>{parseFloat(cal?.level_light_2).toFixed(1) === 'NaN' ? '--' : parseFloat((cal?.level_light_2 / 90) * 100).toFixed(1)}</span> */}
                                                                 <SemiCircleProgressBar
                                                                     percentage={Number(parseFloat((cal?.level_light_2 / 90) * 100).toFixed(0)) || 0}
                                                                     showPercentValue
@@ -1399,7 +1445,6 @@ export default function SolarLight(props) {
                                                         Mode 3
                                                         <div style={{ display: 'flex', gap: '8px' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                                {/* <span style={{ color: 'blue' }}>{parseFloat(cal?.level_light_3).toFixed(1) === 'NaN' ? '--' : parseFloat((cal?.level_light_3 / 90) * 100).toFixed(1)}</span> */}
                                                                 <SemiCircleProgressBar
                                                                     percentage={Number(parseFloat((cal?.level_light_3 / 90) * 100).toFixed(0)) || 0}
                                                                     showPercentValue
@@ -1419,7 +1464,6 @@ export default function SolarLight(props) {
                                                         Mode 4
                                                         <div style={{ display: 'flex', gap: '8px' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                                {/* <span style={{ color: 'blue' }}>{parseFloat(cal?.level_light_4).toFixed(1) === 'NaN' ? '--' : parseFloat((cal?.level_light_4 / 90) * 100).toFixed(1)}</span> */}
                                                                 <SemiCircleProgressBar
                                                                     percentage={Number(parseFloat((cal?.level_light_4 / 90) * 100).toFixed(0)) || 0}
                                                                     showPercentValue
@@ -1441,7 +1485,6 @@ export default function SolarLight(props) {
                                                         Mode 5
                                                         <div style={{ display: 'flex', gap: '8px' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                                {/* <span style={{ color: 'blue' }}>{parseFloat(cal?.level_light_5).toFixed(1) === 'NaN' ? '--' : parseFloat((cal?.level_light_5 / 90) * 100).toFixed(1)}</span> */}
                                                                 <SemiCircleProgressBar
                                                                     percentage={Number(parseFloat((cal?.level_light_5 / 90) * 100).toFixed(0)) || 0}
                                                                     showPercentValue
@@ -1525,10 +1568,6 @@ export default function SolarLight(props) {
                                                 return <option key={index} value={item.sn}>{item.name}</option>
                                             })}
                                         </select>
-
-                                        {/* <div className="DAT_ProjectData_SolarLightMobile_Setting_Title">
-                                            SETTING PANEL
-                                        </div> */}
 
                                         <div className="DAT_ProjectData_SolarLightMobile_Setting_Row">
                                             <div className="DAT_ProjectData_SolarLightMobile_Setting_Row_Item">
@@ -1857,12 +1896,37 @@ export default function SolarLight(props) {
                                 )
                             default:
                                 return (
-                                    <div className="DAT_ProjectData_SolarLightMobile_Light">
+                                    <>
                                         {dashboardMode === 'map'
-                                            ? <div id="map" style={{ width: "100%", height: "100%" }}></div>
-                                            : <img alt='' src={SLDiagramImg.value} />
+                                            ?
+                                            <div className="DAT_ProjectData_SolarLightMobile_Light">
+                                                <div id="map" style={{ width: "100%", height: "100%" }}></div>
+                                            </div>
+                                            :
+                                            <div className="DAT_ProjectData_SolarLightMobile_Diagram"
+                                                style={{ backgroundImage: `url('${slProjectData.value.solar?.data || ''}')` }}
+                                            >
+                                                {slloggerDB.value.map((item, index) =>
+                                                    <Draggable
+                                                        key={index}
+                                                        onDrag={(e, data) => trackPos(e, data)}
+                                                        onStart={() => editLightState === true ? true : false}
+                                                        handle=".solarlight"
+                                                        bounds='parent'
+                                                        defaultPosition={{ x: Number(item.setting.x), y: Number(item.setting.y) }}
+                                                    >
+                                                        <div className='solarlight'
+                                                            id={item.sn}
+                                                            onClick={(e) => handleLightClick(e)}
+                                                        >
+                                                            <img alt='' src='/dat_picture/solar_light.png' />
+                                                            <span>{item.name}</span>
+                                                        </div>
+                                                    </Draggable>
+                                                )}
+                                            </div>
                                         }
-                                    </div>
+                                    </>
                                 )
                         }
                     })()}
@@ -1888,7 +1952,7 @@ export default function SolarLight(props) {
                             <div className='DAT_ProjectData_SolarLight_DashboardMode'>
                                 {dashboardMode === 'map'
                                     ? <button onClick={() => setDashboardMode('diagram')}>{dataLang.formatMessage({ id: 'diagram' })}</button>
-                                    : <button onClick={() => { setDashboardMode('map'); initMap(slProjectData.value.plantname, parseFloat(slProjectData.value.lat), parseFloat(slProjectData.value.long)) }}>{dataLang.formatMessage({ id: 'map' })}</button>
+                                    : <button onClick={() => { setDashboardMode('map'); initMap() }}>{dataLang.formatMessage({ id: 'map' })}</button>
                                 }
                             </div>
 
@@ -1896,14 +1960,26 @@ export default function SolarLight(props) {
                                 ?
                                 <div className='DAT_ProjectData_SolarLight_EditMap'>
                                     {addLightState === true
-                                        ? <button onClick={() => { initMap(slProjectData.value.plantname, parseFloat(slProjectData.value.lat), parseFloat(slProjectData.value.long)); setAddLightState(false) }}>{dataLang.formatMessage({ id: 'quit' })}</button>
+                                        ? <button onClick={() => { initMap(); setAddLightState(false) }}>{dataLang.formatMessage({ id: 'quit' })}</button>
                                         : <button onClick={() => { handleEditMap(); setAddLightState(true) }}>{dataLang.formatMessage({ id: 'edit' })}</button>
                                     }
                                 </div>
                                 :
-                                <div className='DAT_ProjectData_SolarLight_EditMap'>
-                                    <button onClick={() => setEditDiagram(true)}>{dataLang.formatMessage({ id: 'edit' })}</button>
-                                </div>
+                                <>
+                                    <div className='DAT_ProjectData_SolarLight_EditMap'>
+                                        <button onClick={() => setEditDiagram(true)}>{dataLang.formatMessage({ id: 'edit' })}</button>
+                                    </div>
+                                    {editLightState === true
+                                        ?
+                                        <div className='DAT_ProjectData_SolarLight_AddLight'>
+                                            <button onClick={() => handleSaveLightPosition()}>Lưu</button>
+                                        </div>
+                                        :
+                                        <div className='DAT_ProjectData_SolarLight_AddLight'>
+                                            <button onClick={() => setEditLightState(true)}>Chỉnh đèn</button>
+                                        </div>
+                                    }
+                                </>
                             }
                         </>
                         : <></>

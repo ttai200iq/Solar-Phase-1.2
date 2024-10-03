@@ -17,7 +17,9 @@ import toolslice from "../Redux/toolslice";
 import { isBrowser } from "react-device-detect";
 
 import { IoCalendarOutline } from "react-icons/io5";
-import { SLloggerSn } from "./SolarLight";
+import { slloggerDB } from "./SLProjectData";
+
+const loggerSN = signal('');
 
 export default function SLHistory(props) {
   const dataLang = useIntl();
@@ -521,6 +523,10 @@ export default function SLHistory(props) {
   //   setDatatime_(v.innerHTML);
   // }, [dateType]);
 
+  const handleChangeLogger = (e) => {
+    loggerSN.value = e.currentTarget.value;
+  };
+
   useEffect(() => {
     // data Day
     const getDaily = async () => {
@@ -880,6 +886,18 @@ export default function SLHistory(props) {
     // eslint-disable-next-line
   }, [lang]);
 
+  useEffect(() => {
+    loggerSN.value = document.getElementById('selectSN').value;
+
+    // eslint-disable-next-line
+  }, [slloggerDB.value]);
+
+  useEffect(() => {
+    return () => {
+      loggerSN.value = "";
+    };
+  }, []);
+
   return (
     <>
       {isBrowser ?
@@ -956,13 +974,22 @@ export default function SLHistory(props) {
                 </div>
 
                 <div className="DAT_ProjectData_NewDashboard_History_Tit_Right">
+                  <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Select">
+                    <select id='selectSN' onChange={(e) => handleChangeLogger(e)}>
+                      {slloggerDB.value.map((item, index) => {
+                        return <option key={index} value={item.sn}>{item.name}</option>
+                      })}
+                    </select>
+                  </div>
+
                   <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Export">
                     <button onClick={(e) => handleExport(e)}>
                       {dataLang.formatMessage({ id: "export" })}
                     </button>
                   </div>
 
-                  {/* <DatePicker
+                  {/* <>
+                    <DatePicker
                       id="datepicker"
                       onChange={(date) => handleChart(date)}
                       // showMonthYearPicker={dateType === "date" ? false : true}
@@ -976,75 +1003,76 @@ export default function SLHistory(props) {
                           <IoCalendarOutline color="gray" />
                         </button>
                       }
-                    /> */}
+                    />
 
-                  {/* <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date">
-                          <div
-                            className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
-                            id="date"
-                            style={{
-                              borderRight: "solid 1px rgb(199, 199, 199)",
-                              color: dateType === "date" ? color.cur : color.pre,
-                            }}
-                            onClick={(e) => handleDate(e)}
-                          >
-                            {dataLang.formatMessage({ id: "day" })}
-                          </div>
-                          <div
-                            className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
-                            id="month"
-                            style={{
-                              borderRight: "solid 1px rgb(199, 199, 199)",
-                              color: dateType === "month" ? color.cur : color.pre,
-                            }}
-                            onClick={(e) => handleDate(e)}
-                          >
-                            {dataLang.formatMessage({ id: "month" })}
-                          </div>
-                          <div
-                            className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
-                            id="year"
-                            style={{
-                              borderRight: "solid 1px rgb(199, 199, 199)",
-                              color: dateType === "year" ? color.cur : color.pre,
-                            }}
-                            onClick={(e) => handleDate(e)}
-                          >
-                            {dataLang.formatMessage({ id: "year" })}
-                          </div>
-                          <div
-                            className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
-                            id="total"
-                            style={{
-                              color: dateType === "total" ? color.cur : color.pre,
-                            }}
-                            onClick={(e) => handleDate(e)}
-                          >
-                            {dataLang.formatMessage({ id: "total" })}
-                          </div>
-                        </div>
+                    <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date">
+                      <div
+                        className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
+                        id="date"
+                        style={{
+                          borderRight: "solid 1px rgb(199, 199, 199)",
+                          color: dateType === "date" ? color.cur : color.pre,
+                        }}
+                        onClick={(e) => handleDate(e)}
+                      >
+                        {dataLang.formatMessage({ id: "day" })}
+                      </div>
+                      <div
+                        className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
+                        id="month"
+                        style={{
+                          borderRight: "solid 1px rgb(199, 199, 199)",
+                          color: dateType === "month" ? color.cur : color.pre,
+                        }}
+                        onClick={(e) => handleDate(e)}
+                      >
+                        {dataLang.formatMessage({ id: "month" })}
+                      </div>
+                      <div
+                        className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
+                        id="year"
+                        style={{
+                          borderRight: "solid 1px rgb(199, 199, 199)",
+                          color: dateType === "year" ? color.cur : color.pre,
+                        }}
+                        onClick={(e) => handleDate(e)}
+                      >
+                        {dataLang.formatMessage({ id: "year" })}
+                      </div>
+                      <div
+                        className="DAT_ProjectData_NewDashboard_History_Tit_Right_Date_Item"
+                        id="total"
+                        style={{
+                          color: dateType === "total" ? color.cur : color.pre,
+                        }}
+                        onClick={(e) => handleDate(e)}
+                      >
+                        {dataLang.formatMessage({ id: "total" })}
+                      </div>
+                    </div>
 
-                        <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Export">
-                          <button onClick={(e) => handleExport(e)}>
-                            {dataLang.formatMessage({ id: "export" })}
-                          </button>
-                        </div>
+                    <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Export">
+                      <button onClick={(e) => handleExport(e)}>
+                        {dataLang.formatMessage({ id: "export" })}
+                      </button>
+                    </div>
 
-                        <DatePicker
-                          id="datepicker"
-                          onChange={(date) => handleChart(date)}
-                          showMonthYearPicker={dateType === "date" ? false : true}
-                          showYearPicker={
-                            dateType === "date" || dateType === "month" ? false : true
-                          }
-                          disabled={dateType === "total" ? true : false}
-                          customInput={
-                            <button className="DAT_CustomPicker">
-                              <span>{d[dateType]}</span>
-                              <IoCalendarOutline color="gray" />
-                            </button>
-                          }
-                        /> */}
+                    <DatePicker
+                      id="datepicker"
+                      onChange={(date) => handleChart(date)}
+                      showMonthYearPicker={dateType === "date" ? false : true}
+                      showYearPicker={
+                        dateType === "date" || dateType === "month" ? false : true
+                      }
+                      disabled={dateType === "total" ? true : false}
+                      customInput={
+                        <button className="DAT_CustomPicker">
+                          <span>{d[dateType]}</span>
+                          <IoCalendarOutline color="gray" />
+                        </button>
+                      }
+                    />
+                  </> */}
                 </div>
               </div>
 
@@ -1062,8 +1090,16 @@ export default function SLHistory(props) {
           <div style={{ width: "100%" }}>
             <div className="DAT_ProjectData_Dashboard_History">
               <div className="DAT_ProjectData_Dashboard_History_Tit" style={{ padding: '15px 15px 0px' }}>
-                <div className="DAT_ProjectData_Dashboard_History_Tit_Left" style={{ width: '50%', fontSize: '20px' }}>
+                <div className="DAT_ProjectData_Dashboard_History_Tit_Left" style={{ width: '50%', fontSize: '20px', display: 'flex', flexDirection: 'column', gap: '10px', justifyContent: 'flex-end' }}>
                   {dataLang.formatMessage({ id: "history" })}
+
+                  <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Select">
+                    <select id='selectSN' onChange={(e) => handleChangeLogger(e)}>
+                      {slloggerDB.value.map((item, index) => {
+                        return <option key={index} value={item.sn}>{item.name}</option>
+                      })}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="DAT_ProjectData_Dashboard_History_Tit_Right" style={{ width: '50%', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
@@ -1137,9 +1173,9 @@ export default function SLHistory(props) {
                           </button>
                         }
                       /> */}
-                      <div />
                     </div>
                   </div>
+
                   <div className="DAT_ProjectData_Dashboard_History_Tit_Right_Config">
                     <button
                       onClick={(e) => {
@@ -1283,8 +1319,16 @@ export default function SLHistory(props) {
         <div style={{ width: "100%" }}>
           <div className="DAT_ProjectData_Dashboard_History">
             <div className="DAT_ProjectData_Dashboard_History_Tit" style={{ padding: '15px 15px 0px' }}>
-              <div className="DAT_ProjectData_Dashboard_History_Tit_Left" style={{ width: '50%', fontSize: '20px' }}>
+              <div className="DAT_ProjectData_Dashboard_History_Tit_Left" style={{ width: '50%', fontSize: '20px', display: 'flex', flexDirection: 'column', gap: '10px', justifyContent: 'flex-end' }}>
                 {dataLang.formatMessage({ id: "history" })}
+
+                <div className="DAT_ProjectData_NewDashboard_History_Tit_Right_Select">
+                  <select id='selectSN' onChange={(e) => handleChangeLogger(e)}>
+                    {slloggerDB.value.map((item, index) => {
+                      return <option key={index} value={item.sn}>{item.name}</option>
+                    })}
+                  </select>
+                </div>
               </div>
 
               <div className="DAT_ProjectData_Dashboard_History_Tit_Right" style={{ width: '50%', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
@@ -1363,7 +1407,7 @@ export default function SLHistory(props) {
                           </button>
                         }
                       /> */}
-                    <div />
+
                   </div>
                 </div>
 

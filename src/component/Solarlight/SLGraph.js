@@ -60,7 +60,7 @@ const GraphWeb = (props) => {
 
     useEffect(() => {
         if (props.state) {
-            if (parseFloat(cal?.pv_volt).toFixed(1) > 0) {
+            if (parseFloat((cal?.pv_volt) * (cal?.pv_current)).toFixed(1) > 0) {
                 lineA_.value = "moveLtoR";
             } else {
                 lineA_.value = "Default";
@@ -74,7 +74,7 @@ const GraphWeb = (props) => {
                 lineB_.value = "Default";
             }
 
-            if (parseFloat(cal?.led_volt).toFixed(1) > 0) {
+            if (parseFloat(cal?.led_power).toFixed(1) > 0) {
                 lineD_.value = "moveLtoR";
             } else {
                 lineD_.value = "Default";
@@ -371,7 +371,7 @@ const GraphWeb = (props) => {
                 />
             </foreignObject>
             <foreignObject x="200" y="230" width="45" height="70" style={{ overflow: "hidden", padding: "1px", boxSizing: "border-box", cursor: 'pointer' }} onClick={() => props.setType("Battery")}>
-                <Icon src={parseFloat(cal?.device_status).toFixed(0) === '11' || '21' ? "/dat_icon/battery-50_-removebg-preview.png" : "/dat_icon/battery_100.png"} width="40" height="65" />
+                <Icon src={parseFloat(cal?.device_status).toFixed(0) === '13' ? "/dat_icon/battery_100.png" : "/dat_icon/battery-50_-removebg-preview.png"} width="40" height="65" />
             </foreignObject>
 
             <foreignObject x="880" y="180" width="220" height="100" style={{ overflow: "hidden", padding: "1px", boxSizing: "border-box" }}>
@@ -384,7 +384,7 @@ const GraphWeb = (props) => {
                 />
             </foreignObject>
             <foreignObject x="840" y="230" width="80" height="70" style={{ overflow: "hidden", padding: "1px", boxSizing: "border-box", cursor: 'pointer' }} onClick={() => props.setType("LED Light")}>
-                <Icon src="/dat_icon/smart-house.png" width="75" height="65" />
+                <Icon src="/dat_icon/lamppost.png" width="75" height="65" />
             </foreignObject>
 
             <foreignObject x="485" y="110" width="130" height="95" style={{ overflow: "hidden", padding: "2px", boxSizing: "border-box" }}>
