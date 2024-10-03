@@ -2253,6 +2253,7 @@
               &:hover {
                 background-color: #3e80fb;
                 color: white;
+                transition: 0.3s;
               }
             }
           }
@@ -2263,6 +2264,18 @@
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
+          }
+
+          &_Select {
+            & select {
+              padding: 4px;
+              width: 100px;
+              border-radius: 5px;
+              border: solid 1px rgba(198, 197, 197, 0.5);
+              font-size: 14px;
+              cursor: pointer;
+              outline: none;
+            }
           }
         }
       }
@@ -2830,11 +2843,18 @@
       width: 100%;
       height: 456px;
       border: solid 1px rgba(198, 197, 197, 0.5);
+    }
 
-      & img {
-        width: 100%;
-        height: 100%;
-      }
+    &_Diagram {
+      width: 100%;
+      height: 456px;
+      border: solid 1px rgba(198, 197, 197, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
 
     &_Nav {
@@ -2880,6 +2900,12 @@
         width: 60px;
         height: 30px;
         cursor: pointer;
+
+        &:hover {
+          background-color: rgb(62, 128, 251);
+          color: white;
+          transition: 0.3s;
+        }
       }
     }
 
@@ -2894,13 +2920,19 @@
         background-color: COLOR.$Primary-color;
         color: white;
         border: solid 1px rgba(198, 197, 197, 0.5);
-        box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+        box-shadow: 3px 3px 5px rgba(193, 193, 193);
         border-radius: 7px;
         padding: 6px;
         font-size: 16px;
         width: 90px;
         height: 30px;
         cursor: pointer;
+
+        &:hover {
+          background-color: rgb(62, 128, 251);
+          color: white;
+          transition: 0.3s;
+        }
       }
     }
 
@@ -2915,13 +2947,46 @@
         background-color: COLOR.$Primary-color;
         color: white;
         border: solid 1px rgba(198, 197, 197, 0.5);
-        box-shadow: 3px 3px 5px rgba(193, 193, 193, 0.5);
+        box-shadow: 3px 3px 5px rgba(193, 193, 193);
         border-radius: 7px;
         padding: 6px;
         font-size: 16px;
         width: 90px;
         height: 30px;
         cursor: pointer;
+
+        &:hover {
+          background-color: rgb(62, 128, 251);
+          color: white;
+          transition: 0.3s;
+        }
+      }
+    }
+
+    &_AddLight {
+      position: absolute;
+      top: 140px;
+      right: 10px;
+      display: flex;
+      gap: 8px;
+
+      & button {
+        background-color: COLOR.$Primary-color;
+        color: white;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+        box-shadow: 3px 3px 5px rgba(193, 193, 193);
+        border-radius: 7px;
+        padding: 6px;
+        font-size: 16px;
+        width: 90px;
+        height: 30px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgb(62, 128, 251);
+          color: white;
+          transition: 0.3s;
+        }
       }
     }
 
@@ -3155,7 +3220,7 @@
           box-shadow: 3px 5px 5px rgba(193, 193, 193, 0.5);
           border-radius: 7px;
           border: solid 1px rgba(198, 197, 197, 0.5);
-          background-color: rgb(248, 249, 250);
+          // background-color: rgb(248, 249, 250);
 
           &_Title {
             // background-color: COLOR.$Primary-color;
@@ -3252,13 +3317,20 @@
 
     &_Light {
       width: 100%;
-      height: 400px;
+      height: calc(100vh - 400px);
       border: solid 1px rgba(198, 197, 197, 0.5);
+    }
 
-      & img {
-        width: 100%;
-        height: 100%;
-      }
+    &_Diagram {
+      width: 100%;
+      height: calc(100vh - 400px);
+      border: solid 1px rgba(198, 197, 197, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
 
     &_Dashboard {
@@ -3480,6 +3552,7 @@
     color: #505050;
     border-bottom: solid 1px rgba(198, 197, 197, 0.5);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -3526,6 +3599,51 @@
         padding: 8px;
       }
     }
+
+    &_Info {
+      &_Item {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+
+        & input {
+          box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          border: solid 1px rgba(198, 197, 197, 0.5);
+          border-radius: 5px;
+          margin-top: 8px;
+          padding: 6px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        & input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    &_Select {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      & select {
+        padding: 4px;
+        width: 100px;
+        border-radius: 5px;
+        border: solid 1px rgba(198, 197, 197, 0.5);
+        font-size: 14px;
+        cursor: pointer;
+        outline: none;
+      }
+    }
   }
 
   &_Foot {
@@ -3553,7 +3671,7 @@
   // background-color: #4285F4;
   background-color: white;
   // border-radius: 8px;
-  color: #FFFFFF;
+  // color: #FFFFFF;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -3561,8 +3679,12 @@
   // font-size: 14px;
   // padding: 10px 15px;
   position: relative;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 3px rgba(112, 108, 108, 0.2);
   border: solid 1px rgb(66, 133, 244);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   &::after {
     content: "";
@@ -3584,6 +3706,40 @@
     scale: 1.15;
     // border: solid 1px rgba(0, 0, 0, 0.5);
     // box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.solarlight {
+  // background-color: white;
+  width: 80px;
+  height: 80px;
+  // border-radius: 50%;
+  // padding: 5px;
+  position: relative;
+  // box-shadow: 3px 3px 3px rgba(112, 108, 108, 0.2);
+  // border: solid 1px rgb(66, 133, 244);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   left: 50%;
+  //   top: 100%;
+  //   transform: translate(-50%, 0);
+  //   width: 0;
+  //   height: 0;
+  //   border-left: 8px solid transparent;
+  //   border-right: 8px solid transparent;
+  //   border-top: 8px solid #4285F4;
+  // }
+
+  & img {
+    width: 100%;
+    height: 100%;
+    scale: 1.35;
   }
 }
 

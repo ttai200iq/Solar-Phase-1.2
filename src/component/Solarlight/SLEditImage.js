@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { useIntl } from 'react-intl';
 import { signal } from "@preact/signals-react";
-import Resizer from "react-image-file-resizer";
+import { callApi, From } from '../Api/Api';
+import { host } from '../Lang/Contant';
+import { slProjectData } from './SLProjectlist';
 
 export const SLDiagramImg = signal();
 
 export default function SLEditImage(props) {
     const dataLang = useIntl();
-    const [ava, setAva] = useState();
+    const [ava, setAva] = useState(slProjectData.value.solar?.data || '');
 
     const popup_state = {
         pre: { transform: "rotate(0deg)", transition: "0.5s", color: "white" },
@@ -22,40 +24,26 @@ export default function SLEditImage(props) {
         popup.style.color = popup_state[state].color;
     };
 
-    const resizeFilAvatar = (file) =>
-        new Promise((resolve) => {
-            Resizer.imageFileResizer(
-                file,
-                180,
-                180,
-                "PNG",
-                100,
-                0,
-                (uri) => {
-                    resolve(uri);
-                },
-                "file"
-            );
-        });
-
     const handleChooseAvatar = async (e) => {
+        SLDiagramImg.value = e.target.files[0];
         var reader = new FileReader();
-        if (e.target.files[0].size > 50000) {
-            const image = await resizeFilAvatar(e.target.files[0]);
-            reader.readAsDataURL(image);
-            reader.onload = () => {
-                setAva(reader.result);
-            }
-        } else {
-            reader.readAsDataURL(e.target.files[0]);
-            reader.onload = () => {
-                setAva(reader.result);
-            };
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            setAva(reader.result);
         }
     };
 
-    const handleSave = () => {
-        SLDiagramImg.value = ava;
+    const handleSave = async () => {
+        let upload = await From(host.DATA + '/uploadFile', SLDiagramImg.value, slProjectData.value.plantname);
+        console.log(upload);
+        if (upload.status) {
+            setAva(upload.data);
+            let d = await callApi('post', host.DATA + '/updatePlantSolar', { plantid: slProjectData.value.plantid_, file: JSON.stringify({ data: upload.data, path: upload.path }) });
+            console.log(d);
+            if (d.status) {
+                slProjectData.value.solar = { data: upload.data, path: upload.path };
+            }
+        }
         props.handleClose();
     };
 

@@ -55,3 +55,30 @@ export const Download = (url, data) => {
     }
   });
 }
+
+export const From = (url, data, name) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const formData = new FormData()
+      formData.append('image', data)
+      formData.append('name', name)
+      await axios.post(url, formData,
+
+        {
+          headers: {
+            token: JSON.parse(localStorage.getItem('token')) || JSON.parse(sessionStorage.getItem('token')),
+            'content-type': 'multipart/form-data'
+          },
+
+          withCredentials: true
+        }).then(
+          function (res) {
+            resolve(res.data)
+          }
+        )
+
+    } catch (e) {
+      reject(e);
+    }
+  });
+}

@@ -82,10 +82,13 @@ export default function SLAddGateway(props) {
         type_.value = type.current.value;
       }
       if (d.status === true) {
+        let data = slloggerDB.value.find((item) => item.sn === sn.current.value);
+        let newData = { ...data.setting, lat: slProjectData.value.lat, lng: slProjectData.value.long };
+
         let res_ = await callApi("post", host.DATA + "/updateLogger", {
           sn: sn.current.value,
           type: "setting",
-          data: JSON.stringify({ lat: slProjectData.value.lat, long: slProjectData.value.long }),
+          data: JSON.stringify(newData),
         });
         console.log(res_);
 
